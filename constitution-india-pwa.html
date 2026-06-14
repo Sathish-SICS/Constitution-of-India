@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Constitution">
+<meta name="theme-color" content="#0D1117">
+<title>Constitution of India</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0D1117;
+    --ink-mid: #1C2333;
+    --ink-soft: #2D3748;
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --gold-dim: rgba(201,168,76,0.15);
+    --gold-glow: rgba(201,168,76,0.08);
+    --cream: #F5F0E8;
+    --cream-dim: rgba(245,240,232,0.7);
+    --saffron: #FF9933;
+    --white-band: #FFFFFF;
+    --green-band: #138808;
+    --navy: #000080;
+    --text-primary: #F5F0E8;
+    --text-secondary: rgba(245,240,232,0.65);
+    --text-muted: rgba(245,240,232,0.4);
+    --border: rgba(201,168,76,0.2);
+    --border-soft: rgba(245,240,232,0.08);
+    --radius: 16px;
+    --radius-sm: 10px;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--ink);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── SCREENS ── */
+  .screen { display:none; min-height:100vh; flex-direction:column; }
+  .screen.active { display:flex; }
+
+  /* ── SPLASH ── */
+  #splash {
+    background: radial-gradient(ellipse at 50% 30%, #1a2240 0%, var(--ink) 70%);
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  #splash::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C9A84C' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 1;
+  }
+  .ashoka-wheel {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 28px;
+    animation: spinWheel 20s linear infinite;
+    filter: drop-shadow(0 0 20px rgba(201,168,76,0.4));
+  }
+  @keyframes spinWheel { to { transform: rotate(360deg); } }
+  .flag-stripe {
+    display: flex;
+    width: 80px;
+    height: 6px;
+    border-radius: 3px;
+    overflow: hidden;
+    margin: 0 auto 32px;
+  }
+  .flag-stripe .s1 { flex:1; background: var(--saffron); }
+  .flag-stripe .s2 { flex:1; background: var(--white-band); }
+  .flag-stripe .s3 { flex:1; background: var(--green-band); }
+
+  .splash-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 38px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+  .splash-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-style: italic;
+    color: var(--gold);
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+  }
+  .splash-hindi {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 48px;
+    letter-spacing: 1px;
+  }
+  .splash-meta {
+    display: flex;
+    gap: 32px;
+    justify-content: center;
+    margin-bottom: 48px;
+  }
+  .splash-stat { text-align: center; }
+  .splash-stat .num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--gold);
+    display: block;
+  }
+  .splash-stat .lbl {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .btn-explore {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, var(--gold), #a07d30);
+    color: var(--ink);
+    font-weight: 600;
+    font-size: 15px;
+    padding: 16px 36px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    letter-spacing: 0.3px;
+    box-shadow: 0 8px 32px rgba(201,168,76,0.35);
+    transition: all 0.2s;
+  }
+  .btn-explore:active { transform: scale(0.97); }
+
+  /* ── HOME ── */
+  #home { background: var(--ink); }
+
+  .top-bar {
+    background: rgba(13,17,23,0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 52px 20px 16px;
+    border-bottom: 1px solid var(--border-soft);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .top-bar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
+  .app-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .logo-wheel {
+    width: 28px;
+    height: 28px;
+    animation: spinWheel 20s linear infinite;
+  }
+  .app-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+  .app-name span { color: var(--gold); }
+
+  .search-wrap {
+    position: relative;
+  }
+  .search-input {
+    width: 100%;
+    background: var(--ink-mid);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 16px 12px 42px;
+    color: var(--text-primary);
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .search-input:focus { border-color: var(--gold); }
+  .search-input::placeholder { color: var(--text-muted); }
+  .search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 16px;
+  }
+
+  .home-content { flex: 1; overflow-y: auto; padding-bottom: 90px; }
+
+  /* Hero card */
+  .preamble-hero {
+    margin: 20px 16px;
+    background: linear-gradient(135deg, #1a2240 0%, #0d1117 100%);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  .preamble-hero:active { transform: scale(0.98); }
+  .preamble-hero::before {
+    content: '';
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 140px; height: 140px;
+    background: radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 70%);
+  }
+  .hero-tag {
+    display: inline-block;
+    background: var(--gold-dim);
+    border: 1px solid rgba(201,168,76,0.3);
+    color: var(--gold);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin-bottom: 14px;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+  .hero-excerpt {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+  .hero-cta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--gold);
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  /* Section label */
+  .section-label {
+    padding: 0 16px;
+    margin: 24px 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-label span {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border-soft);
+  }
+
+  /* Part cards */
+  .parts-list { padding: 0 16px; display: flex; flex-direction: column; gap: 8px; }
+  .part-card {
+    background: var(--ink-mid);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-sm);
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .part-card:active { transform: scale(0.98); background: var(--ink-soft); }
+  .part-card.highlighted { border-color: var(--border); }
+  .part-card.highlighted::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: linear-gradient(to bottom, var(--gold), var(--saffron));
+    border-radius: 3px 0 0 3px;
+  }
+  .part-num {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: var(--gold-dim);
+    border: 1px solid rgba(201,168,76,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+  .part-info { flex: 1; min-width: 0; }
+  .part-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 3px;
+  }
+  .part-range {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+  .part-arrow {
+    color: var(--text-muted);
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  /* ── ARTICLES LIST ── */
+  #articles-view { background: var(--ink); }
+  .sub-bar {
+    background: rgba(13,17,23,0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 52px 20px 16px;
+    border-bottom: 1px solid var(--border-soft);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .sub-bar-inner {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 4px;
+  }
+  .back-btn {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    background: var(--ink-mid);
+    border: 1px solid var(--border-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    font-size: 16px;
+  }
+  .sub-bar-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .sub-bar-count {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+  .articles-content { flex:1; overflow-y:auto; padding: 12px 16px 90px; }
+  .article-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border-soft);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .article-row:active { opacity: 0.7; }
+  .art-num-badge {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--ink-mid), var(--ink-soft));
+    border: 1px solid var(--border-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--gold-light);
+    flex-shrink: 0;
+  }
+  .art-info { flex: 1; min-width: 0; }
+  .art-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 3px;
+  }
+  .art-snippet {
+    font-size: 12px;
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .art-arrow { color: var(--text-muted); font-size: 14px; }
+
+  /* ── ARTICLE DETAIL ── */
+  #article-detail { background: var(--ink); }
+  .detail-bar {
+    background: rgba(13,17,23,0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 52px 20px 16px;
+    border-bottom: 1px solid var(--border-soft);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .detail-bar-inner {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .detail-actions {
+    display: flex;
+    gap: 8px;
+    margin-left: auto;
+  }
+  .icon-btn {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    background: var(--ink-mid);
+    border: 1px solid var(--border-soft);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.2s;
+  }
+  .icon-btn.fav-active { background: var(--gold-dim); border-color: var(--border); }
+
+  .detail-content { flex:1; overflow-y:auto; padding-bottom: 40px; }
+  .article-header {
+    padding: 28px 24px 24px;
+    border-bottom: 1px solid var(--border-soft);
+    background: linear-gradient(180deg, rgba(201,168,76,0.04) 0%, transparent 100%);
+  }
+  .art-part-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--gold-dim);
+    border: 1px solid rgba(201,168,76,0.25);
+    color: var(--gold);
+    font-size: 11px;
+    font-weight: 500;
+    padding: 5px 12px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+  .art-number-display {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+  .art-main-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--text-primary);
+  }
+  .article-body {
+    padding: 28px 24px;
+  }
+  .article-body p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    line-height: 1.8;
+    color: var(--cream-dim);
+    margin-bottom: 20px;
+  }
+  .article-body p:first-child::first-letter {
+    float: left;
+    font-size: 52px;
+    font-weight: 700;
+    line-height: 0.85;
+    margin: 6px 8px 0 0;
+    color: var(--gold);
+  }
+
+  .nav-pills {
+    display: flex;
+    gap: 10px;
+    padding: 0 24px 28px;
+  }
+  .nav-pill {
+    flex: 1;
+    background: var(--ink-mid);
+    border: 1px solid var(--border-soft);
+    border-radius: 10px;
+    padding: 12px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 12px;
+    color: var(--text-secondary);
+    transition: all 0.2s;
+  }
+  .nav-pill:active { background: var(--ink-soft); }
+  .nav-pill .nav-pill-arrow { font-size: 16px; display: block; color: var(--gold); margin-bottom: 4px; }
+
+  /* ── BOTTOM NAV ── */
+  .bottom-nav {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: rgba(13,17,23,0.97);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid var(--border-soft);
+    display: flex;
+    padding: 10px 0 28px;
+    z-index: 200;
+  }
+  .nav-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    padding: 6px 0;
+    transition: all 0.15s;
+  }
+  .nav-icon { font-size: 22px; }
+  .nav-label { font-size: 10px; font-weight: 500; color: var(--text-muted); letter-spacing: 0.3px; }
+  .nav-item.active .nav-icon { filter: drop-shadow(0 0 6px var(--gold)); }
+  .nav-item.active .nav-label { color: var(--gold); }
+
+  /* ── SEARCH RESULTS ── */
+  .search-results-overlay {
+    display: none;
+    position: fixed;
+    top: 140px; left: 0; right: 0; bottom: 90px;
+    background: var(--ink);
+    z-index: 150;
+    overflow-y: auto;
+    padding: 12px 16px;
+  }
+  .search-results-overlay.visible { display: block; }
+  .result-item {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border-soft);
+    cursor: pointer;
+  }
+  .result-art { font-size: 11px; color: var(--gold); font-weight: 500; margin-bottom: 4px; letter-spacing: 0.5px; }
+  .result-title { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 600; margin-bottom: 4px; }
+  .result-snippet { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+  .result-snippet em { color: var(--gold); font-style: normal; }
+
+  /* ── FAVORITES ── */
+  #favorites-view { background: var(--ink); }
+  .empty-state {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    text-align: center;
+    gap: 16px;
+  }
+  .empty-icon { font-size: 48px; opacity: 0.3; }
+  .empty-text { font-family: 'Cormorant Garamond', serif; font-size: 20px; color: var(--text-secondary); }
+  .empty-sub { font-size: 13px; color: var(--text-muted); }
+
+  /* ── ARTICLE OF THE DAY ── */
+  #aod-view {
+    background: radial-gradient(ellipse at 50% 0%, #1a2240 0%, var(--ink) 60%);
+    padding-bottom: 90px;
+  }
+  .aod-header {
+    padding: 60px 24px 24px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .aod-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,153,51,0.12);
+    border: 1px solid rgba(255,153,51,0.3);
+    color: var(--saffron);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+  }
+  .aod-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .aod-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--gold);
+    margin-bottom: 24px;
+  }
+  .aod-body {
+    padding: 28px 24px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px;
+    line-height: 1.85;
+    color: var(--cream-dim);
+  }
+  .aod-fact-card {
+    margin: 0 24px 24px;
+    background: var(--ink-mid);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+  }
+  .aod-fact-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+  .aod-fact-text {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 3px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  /* Install banner */
+  .install-banner {
+    display: none;
+    position: fixed;
+    bottom: 90px; left: 16px; right: 16px;
+    background: var(--ink-mid);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    z-index: 300;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  }
+  .install-banner.visible { display: flex; }
+  .install-text { flex:1; font-size: 13px; line-height: 1.4; color: var(--text-secondary); }
+  .install-text strong { color: var(--text-primary); display: block; margin-bottom: 2px; }
+  .install-btn {
+    background: var(--gold);
+    color: var(--ink);
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-weight: 600;
+    font-size: 12px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .install-close {
+    font-size: 18px;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 4px;
+  }
+</style>
+</head>
+<body>
+
+<!-- SPLASH SCREEN -->
+<div class="screen active" id="splash">
+  <svg class="ashoka-wheel" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="50" cy="50" r="46" fill="none" stroke="#C9A84C" stroke-width="2.5"/>
+    <circle cx="50" cy="50" r="8" fill="none" stroke="#C9A84C" stroke-width="2"/>
+    <circle cx="50" cy="50" r="4" fill="#C9A84C"/>
+    <!-- 24 spokes -->
+    <g stroke="#C9A84C" stroke-width="1.2" opacity="0.9">
+      <line x1="50" y1="42" x2="50" y2="8"/><line x1="57.3" y1="43" x2="73.3" y2="10.5"/>
+      <line x1="63" y1="47" x2="88.3" y2="22.7"/><line x1="66" y1="53" x2="92" y2="50"/>
+      <line x1="63" y1="57.3" x2="89.5" y2="73.3"/><line x1="57" y1="63" x2="77.3" y2="88.3"/>
+      <line x1="50" y1="58" x2="50" y2="92"/><line x1="42.7" y1="57" x2="26.7" y2="89.5"/>
+      <line x1="37" y1="53" x2="11.7" y2="77.3"/><line x1="34" y1="47" x2="8" y2="50"/>
+      <line x1="37" y1="42.7" x2="10.5" y2="26.7"/><line x1="43" y1="37" x2="22.7" y2="11.7"/>
+      <line x1="53.5" y1="42.5" x2="61" y2="11"/><line x1="60.5" y1="45" x2="84" y2="19.5"/>
+      <line x1="64.5" y1="50.5" x2="92" y2="43"/><line x1="62" y1="60" x2="85" y2="80"/>
+      <line x1="55" y1="65" x2="63" y2="90"/><line x1="45" y1="65" x2="37" y2="91"/>
+      <line x1="38" y1="60" x2="15" y2="80"/><line x1="35.5" y1="50.5" x2="8" y2="57"/>
+      <line x1="39.5" y1="45" x2="16" y2="19.5"/><line x1="46.5" y1="42.5" x2="39" y2="11"/>
+    </g>
+  </svg>
+
+  <div class="flag-stripe"><div class="s1"></div><div class="s2"></div><div class="s3"></div></div>
+
+  <div class="splash-title">Constitution<br>of India</div>
+  <div class="splash-subtitle">भारत का संविधान</div>
+  <div class="splash-hindi">Adopted · 26 November 1949</div>
+
+  <div class="splash-meta">
+    <div class="splash-stat"><span class="num">448</span><span class="lbl">Articles</span></div>
+    <div class="splash-stat"><span class="num">25</span><span class="lbl">Parts</span></div>
+    <div class="splash-stat"><span class="num">12</span><span class="lbl">Schedules</span></div>
+  </div>
+
+  <button class="btn-explore" onclick="goHome()">
+    ⚖ Explore Constitution
+  </button>
+</div>
+
+<!-- HOME SCREEN -->
+<div class="screen" id="home">
+  <div class="top-bar">
+    <div class="top-bar-inner">
+      <div class="app-logo">
+        <svg class="logo-wheel" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="46" fill="none" stroke="#C9A84C" stroke-width="3"/>
+          <circle cx="50" cy="50" r="6" fill="#C9A84C"/>
+          <g stroke="#C9A84C" stroke-width="1.5">
+            <line x1="50" y1="44" x2="50" y2="8"/><line x1="58" y1="45" x2="76" y2="12"/>
+            <line x1="64" y1="50" x2="92" y2="50"/><line x1="58" y1="57" x2="76" y2="88"/>
+            <line x1="50" y1="56" x2="50" y2="92"/><line x1="42" y1="57" x2="24" y2="88"/>
+            <line x1="36" y1="50" x2="8" y2="50"/><line x1="42" y1="45" x2="24" y2="12"/>
+          </g>
+        </svg>
+        <div class="app-name">Samvidhan<span>.</span></div>
+      </div>
+    </div>
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input class="search-input" id="searchInput" type="text" placeholder="Search articles, rights, duties…" oninput="handleSearch(this.value)" onfocus="showSearchOverlay()" />
+    </div>
+  </div>
+
+  <div class="home-content" id="homeContent">
+    <!-- Preamble Hero -->
+    <div class="preamble-hero" onclick="openArticleById('preamble')">
+      <div class="hero-tag">✦ Preamble</div>
+      <div class="hero-title">We, the People<br>of India…</div>
+      <div class="hero-excerpt">"…to secure to all its citizens: Justice, Liberty, Equality and to promote among them all Fraternity…"</div>
+      <div class="hero-cta">Read Preamble <span>→</span></div>
+    </div>
+
+    <div class="section-label"><span>Parts of the Constitution</span></div>
+    <div class="parts-list" id="partsList"></div>
+  </div>
+
+  <!-- Search overlay -->
+  <div class="search-results-overlay" id="searchOverlay">
+    <div id="searchResults"></div>
+  </div>
+
+  <div class="bottom-nav">
+    <div class="nav-item active" onclick="switchTab('home',this)">
+      <span class="nav-icon">📜</span>
+      <span class="nav-label">Constitution</span>
+    </div>
+    <div class="nav-item" onclick="switchTab('favorites-view',this)">
+      <span class="nav-icon">⭐</span>
+      <span class="nav-label">Saved</span>
+    </div>
+    <div class="nav-item" onclick="switchTab('aod-view',this)">
+      <span class="nav-icon">☀️</span>
+      <span class="nav-label">Today</span>
+    </div>
+  </div>
+</div>
+
+<!-- ARTICLES LIST VIEW -->
+<div class="screen" id="articles-view">
+  <div class="sub-bar">
+    <div class="sub-bar-inner">
+      <div class="back-btn" onclick="goBack('home')">←</div>
+      <div>
+        <div class="sub-bar-title" id="partViewTitle">Part V</div>
+        <div class="sub-bar-count" id="partViewCount"></div>
+      </div>
+    </div>
+  </div>
+  <div class="articles-content" id="articlesContent"></div>
+</div>
+
+<!-- ARTICLE DETAIL VIEW -->
+<div class="screen" id="article-detail">
+  <div class="detail-bar">
+    <div class="detail-bar-inner">
+      <div class="back-btn" id="artBackBtn" onclick="">←</div>
+      <div style="flex:1;min-width:0">
+        <div class="sub-bar-title" id="detailBarTitle" style="font-size:15px">Article</div>
+      </div>
+      <div class="detail-actions">
+        <div class="icon-btn" id="favBtn" onclick="toggleFav()">☆</div>
+      </div>
+    </div>
+  </div>
+  <div class="detail-content" id="detailContent"></div>
+</div>
+
+<!-- FAVORITES VIEW -->
+<div class="screen" id="favorites-view">
+  <div class="sub-bar">
+    <div class="sub-bar-inner">
+      <div><div class="sub-bar-title">Saved Articles</div></div>
+    </div>
+  </div>
+  <div class="articles-content" id="favsContent"></div>
+  <div class="bottom-nav">
+    <div class="nav-item" onclick="switchTab('home',this)">
+      <span class="nav-icon">📜</span><span class="nav-label">Constitution</span>
+    </div>
+    <div class="nav-item active" onclick="switchTab('favorites-view',this)">
+      <span class="nav-icon">⭐</span><span class="nav-label">Saved</span>
+    </div>
+    <div class="nav-item" onclick="switchTab('aod-view',this)">
+      <span class="nav-icon">☀️</span><span class="nav-label">Today</span>
+    </div>
+  </div>
+</div>
+
+<!-- ARTICLE OF THE DAY VIEW -->
+<div class="screen" id="aod-view">
+  <div class="aod-header">
+    <div class="aod-tag">☀️ Article of the Day</div>
+    <div class="aod-title" id="aodTitle"></div>
+    <div class="aod-subtitle" id="aodSubtitle"></div>
+  </div>
+  <div class="aod-body" id="aodBody"></div>
+  <div class="aod-fact-card">
+    <div class="aod-fact-label">💡 Did You Know?</div>
+    <div class="aod-fact-text" id="aodFact"></div>
+  </div>
+  <div class="bottom-nav">
+    <div class="nav-item" onclick="switchTab('home',this)">
+      <span class="nav-icon">📜</span><span class="nav-label">Constitution</span>
+    </div>
+    <div class="nav-item" onclick="switchTab('favorites-view',this)">
+      <span class="nav-icon">⭐</span><span class="nav-label">Saved</span>
+    </div>
+    <div class="nav-item active" onclick="switchTab('aod-view',this)">
+      <span class="nav-icon">☀️</span><span class="nav-label">Today</span>
+    </div>
+  </div>
+</div>
+
+<!-- Install Banner -->
+<div class="install-banner" id="installBanner">
+  <div class="install-text">
+    <strong>Add to Home Screen</strong>
+    Tap Share → "Add to Home Screen" in Safari
+  </div>
+  <div class="install-close" onclick="document.getElementById('installBanner').classList.remove('visible')">✕</div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════════
+const PARTS = [
+  { id:'pI',   num:'I',      name:'The Union and Its Territory', range:'1–4',     color:'#C9A84C' },
+  { id:'pII',  num:'II',     name:'Citizenship',                  range:'5–11',    color:'#C9A84C' },
+  { id:'pIII', num:'III',    name:'Fundamental Rights',           range:'12–35',   color:'#FF9933' },
+  { id:'pIV',  num:'IV',     name:'Directive Principles of State Policy', range:'36–51', color:'#C9A84C' },
+  { id:'pIVA', num:'IV-A',   name:'Fundamental Duties',           range:'51A',     color:'#C9A84C' },
+  { id:'pV',   num:'V',      name:'The Union',                    range:'52–151',  color:'#C9A84C' },
+  { id:'pVI',  num:'VI',     name:'The States',                   range:'152–237', color:'#C9A84C' },
+  { id:'pVIII',num:'VIII',   name:'The Union Territories',        range:'239–242', color:'#C9A84C' },
+  { id:'pIX',  num:'IX',     name:'The Panchayats',               range:'243–243O',color:'#138808' },
+  { id:'pIXA', num:'IX-A',   name:'The Municipalities',           range:'243P–243ZG', color:'#138808' },
+  { id:'pX',   num:'X',      name:'The Scheduled and Tribal Areas', range:'244–244A', color:'#C9A84C' },
+  { id:'pXI',  num:'XI',     name:'Relations between Union & States', range:'245–263', color:'#C9A84C' },
+  { id:'pXII', num:'XII',    name:'Finance, Property, Contracts & Suits', range:'264–300A', color:'#C9A84C' },
+  { id:'pXIV', num:'XIV',    name:'Services Under the Union & States', range:'308–323', color:'#C9A84C' },
+  { id:'pXVA', num:'XIV-A',  name:'Tribunals',                    range:'323A–323B', color:'#C9A84C' },
+  { id:'pXV',  num:'XV',     name:'Elections',                    range:'324–329A', color:'#C9A84C' },
+  { id:'pXVI', num:'XVI',    name:'Special Provisions for Certain Classes', range:'330–342A', color:'#C9A84C' },
+  { id:'pXVII',num:'XVII',   name:'Official Language',            range:'343–351', color:'#C9A84C' },
+  { id:'pXVIII',num:'XVIII', name:'Emergency Provisions',         range:'352–360', color:'#FF9933' },
+  { id:'pXIX', num:'XIX',    name:'Miscellaneous',                range:'361–367', color:'#C9A84C' },
+  { id:'pXX',  num:'XX',     name:'Amendment of the Constitution',range:'368',     color:'#C9A84C' },
+  { id:'pXXI', num:'XXI',    name:'Temporary & Transitional Provisions', range:'369–392', color:'#C9A84C' },
+  { id:'pXXII',num:'XXII',   name:'Short Title, Commencement, etc.', range:'393–395', color:'#C9A84C' },
+];
+
+const ARTICLES = {
+  'preamble': {
+    num: 'Preamble', title: 'Preamble to the Constitution',
+    part: 'Foundation', partId: null,
+    text: `WE, THE PEOPLE OF INDIA, having solemnly resolved to constitute India into a SOVEREIGN SOCIALIST SECULAR DEMOCRATIC REPUBLIC and to secure to all its citizens:
+
+JUSTICE, social, economic and political;
+
+LIBERTY of thought, expression, belief, faith and worship;
+
+EQUALITY of status and of opportunity; and to promote among them all
+
+FRATERNITY assuring the dignity of the individual and the unity and integrity of the Nation;
+
+IN OUR CONSTITUENT ASSEMBLY this twenty-sixth day of November, 1949, do HEREBY ADOPT, ENACT AND GIVE TO OURSELVES THIS CONSTITUTION.`,
+    fact: 'The word "SOCIALIST" and "SECULAR" were added by the 42nd Constitutional Amendment in 1976 during the Emergency period.'
+  },
+  'a12': { num:'12', title:'Definition of State', part:'Part III – Fundamental Rights', partId:'pIII', text:'In this part, unless the context otherwise requires, "the State" includes the Government and Parliament of India and the Government and the Legislature of each of the States and all local or other authorities within the territory of India or under the control of the Government of India.', fact:'Article 12 is the gateway to Fundamental Rights. All rights in Part III are enforceable against the "State" as defined here.' },
+  'a13': { num:'13', title:'Laws inconsistent with or in derogation of Fundamental Rights', part:'Part III – Fundamental Rights', partId:'pIII', text:'All laws in force in the territory of India immediately before the commencement of this Constitution, in so far as they are inconsistent with the provisions of this Part, shall, to the extent of such inconsistency, be void. The State shall not make any law which takes away or abridges the rights conferred by this Part and any law made in contravention of this clause shall, to the extent of the contravention, be void.', fact:'Article 13 is the constitutional basis for judicial review of legislation in India.' },
+  'a14': { num:'14', title:'Equality before law', part:'Part III – Fundamental Rights', partId:'pIII', text:'The State shall not deny to any person equality before the law or the equal protection of the laws within the territory of India. This article prohibits class legislation but permits reasonable classification.', fact:'Article 14 embodies two concepts: "Equality before law" (borrowed from English law) and "Equal protection of laws" (borrowed from the 14th Amendment of the US Constitution).' },
+  'a15': { num:'15', title:'Prohibition of discrimination on grounds of religion, race, caste, sex or place of birth', part:'Part III – Fundamental Rights', partId:'pIII', text:'The State shall not discriminate against any citizen on grounds only of religion, race, caste, sex, place of birth or any of them. No citizen shall, on grounds only of religion, race, caste, sex, place of birth or any of them, be subject to any disability, liability, restriction or condition with regard to access to shops, public restaurants, hotels and places of public entertainment.', fact:'The State can make special provisions for women, children, and socially/educationally backward classes under Articles 15(3) and 15(4).' },
+  'a16': { num:'16', title:'Equality of opportunity in matters of public employment', part:'Part III – Fundamental Rights', partId:'pIII', text:'There shall be equality of opportunity for all citizens in matters relating to employment or appointment to any office under the State. No citizen shall, on grounds only of religion, race, caste, sex, descent, place of birth, residence or any of them, be ineligible for, or discriminated against in respect of, any employment or office under the State.', fact:'Article 16(4) allows reservation of posts for backward classes not adequately represented in State services — the basis of India\'s reservation policy.' },
+  'a17': { num:'17', title:'Abolition of Untouchability', part:'Part III – Fundamental Rights', partId:'pIII', text:'"Untouchability" is abolished and its practice in any form is forbidden. The enforcement of any disability arising out of "Untouchability" shall be an offence punishable in accordance with law.', fact:'This article abolishes untouchability absolutely without any exception. The Protection of Civil Rights Act, 1955 gives effect to this provision.' },
+  'a19': { num:'19', title:'Protection of certain rights regarding freedom of speech, etc.', part:'Part III – Fundamental Rights', partId:'pIII', text:'All citizens shall have the right to freedom of speech and expression; to assemble peaceably and without arms; to form associations or unions; to move freely throughout the territory of India; to reside and settle in any part of the territory of India; and to practise any profession, or to carry on any occupation, trade or business.', fact:'Freedom of the Press is not mentioned separately in Article 19 but is included in "freedom of speech and expression" as held by the Supreme Court.' },
+  'a21': { num:'21', title:'Protection of life and personal liberty', part:'Part III – Fundamental Rights', partId:'pIII', text:'No person shall be deprived of his life or personal liberty except according to procedure established by law. The Supreme Court has given an expansive interpretation to include right to livelihood, right to health, right to education, right to privacy, and many more rights as part of the right to life.', fact:'Article 21 is considered the "heart of the Constitution". The landmark Maneka Gandhi case (1978) expanded it to include the right to live with human dignity.' },
+  'a32': { num:'32', title:'Remedies for enforcement of rights conferred by Part III', part:'Part III – Fundamental Rights', partId:'pIII', text:'The right to move the Supreme Court by appropriate proceedings for the enforcement of the rights conferred by this Part is guaranteed. The Supreme Court shall have power to issue directions or orders or writs, including writs in the nature of habeas corpus, mandamus, prohibition, quo warranto and certiorari, whichever may be appropriate, for the enforcement of any of the rights conferred by this Part.', fact:'Dr B.R. Ambedkar called Article 32 the "heart and soul of the Constitution". It is itself a Fundamental Right and cannot be suspended except during Emergency.' },
+  'a44': { num:'44', title:'Uniform civil code for the citizens', part:'Part IV – Directive Principles', partId:'pIV', text:'The State shall endeavour to secure for the citizens a uniform civil code throughout the territory of India. This is a directive principle and not directly enforceable in courts, but it is fundamental to the governance of the country.', fact:'Article 44 remains one of the most debated provisions of the Constitution. Goa is the only Indian state with a Uniform Civil Code in force.' },
+  'a51A': { num:'51A', title:'Fundamental Duties', part:'Part IV-A – Fundamental Duties', partId:'pIVA', text:'It shall be the duty of every citizen of India to abide by the Constitution and respect its ideals and institutions, the National Flag and the National Anthem; to cherish and follow the noble ideals which inspired our national struggle for freedom; to uphold and protect the sovereignty, unity and integrity of India; to defend the country and render national service when called upon to do so; to promote harmony and the spirit of common brotherhood amongst all the people of India.', fact:'Fundamental Duties were added by the 42nd Constitutional Amendment (1976) and are non-justiciable — they cannot be enforced by a court of law.' },
+  'a52': { num:'52', title:'The President of India', part:'Part V – The Union', partId:'pV', text:'There shall be a President of India. The President is the constitutional head of the executive of the Union. The executive power of the Union is vested in the President and shall be exercised by him either directly or through officers subordinate to him in accordance with this Constitution.', fact:'India has a parliamentary system, so the President acts on the advice of the Council of Ministers headed by the Prime Minister.' },
+  'a53': { num:'53', title:'Executive power of the Union', part:'Part V – The Union', partId:'pV', text:'The executive power of the Union shall be vested in the President and shall be exercised by him either directly or through officers subordinate to him in accordance with this Constitution. The supreme command of the Defence Forces of the Union shall be vested in the President and the exercise thereof shall be regulated by law.', fact:'The President is the Supreme Commander of the Indian Armed Forces.' },
+  'a54': { num:'54', title:'Election of President', part:'Part V – The Union', partId:'pV', text:'The President shall be elected by the members of an electoral college consisting of the elected members of both Houses of Parliament; and the elected members of the Legislative Assemblies of the States. The election shall be held in accordance with the system of proportional representation by means of the single transferable vote.', fact:'The President of India is elected indirectly — not by direct vote of the people but by an Electoral College.' },
+  'a57': { num:'57', title:'Eligibility for re-election', part:'Part V – The Union', partId:'pV', text:'A person who holds, or who has held, office as President shall, subject to the other provisions of this Constitution, be eligible for re-election to that office.', fact:'Unlike the US, India\'s Constitution does not limit the number of terms a President can serve.' },
+  'a61': { num:'61', title:'Procedure for impeachment of the President', part:'Part V – The Union', partId:'pV', text:'When a President is to be impeached for violation of the Constitution, the charge shall be preferred by either House of Parliament. The charge shall be investigated by the other House. If a resolution for impeachment is passed by a majority of not less than two-thirds of the total membership of the House, the President shall stand removed from office.', fact:'No President of India has ever been impeached. The impeachment process requires a 2/3rd majority in both Houses of Parliament.' },
+  'a72': { num:'72', title:'Power of President to grant pardons, etc.', part:'Part V – The Union', partId:'pV', text:'The President shall have the power to grant pardons, reprieves, respites or remissions of punishment or to suspend, remit or commute the sentence of any person convicted of any offence in all cases where the punishment or sentence is by a Court Martial; in all cases where the punishment or sentence is for an offence against any law relating to a matter to which the executive power of the Union extends; in all cases where the sentence is a sentence of death.', fact:'The President\'s pardon power under Article 72 is wider than the Governor\'s power under Article 161 as it extends to death sentences and court martial sentences.' },
+  'a74': { num:'74', title:'Council of Ministers to aid and advise President', part:'Part V – The Union', partId:'pV', text:'There shall be a Council of Ministers with the Prime Minister at the head to aid and advise the President who shall, in the exercise of his functions, act in accordance with such advice. The President may require the Council of Ministers to reconsider such advice and the President shall act in accordance with the advice tendered after such reconsideration.', fact:'The 44th Constitutional Amendment (1978) added that the President can send back the advice once for reconsideration, but must accept the advice if returned.' },
+  'a110': { num:'110', title:'Definition of "Money Bills"', part:'Part V – The Union', partId:'pV', text:'A Bill shall be deemed to be a Money Bill if it contains only provisions dealing with all or any of the following matters: the imposition, abolition, remission, alteration or regulation of any tax; the regulation of the borrowing of money by the Union Government; the custody of the Consolidated Fund of India and appropriation of moneys out of that Fund.', fact:'The Speaker of Lok Sabha has the final authority to certify whether a Bill is a Money Bill, and this decision cannot be challenged in any court.' },
+  'a124': { num:'124', title:'Establishment and constitution of Supreme Court', part:'Part V – The Union', partId:'pV', text:'There shall be a Supreme Court of India consisting of a Chief Justice of India and, until Parliament by law prescribes a larger number, of not more than thirty-three other Judges. Every Judge of the Supreme Court shall be appointed by the President by warrant under his hand and seal after consultation with such of the Judges of the Supreme Court and of the High Courts in the States as the President may deem necessary for the purpose.', fact:'The Supreme Court of India was established on 28 January 1950. It is the highest court and the final court of appeal in India.' },
+  'a324': { num:'324', title:'Superintendence, direction and control of elections', part:'Part XV – Elections', partId:'pXV', text:'The superintendence, direction and control of the preparation of the electoral rolls for, and the conduct of, all elections to Parliament and to the Legislature of every State and of elections to the offices of President and Vice-President held under this Constitution shall be vested in the Election Commission consisting of the Chief Election Commissioner and such number of other Election Commissioners, if any, as the President may from time to time fix.', fact:'The Election Commission of India is an autonomous constitutional authority responsible for administering election processes in India.' },
+  'a343': { num:'343', title:'Official language of the Union', part:'Part XVII – Official Language', partId:'pXVII', text:'The official language of the Union shall be Hindi in Devanagari script. The form of numerals to be used for the official purposes of the Union shall be the international form of Indian numerals. Notwithstanding anything in clause (1), for a period of fifteen years from the commencement of this Constitution, the English language shall continue to be used for all the official purposes of the Union for which it was being used immediately before such commencement.', fact:'Despite 15 years expiring in 1965, English continues as an official language due to the Official Languages Act, 1963 and protests from non-Hindi speaking states.' },
+  'a352': { num:'352', title:'Proclamation of Emergency', part:'Part XVIII – Emergency Provisions', partId:'pXVIII', text:'If the President is satisfied that a grave emergency exists whereby the security of India or of any part of the territory thereof is threatened, whether by war or external aggression or armed rebellion, he may, by Proclamation, make a declaration to that effect in respect of the whole of India or of such part of the territory thereof as may be specified in the Proclamation.', fact:'India has declared National Emergency three times: 1962 (China war), 1971 (Pakistan war), and 1975-77 (internal disturbance declared by PM Indira Gandhi).' },
+  'a368': { num:'368', title:'Power of Parliament to amend the Constitution and procedure therefor', part:'Part XX – Amendment of the Constitution', partId:'pXX', text:'Notwithstanding anything in this Constitution, Parliament may in exercise of its constituent power amend by way of addition, variation or repeal any provision of this Constitution in accordance with the procedure laid down in this article. An amendment of this Constitution may be initiated only by the introduction of a Bill for the purpose in either House of Parliament, and when the Bill is passed in each House by a majority of the total membership of that House and by a majority of not less than two-thirds of the members of that House present and voting, it shall be presented to the President who shall give his assent to the Bill.', fact:'The Kesavananda Bharati case (1973) established that Parliament cannot amend the "Basic Structure" of the Constitution.' },
+};
+
+// Map part IDs to article lists
+const PART_ARTICLES = {
+  pIII: ['a12','a13','a14','a15','a16','a17','a19','a21','a32'],
+  pIV:  ['a44'],
+  pIVA: ['a51A'],
+  pV:   ['a52','a53','a54','a57','a61','a72','a74','a110','a124'],
+  pXV:  ['a324'],
+  pXVII:['a343'],
+  pXVIII:['a352'],
+  pXX:  ['a368'],
+};
+
+// ═══════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════
+let currentArticleId = null;
+let backTarget = 'home';
+let favorites = JSON.parse(localStorage.getItem('samvidhan_favs') || '[]');
+
+// ═══════════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════════
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+function goHome() { showScreen('home'); renderParts(); }
+function goBack(target) { showScreen(target); }
+
+function switchTab(targetId, el) {
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  el.classList.add('active');
+  showScreen(targetId);
+  if(targetId === 'favorites-view') renderFavorites();
+  if(targetId === 'aod-view') renderAOD();
+  if(targetId === 'home') renderParts();
+}
+
+// ═══════════════════════════════════════════
+// RENDER PARTS
+// ═══════════════════════════════════════════
+function renderParts() {
+  const list = document.getElementById('partsList');
+  list.innerHTML = PARTS.map((p,i) => `
+    <div class="part-card ${i<3?'highlighted':''}" onclick="openPart('${p.id}','${p.name}','${p.range}')">
+      <div class="part-num">${p.num}</div>
+      <div class="part-info">
+        <div class="part-name">${p.name}</div>
+        <div class="part-range">Articles ${p.range}</div>
+      </div>
+      <div class="part-arrow">›</div>
+    </div>
+  `).join('');
+}
+
+// ═══════════════════════════════════════════
+// OPEN PART → ARTICLES LIST
+// ═══════════════════════════════════════════
+function openPart(partId, partName, range) {
+  document.getElementById('partViewTitle').textContent = 'Part ' + PARTS.find(p=>p.id===partId)?.num + ' – ' + partName;
+  const arts = PART_ARTICLES[partId] || [];
+  document.getElementById('partViewCount').textContent = arts.length ? `${arts.length} articles` : 'Select an article';
+  
+  const content = document.getElementById('articlesContent');
+  if(!arts.length) {
+    content.innerHTML = `<div class="empty-state"><div class="empty-icon">📖</div><div class="empty-text">Articles ${range}</div><div class="empty-sub">Full content coming soon</div></div>`;
+  } else {
+    content.innerHTML = arts.map(id => {
+      const a = ARTICLES[id];
+      return `<div class="article-row" onclick="openArticle('${id}','articles-view')">
+        <div class="art-num-badge">${a.num}</div>
+        <div class="art-info">
+          <div class="art-title">${a.title}</div>
+          <div class="art-snippet">${a.text.substring(0,60)}…</div>
+        </div>
+        <div class="art-arrow">›</div>
+      </div>`;
+    }).join('');
+  }
+  showScreen('articles-view');
+}
+
+// ═══════════════════════════════════════════
+// OPEN ARTICLE
+// ═══════════════════════════════════════════
+function openArticle(id, from) {
+  backTarget = from || 'home';
+  currentArticleId = id;
+  const a = ARTICLES[id];
+  if(!a) return;
+
+  document.getElementById('artBackBtn').onclick = () => goBack(backTarget);
+  document.getElementById('detailBarTitle').textContent = `Article ${a.num}`;
+  updateFavBtn();
+
+  // Get prev/next
+  const allIds = Object.keys(ARTICLES);
+  const idx = allIds.indexOf(id);
+  const prevId = idx > 0 ? allIds[idx-1] : null;
+  const nextId = idx < allIds.length-1 ? allIds[idx+1] : null;
+
+  document.getElementById('detailContent').innerHTML = `
+    <div class="article-header">
+      <div class="art-part-tag">📜 ${a.part}</div>
+      <div class="art-number-display">Article ${a.num}</div>
+      <div class="art-main-title">${a.title}</div>
+    </div>
+    <div class="article-body">
+      ${a.text.split('\n\n').map(p => `<p>${p.trim()}</p>`).filter(p=>p!=='<p></p>').join('')}
+    </div>
+    ${a.fact ? `<div class="aod-fact-card" style="margin:0 24px 24px">
+      <div class="aod-fact-label">💡 Did You Know?</div>
+      <div class="aod-fact-text">${a.fact}</div>
+    </div>` : ''}
+    <div class="nav-pills">
+      ${prevId ? `<div class="nav-pill" onclick="openArticle('${prevId}','${backTarget}')"><span class="nav-pill-arrow">←</span>Article ${ARTICLES[prevId].num}</div>` : '<div></div>'}
+      ${nextId ? `<div class="nav-pill" onclick="openArticle('${nextId}','${backTarget}')"><span class="nav-pill-arrow">→</span>Article ${ARTICLES[nextId].num}</div>` : '<div></div>'}
+    </div>
+  `;
+  showScreen('article-detail');
+}
+
+function openArticleById(id) { openArticle(id, 'home'); }
+
+// ═══════════════════════════════════════════
+// FAVORITES
+// ═══════════════════════════════════════════
+function toggleFav() {
+  if(!currentArticleId) return;
+  const idx = favorites.indexOf(currentArticleId);
+  if(idx >= 0) favorites.splice(idx,1);
+  else favorites.push(currentArticleId);
+  localStorage.setItem('samvidhan_favs', JSON.stringify(favorites));
+  updateFavBtn();
+}
+function updateFavBtn() {
+  const btn = document.getElementById('favBtn');
+  if(favorites.includes(currentArticleId)) {
+    btn.textContent = '★'; btn.classList.add('fav-active');
+  } else {
+    btn.textContent = '☆'; btn.classList.remove('fav-active');
+  }
+}
+function renderFavorites() {
+  const c = document.getElementById('favsContent');
+  if(!favorites.length) {
+    c.innerHTML = `<div class="empty-state"><div class="empty-icon">⭐</div><div class="empty-text">No saved articles yet</div><div class="empty-sub">Tap ☆ on any article to save it here</div></div>`;
+    return;
+  }
+  c.innerHTML = favorites.map(id => {
+    const a = ARTICLES[id];
+    if(!a) return '';
+    return `<div class="article-row" onclick="openArticle('${id}','favorites-view')">
+      <div class="art-num-badge">${a.num}</div>
+      <div class="art-info">
+        <div class="art-title">${a.title}</div>
+        <div class="art-snippet">${a.part}</div>
+      </div>
+      <div class="art-arrow">›</div>
+    </div>`;
+  }).join('');
+}
+
+// ═══════════════════════════════════════════
+// ARTICLE OF THE DAY
+// ═══════════════════════════════════════════
+function renderAOD() {
+  const ids = Object.keys(ARTICLES);
+  const dayIdx = Math.floor(Date.now() / 86400000) % ids.length;
+  const a = ARTICLES[ids[dayIdx]];
+  document.getElementById('aodTitle').textContent = `Article ${a.num}`;
+  document.getElementById('aodSubtitle').textContent = a.title;
+  document.getElementById('aodBody').innerHTML = a.text.split('\n\n').map(p=>`<p>${p.trim()}</p>`).filter(p=>p!=='<p></p>').join('');
+  document.getElementById('aodFact').textContent = a.fact || 'This article forms a fundamental part of the Indian Constitution.';
+}
+
+// ═══════════════════════════════════════════
+// SEARCH
+// ═══════════════════════════════════════════
+function showSearchOverlay() {
+  document.getElementById('searchOverlay').classList.add('visible');
+}
+function handleSearch(query) {
+  const overlay = document.getElementById('searchOverlay');
+  const results = document.getElementById('searchResults');
+  if(!query.trim()) {
+    overlay.classList.remove('visible');
+    return;
+  }
+  overlay.classList.add('visible');
+  const q = query.toLowerCase();
+  const matches = Object.entries(ARTICLES).filter(([id,a]) =>
+    a.title.toLowerCase().includes(q) || a.text.toLowerCase().includes(q) || a.num.toLowerCase().includes(q)
+  );
+  if(!matches.length) {
+    results.innerHTML = `<div class="empty-state" style="padding:40px"><div class="empty-icon">🔍</div><div class="empty-text">No results found</div></div>`;
+    return;
+  }
+  results.innerHTML = matches.slice(0,20).map(([id,a]) => {
+    const snippet = a.text.replace(new RegExp(query,'gi'), m=>`<em>${m}</em>`).substring(0,100);
+    return `<div class="result-item" onclick="openArticleById('${id}');clearSearch()">
+      <div class="result-art">Article ${a.num} · ${a.part}</div>
+      <div class="result-title">${a.title}</div>
+      <div class="result-snippet">${snippet}…</div>
+    </div>`;
+  }).join('');
+}
+function clearSearch() {
+  document.getElementById('searchInput').value = '';
+  document.getElementById('searchOverlay').classList.remove('visible');
+}
+document.addEventListener('click', (e) => {
+  const overlay = document.getElementById('searchOverlay');
+  const input = document.getElementById('searchInput');
+  if(!overlay.contains(e.target) && e.target !== input) {
+    overlay.classList.remove('visible');
+  }
+});
+
+// ═══════════════════════════════════════════
+// PWA INSTALL
+// ═══════════════════════════════════════════
+const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+const isStandalone = window.navigator.standalone === true;
+if(isIOS && !isStandalone) {
+  setTimeout(() => {
+    const banner = document.getElementById('installBanner');
+    if(!localStorage.getItem('install_dismissed')) {
+      banner.classList.add('visible');
+    }
+  }, 3000);
+}
+document.querySelector('.install-close')?.addEventListener('click', () => {
+  localStorage.setItem('install_dismissed','1');
+});
+
+// Init
+renderParts();
+renderAOD();
+</script>
+</body>
+</html>
