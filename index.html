@@ -36,17 +36,21 @@
 
   * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
 
-  body {
+  html, body {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
     font-family: 'Inter', sans-serif;
     background: var(--ink);
     color: var(--text-primary);
     min-height: 100vh;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
+    position: relative;
   }
 
   /* ── SCREENS ── */
-  .screen { display:none; min-height:100vh; flex-direction:column; }
+  .screen { display:none; min-height:100vh; flex-direction:column; width:100%; }
   .screen.active { display:flex; }
 
   /* ── SPLASH ── */
@@ -551,7 +555,11 @@
   /* ── BOTTOM NAV ── */
   .bottom-nav {
     position: fixed;
-    bottom: 0; left: 0; right: 0;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 480px;
     background: rgba(13,17,23,0.97);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
