@@ -5,776 +5,245 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Constitution">
+<meta name="apple-mobile-web-app-title" content="Samvidhan">
 <meta name="theme-color" content="#0D1117">
 <title>Constitution of India</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --ink: #0D1117;
-    --ink-mid: #1C2333;
-    --ink-soft: #2D3748;
-    --gold: #C9A84C;
-    --gold-light: #E8C97A;
-    --gold-dim: rgba(201,168,76,0.15);
-    --gold-glow: rgba(201,168,76,0.08);
-    --cream: #F5F0E8;
-    --cream-dim: rgba(245,240,232,0.7);
-    --saffron: #FF9933;
-    --white-band: #FFFFFF;
-    --green-band: #138808;
-    --navy: #000080;
-    --text-primary: #F5F0E8;
-    --text-secondary: rgba(245,240,232,0.65);
-    --text-muted: rgba(245,240,232,0.4);
-    --border: rgba(201,168,76,0.2);
-    --border-soft: rgba(245,240,232,0.08);
-    --radius: 16px;
-    --radius-sm: 10px;
-  }
+:root {
+  --ink:#0D1117; --ink-mid:#1C2333; --ink-soft:#2D3748;
+  --gold:#C9A84C; --gold-light:#E8C97A; --gold-dim:rgba(201,168,76,0.15);
+  --cream:#F5F0E8; --cream-dim:rgba(245,240,232,0.7);
+  --saffron:#FF9933; --green-band:#138808;
+  --text-primary:#F5F0E8; --text-secondary:rgba(245,240,232,0.65); --text-muted:rgba(245,240,232,0.4);
+  --border:rgba(201,168,76,0.2); --border-soft:rgba(245,240,232,0.08);
+  --radius:16px; --radius-sm:10px;
+  /* Parchment */
+  --parch-bg:#f4e4c1; --parch-bg2:#ede0b0; --parch-text:#2c1a00; --parch-text2:#4a3010; --parch-border:#c8a96e;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{width:100%;max-width:480px;margin:0 auto;font-family:'Inter',sans-serif;background:var(--ink);color:var(--text-primary);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+.screen{display:none;min-height:100vh;flex-direction:column;width:100%;}
+.screen.active{display:flex;}
 
-  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+/* ── SPLASH ── */
+#splash{background:radial-gradient(ellipse at 50% 30%,#1a2240 0%,var(--ink) 70%);align-items:center;justify-content:center;text-align:center;padding:40px 24px;position:relative;overflow:hidden;z-index:0;}
+#splash>*{position:relative;z-index:1;}
+#splash::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23C9A84C' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");pointer-events:none;}
+.ashoka-wheel{width:100px;height:100px;margin:0 auto 28px;animation:spinW 20s linear infinite;filter:drop-shadow(0 0 20px rgba(201,168,76,0.4));}
+@keyframes spinW{to{transform:rotate(360deg);}}
+.flag-stripe{display:flex;width:80px;height:6px;border-radius:3px;overflow:hidden;margin:0 auto 32px;}
+.flag-stripe .s1{flex:1;background:var(--saffron)}.flag-stripe .s2{flex:1;background:#fff}.flag-stripe .s3{flex:1;background:var(--green-band)}
+.splash-title{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:700;line-height:1.1;margin-bottom:6px;}
+.splash-subtitle{font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;color:var(--gold);margin-bottom:8px;}
+.splash-hindi{font-size:13px;color:var(--text-muted);margin-bottom:48px;letter-spacing:1px;}
+.splash-meta{display:flex;gap:32px;justify-content:center;margin-bottom:48px;}
+.splash-stat{text-align:center;}
+.splash-stat .num{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:var(--gold);display:block;}
+.splash-stat .lbl{font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;}
+.btn-explore{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--gold),#a07d30);color:var(--ink);font-weight:600;font-size:15px;padding:16px 36px;border-radius:50px;border:none;cursor:pointer;box-shadow:0 8px 32px rgba(201,168,76,0.35);transition:all 0.2s;}
+.btn-explore:active{transform:scale(0.97);}
 
-  html, body {
-    width: 100%;
-    max-width: 480px;
-    margin: 0 auto;
-    font-family: 'Inter', sans-serif;
-    background: var(--ink);
-    color: var(--text-primary);
-    min-height: 100vh;
-    overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
-    position: relative;
-  }
+/* ── TOP BAR ── */
+.top-bar{background:rgba(13,17,23,0.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:52px 20px 16px;border-bottom:1px solid var(--border-soft);position:sticky;top:0;z-index:100;}
+.top-bar-inner{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.app-logo{display:flex;align-items:center;gap:10px;}
+.logo-wheel{width:28px;height:28px;animation:spinW 20s linear infinite;}
+.app-name{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;}
+.app-name span{color:var(--gold);}
+.search-wrap{position:relative;}
+.search-input{width:100%;background:var(--ink-mid);border:1px solid var(--border);border-radius:12px;padding:12px 16px 12px 42px;color:var(--text-primary);font-size:14px;font-family:'Inter',sans-serif;outline:none;transition:border-color 0.2s;}
+.search-input:focus{border-color:var(--gold);}
+.search-input::placeholder{color:var(--text-muted);}
+.search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:16px;}
 
-  /* ── SCREENS ── */
-  .screen { display:none; min-height:100vh; flex-direction:column; width:100%; }
-  .screen.active { display:flex; }
+/* ── HOME CONTENT ── */
+#home{background:var(--ink);}
+.home-content{flex:1;overflow-y:auto;padding-bottom:90px;}
+.preamble-hero{margin:20px 16px;background:linear-gradient(135deg,#1a2240 0%,#0d1117 100%);border:1px solid var(--border);border-radius:20px;padding:24px;position:relative;overflow:hidden;cursor:pointer;transition:transform 0.2s;}
+.preamble-hero:active{transform:scale(0.98);}
+.preamble-hero::before{content:'';position:absolute;top:-30px;right:-30px;width:140px;height:140px;background:radial-gradient(circle,rgba(201,168,76,0.12) 0%,transparent 70%);pointer-events:none;}
+.hero-tag{display:inline-block;background:var(--gold-dim);border:1px solid rgba(201,168,76,0.3);color:var(--gold);font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:4px 10px;border-radius:20px;margin-bottom:14px;}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;line-height:1.2;margin-bottom:10px;}
+.hero-excerpt{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;color:var(--text-secondary);line-height:1.6;margin-bottom:16px;}
+.hero-cta{display:flex;align-items:center;gap:6px;color:var(--gold);font-size:13px;font-weight:500;}
 
-  /* ── SPLASH ── */
-  #splash {
-    background: radial-gradient(ellipse at 50% 30%, #1a2240 0%, var(--ink) 70%);
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 40px 24px;
-    position: relative;
-    overflow: hidden;
-    z-index: 0;
-  }
-  #splash > * {
-    position: relative;
-    z-index: 1;
-  }
-  #splash::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C9A84C' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-    opacity: 1;
-    pointer-events: none;
-  }
-  .ashoka-wheel {
-    width: 100px;
-    height: 100px;
-    margin: 0 auto 28px;
-    animation: spinWheel 20s linear infinite;
-    filter: drop-shadow(0 0 20px rgba(201,168,76,0.4));
-  }
-  @keyframes spinWheel { to { transform: rotate(360deg); } }
-  .flag-stripe {
-    display: flex;
-    width: 80px;
-    height: 6px;
-    border-radius: 3px;
-    overflow: hidden;
-    margin: 0 auto 32px;
-  }
-  .flag-stripe .s1 { flex:1; background: var(--saffron); }
-  .flag-stripe .s2 { flex:1; background: var(--white-band); }
-  .flag-stripe .s3 { flex:1; background: var(--green-band); }
+/* ── QUICK SHORTCUTS ── */
+.shortcuts-section{padding:0 16px;margin-bottom:8px;}
+.shortcuts-scroll{display:flex;gap:10px;overflow-x:auto;padding-bottom:8px;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+.shortcuts-scroll::-webkit-scrollbar{display:none;}
+.shortcut-chip{flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;transition:transform 0.15s;}
+.shortcut-chip:active{transform:scale(0.93);}
+.chip-icon{width:54px;height:54px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:22px;border:1px solid rgba(255,255,255,0.08);}
+.chip-icon.neon-orange{background:linear-gradient(135deg,#ff6b00,#ff9933);box-shadow:0 0 16px rgba(255,105,0,0.4);}
+.chip-icon.neon-blue{background:linear-gradient(135deg,#0066ff,#00aaff);box-shadow:0 0 16px rgba(0,102,255,0.4);}
+.chip-icon.neon-green{background:linear-gradient(135deg,#00a651,#00cc66);box-shadow:0 0 16px rgba(0,166,81,0.4);}
+.chip-icon.neon-purple{background:linear-gradient(135deg,#6b21a8,#a855f7);box-shadow:0 0 16px rgba(168,85,247,0.4);}
+.chip-icon.neon-red{background:linear-gradient(135deg,#cc0000,#ff3333);box-shadow:0 0 16px rgba(204,0,0,0.4);}
+.chip-icon.neon-teal{background:linear-gradient(135deg,#007777,#00cccc);box-shadow:0 0 16px rgba(0,204,204,0.4);}
+.chip-icon.neon-gold{background:linear-gradient(135deg,#8b6914,#c9a84c);box-shadow:0 0 16px rgba(201,168,76,0.4);}
+.chip-label{font-size:10px;font-weight:500;color:var(--text-secondary);text-align:center;line-height:1.3;max-width:60px;}
 
-  .splash-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 38px;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-    line-height: 1.1;
-    color: var(--text-primary);
-    margin-bottom: 6px;
-  }
-  .splash-subtitle {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 16px;
-    font-style: italic;
-    color: var(--gold);
-    margin-bottom: 8px;
-    letter-spacing: 0.5px;
-  }
-  .splash-hindi {
-    font-size: 13px;
-    color: var(--text-muted);
-    margin-bottom: 48px;
-    letter-spacing: 1px;
-  }
-  .splash-meta {
-    display: flex;
-    gap: 32px;
-    justify-content: center;
-    margin-bottom: 48px;
-  }
-  .splash-stat { text-align: center; }
-  .splash-stat .num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 28px;
-    font-weight: 700;
-    color: var(--gold);
-    display: block;
-  }
-  .splash-stat .lbl {
-    font-size: 11px;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-  .btn-explore {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: linear-gradient(135deg, var(--gold), #a07d30);
-    color: var(--ink);
-    font-weight: 600;
-    font-size: 15px;
-    padding: 16px 36px;
-    border-radius: 50px;
-    border: none;
-    cursor: pointer;
-    letter-spacing: 0.3px;
-    box-shadow: 0 8px 32px rgba(201,168,76,0.35);
-    transition: all 0.2s;
-  }
-  .btn-explore:active { transform: scale(0.97); }
+/* ── SECTION LABEL ── */
+.section-label{padding:0 16px;margin:20px 0 12px;display:flex;align-items:center;gap:10px;}
+.section-label span{font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);}
+.section-label::after{content:'';flex:1;height:1px;background:var(--border-soft);}
 
-  /* ── HOME ── */
-  #home { background: var(--ink); }
+/* ── PARTS LIST ── */
+.parts-list{padding:0 16px;display:flex;flex-direction:column;gap:8px;}
+.part-card{background:var(--ink-mid);border:1px solid var(--border-soft);border-radius:var(--radius-sm);padding:16px 18px;display:flex;align-items:center;gap:16px;cursor:pointer;transition:all 0.2s;position:relative;overflow:hidden;}
+.part-card:active{transform:scale(0.98);background:var(--ink-soft);}
+.part-card.highlighted{border-color:var(--border);}
+.part-card.highlighted::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,var(--gold),var(--saffron));border-radius:3px 0 0 3px;}
+.part-num{width:36px;height:36px;border-radius:10px;background:var(--gold-dim);border:1px solid rgba(201,168,76,0.2);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:13px;font-weight:700;color:var(--gold);flex-shrink:0;}
+.part-info{flex:1;min-width:0;}
+.part-name{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:3px;}
+.part-range{font-size:12px;color:var(--text-muted);}
+.part-arrow{color:var(--text-muted);font-size:16px;flex-shrink:0;}
 
-  .top-bar {
-    background: rgba(13,17,23,0.95);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    padding: 52px 20px 16px;
-    border-bottom: 1px solid var(--border-soft);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-  .top-bar-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 14px;
-  }
-  .app-logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .logo-wheel {
-    width: 28px;
-    height: 28px;
-    animation: spinWheel 20s linear infinite;
-  }
-  .app-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--text-primary);
-  }
-  .app-name span { color: var(--gold); }
+/* ── SUB BAR ── */
+.sub-bar{background:rgba(13,17,23,0.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:52px 20px 16px;border-bottom:1px solid var(--border-soft);position:sticky;top:0;z-index:100;}
+.sub-bar-inner{display:flex;align-items:center;gap:14px;}
+.back-btn{width:36px;height:36px;border-radius:10px;background:var(--ink-mid);border:1px solid var(--border-soft);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;font-size:16px;}
+.sub-bar-title{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.sub-bar-count{font-size:12px;color:var(--text-muted);margin-top:2px;}
 
-  .search-wrap {
-    position: relative;
-  }
-  .search-input {
-    width: 100%;
-    background: var(--ink-mid);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 12px 16px 12px 42px;
-    color: var(--text-primary);
-    font-size: 14px;
-    font-family: 'Inter', sans-serif;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-  .search-input:focus { border-color: var(--gold); }
-  .search-input::placeholder { color: var(--text-muted); }
-  .search-icon {
-    position: absolute;
-    left: 14px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--text-muted);
-    font-size: 16px;
-  }
+/* ── ARTICLES LIST ── */
+#articles-view{background:var(--ink);}
+.articles-content{flex:1;overflow-y:auto;padding:12px 16px 90px;}
+.article-row{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--border-soft);cursor:pointer;transition:all 0.15s;}
+.article-row:active{opacity:0.7;}
+.art-num-badge{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--ink-mid),var(--ink-soft));border:1px solid var(--border-soft);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700;color:var(--gold-light);flex-shrink:0;}
+.art-info{flex:1;min-width:0;}
+.art-title{font-size:14px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:3px;}
+.art-snippet{font-size:12px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.art-arrow{color:var(--text-muted);font-size:14px;}
 
-  .home-content { flex: 1; overflow-y: auto; padding-bottom: 90px; }
+/* ── ARTICLE DETAIL — PARCHMENT ── */
+#article-detail{background:var(--parch-bg);}
+.detail-bar{background:rgba(180,140,80,0.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:52px 20px 16px;border-bottom:2px solid var(--parch-border);position:sticky;top:0;z-index:100;}
+.detail-bar-inner{display:flex;align-items:center;gap:14px;}
+.back-btn-parch{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,0.25);border:1px solid rgba(255,255,255,0.4);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;font-size:16px;color:#2c1a00;}
+.detail-bar-title{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;color:#2c1a00;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.icon-btn-parch{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,0.25);border:1px solid rgba(255,255,255,0.4);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;color:#2c1a00;transition:all 0.2s;}
+.icon-btn-parch.fav-active{background:rgba(255,153,51,0.4);border-color:#ff9933;}
 
-  /* Hero card */
-  .preamble-hero {
-    margin: 20px 16px;
-    background: linear-gradient(135deg, #1a2240 0%, #0d1117 100%);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 24px;
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
-    transition: transform 0.2s;
-  }
-  .preamble-hero:active { transform: scale(0.98); }
-  .preamble-hero::before {
-    content: '';
-    position: absolute;
-    top: -30px; right: -30px;
-    width: 140px; height: 140px;
-    background: radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 70%);
-  }
-  .hero-tag {
-    display: inline-block;
-    background: var(--gold-dim);
-    border: 1px solid rgba(201,168,76,0.3);
-    color: var(--gold);
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    padding: 4px 10px;
-    border-radius: 20px;
-    margin-bottom: 14px;
-  }
-  .hero-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 26px;
-    font-weight: 700;
-    line-height: 1.2;
-    margin-bottom: 10px;
-  }
-  .hero-excerpt {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 14px;
-    color: var(--text-secondary);
-    line-height: 1.6;
-    margin-bottom: 16px;
-  }
-  .hero-cta {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    color: var(--gold);
-    font-size: 13px;
-    font-weight: 500;
-  }
+.detail-content{flex:1;overflow-y:auto;padding-bottom:40px;background:var(--parch-bg);}
 
-  /* Section label */
-  .section-label {
-    padding: 0 16px;
-    margin: 24px 0 12px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .section-label span {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--text-muted);
-  }
-  .section-label::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border-soft);
-  }
+/* Paper texture overlay */
+.detail-content::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:0.5;}
 
-  /* Part cards */
-  .parts-list { padding: 0 16px; display: flex; flex-direction: column; gap: 8px; }
-  .part-card {
-    background: var(--ink-mid);
-    border: 1px solid var(--border-soft);
-    border-radius: var(--radius-sm);
-    padding: 16px 18px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    cursor: pointer;
-    transition: all 0.2s;
-    position: relative;
-    overflow: hidden;
-  }
-  .part-card:active { transform: scale(0.98); background: var(--ink-soft); }
-  .part-card.highlighted { border-color: var(--border); }
-  .part-card.highlighted::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 3px;
-    background: linear-gradient(to bottom, var(--gold), var(--saffron));
-    border-radius: 3px 0 0 3px;
-  }
-  .part-num {
-    width: 36px;
-    height: 36px;
-    border-radius: 10px;
-    background: var(--gold-dim);
-    border: 1px solid rgba(201,168,76,0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--gold);
-    flex-shrink: 0;
-  }
-  .part-info { flex: 1; min-width: 0; }
-  .part-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--text-primary);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    margin-bottom: 3px;
-  }
-  .part-range {
-    font-size: 12px;
-    color: var(--text-muted);
-  }
-  .part-arrow {
-    color: var(--text-muted);
-    font-size: 16px;
-    flex-shrink: 0;
-  }
+.article-header-parch{padding:28px 24px 20px;border-bottom:2px solid var(--parch-border);background:linear-gradient(180deg,rgba(200,169,110,0.3) 0%,transparent 100%);position:relative;z-index:1;}
+.art-part-tag-parch{display:inline-flex;align-items:center;gap:6px;background:rgba(139,105,20,0.15);border:1px solid rgba(139,105,20,0.35);color:#6b4400;font-size:11px;font-weight:600;padding:5px 12px;border-radius:20px;margin-bottom:16px;}
+.art-number-parch{font-family:'Cormorant Garamond',serif;font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#8b6914;margin-bottom:8px;}
+.art-main-title-parch{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;line-height:1.25;color:var(--parch-text);}
 
-  /* ── ARTICLES LIST ── */
-  #articles-view { background: var(--ink); }
-  .sub-bar {
-    background: rgba(13,17,23,0.95);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    padding: 52px 20px 16px;
-    border-bottom: 1px solid var(--border-soft);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-  .sub-bar-inner {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-bottom: 4px;
-  }
-  .back-btn {
-    width: 36px; height: 36px;
-    border-radius: 10px;
-    background: var(--ink-mid);
-    border: 1px solid var(--border-soft);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    flex-shrink: 0;
-    font-size: 16px;
-  }
-  .sub-bar-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 18px;
-    font-weight: 700;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .sub-bar-count {
-    font-size: 12px;
-    color: var(--text-muted);
-    margin-top: 2px;
-  }
-  .articles-content { flex:1; overflow-y:auto; padding: 12px 16px 90px; }
-  .article-row {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 14px 0;
-    border-bottom: 1px solid var(--border-soft);
-    cursor: pointer;
-    transition: all 0.15s;
-  }
-  .article-row:active { opacity: 0.7; }
-  .art-num-badge {
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
-    background: linear-gradient(135deg, var(--ink-mid), var(--ink-soft));
-    border: 1px solid var(--border-soft);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--gold-light);
-    flex-shrink: 0;
-  }
-  .art-info { flex: 1; min-width: 0; }
-  .art-title {
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--text-primary);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    margin-bottom: 3px;
-  }
-  .art-snippet {
-    font-size: 12px;
-    color: var(--text-muted);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .art-arrow { color: var(--text-muted); font-size: 14px; }
+.article-body-parch{padding:24px 24px 16px;position:relative;z-index:1;}
+.article-body-parch p{font-family:'Cormorant Garamond',serif;font-size:19px;line-height:1.85;color:var(--parch-text2);margin-bottom:18px;text-align:justify;}
+.article-body-parch p:first-child::first-letter{float:left;font-size:54px;font-weight:700;line-height:0.85;margin:6px 8px 0 0;color:#8b1a00;font-family:'Cormorant Garamond',serif;}
 
-  /* ── ARTICLE DETAIL ── */
-  #article-detail { background: var(--ink); }
-  .detail-bar {
-    background: rgba(13,17,23,0.95);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    padding: 52px 20px 16px;
-    border-bottom: 1px solid var(--border-soft);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-  .detail-bar-inner {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-  .detail-actions {
-    display: flex;
-    gap: 8px;
-    margin-left: auto;
-  }
-  .icon-btn {
-    width: 36px; height: 36px;
-    border-radius: 10px;
-    background: var(--ink-mid);
-    border: 1px solid var(--border-soft);
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer;
-    font-size: 16px;
-    transition: all 0.2s;
-  }
-  .icon-btn.fav-active { background: var(--gold-dim); border-color: var(--border); }
+.fact-card-parch{margin:0 20px 24px;background:rgba(139,105,20,0.1);border:1px solid var(--parch-border);border-radius:12px;padding:18px;position:relative;z-index:1;}
+.fact-label-parch{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#8b6914;margin-bottom:8px;}
+.fact-text-parch{font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--parch-text2);line-height:1.6;}
 
-  .detail-content { flex:1; overflow-y:auto; padding-bottom: 40px; }
-  .article-header {
-    padding: 28px 24px 24px;
-    border-bottom: 1px solid var(--border-soft);
-    background: linear-gradient(180deg, rgba(201,168,76,0.04) 0%, transparent 100%);
-  }
-  .art-part-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: var(--gold-dim);
-    border: 1px solid rgba(201,168,76,0.25);
-    color: var(--gold);
-    font-size: 11px;
-    font-weight: 500;
-    padding: 5px 12px;
-    border-radius: 20px;
-    margin-bottom: 16px;
-  }
-  .art-number-display {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 8px;
-  }
-  .art-main-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 28px;
-    font-weight: 700;
-    line-height: 1.25;
-    color: var(--text-primary);
-  }
-  .article-body {
-    padding: 28px 24px;
-  }
-  .article-body p {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 18px;
-    line-height: 1.8;
-    color: var(--cream-dim);
-    margin-bottom: 20px;
-  }
-  .article-body p:first-child::first-letter {
-    float: left;
-    font-size: 52px;
-    font-weight: 700;
-    line-height: 0.85;
-    margin: 6px 8px 0 0;
-    color: var(--gold);
-  }
+.nav-pills-parch{display:flex;gap:10px;padding:0 20px 28px;position:relative;z-index:1;}
+.nav-pill-parch{flex:1;background:rgba(139,105,20,0.12);border:1px solid var(--parch-border);border-radius:10px;padding:12px;text-align:center;cursor:pointer;font-family:'Cormorant Garamond',serif;font-size:14px;color:var(--parch-text2);transition:all 0.2s;}
+.nav-pill-parch:active{background:rgba(139,105,20,0.25);}
+.nav-pill-arrow-parch{font-size:18px;display:block;color:#8b1a00;margin-bottom:2px;}
 
-  .nav-pills {
-    display: flex;
-    gap: 10px;
-    padding: 0 24px 28px;
-  }
-  .nav-pill {
-    flex: 1;
-    background: var(--ink-mid);
-    border: 1px solid var(--border-soft);
-    border-radius: 10px;
-    padding: 12px;
-    text-align: center;
-    cursor: pointer;
-    font-size: 12px;
-    color: var(--text-secondary);
-    transition: all 0.2s;
-  }
-  .nav-pill:active { background: var(--ink-soft); }
-  .nav-pill .nav-pill-arrow { font-size: 16px; display: block; color: var(--gold); margin-bottom: 4px; }
+/* ── BOTTOM NAV ── */
+.bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:rgba(13,17,23,0.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid var(--border-soft);display:flex;padding:10px 0 28px;z-index:200;}
+.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;padding:6px 0;transition:all 0.15s;}
+.nav-icon{font-size:22px;}
+.nav-label{font-size:10px;font-weight:500;color:var(--text-muted);letter-spacing:0.3px;}
+.nav-item.active .nav-label{color:var(--gold);}
 
-  /* ── BOTTOM NAV ── */
-  .bottom-nav {
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    max-width: 480px;
-    background: rgba(13,17,23,0.97);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-top: 1px solid var(--border-soft);
-    display: flex;
-    padding: 10px 0 28px;
-    z-index: 200;
-  }
-  .nav-item {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    cursor: pointer;
-    padding: 6px 0;
-    transition: all 0.15s;
-  }
-  .nav-icon { font-size: 22px; }
-  .nav-label { font-size: 10px; font-weight: 500; color: var(--text-muted); letter-spacing: 0.3px; }
-  .nav-item.active .nav-icon { filter: drop-shadow(0 0 6px var(--gold)); }
-  .nav-item.active .nav-label { color: var(--gold); }
+/* ── SEARCH OVERLAY ── */
+.search-results-overlay{display:none;position:fixed;top:140px;left:0;right:0;bottom:90px;background:var(--ink);z-index:150;overflow-y:auto;padding:12px 16px;max-width:480px;margin:0 auto;}
+.search-results-overlay.visible{display:block;}
+.result-item{padding:14px 0;border-bottom:1px solid var(--border-soft);cursor:pointer;}
+.result-art{font-size:11px;color:var(--gold);font-weight:500;margin-bottom:4px;}
+.result-title{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:600;margin-bottom:4px;}
+.result-snippet{font-size:12px;color:var(--text-muted);line-height:1.5;}
+.result-snippet em{color:var(--gold);font-style:normal;}
 
-  /* ── SEARCH RESULTS ── */
-  .search-results-overlay {
-    display: none;
-    position: fixed;
-    top: 140px; left: 0; right: 0; bottom: 90px;
-    background: var(--ink);
-    z-index: 150;
-    overflow-y: auto;
-    padding: 12px 16px;
-  }
-  .search-results-overlay.visible { display: block; }
-  .result-item {
-    padding: 14px 0;
-    border-bottom: 1px solid var(--border-soft);
-    cursor: pointer;
-  }
-  .result-art { font-size: 11px; color: var(--gold); font-weight: 500; margin-bottom: 4px; letter-spacing: 0.5px; }
-  .result-title { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 600; margin-bottom: 4px; }
-  .result-snippet { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
-  .result-snippet em { color: var(--gold); font-style: normal; }
+/* ── FAVORITES ── */
+#favorites-view{background:var(--ink);}
+.empty-state{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px;text-align:center;gap:16px;}
+.empty-icon{font-size:48px;opacity:0.3;}
+.empty-text{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--text-secondary);}
+.empty-sub{font-size:13px;color:var(--text-muted);}
 
-  /* ── FAVORITES ── */
-  #favorites-view { background: var(--ink); }
-  .empty-state {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 40px;
-    text-align: center;
-    gap: 16px;
-  }
-  .empty-icon { font-size: 48px; opacity: 0.3; }
-  .empty-text { font-family: 'Cormorant Garamond', serif; font-size: 20px; color: var(--text-secondary); }
-  .empty-sub { font-size: 13px; color: var(--text-muted); }
+/* ── AOD ── */
+#aod-view{background:radial-gradient(ellipse at 50% 0%,#1a2240 0%,var(--ink) 60%);padding-bottom:90px;}
+.aod-header{padding:60px 24px 24px;border-bottom:1px solid var(--border-soft);}
+.aod-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,153,51,0.12);border:1px solid rgba(255,153,51,0.3);color:var(--saffron);font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:20px;}
+.aod-title{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:700;line-height:1.2;margin-bottom:8px;}
+.aod-subtitle{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;color:var(--gold);margin-bottom:24px;}
+.aod-body{padding:28px 24px;font-family:'Cormorant Garamond',serif;font-size:19px;line-height:1.85;color:var(--cream-dim);}
+.aod-fact-card{margin:0 24px 24px;background:var(--ink-mid);border:1px solid var(--border);border-radius:var(--radius);padding:20px;}
+.aod-fact-label{font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
+.aod-fact-text{font-size:14px;color:var(--text-secondary);line-height:1.6;}
 
-  /* ── ARTICLE OF THE DAY ── */
-  #aod-view {
-    background: radial-gradient(ellipse at 50% 0%, #1a2240 0%, var(--ink) 60%);
-    padding-bottom: 90px;
-  }
-  .aod-header {
-    padding: 60px 24px 24px;
-    border-bottom: 1px solid var(--border-soft);
-  }
-  .aod-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: rgba(255,153,51,0.12);
-    border: 1px solid rgba(255,153,51,0.3);
-    color: var(--saffron);
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    padding: 5px 14px;
-    border-radius: 20px;
-    margin-bottom: 20px;
-  }
-  .aod-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 32px;
-    font-weight: 700;
-    line-height: 1.2;
-    margin-bottom: 8px;
-  }
-  .aod-subtitle {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 16px;
-    color: var(--gold);
-    margin-bottom: 24px;
-  }
-  .aod-body {
-    padding: 28px 24px;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 19px;
-    line-height: 1.85;
-    color: var(--cream-dim);
-  }
-  .aod-fact-card {
-    margin: 0 24px 24px;
-    background: var(--ink-mid);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 20px;
-  }
-  .aod-fact-label {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 10px;
-  }
-  .aod-fact-text {
-    font-size: 14px;
-    color: var(--text-secondary);
-    line-height: 1.6;
-  }
+/* ── SCHEDULES VIEW ── */
+#schedules-view{background:var(--ink);}
+.schedule-card{background:var(--ink-mid);border:1px solid var(--border-soft);border-radius:var(--radius-sm);margin:0 16px 10px;padding:18px;cursor:pointer;transition:all 0.2s;display:flex;align-items:flex-start;gap:14px;}
+.schedule-card:active{transform:scale(0.98);background:var(--ink-soft);}
+.sched-num{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,rgba(201,168,76,0.2),rgba(201,168,76,0.05));border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700;color:var(--gold);flex-shrink:0;}
+.sched-info{flex:1;}
+.sched-title{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:600;margin-bottom:4px;}
+.sched-desc{font-size:12px;color:var(--text-muted);line-height:1.4;}
 
-  /* Scrollbar */
-  ::-webkit-scrollbar { width: 3px; }
-  ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+/* ── SCHEDULE DETAIL ── */
+#schedule-detail{background:var(--parch-bg);}
+.sched-detail-content{flex:1;overflow-y:auto;padding:0 0 40px;}
+.sched-body{padding:24px;font-family:'Cormorant Garamond',serif;font-size:18px;line-height:1.85;color:var(--parch-text2);position:relative;z-index:1;}
+.sched-body p{margin-bottom:14px;text-align:justify;}
+.sched-body ul{padding-left:20px;margin-bottom:14px;}
+.sched-body li{margin-bottom:8px;font-size:17px;}
+.sched-body .lang-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0;}
+.sched-body .lang-item{background:rgba(139,105,20,0.1);border:1px solid var(--parch-border);border-radius:8px;padding:10px 12px;font-size:15px;color:var(--parch-text);}
+.sched-body .amend-item{background:rgba(139,105,20,0.08);border-left:3px solid #8b1a00;padding:10px 14px;margin-bottom:8px;border-radius:0 8px 8px 0;}
+.amend-num{font-weight:700;color:#8b1a00;font-size:14px;}
+.amend-year{color:#8b6914;font-size:12px;margin-left:8px;}
+.amend-desc{font-size:15px;color:var(--parch-text2);margin-top:4px;}
 
-  /* Install banner */
-  .install-banner {
-    display: none;
-    position: fixed;
-    bottom: 90px; left: 16px; right: 16px;
-    background: var(--ink-mid);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 14px 16px;
-    z-index: 300;
-    align-items: center;
-    gap: 12px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-  }
-  .install-banner.visible { display: flex; }
-  .install-text { flex:1; font-size: 13px; line-height: 1.4; color: var(--text-secondary); }
-  .install-text strong { color: var(--text-primary); display: block; margin-bottom: 2px; }
-  .install-btn {
-    background: var(--gold);
-    color: var(--ink);
-    border: none;
-    border-radius: 8px;
-    padding: 8px 16px;
-    font-weight: 600;
-    font-size: 12px;
-    cursor: pointer;
-    white-space: nowrap;
-  }
-  .install-close {
-    font-size: 18px;
-    color: var(--text-muted);
-    cursor: pointer;
-    padding: 4px;
-  }
+::-webkit-scrollbar{width:3px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
 </style>
 </head>
 <body>
 
-<!-- SPLASH SCREEN -->
+<!-- SPLASH -->
 <div class="screen active" id="splash">
-  <svg class="ashoka-wheel" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <svg class="ashoka-wheel" viewBox="0 0 100 100">
     <circle cx="50" cy="50" r="46" fill="none" stroke="#C9A84C" stroke-width="2.5"/>
     <circle cx="50" cy="50" r="8" fill="none" stroke="#C9A84C" stroke-width="2"/>
     <circle cx="50" cy="50" r="4" fill="#C9A84C"/>
-    <!-- 24 spokes -->
-    <g stroke="#C9A84C" stroke-width="1.2" opacity="0.9">
+    <g stroke="#C9A84C" stroke-width="1.2">
       <line x1="50" y1="42" x2="50" y2="8"/><line x1="57.3" y1="43" x2="73.3" y2="10.5"/>
       <line x1="63" y1="47" x2="88.3" y2="22.7"/><line x1="66" y1="53" x2="92" y2="50"/>
       <line x1="63" y1="57.3" x2="89.5" y2="73.3"/><line x1="57" y1="63" x2="77.3" y2="88.3"/>
       <line x1="50" y1="58" x2="50" y2="92"/><line x1="42.7" y1="57" x2="26.7" y2="89.5"/>
       <line x1="37" y1="53" x2="11.7" y2="77.3"/><line x1="34" y1="47" x2="8" y2="50"/>
       <line x1="37" y1="42.7" x2="10.5" y2="26.7"/><line x1="43" y1="37" x2="22.7" y2="11.7"/>
-      <line x1="53.5" y1="42.5" x2="61" y2="11"/><line x1="60.5" y1="45" x2="84" y2="19.5"/>
-      <line x1="64.5" y1="50.5" x2="92" y2="43"/><line x1="62" y1="60" x2="85" y2="80"/>
-      <line x1="55" y1="65" x2="63" y2="90"/><line x1="45" y1="65" x2="37" y2="91"/>
-      <line x1="38" y1="60" x2="15" y2="80"/><line x1="35.5" y1="50.5" x2="8" y2="57"/>
-      <line x1="39.5" y1="45" x2="16" y2="19.5"/><line x1="46.5" y1="42.5" x2="39" y2="11"/>
     </g>
   </svg>
-
   <div class="flag-stripe"><div class="s1"></div><div class="s2"></div><div class="s3"></div></div>
-
   <div class="splash-title">Constitution<br>of India</div>
   <div class="splash-subtitle">भारत का संविधान</div>
   <div class="splash-hindi">Adopted · 26 November 1949</div>
-
   <div class="splash-meta">
     <div class="splash-stat"><span class="num">448</span><span class="lbl">Articles</span></div>
     <div class="splash-stat"><span class="num">25</span><span class="lbl">Parts</span></div>
     <div class="splash-stat"><span class="num">12</span><span class="lbl">Schedules</span></div>
   </div>
-
-  <button class="btn-explore" onclick="goHome()">
-    ⚖ Explore Constitution
-  </button>
+  <button class="btn-explore" onclick="goHome()">⚖ Explore Constitution</button>
 </div>
 
-<!-- HOME SCREEN -->
+<!-- HOME -->
 <div class="screen" id="home">
   <div class="top-bar">
     <div class="top-bar-inner">
@@ -794,12 +263,10 @@
     </div>
     <div class="search-wrap">
       <span class="search-icon">🔍</span>
-      <input class="search-input" id="searchInput" type="text" placeholder="Search articles, rights, duties…" oninput="handleSearch(this.value)" onfocus="showSearchOverlay()" />
+      <input class="search-input" id="searchInput" type="text" placeholder="Search articles, rights, duties…" oninput="handleSearch(this.value)" onfocus="showSearchOverlay()"/>
     </div>
   </div>
-
-  <div class="home-content" id="homeContent">
-    <!-- Preamble Hero -->
+  <div class="home-content">
     <div class="preamble-hero" onclick="openArticleById('preamble')">
       <div class="hero-tag">✦ Preamble</div>
       <div class="hero-title">We, the People<br>of India…</div>
@@ -807,38 +274,59 @@
       <div class="hero-cta">Read Preamble <span>→</span></div>
     </div>
 
+    <div class="section-label"><span>Quick Access</span></div>
+    <div class="shortcuts-section">
+      <div class="shortcuts-scroll">
+        <div class="shortcut-chip" onclick="openShortcut('fr')">
+          <div class="chip-icon neon-orange">⚖️</div>
+          <div class="chip-label">Fundamental Rights</div>
+        </div>
+        <div class="shortcut-chip" onclick="openShortcut('fd')">
+          <div class="chip-icon neon-green">🙏</div>
+          <div class="chip-label">Fundamental Duties</div>
+        </div>
+        <div class="shortcut-chip" onclick="openShortcut('dpsp')">
+          <div class="chip-icon neon-blue">📋</div>
+          <div class="chip-label">Directive Principles</div>
+        </div>
+        <div class="shortcut-chip" onclick="openShortcut('languages')">
+          <div class="chip-icon neon-purple">🗣️</div>
+          <div class="chip-label">8th Schedule Languages</div>
+        </div>
+        <div class="shortcut-chip" onclick="openShortcut('amendments')">
+          <div class="chip-icon neon-red">📝</div>
+          <div class="chip-label">Key Amendments</div>
+        </div>
+        <div class="shortcut-chip" onclick="openShortcut('emergency')">
+          <div class="chip-icon neon-teal">🚨</div>
+          <div class="chip-label">Emergency Provisions</div>
+        </div>
+        <div class="shortcut-chip" onclick="showScreen('schedules-view')">
+          <div class="chip-icon neon-gold">📅</div>
+          <div class="chip-label">12 Schedules</div>
+        </div>
+      </div>
+    </div>
+
     <div class="section-label"><span>Parts of the Constitution</span></div>
     <div class="parts-list" id="partsList"></div>
   </div>
-
-  <!-- Search overlay -->
-  <div class="search-results-overlay" id="searchOverlay">
-    <div id="searchResults"></div>
-  </div>
-
+  <div class="search-results-overlay" id="searchOverlay"><div id="searchResults"></div></div>
   <div class="bottom-nav">
-    <div class="nav-item active" onclick="switchTab('home',this)">
-      <span class="nav-icon">📜</span>
-      <span class="nav-label">Constitution</span>
-    </div>
-    <div class="nav-item" onclick="switchTab('favorites-view',this)">
-      <span class="nav-icon">⭐</span>
-      <span class="nav-label">Saved</span>
-    </div>
-    <div class="nav-item" onclick="switchTab('aod-view',this)">
-      <span class="nav-icon">☀️</span>
-      <span class="nav-label">Today</span>
-    </div>
+    <div class="nav-item active" onclick="switchTab('home',this)"><span class="nav-icon">📜</span><span class="nav-label">Constitution</span></div>
+    <div class="nav-item" onclick="switchTab('schedules-view',this)"><span class="nav-icon">📅</span><span class="nav-label">Schedules</span></div>
+    <div class="nav-item" onclick="switchTab('favorites-view',this)"><span class="nav-icon">⭐</span><span class="nav-label">Saved</span></div>
+    <div class="nav-item" onclick="switchTab('aod-view',this)"><span class="nav-icon">☀️</span><span class="nav-label">Today</span></div>
   </div>
 </div>
 
-<!-- ARTICLES LIST VIEW -->
+<!-- ARTICLES LIST -->
 <div class="screen" id="articles-view">
   <div class="sub-bar">
     <div class="sub-bar-inner">
       <div class="back-btn" onclick="goBack('home')">←</div>
       <div>
-        <div class="sub-bar-title" id="partViewTitle">Part V</div>
+        <div class="sub-bar-title" id="partViewTitle">Part</div>
         <div class="sub-bar-count" id="partViewCount"></div>
       </div>
     </div>
@@ -846,44 +334,61 @@
   <div class="articles-content" id="articlesContent"></div>
 </div>
 
-<!-- ARTICLE DETAIL VIEW -->
+<!-- ARTICLE DETAIL — PARCHMENT -->
 <div class="screen" id="article-detail">
   <div class="detail-bar">
     <div class="detail-bar-inner">
-      <div class="back-btn" id="artBackBtn" onclick="">←</div>
-      <div style="flex:1;min-width:0">
-        <div class="sub-bar-title" id="detailBarTitle" style="font-size:15px">Article</div>
-      </div>
-      <div class="detail-actions">
-        <div class="icon-btn" id="favBtn" onclick="toggleFav()">☆</div>
-      </div>
+      <div class="back-btn-parch" id="artBackBtn">←</div>
+      <div class="detail-bar-title" id="detailBarTitle">Article</div>
+      <div class="icon-btn-parch" id="favBtn" onclick="toggleFav()">☆</div>
     </div>
   </div>
   <div class="detail-content" id="detailContent"></div>
 </div>
 
-<!-- FAVORITES VIEW -->
-<div class="screen" id="favorites-view">
+<!-- SCHEDULES LIST -->
+<div class="screen" id="schedules-view">
   <div class="sub-bar">
     <div class="sub-bar-inner">
-      <div><div class="sub-bar-title">Saved Articles</div></div>
+      <div class="back-btn" onclick="goBack('home')">←</div>
+      <div><div class="sub-bar-title">12 Schedules</div><div class="sub-bar-count">Constitutional Schedules</div></div>
     </div>
   </div>
-  <div class="articles-content" id="favsContent"></div>
+  <div style="flex:1;overflow-y:auto;padding:16px 0 90px;" id="schedulesList"></div>
   <div class="bottom-nav">
-    <div class="nav-item" onclick="switchTab('home',this)">
-      <span class="nav-icon">📜</span><span class="nav-label">Constitution</span>
-    </div>
-    <div class="nav-item active" onclick="switchTab('favorites-view',this)">
-      <span class="nav-icon">⭐</span><span class="nav-label">Saved</span>
-    </div>
-    <div class="nav-item" onclick="switchTab('aod-view',this)">
-      <span class="nav-icon">☀️</span><span class="nav-label">Today</span>
-    </div>
+    <div class="nav-item" onclick="switchTab('home',this)"><span class="nav-icon">📜</span><span class="nav-label">Constitution</span></div>
+    <div class="nav-item active" onclick="switchTab('schedules-view',this)"><span class="nav-icon">📅</span><span class="nav-label">Schedules</span></div>
+    <div class="nav-item" onclick="switchTab('favorites-view',this)"><span class="nav-icon">⭐</span><span class="nav-label">Saved</span></div>
+    <div class="nav-item" onclick="switchTab('aod-view',this)"><span class="nav-icon">☀️</span><span class="nav-label">Today</span></div>
   </div>
 </div>
 
-<!-- ARTICLE OF THE DAY VIEW -->
+<!-- SCHEDULE DETAIL — PARCHMENT -->
+<div class="screen" id="schedule-detail">
+  <div class="detail-bar">
+    <div class="detail-bar-inner">
+      <div class="back-btn-parch" id="schedBackBtn">←</div>
+      <div class="detail-bar-title" id="schedDetailTitle">Schedule</div>
+    </div>
+  </div>
+  <div class="sched-detail-content" id="schedDetailContent"></div>
+</div>
+
+<!-- FAVORITES -->
+<div class="screen" id="favorites-view">
+  <div class="sub-bar">
+    <div class="sub-bar-inner"><div><div class="sub-bar-title">Saved Articles</div></div></div>
+  </div>
+  <div class="articles-content" id="favsContent"></div>
+  <div class="bottom-nav">
+    <div class="nav-item" onclick="switchTab('home',this)"><span class="nav-icon">📜</span><span class="nav-label">Constitution</span></div>
+    <div class="nav-item" onclick="switchTab('schedules-view',this)"><span class="nav-icon">📅</span><span class="nav-label">Schedules</span></div>
+    <div class="nav-item active" onclick="switchTab('favorites-view',this)"><span class="nav-icon">⭐</span><span class="nav-label">Saved</span></div>
+    <div class="nav-item" onclick="switchTab('aod-view',this)"><span class="nav-icon">☀️</span><span class="nav-label">Today</span></div>
+  </div>
+</div>
+
+<!-- AOD -->
 <div class="screen" id="aod-view">
   <div class="aod-header">
     <div class="aod-tag">☀️ Article of the Day</div>
@@ -891,127 +396,193 @@
     <div class="aod-subtitle" id="aodSubtitle"></div>
   </div>
   <div class="aod-body" id="aodBody"></div>
-  <div class="aod-fact-card">
-    <div class="aod-fact-label">💡 Did You Know?</div>
-    <div class="aod-fact-text" id="aodFact"></div>
-  </div>
+  <div class="aod-fact-card"><div class="aod-fact-label">💡 Did You Know?</div><div class="aod-fact-text" id="aodFact"></div></div>
   <div class="bottom-nav">
-    <div class="nav-item" onclick="switchTab('home',this)">
-      <span class="nav-icon">📜</span><span class="nav-label">Constitution</span>
-    </div>
-    <div class="nav-item" onclick="switchTab('favorites-view',this)">
-      <span class="nav-icon">⭐</span><span class="nav-label">Saved</span>
-    </div>
-    <div class="nav-item active" onclick="switchTab('aod-view',this)">
-      <span class="nav-icon">☀️</span><span class="nav-label">Today</span>
-    </div>
+    <div class="nav-item" onclick="switchTab('home',this)"><span class="nav-icon">📜</span><span class="nav-label">Constitution</span></div>
+    <div class="nav-item" onclick="switchTab('schedules-view',this)"><span class="nav-icon">📅</span><span class="nav-label">Schedules</span></div>
+    <div class="nav-item" onclick="switchTab('favorites-view',this)"><span class="nav-icon">⭐</span><span class="nav-label">Saved</span></div>
+    <div class="nav-item active" onclick="switchTab('aod-view',this)"><span class="nav-icon">☀️</span><span class="nav-label">Today</span></div>
   </div>
-</div>
-
-<!-- Install Banner -->
-<div class="install-banner" id="installBanner">
-  <div class="install-text">
-    <strong>Add to Home Screen</strong>
-    Tap Share → "Add to Home Screen" in Safari
-  </div>
-  <div class="install-close" onclick="document.getElementById('installBanner').classList.remove('visible')">✕</div>
 </div>
 
 <script>
-// ═══════════════════════════════════════════
-// DATA
-// ═══════════════════════════════════════════
+// ═══════════════ DATA ═══════════════
 const PARTS = [
-  { id:'pI',   num:'I',      name:'The Union and Its Territory', range:'1–4',     color:'#C9A84C' },
-  { id:'pII',  num:'II',     name:'Citizenship',                  range:'5–11',    color:'#C9A84C' },
-  { id:'pIII', num:'III',    name:'Fundamental Rights',           range:'12–35',   color:'#FF9933' },
-  { id:'pIV',  num:'IV',     name:'Directive Principles of State Policy', range:'36–51', color:'#C9A84C' },
-  { id:'pIVA', num:'IV-A',   name:'Fundamental Duties',           range:'51A',     color:'#C9A84C' },
-  { id:'pV',   num:'V',      name:'The Union',                    range:'52–151',  color:'#C9A84C' },
-  { id:'pVI',  num:'VI',     name:'The States',                   range:'152–237', color:'#C9A84C' },
-  { id:'pVIII',num:'VIII',   name:'The Union Territories',        range:'239–242', color:'#C9A84C' },
-  { id:'pIX',  num:'IX',     name:'The Panchayats',               range:'243–243O',color:'#138808' },
-  { id:'pIXA', num:'IX-A',   name:'The Municipalities',           range:'243P–243ZG', color:'#138808' },
-  { id:'pX',   num:'X',      name:'The Scheduled and Tribal Areas', range:'244–244A', color:'#C9A84C' },
-  { id:'pXI',  num:'XI',     name:'Relations between Union & States', range:'245–263', color:'#C9A84C' },
-  { id:'pXII', num:'XII',    name:'Finance, Property, Contracts & Suits', range:'264–300A', color:'#C9A84C' },
-  { id:'pXIV', num:'XIV',    name:'Services Under the Union & States', range:'308–323', color:'#C9A84C' },
-  { id:'pXVA', num:'XIV-A',  name:'Tribunals',                    range:'323A–323B', color:'#C9A84C' },
-  { id:'pXV',  num:'XV',     name:'Elections',                    range:'324–329A', color:'#C9A84C' },
-  { id:'pXVI', num:'XVI',    name:'Special Provisions for Certain Classes', range:'330–342A', color:'#C9A84C' },
-  { id:'pXVII',num:'XVII',   name:'Official Language',            range:'343–351', color:'#C9A84C' },
-  { id:'pXVIII',num:'XVIII', name:'Emergency Provisions',         range:'352–360', color:'#FF9933' },
-  { id:'pXIX', num:'XIX',    name:'Miscellaneous',                range:'361–367', color:'#C9A84C' },
-  { id:'pXX',  num:'XX',     name:'Amendment of the Constitution',range:'368',     color:'#C9A84C' },
-  { id:'pXXI', num:'XXI',    name:'Temporary & Transitional Provisions', range:'369–392', color:'#C9A84C' },
-  { id:'pXXII',num:'XXII',   name:'Short Title, Commencement, etc.', range:'393–395', color:'#C9A84C' },
+  {id:'pI',num:'I',name:'The Union and Its Territory',range:'1–4'},
+  {id:'pII',num:'II',name:'Citizenship',range:'5–11'},
+  {id:'pIII',num:'III',name:'Fundamental Rights',range:'12–35'},
+  {id:'pIV',num:'IV',name:'Directive Principles of State Policy',range:'36–51'},
+  {id:'pIVA',num:'IV-A',name:'Fundamental Duties',range:'51A'},
+  {id:'pV',num:'V',name:'The Union',range:'52–151'},
+  {id:'pVI',num:'VI',name:'The States',range:'152–237'},
+  {id:'pVIII',num:'VIII',name:'The Union Territories',range:'239–242'},
+  {id:'pIX',num:'IX',name:'The Panchayats',range:'243–243O'},
+  {id:'pIXA',num:'IX-A',name:'The Municipalities',range:'243P–243ZG'},
+  {id:'pX',num:'X',name:'The Scheduled and Tribal Areas',range:'244–244A'},
+  {id:'pXI',num:'XI',name:'Relations between Union & States',range:'245–263'},
+  {id:'pXII',num:'XII',name:'Finance, Property, Contracts & Suits',range:'264–300A'},
+  {id:'pXIV',num:'XIV',name:'Services Under the Union & States',range:'308–323'},
+  {id:'pXVA',num:'XIV-A',name:'Tribunals',range:'323A–323B'},
+  {id:'pXV',num:'XV',name:'Elections',range:'324–329A'},
+  {id:'pXVI',num:'XVI',name:'Special Provisions for Certain Classes',range:'330–342A'},
+  {id:'pXVII',num:'XVII',name:'Official Language',range:'343–351'},
+  {id:'pXVIII',num:'XVIII',name:'Emergency Provisions',range:'352–360'},
+  {id:'pXIX',num:'XIX',name:'Miscellaneous',range:'361–367'},
+  {id:'pXX',num:'XX',name:'Amendment of the Constitution',range:'368'},
+  {id:'pXXI',num:'XXI',name:'Temporary & Transitional Provisions',range:'369–392'},
+  {id:'pXXII',num:'XXII',name:'Short Title, Commencement, etc.',range:'393–395'},
 ];
 
 const ARTICLES = {
-  'preamble': {
-    num: 'Preamble', title: 'Preamble to the Constitution',
-    part: 'Foundation', partId: null,
-    text: `WE, THE PEOPLE OF INDIA, having solemnly resolved to constitute India into a SOVEREIGN SOCIALIST SECULAR DEMOCRATIC REPUBLIC and to secure to all its citizens:
-
-JUSTICE, social, economic and political;
-
-LIBERTY of thought, expression, belief, faith and worship;
-
-EQUALITY of status and of opportunity; and to promote among them all
-
-FRATERNITY assuring the dignity of the individual and the unity and integrity of the Nation;
-
-IN OUR CONSTITUENT ASSEMBLY this twenty-sixth day of November, 1949, do HEREBY ADOPT, ENACT AND GIVE TO OURSELVES THIS CONSTITUTION.`,
-    fact: 'The word "SOCIALIST" and "SECULAR" were added by the 42nd Constitutional Amendment in 1976 during the Emergency period.'
-  },
-  'a12': { num:'12', title:'Definition of State', part:'Part III – Fundamental Rights', partId:'pIII', text:'In this part, unless the context otherwise requires, "the State" includes the Government and Parliament of India and the Government and the Legislature of each of the States and all local or other authorities within the territory of India or under the control of the Government of India.', fact:'Article 12 is the gateway to Fundamental Rights. All rights in Part III are enforceable against the "State" as defined here.' },
-  'a13': { num:'13', title:'Laws inconsistent with or in derogation of Fundamental Rights', part:'Part III – Fundamental Rights', partId:'pIII', text:'All laws in force in the territory of India immediately before the commencement of this Constitution, in so far as they are inconsistent with the provisions of this Part, shall, to the extent of such inconsistency, be void. The State shall not make any law which takes away or abridges the rights conferred by this Part and any law made in contravention of this clause shall, to the extent of the contravention, be void.', fact:'Article 13 is the constitutional basis for judicial review of legislation in India.' },
-  'a14': { num:'14', title:'Equality before law', part:'Part III – Fundamental Rights', partId:'pIII', text:'The State shall not deny to any person equality before the law or the equal protection of the laws within the territory of India. This article prohibits class legislation but permits reasonable classification.', fact:'Article 14 embodies two concepts: "Equality before law" (borrowed from English law) and "Equal protection of laws" (borrowed from the 14th Amendment of the US Constitution).' },
-  'a15': { num:'15', title:'Prohibition of discrimination on grounds of religion, race, caste, sex or place of birth', part:'Part III – Fundamental Rights', partId:'pIII', text:'The State shall not discriminate against any citizen on grounds only of religion, race, caste, sex, place of birth or any of them. No citizen shall, on grounds only of religion, race, caste, sex, place of birth or any of them, be subject to any disability, liability, restriction or condition with regard to access to shops, public restaurants, hotels and places of public entertainment.', fact:'The State can make special provisions for women, children, and socially/educationally backward classes under Articles 15(3) and 15(4).' },
-  'a16': { num:'16', title:'Equality of opportunity in matters of public employment', part:'Part III – Fundamental Rights', partId:'pIII', text:'There shall be equality of opportunity for all citizens in matters relating to employment or appointment to any office under the State. No citizen shall, on grounds only of religion, race, caste, sex, descent, place of birth, residence or any of them, be ineligible for, or discriminated against in respect of, any employment or office under the State.', fact:'Article 16(4) allows reservation of posts for backward classes not adequately represented in State services — the basis of India\'s reservation policy.' },
-  'a17': { num:'17', title:'Abolition of Untouchability', part:'Part III – Fundamental Rights', partId:'pIII', text:'"Untouchability" is abolished and its practice in any form is forbidden. The enforcement of any disability arising out of "Untouchability" shall be an offence punishable in accordance with law.', fact:'This article abolishes untouchability absolutely without any exception. The Protection of Civil Rights Act, 1955 gives effect to this provision.' },
-  'a19': { num:'19', title:'Protection of certain rights regarding freedom of speech, etc.', part:'Part III – Fundamental Rights', partId:'pIII', text:'All citizens shall have the right to freedom of speech and expression; to assemble peaceably and without arms; to form associations or unions; to move freely throughout the territory of India; to reside and settle in any part of the territory of India; and to practise any profession, or to carry on any occupation, trade or business.', fact:'Freedom of the Press is not mentioned separately in Article 19 but is included in "freedom of speech and expression" as held by the Supreme Court.' },
-  'a21': { num:'21', title:'Protection of life and personal liberty', part:'Part III – Fundamental Rights', partId:'pIII', text:'No person shall be deprived of his life or personal liberty except according to procedure established by law. The Supreme Court has given an expansive interpretation to include right to livelihood, right to health, right to education, right to privacy, and many more rights as part of the right to life.', fact:'Article 21 is considered the "heart of the Constitution". The landmark Maneka Gandhi case (1978) expanded it to include the right to live with human dignity.' },
-  'a32': { num:'32', title:'Remedies for enforcement of rights conferred by Part III', part:'Part III – Fundamental Rights', partId:'pIII', text:'The right to move the Supreme Court by appropriate proceedings for the enforcement of the rights conferred by this Part is guaranteed. The Supreme Court shall have power to issue directions or orders or writs, including writs in the nature of habeas corpus, mandamus, prohibition, quo warranto and certiorari, whichever may be appropriate, for the enforcement of any of the rights conferred by this Part.', fact:'Dr B.R. Ambedkar called Article 32 the "heart and soul of the Constitution". It is itself a Fundamental Right and cannot be suspended except during Emergency.' },
-  'a44': { num:'44', title:'Uniform civil code for the citizens', part:'Part IV – Directive Principles', partId:'pIV', text:'The State shall endeavour to secure for the citizens a uniform civil code throughout the territory of India. This is a directive principle and not directly enforceable in courts, but it is fundamental to the governance of the country.', fact:'Article 44 remains one of the most debated provisions of the Constitution. Goa is the only Indian state with a Uniform Civil Code in force.' },
-  'a51A': { num:'51A', title:'Fundamental Duties', part:'Part IV-A – Fundamental Duties', partId:'pIVA', text:'It shall be the duty of every citizen of India to abide by the Constitution and respect its ideals and institutions, the National Flag and the National Anthem; to cherish and follow the noble ideals which inspired our national struggle for freedom; to uphold and protect the sovereignty, unity and integrity of India; to defend the country and render national service when called upon to do so; to promote harmony and the spirit of common brotherhood amongst all the people of India.', fact:'Fundamental Duties were added by the 42nd Constitutional Amendment (1976) and are non-justiciable — they cannot be enforced by a court of law.' },
-  'a52': { num:'52', title:'The President of India', part:'Part V – The Union', partId:'pV', text:'There shall be a President of India. The President is the constitutional head of the executive of the Union. The executive power of the Union is vested in the President and shall be exercised by him either directly or through officers subordinate to him in accordance with this Constitution.', fact:'India has a parliamentary system, so the President acts on the advice of the Council of Ministers headed by the Prime Minister.' },
-  'a53': { num:'53', title:'Executive power of the Union', part:'Part V – The Union', partId:'pV', text:'The executive power of the Union shall be vested in the President and shall be exercised by him either directly or through officers subordinate to him in accordance with this Constitution. The supreme command of the Defence Forces of the Union shall be vested in the President and the exercise thereof shall be regulated by law.', fact:'The President is the Supreme Commander of the Indian Armed Forces.' },
-  'a54': { num:'54', title:'Election of President', part:'Part V – The Union', partId:'pV', text:'The President shall be elected by the members of an electoral college consisting of the elected members of both Houses of Parliament; and the elected members of the Legislative Assemblies of the States. The election shall be held in accordance with the system of proportional representation by means of the single transferable vote.', fact:'The President of India is elected indirectly — not by direct vote of the people but by an Electoral College.' },
-  'a57': { num:'57', title:'Eligibility for re-election', part:'Part V – The Union', partId:'pV', text:'A person who holds, or who has held, office as President shall, subject to the other provisions of this Constitution, be eligible for re-election to that office.', fact:'Unlike the US, India\'s Constitution does not limit the number of terms a President can serve.' },
-  'a61': { num:'61', title:'Procedure for impeachment of the President', part:'Part V – The Union', partId:'pV', text:'When a President is to be impeached for violation of the Constitution, the charge shall be preferred by either House of Parliament. The charge shall be investigated by the other House. If a resolution for impeachment is passed by a majority of not less than two-thirds of the total membership of the House, the President shall stand removed from office.', fact:'No President of India has ever been impeached. The impeachment process requires a 2/3rd majority in both Houses of Parliament.' },
-  'a72': { num:'72', title:'Power of President to grant pardons, etc.', part:'Part V – The Union', partId:'pV', text:'The President shall have the power to grant pardons, reprieves, respites or remissions of punishment or to suspend, remit or commute the sentence of any person convicted of any offence in all cases where the punishment or sentence is by a Court Martial; in all cases where the punishment or sentence is for an offence against any law relating to a matter to which the executive power of the Union extends; in all cases where the sentence is a sentence of death.', fact:'The President\'s pardon power under Article 72 is wider than the Governor\'s power under Article 161 as it extends to death sentences and court martial sentences.' },
-  'a74': { num:'74', title:'Council of Ministers to aid and advise President', part:'Part V – The Union', partId:'pV', text:'There shall be a Council of Ministers with the Prime Minister at the head to aid and advise the President who shall, in the exercise of his functions, act in accordance with such advice. The President may require the Council of Ministers to reconsider such advice and the President shall act in accordance with the advice tendered after such reconsideration.', fact:'The 44th Constitutional Amendment (1978) added that the President can send back the advice once for reconsideration, but must accept the advice if returned.' },
-  'a110': { num:'110', title:'Definition of "Money Bills"', part:'Part V – The Union', partId:'pV', text:'A Bill shall be deemed to be a Money Bill if it contains only provisions dealing with all or any of the following matters: the imposition, abolition, remission, alteration or regulation of any tax; the regulation of the borrowing of money by the Union Government; the custody of the Consolidated Fund of India and appropriation of moneys out of that Fund.', fact:'The Speaker of Lok Sabha has the final authority to certify whether a Bill is a Money Bill, and this decision cannot be challenged in any court.' },
-  'a124': { num:'124', title:'Establishment and constitution of Supreme Court', part:'Part V – The Union', partId:'pV', text:'There shall be a Supreme Court of India consisting of a Chief Justice of India and, until Parliament by law prescribes a larger number, of not more than thirty-three other Judges. Every Judge of the Supreme Court shall be appointed by the President by warrant under his hand and seal after consultation with such of the Judges of the Supreme Court and of the High Courts in the States as the President may deem necessary for the purpose.', fact:'The Supreme Court of India was established on 28 January 1950. It is the highest court and the final court of appeal in India.' },
-  'a324': { num:'324', title:'Superintendence, direction and control of elections', part:'Part XV – Elections', partId:'pXV', text:'The superintendence, direction and control of the preparation of the electoral rolls for, and the conduct of, all elections to Parliament and to the Legislature of every State and of elections to the offices of President and Vice-President held under this Constitution shall be vested in the Election Commission consisting of the Chief Election Commissioner and such number of other Election Commissioners, if any, as the President may from time to time fix.', fact:'The Election Commission of India is an autonomous constitutional authority responsible for administering election processes in India.' },
-  'a343': { num:'343', title:'Official language of the Union', part:'Part XVII – Official Language', partId:'pXVII', text:'The official language of the Union shall be Hindi in Devanagari script. The form of numerals to be used for the official purposes of the Union shall be the international form of Indian numerals. Notwithstanding anything in clause (1), for a period of fifteen years from the commencement of this Constitution, the English language shall continue to be used for all the official purposes of the Union for which it was being used immediately before such commencement.', fact:'Despite 15 years expiring in 1965, English continues as an official language due to the Official Languages Act, 1963 and protests from non-Hindi speaking states.' },
-  'a352': { num:'352', title:'Proclamation of Emergency', part:'Part XVIII – Emergency Provisions', partId:'pXVIII', text:'If the President is satisfied that a grave emergency exists whereby the security of India or of any part of the territory thereof is threatened, whether by war or external aggression or armed rebellion, he may, by Proclamation, make a declaration to that effect in respect of the whole of India or of such part of the territory thereof as may be specified in the Proclamation.', fact:'India has declared National Emergency three times: 1962 (China war), 1971 (Pakistan war), and 1975-77 (internal disturbance declared by PM Indira Gandhi).' },
-  'a368': { num:'368', title:'Power of Parliament to amend the Constitution and procedure therefor', part:'Part XX – Amendment of the Constitution', partId:'pXX', text:'Notwithstanding anything in this Constitution, Parliament may in exercise of its constituent power amend by way of addition, variation or repeal any provision of this Constitution in accordance with the procedure laid down in this article. An amendment of this Constitution may be initiated only by the introduction of a Bill for the purpose in either House of Parliament, and when the Bill is passed in each House by a majority of the total membership of that House and by a majority of not less than two-thirds of the members of that House present and voting, it shall be presented to the President who shall give his assent to the Bill.', fact:'The Kesavananda Bharati case (1973) established that Parliament cannot amend the "Basic Structure" of the Constitution.' },
+  preamble:{num:'Preamble',title:'Preamble to the Constitution',part:'Foundation',partId:null,
+    text:`WE, THE PEOPLE OF INDIA, having solemnly resolved to constitute India into a SOVEREIGN SOCIALIST SECULAR DEMOCRATIC REPUBLIC and to secure to all its citizens:\n\nJUSTICE, social, economic and political;\n\nLIBERTY of thought, expression, belief, faith and worship;\n\nEQUALITY of status and of opportunity; and to promote among them all\n\nFRATERNITY assuring the dignity of the individual and the unity and integrity of the Nation;\n\nIN OUR CONSTITUENT ASSEMBLY this twenty-sixth day of November, 1949, do HEREBY ADOPT, ENACT AND GIVE TO OURSELVES THIS CONSTITUTION.`,
+    fact:'The words "SOCIALIST" and "SECULAR" were added by the 42nd Constitutional Amendment in 1976 during the Emergency period proclaimed by PM Indira Gandhi.'},
+  a12:{num:'12',title:'Definition of State',part:'Part III – Fundamental Rights',partId:'pIII',
+    text:'In this part, unless the context otherwise requires, "the State" includes the Government and Parliament of India and the Government and the Legislature of each of the States and all local or other authorities within the territory of India or under the control of the Government of India.',
+    fact:'Article 12 is the gateway to Fundamental Rights. All rights in Part III are enforceable only against the "State" as defined here — not against private individuals.'},
+  a13:{num:'13',title:'Laws inconsistent with or in derogation of Fundamental Rights',part:'Part III – Fundamental Rights',partId:'pIII',
+    text:'All laws in force in the territory of India immediately before the commencement of this Constitution, in so far as they are inconsistent with the provisions of this Part, shall, to the extent of such inconsistency, be void. The State shall not make any law which takes away or abridges the rights conferred by this Part and any law made in contravention of this clause shall, to the extent of the contravention, be void.',
+    fact:'Article 13 is the constitutional basis for judicial review of legislation in India. The Supreme Court can strike down any law that violates Fundamental Rights.'},
+  a14:{num:'14',title:'Equality before law',part:'Part III – Fundamental Rights',partId:'pIII',
+    text:'The State shall not deny to any person equality before the law or the equal protection of the laws within the territory of India. This article prohibits class legislation but permits reasonable classification based on intelligible differentia having a rational nexus to the objective.',
+    fact:'"Equality before law" is borrowed from English law (rule of law by Dicey) and "Equal protection of laws" from the 14th Amendment of the US Constitution.'},
+  a15:{num:'15',title:'Prohibition of discrimination on grounds of religion, race, caste, sex or place of birth',part:'Part III – Fundamental Rights',partId:'pIII',
+    text:'The State shall not discriminate against any citizen on grounds only of religion, race, caste, sex, place of birth or any of them. No citizen shall, on grounds only of religion, race, caste, sex, place of birth or any of them, be subject to any disability, liability, restriction or condition with regard to access to shops, public restaurants, hotels and places of public entertainment.\n\nNothing in this article shall prevent the State from making any special provision for women and children, or for the advancement of any socially and educationally backward classes of citizens or for the Scheduled Castes and the Scheduled Tribes.',
+    fact:'The 103rd Amendment (2019) added Article 15(6) enabling 10% EWS reservation for economically weaker sections among general category.'},
+  a16:{num:'16',title:'Equality of opportunity in matters of public employment',part:'Part III – Fundamental Rights',partId:'pIII',
+    text:'There shall be equality of opportunity for all citizens in matters relating to employment or appointment to any office under the State. No citizen shall, on grounds only of religion, race, caste, sex, descent, place of birth, residence or any of them, be ineligible for, or discriminated against in respect of, any employment or office under the State.\n\nNothing in this article shall prevent the State from making any provision for the reservation of appointments or posts in favour of any backward class of citizens which, in the opinion of the State, is not adequately represented in the services under the State.',
+    fact:'The Supreme Court in Indra Sawhney case (1992) — Mandal Commission case — capped total reservations at 50%, with OBC quota set at 27%.'},
+  a17:{num:'17',title:'Abolition of Untouchability',part:'Part III – Fundamental Rights',partId:'pIII',
+    text:'"Untouchability" is abolished and its practice in any form is forbidden. The enforcement of any disability arising out of "Untouchability" shall be an offence punishable in accordance with law.',
+    fact:'This is an absolute right with no exceptions. The Protection of Civil Rights Act 1955 (formerly Untouchability Offences Act) and SC/ST Prevention of Atrocities Act 1989 enforce this article.'},
+  a19:{num:'19',title:'Protection of certain rights regarding freedom of speech, etc.',part:'Part III – Fundamental Rights',partId:'pIII',
+    text:'All citizens shall have the right to freedom of speech and expression; to assemble peaceably and without arms; to form associations or unions or co-operative societies; to move freely throughout the territory of India; to reside and settle in any part of the territory of India; and to practise any profession, or to carry on any occupation, trade or business.\n\nThese rights are subject to reasonable restrictions in the interest of sovereignty, integrity, public order, decency, morality, or relations with foreign states.',
+    fact:'Freedom of the Press is not mentioned separately but is included in "freedom of speech and expression." The right to internet access has been held to be part of Article 19(1)(a) by Kerala HC.'},
+  a21:{num:'21',title:'Protection of life and personal liberty',part:'Part III – Fundamental Rights',partId:'pIII',
+    text:'No person shall be deprived of his life or personal liberty except according to procedure established by law.\n\nThe Supreme Court has given this article the widest possible interpretation to include: right to livelihood, right to health, right to education (till 14 years), right to privacy (2017 Puttaswamy judgment), right to a clean environment, right to legal aid, right to a speedy trial, and right to dignity.',
+    fact:'Dr. B.R. Ambedkar called Article 21 the "heart of the Constitution." The Maneka Gandhi case (1978) held that the procedure must be fair, just, and reasonable — not merely any procedure established by law.'},
+  a32:{num:'32',title:'Remedies for enforcement of rights conferred by Part III',part:'Part III – Fundamental Rights',partId:'pIII',
+    text:'The right to move the Supreme Court by appropriate proceedings for the enforcement of the rights conferred by this Part is guaranteed. The Supreme Court shall have power to issue directions or orders or writs, including writs in the nature of habeas corpus, mandamus, prohibition, quo warranto and certiorari, whichever may be appropriate, for the enforcement of any of the rights conferred by this Part.',
+    fact:'Dr. B.R. Ambedkar called Article 32 the "heart and soul of the Constitution." It is itself a Fundamental Right — the right to constitutional remedies — and cannot be suspended except during a proclaimed Emergency.'},
+  a44:{num:'44',title:'Uniform civil code for the citizens',part:'Part IV – Directive Principles',partId:'pIV',
+    text:'The State shall endeavour to secure for the citizens a uniform civil code throughout the territory of India. This is a Directive Principle of State Policy — fundamental to governance but not directly enforceable in courts.',
+    fact:'Goa is the only Indian state that has a Uniform Civil Code (the Portuguese Civil Code of 1867, still in force). Article 44 remains one of the most politically debated provisions of the Indian Constitution.'},
+  a51A:{num:'51A',title:'Fundamental Duties',part:'Part IV-A – Fundamental Duties',partId:'pIVA',
+    text:'It shall be the duty of every citizen of India to: abide by the Constitution and respect its ideals, institutions, the National Flag and the National Anthem; cherish and follow the noble ideals of the national struggle for freedom; uphold and protect the sovereignty, unity and integrity of India; defend the country and render national service when called upon; promote harmony and the spirit of common brotherhood among all people of India; value and preserve the rich heritage of our composite culture; protect and improve the natural environment; develop scientific temper, humanism, and the spirit of inquiry; safeguard public property; strive towards excellence in all spheres; and (added by 86th Amendment) provide opportunities for education to children between 6 and 14 years.',
+    fact:'Fundamental Duties were added by the 42nd Constitutional Amendment (1976) on the recommendation of the Swaran Singh Committee. They are non-justiciable — courts cannot enforce them directly.'},
+  a52:{num:'52',title:'The President of India',part:'Part V – The Union',partId:'pV',
+    text:'There shall be a President of India. The President is the constitutional head of the executive of the Union. The executive power of the Union is vested in the President and shall be exercised by him either directly or through officers subordinate to him in accordance with this Constitution.',
+    fact:'India follows a parliamentary system, so the President acts as a constitutional (nominal) head. The real executive power is exercised by the Prime Minister and Council of Ministers.'},
+  a57:{num:'57',title:'Eligibility for re-election',part:'Part V – The Union',partId:'pV',
+    text:'A person who holds, or who has held, office as President shall, subject to the other provisions of this Constitution, be eligible for re-election to that office.',
+    fact:'Unlike the USA which limits Presidents to two terms, India\'s Constitution does not cap the number of terms. Dr. Rajendra Prasad served two terms as the first President of India.'},
+  a61:{num:'61',title:'Procedure for impeachment of the President',part:'Part V – The Union',partId:'pV',
+    text:'When a President is to be impeached for violation of the Constitution, the charge shall be preferred by either House of Parliament. The charge shall be investigated by the other House. If a resolution for impeachment is passed by a majority of not less than two-thirds of the total membership of the House, the President shall stand removed from office.',
+    fact:'No President of India has ever been impeached. Unlike US impeachment, Indian Presidential impeachment requires violation of the Constitution — not any other criminal offence.'},
+  a72:{num:'72',title:'Power of President to grant pardons',part:'Part V – The Union',partId:'pV',
+    text:'The President shall have the power to grant pardons, reprieves, respites or remissions of punishment or to suspend, remit or commute the sentence of any person convicted of any offence — including sentences by Court Martial and all sentences of death.',
+    fact:'The President\'s pardon power is wider than the Governor\'s power under Article 161, as it includes death sentences and court martial sentences. The President must act on the advice of the Cabinet.'},
+  a110:{num:'110',title:'Definition of "Money Bills"',part:'Part V – The Union',partId:'pV',
+    text:'A Bill is deemed to be a Money Bill if it contains only provisions dealing with: imposition, abolition, or regulation of any tax; regulation of borrowing of money by the Union; custody of the Consolidated Fund of India; appropriation of moneys; declaring any expenditure charged on the Consolidated Fund; or any matter incidental to the above.\n\nThe Speaker of Lok Sabha has final authority to certify a Bill as a Money Bill.',
+    fact:'Money Bills can only be introduced in Lok Sabha. The Rajya Sabha can only recommend amendments (not reject) and must return them within 14 days. Lok Sabha may or may not accept those recommendations.'},
+  a324:{num:'324',title:'Superintendence of elections vested in Election Commission',part:'Part XV – Elections',partId:'pXV',
+    text:'The superintendence, direction and control of the preparation of the electoral rolls for, and the conduct of, all elections to Parliament and to the Legislature of every State and of elections to the offices of President and Vice-President shall be vested in the Election Commission consisting of the Chief Election Commissioner and such number of other Election Commissioners as the President may from time to time fix.',
+    fact:'The Election Commission of India was established on 25 January 1950, a day before the Republic. The multi-member Election Commission structure was adopted after the 1989 amendment.'},
+  a343:{num:'343',title:'Official language of the Union',part:'Part XVII – Official Language',partId:'pXVII',
+    text:'The official language of the Union shall be Hindi in Devanagari script. The form of numerals to be used for the official purposes of the Union shall be the international form of Indian numerals.\n\nFor fifteen years from the commencement of the Constitution, English was to continue for official purposes. This period expired in 1965, but non-Hindi speaking states protested, leading to the Official Languages Act 1963 continuing English use.',
+    fact:'Despite Hindi being declared the official language, India has no declared "national language." The Constitution recognises 22 languages in the Eighth Schedule. Currently 22 languages are listed (originally 14 in 1950).'},
+  a352:{num:'352',title:'Proclamation of Emergency',part:'Part XVIII – Emergency Provisions',partId:'pXVIII',
+    text:'If the President is satisfied that a grave emergency exists whereby the security of India or of any part of its territory is threatened, whether by war or external aggression or armed rebellion, he may, by Proclamation, make a declaration to that effect.\n\nSuch a Proclamation must be approved by both Houses of Parliament by a special majority (2/3 members present and voting AND more than half of total membership) within one month.',
+    fact:'National Emergency has been proclaimed 3 times: 1962 (China war), 1971 (Pakistan war), and 1975–77 (internal disturbance — the most controversial, declared by PM Indira Gandhi). The 44th Amendment replaced "internal disturbance" with "armed rebellion."'},
+  a356:{num:'356',title:'Provisions in case of failure of constitutional machinery in States',part:'Part XVIII – Emergency Provisions',partId:'pXVIII',
+    text:'If the President, on receipt of a report from the Governor of a State or otherwise, is satisfied that the government of the State cannot be carried on in accordance with the provisions of this Constitution, the President may by Proclamation assume to himself all or any of the functions of the Government of the State and declare that the powers of the Legislature of the State shall be exercisable by or under the authority of Parliament.',
+    fact:'Article 356 (President\'s Rule) has been imposed over 100 times since 1950. The S.R. Bommai case (1994) significantly restricted its misuse by making it subject to judicial review.'},
+  a368:{num:'368',title:'Power of Parliament to amend the Constitution',part:'Part XX – Amendment of the Constitution',partId:'pXX',
+    text:'Parliament may amend any provision of this Constitution by introducing a Bill in either House. The Bill must be passed in each House by: (a) a majority of the total membership of that House; and (b) a majority of not less than two-thirds of the members present and voting.\n\nCertain provisions also require ratification by not less than one-half of the State Legislatures.',
+    fact:'The Kesavananda Bharati case (1973) — a 13-judge constitutional bench — established the Basic Structure doctrine: Parliament cannot amend the "basic structure" of the Constitution. The Constitution has been amended 106 times as of 2023.'},
 };
 
-// Map part IDs to article lists
 const PART_ARTICLES = {
-  pIII: ['a12','a13','a14','a15','a16','a17','a19','a21','a32'],
-  pIV:  ['a44'],
-  pIVA: ['a51A'],
-  pV:   ['a52','a53','a54','a57','a61','a72','a74','a110','a124'],
-  pXV:  ['a324'],
+  pIII:['a12','a13','a14','a15','a16','a17','a19','a21','a32'],
+  pIV:['a44'],
+  pIVA:['a51A'],
+  pV:['a52','a57','a61','a72','a110'],
+  pXV:['a324'],
   pXVII:['a343'],
-  pXVIII:['a352'],
-  pXX:  ['a368'],
+  pXVIII:['a352','a356'],
+  pXX:['a368'],
 };
 
-// ═══════════════════════════════════════════
-// STATE
-// ═══════════════════════════════════════════
+const SCHEDULES = [
+  {num:'1st',title:'States and Union Territories',desc:'Lists all 28 States and 8 Union Territories of India with their territories.',
+   content:`<p>The First Schedule lists all the States and Union Territories of India. Originally there were 14 States and 6 Union Territories at the time of adoption. Today India has <strong>28 States</strong> and <strong>8 Union Territories</strong>.</p><p><strong>States include:</strong> Andhra Pradesh, Arunachal Pradesh, Assam, Bihar, Chhattisgarh, Goa, Gujarat, Haryana, Himachal Pradesh, Jharkhand, Karnataka, Kerala, Madhya Pradesh, Maharashtra, Manipur, Meghalaya, Mizoram, Nagaland, Odisha, Punjab, Rajasthan, Sikkim, Tamil Nadu, Telangana, Tripura, Uttar Pradesh, Uttarakhand, West Bengal.</p><p><strong>Union Territories:</strong> Andaman & Nicobar Islands, Chandigarh, Dadra & Nagar Haveli and Daman & Diu, Delhi (NCT), Jammu & Kashmir, Ladakh, Lakshadweep, Puducherry.</p><p>J&K and Ladakh were reorganised as UTs by the Jammu and Kashmir Reorganisation Act 2019, following the abrogation of Article 370.</p>`},
+  {num:'2nd',title:'Emoluments of Constitutional Functionaries',desc:'Salaries and allowances of President, Vice-President, Governors, Speakers, Judges.',
+   content:`<p>The Second Schedule contains provisions relating to the <strong>emoluments, allowances, privileges, and rights</strong> in respect of:</p><ul><li><strong>Part A:</strong> The President of India</li><li><strong>Part B:</strong> The Governors of States</li><li><strong>Part C:</strong> The Speaker and Deputy Speaker of Lok Sabha, Chairman and Deputy Chairman of Rajya Sabha, Speakers and Deputy Speakers of State Legislative Assemblies</li><li><strong>Part D:</strong> The Judges of the Supreme Court</li><li><strong>Part E:</strong> The Comptroller and Auditor-General of India</li></ul><p>These emoluments are charged on the Consolidated Fund of India and are not subject to vote in Parliament, ensuring independence of these constitutional functionaries.</p>`},
+  {num:'3rd',title:'Forms of Oaths and Affirmations',desc:'Oaths for Union and State officials — Ministers, MPs, MLAs, Judges.',
+   content:`<p>The Third Schedule prescribes the <strong>forms of oaths or affirmations</strong> to be taken by various constitutional functionaries:</p><ul><li>Union Ministers</li><li>Candidates for election to Parliament</li>Members of Parliament</li><li>Judges of the Supreme Court</li><li>The Comptroller and Auditor-General</li><li>State Ministers</li><li>Candidates for election to State Legislature</li><li>Members of State Legislatures</li><li>Judges of High Courts</li></ul><p>Each oath includes a pledge to bear true faith and allegiance to the Constitution of India, to uphold the sovereignty and integrity of India, and to faithfully discharge the duties of the office.</p>`},
+  {num:'4th',title:'Allocation of Seats in Rajya Sabha',desc:'Number of seats allocated to each State and UT in the Council of States.',
+   content:`<p>The Fourth Schedule allocates <strong>seats in the Rajya Sabha (Council of States)</strong> to each State and Union Territory.</p><p>Key allocations: Uttar Pradesh (31), Maharashtra (19), Tamil Nadu (18), Bihar (16), West Bengal (16), Karnataka (12), Andhra Pradesh (11), Gujarat (11), Madhya Pradesh (11), Rajasthan (10).</p><p>Total strength of Rajya Sabha is <strong>245 members</strong>: 233 elected by State and UT legislatures + 12 nominated by the President for distinguished service in literature, science, art, and social service.</p><p>Rajya Sabha is a <strong>permanent body</strong> — it never dissolves. One-third of its members retire every two years.</p>`},
+  {num:'5th',title:'Administration of Scheduled Areas and Scheduled Tribes',desc:'Provisions for administration of Scheduled Areas — tribal regions requiring special protection.',
+   content:`<p>The Fifth Schedule deals with the <strong>administration and control of Scheduled Areas and Scheduled Tribes</strong> in States other than Assam, Meghalaya, Tripura, and Mizoram.</p><p><strong>Key provisions:</strong></p><ul><li>The Governor of a State has special powers regarding Scheduled Areas</li><li>A Tribes Advisory Council must be established in each State having Scheduled Areas</li><li>The Governor can direct that any Act of Parliament or State Legislature shall not apply to a Scheduled Area, or shall apply with modifications</li><li>The President can declare any area as a Scheduled Area or alter the boundaries</li></ul><p>Currently Scheduled Areas exist in: Andhra Pradesh, Telangana, Chhattisgarh, Gujarat, Himachal Pradesh, Jharkhand, Madhya Pradesh, Maharashtra, Odisha, and Rajasthan.</p>`},
+  {num:'6th',title:'Administration of Tribal Areas in NE India',desc:'Special autonomous districts and regional councils for tribal areas in Assam, Meghalaya, Tripura, Mizoram.',
+   content:`<p>The Sixth Schedule provides for <strong>autonomous tribal administration in Assam, Meghalaya, Tripura, and Mizoram</strong> through Autonomous District Councils and Regional Councils.</p><p><strong>Autonomous Districts:</strong> Karbi Anglong, Dima Hasao, Bodoland (Assam); Khasi Hills, Jaintia Hills, Garo Hills (Meghalaya); Tripura Tribal Areas; Chakma, Mara, Lai (Mizoram).</p><p>These councils can make laws on: use of land, management of forests, use of waterways, regulation of shifting cultivation, establishment of village administration, money lending, social customs.</p><p>Laws made by these councils require assent of the Governor to become effective.</p>`},
+  {num:'7th',title:'Distribution of Legislative Powers — Three Lists',desc:'Union List (97 subjects), State List (66 subjects), Concurrent List (47 subjects).',
+   content:`<p>The Seventh Schedule divides legislative powers between the Union and States through <strong>three lists</strong>:</p><div class="amend-item"><span class="amend-num">Union List (List I)</span><div class="amend-desc">97 subjects on which only Parliament can legislate. Includes: Defence, Foreign Affairs, Atomic Energy, Railways, Banking, Currency, Census, Post & Telegraph, Inter-state trade.</div></div><div class="amend-item"><span class="amend-num">State List (List II)</span><div class="amend-desc">66 subjects on which State Legislatures can legislate. Includes: Police, Public order, Land, Agriculture, Local Government, Public Health, Forests (pre-42nd Amendment).</div></div><div class="amend-item"><span class="amend-num">Concurrent List (List III)</span><div class="amend-desc">47 subjects on which both Parliament and State Legislatures can legislate. In case of conflict, Central law prevails. Includes: Education (post-42nd Amendment), Forests, Criminal law, Marriage, Bankruptcy.</div></div><p>Originally there were 97+66+47 items. Numbers have changed over various amendments.</p>`},
+  {num:'8th',title:'Official Languages — 22 Languages',desc:'22 languages recognised by the Constitution. Originally 14, now 22 after amendments.',
+   content:`<p>The Eighth Schedule lists the <strong>official languages recognised by the Constitution of India</strong>. Originally 14 languages were listed in 1950. The current count is <strong>22 languages</strong>.</p><p><strong>Languages added over time:</strong></p><div class="amend-item"><span class="amend-num">Original 14 (1950)</span><div class="amend-desc">Assamese, Bengali, Gujarati, Hindi, Kannada, Kashmiri, Malayalam, Marathi, Oriya (Odia), Punjabi, Sanskrit, Tamil, Telugu, Urdu</div></div><div class="amend-item"><span class="amend-num">21st Amendment (1967)</span><div class="amend-desc">Added Sindhi (15th language)</div></div><div class="amend-item"><span class="amend-num">71st Amendment (1992)</span><div class="amend-desc">Added Konkani, Manipuri, Nepali (16th, 17th, 18th languages)</div></div><div class="amend-item"><span class="amend-num">92nd Amendment (2003)</span><div class="amend-desc">Added Bodo, Dogri, Maithili, Santhali (19th to 22nd languages)</div></div><div class="lang-grid"><div class="lang-item">1. Assamese</div><div class="lang-item">2. Bengali</div><div class="lang-item">3. Bodo</div><div class="lang-item">4. Dogri</div><div class="lang-item">5. Gujarati</div><div class="lang-item">6. Hindi</div><div class="lang-item">7. Kannada</div><div class="lang-item">8. Kashmiri</div><div class="lang-item">9. Konkani</div><div class="lang-item">10. Maithili</div><div class="lang-item">11. Malayalam</div><div class="lang-item">12. Manipuri</div><div class="lang-item">13. Marathi</div><div class="lang-item">14. Nepali</div><div class="lang-item">15. Odia</div><div class="lang-item">16. Punjabi</div><div class="lang-item">17. Sanskrit</div><div class="lang-item">18. Santhali</div><div class="lang-item">19. Sindhi</div><div class="lang-item">20. Tamil</div><div class="lang-item">21. Telugu</div><div class="lang-item">22. Urdu</div></div><p>There are demands to include Tulu, Rajasthani, Bhojpuri, and several other languages in the Eighth Schedule.</p>`},
+  {num:'9th',title:'Acts and Regulations protected from Judicial Review',desc:'Laws placed beyond judicial challenge, mostly relating to land reforms and zamindari abolition.',
+   content:`<p>The Ninth Schedule was added by the <strong>1st Constitutional Amendment (1951)</strong> to protect certain laws from judicial challenge on the grounds of violation of Fundamental Rights.</p><p>Originally it contained only 13 Acts (mainly land reform laws to abolish zamindari). As of now it contains <strong>284 Acts and Regulations</strong>.</p><p><strong>Purpose:</strong> To protect land reform legislation and other socio-economic laws that courts were striking down as violating the right to property (then a Fundamental Right under Article 31).</p><p>Key laws included: The Bihar Land Reforms Act 1950, The Uttar Pradesh Zamindari Abolition & Land Reforms Act 1950, The Madras Estates (Abolition & Conversion) Act 1948.</p><p><strong>Important ruling:</strong> In the I.R. Coelho case (2007), the Supreme Court held that laws added to the Ninth Schedule after 24 April 1973 (Kesavananda Bharati judgment date) can be challenged if they violate the basic structure of the Constitution.</p>`},
+  {num:'10th',title:'Anti-Defection Law',desc:'Provisions for disqualification of Members of Parliament and State Legislatures on grounds of defection.',
+   content:`<p>The Tenth Schedule was added by the <strong>52nd Constitutional Amendment (1985)</strong> during Rajiv Gandhi's government to combat political defections — the "aaya ram gaya ram" phenomenon.</p><p><strong>Grounds for disqualification:</strong></p><ul><li>If a member voluntarily gives up membership of their political party</li><li>If a member votes or abstains from voting in the House contrary to the direction of their party (party whip), without prior permission and without being condoned within 15 days</li><li>If an independent member joins a political party after election</li><li>If a nominated member joins a political party after 6 months of taking seat</li></ul><p><strong>Exception (Merger):</strong> Disqualification does not apply if at least two-thirds of the members of the legislature party agree to merge with another party.</p><p><strong>Decision:</strong> The Speaker/Chairman of the House decides on disqualification. Their decision can be challenged in High Courts and the Supreme Court.</p>`},
+  {num:'11th',title:'Powers of Panchayats — 29 Subjects',desc:'29 matters listed for Panchayati Raj institutions under the 73rd Amendment.',
+   content:`<p>The Eleventh Schedule was added by the <strong>73rd Constitutional Amendment (1992)</strong> — one of the most significant amendments for grassroots democracy. It lists <strong>29 subjects</strong> that may be entrusted to Panchayats.</p><p><strong>The 29 subjects include:</strong></p><ul><li>Agriculture, land improvement, soil conservation</li><li>Minor irrigation, water management</li><li>Animal husbandry, dairying, poultry</li><li>Fisheries</li><li>Social forestry and farm forestry</li><li>Minor forest produce</li><li>Small scale industries, including food processing industries</li><li>Khadi, village and cottage industries</li><li>Rural housing</li><li>Drinking water</li><li>Fuel and fodder</li><li>Roads, culverts, bridges, ferries, waterways</li><li>Rural electrification</li><li>Non-conventional energy sources</li><li>Poverty alleviation programme</li><li>Education, including primary and secondary schools</li><li>Technical training and vocational education</li><li>Adult and non-formal education</li><li>Libraries</li><li>Cultural activities</li><li>Markets and fairs</li><li>Health and sanitation</li><li>Family welfare</li><li>Women and child development</li><li>Social welfare, including welfare of the handicapped and mentally retarded</li><li>Welfare of the weaker sections, especially SC and ST</li><li>Public distribution system</li><li>Maintenance of community assets</li></ul>`},
+  {num:'12th',title:'Powers of Municipalities — 18 Subjects',desc:'18 matters listed for Urban Local Bodies under the 74th Amendment.',
+   content:`<p>The Twelfth Schedule was added by the <strong>74th Constitutional Amendment (1992)</strong> — the companion to the 73rd Amendment, for urban areas. It lists <strong>18 subjects</strong> that may be entrusted to Municipalities (Urban Local Bodies).</p><p><strong>The 18 subjects include:</strong></p><ul><li>Urban planning including town planning</li><li>Regulation of land use and construction of buildings</li><li>Planning for economic and social development</li><li>Roads and bridges</li><li>Water supply for domestic, industrial and commercial purposes</li><li>Public health, sanitation, conservancy, and solid waste management</li><li>Fire services</li><li>Urban forestry, protection of environment and ecological aspects</li><li>Safeguarding the interests of weaker sections of society, including the handicapped and mentally retarded</li><li>Slum improvement and upgradation</li><li>Urban poverty alleviation</li><li>Provision of urban amenities and facilities (parks, gardens, playgrounds)</li><li>Promotion of cultural, educational, and aesthetic aspects</li><li>Burials and burial grounds, cremations and cremation grounds</li><li>Cattle ponds, prevention of cruelty to animals</li><li>Vital statistics including registration of births and deaths</li><li>Public amenities including street lighting, parking lots, bus stops and public conveniences</li><li>Regulation of slaughterhouses and tanneries</li></ul><p>These 74th Amendment provisions are directly relevant to your work in PDS administration under Urban Local Bodies!</p>`},
+];
+
+const SHORTCUTS = {
+  fr:{title:'Fundamental Rights',back:'articles-view',articles:['a12','a13','a14','a15','a16','a17','a19','a21','a32']},
+  fd:{title:'Fundamental Duties',back:'articles-view',articles:['a51A']},
+  dpsp:{title:'Directive Principles',back:'articles-view',articles:['a44']},
+  emergency:{title:'Emergency Provisions',back:'articles-view',articles:['a352','a356']},
+  languages:{type:'schedule',scheduleIdx:7},
+  amendments:{type:'special'},
+};
+
+const KEY_AMENDMENTS = [
+  {num:'1st',year:1951,desc:'Added 9th Schedule to protect land reform laws from judicial review. Added reasonable restrictions on free speech.'},
+  {num:'7th',year:1956,desc:'Reorganised states on linguistic basis. Abolished Part B States. Adjusted Rajya Sabha seats.'},
+  {num:'13th',year:1962,desc:'Created the state of Nagaland with special provisions under Article 371A.'},
+  {num:'21st',year:1967,desc:'Added Sindhi as the 15th language in the Eighth Schedule.'},
+  {num:'24th',year:1971,desc:'Affirmed Parliament\'s power to amend Fundamental Rights (after Golak Nath case 1967).'},
+  {num:'25th',year:1971,desc:'Curtailed right to property; allowed acquisition of property for public purpose without full compensation.'},
+  {num:'42nd',year:1976,desc:'Called the "Mini Constitution." Added "Socialist," "Secular," "Integrity" to Preamble. Added Fundamental Duties. Shifted Education and Forests to Concurrent List. Extended President\'s Rule. Made Directive Principles superior to Fundamental Rights.'},
+  {num:'44th',year:1978,desc:'Restored many provisions changed by 42nd Amendment. Replaced "internal disturbance" with "armed rebellion" in Article 352. Right to property (Art. 31) removed as Fundamental Right; became only a legal right under Art. 300A.'},
+  {num:'52nd',year:1985,desc:'Added Tenth Schedule — the Anti-Defection Law — to prevent political horse-trading ("aaya ram gaya ram").'},
+  {num:'61st',year:1989,desc:'Lowered voting age from 21 to 18 years for elections to Lok Sabha and State Assemblies.'},
+  {num:'69th',year:1991,desc:'Gave special status to Delhi as National Capital Territory (NCT) with a Legislative Assembly and a Council of Ministers.'},
+  {num:'71st',year:1992,desc:'Added Konkani, Manipuri, and Nepali as the 16th, 17th, and 18th languages in the Eighth Schedule.'},
+  {num:'73rd',year:1992,desc:'Gave constitutional status to Panchayati Raj institutions. Added Part IX and the Eleventh Schedule (29 subjects for Panchayats). Mandated reservations for SC, ST, and Women in Panchayats.'},
+  {num:'74th',year:1992,desc:'Gave constitutional status to Urban Local Bodies (Municipalities). Added Part IX-A and Twelfth Schedule (18 subjects). Mandated reservations for SC, ST, and Women in Municipalities.'},
+  {num:'86th',year:2002,desc:'Made free and compulsory education a Fundamental Right for children 6–14 years (Article 21A). Added duty of parents to send children to school as Fundamental Duty 51A(k). Led to RTE Act 2009.'},
+  {num:'91st',year:2003,desc:'Limited Council of Ministers to 15% of Lok Sabha/Assembly strength. Strengthened anti-defection provisions.'},
+  {num:'92nd',year:2003,desc:'Added Bodo, Dogri, Maithili, and Santhali as the 19th to 22nd languages in the Eighth Schedule.'},
+  {num:'97th',year:2011,desc:'Added right to form cooperative societies as a Fundamental Right. Added a new Directive Principle (Article 43B). Added a new Part IX-B for Co-operative Societies.'},
+  {num:'100th',year:2015,desc:'Land Boundary Agreement with Bangladesh — exchanged 162 enclaves.'},
+  {num:'101st',year:2016,desc:'Introduced Goods and Services Tax (GST) — the biggest indirect tax reform. Added Articles 246A, 269A, 279A.'},
+  {num:'102nd',year:2018,desc:'Gave constitutional status to the National Commission for Backward Classes (NCBC) — Article 338B.'},
+  {num:'103rd',year:2019,desc:'Added 10% reservation for Economically Weaker Sections (EWS) among general category in education and government jobs.'},
+  {num:'104th',year:2020,desc:'Extended reservation of seats for SC and ST in Lok Sabha and State Assemblies by 10 more years (till 2030). Abolished Anglo-Indian reserved seats.'},
+  {num:'105th',year:2021,desc:'Restored States\' power to identify OBCs for reservation purposes — overriding the Supreme Court\'s Maratha reservation judgment.'},
+  {num:'106th',year:2023,desc:'Reserved one-third of seats for women in Lok Sabha, State Legislative Assemblies, and Delhi Assembly (Women\'s Reservation Act / Nari Shakti Vandan Adhiniyam). Comes into effect after next delimitation.'},
+];
+
+// ═══════════════ STATE ═══════════════
 let currentArticleId = null;
 let backTarget = 'home';
 let favorites = JSON.parse(localStorage.getItem('samvidhan_favs') || '[]');
 
-// ═══════════════════════════════════════════
-// NAVIGATION
-// ═══════════════════════════════════════════
+// ═══════════════ NAVIGATION ═══════════════
 function showScreen(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
@@ -1022,16 +593,15 @@ function goBack(target) { showScreen(target); }
 
 function switchTab(targetId, el) {
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  el.classList.add('active');
+  if(el) el.classList.add('active');
   showScreen(targetId);
-  if(targetId === 'favorites-view') renderFavorites();
-  if(targetId === 'aod-view') renderAOD();
-  if(targetId === 'home') renderParts();
+  if(targetId==='favorites-view') renderFavorites();
+  if(targetId==='aod-view') renderAOD();
+  if(targetId==='home') renderParts();
+  if(targetId==='schedules-view') renderSchedules();
 }
 
-// ═══════════════════════════════════════════
-// RENDER PARTS
-// ═══════════════════════════════════════════
+// ═══════════════ PARTS ═══════════════
 function renderParts() {
   const list = document.getElementById('partsList');
   list.innerHTML = PARTS.map((p,i) => `
@@ -1042,18 +612,15 @@ function renderParts() {
         <div class="part-range">Articles ${p.range}</div>
       </div>
       <div class="part-arrow">›</div>
-    </div>
-  `).join('');
+    </div>`).join('');
 }
 
-// ═══════════════════════════════════════════
-// OPEN PART → ARTICLES LIST
-// ═══════════════════════════════════════════
+// ═══════════════ OPEN PART ═══════════════
 function openPart(partId, partName, range) {
-  document.getElementById('partViewTitle').textContent = 'Part ' + PARTS.find(p=>p.id===partId)?.num + ' – ' + partName;
+  const part = PARTS.find(p=>p.id===partId);
+  document.getElementById('partViewTitle').textContent = 'Part '+(part?part.num:'')+' – '+partName;
   const arts = PART_ARTICLES[partId] || [];
-  document.getElementById('partViewCount').textContent = arts.length ? `${arts.length} articles` : 'Select an article';
-  
+  document.getElementById('partViewCount').textContent = arts.length ? `${arts.length} articles` : 'Content coming soon';
   const content = document.getElementById('articlesContent');
   if(!arts.length) {
     content.innerHTML = `<div class="empty-state"><div class="empty-icon">📖</div><div class="empty-text">Articles ${range}</div><div class="empty-sub">Full content coming soon</div></div>`;
@@ -1062,174 +629,158 @@ function openPart(partId, partName, range) {
       const a = ARTICLES[id];
       return `<div class="article-row" onclick="openArticle('${id}','articles-view')">
         <div class="art-num-badge">${a.num}</div>
-        <div class="art-info">
-          <div class="art-title">${a.title}</div>
-          <div class="art-snippet">${a.text.substring(0,60)}…</div>
-        </div>
-        <div class="art-arrow">›</div>
-      </div>`;
+        <div class="art-info"><div class="art-title">${a.title}</div><div class="art-snippet">${a.text.substring(0,60)}…</div></div>
+        <div class="art-arrow">›</div></div>`;
     }).join('');
   }
   showScreen('articles-view');
 }
 
-// ═══════════════════════════════════════════
-// OPEN ARTICLE
-// ═══════════════════════════════════════════
+// ═══════════════ OPEN ARTICLE ═══════════════
 function openArticle(id, from) {
   backTarget = from || 'home';
   currentArticleId = id;
   const a = ARTICLES[id];
   if(!a) return;
-
   document.getElementById('artBackBtn').onclick = () => goBack(backTarget);
-  document.getElementById('detailBarTitle').textContent = `Article ${a.num}`;
+  document.getElementById('detailBarTitle').textContent = id==='preamble' ? 'Preamble' : `Article ${a.num}`;
   updateFavBtn();
-
-  // Get prev/next
   const allIds = Object.keys(ARTICLES);
   const idx = allIds.indexOf(id);
   const prevId = idx > 0 ? allIds[idx-1] : null;
   const nextId = idx < allIds.length-1 ? allIds[idx+1] : null;
-
   document.getElementById('detailContent').innerHTML = `
-    <div class="article-header">
-      <div class="art-part-tag">📜 ${a.part}</div>
-      <div class="art-number-display">Article ${a.num}</div>
-      <div class="art-main-title">${a.title}</div>
+    <div class="article-header-parch">
+      <div class="art-part-tag-parch">📜 ${a.part}</div>
+      <div class="art-number-parch">${id==='preamble'?'Preamble':'Article '+a.num}</div>
+      <div class="art-main-title-parch">${a.title}</div>
     </div>
-    <div class="article-body">
-      ${a.text.split('\n\n').map(p => `<p>${p.trim()}</p>`).filter(p=>p!=='<p></p>').join('')}
+    <div class="article-body-parch">
+      ${a.text.split('\n\n').map(p=>`<p>${p.trim()}</p>`).filter(p=>p!=='<p></p>').join('')}
     </div>
-    ${a.fact ? `<div class="aod-fact-card" style="margin:0 24px 24px">
-      <div class="aod-fact-label">💡 Did You Know?</div>
-      <div class="aod-fact-text">${a.fact}</div>
-    </div>` : ''}
-    <div class="nav-pills">
-      ${prevId ? `<div class="nav-pill" onclick="openArticle('${prevId}','${backTarget}')"><span class="nav-pill-arrow">←</span>Article ${ARTICLES[prevId].num}</div>` : '<div></div>'}
-      ${nextId ? `<div class="nav-pill" onclick="openArticle('${nextId}','${backTarget}')"><span class="nav-pill-arrow">→</span>Article ${ARTICLES[nextId].num}</div>` : '<div></div>'}
-    </div>
-  `;
+    ${a.fact?`<div class="fact-card-parch"><div class="fact-label-parch">💡 Did You Know?</div><div class="fact-text-parch">${a.fact}</div></div>`:''}
+    <div class="nav-pills-parch">
+      ${prevId?`<div class="nav-pill-parch" onclick="openArticle('${prevId}','${backTarget}')"><span class="nav-pill-arrow-parch">←</span>${ARTICLES[prevId].num==='Preamble'?'Preamble':'Art. '+ARTICLES[prevId].num}</div>`:'<div></div>'}
+      ${nextId?`<div class="nav-pill-parch" onclick="openArticle('${nextId}','${backTarget}')"><span class="nav-pill-arrow-parch">→</span>Art. ${ARTICLES[nextId].num}</div>`:'<div></div>'}
+    </div>`;
   showScreen('article-detail');
 }
+function openArticleById(id) { openArticle(id,'home'); }
 
-function openArticleById(id) { openArticle(id, 'home'); }
+// ═══════════════ SHORTCUTS ═══════════════
+function openShortcut(key) {
+  const s = SHORTCUTS[key];
+  if(!s) return;
+  if(s.type==='schedule') { openSchedule(s.scheduleIdx); return; }
+  if(s.type==='special' && key==='amendments') { openAmendments(); return; }
+  // Show as article list
+  document.getElementById('partViewTitle').textContent = s.title;
+  document.getElementById('partViewCount').textContent = `${s.articles.length} articles`;
+  document.getElementById('articlesContent').innerHTML = s.articles.map(id => {
+    const a = ARTICLES[id];
+    return `<div class="article-row" onclick="openArticle('${id}','articles-view')">
+      <div class="art-num-badge">${a.num}</div>
+      <div class="art-info"><div class="art-title">${a.title}</div><div class="art-snippet">${a.text.substring(0,60)}…</div></div>
+      <div class="art-arrow">›</div></div>`;
+  }).join('');
+  showScreen('articles-view');
+}
 
-// ═══════════════════════════════════════════
-// FAVORITES
-// ═══════════════════════════════════════════
+function openAmendments() {
+  document.getElementById('schedDetailTitle').textContent = 'Key Amendments';
+  document.getElementById('schedBackBtn').onclick = () => goBack('home');
+  document.getElementById('schedDetailContent').innerHTML = `
+    <div class="article-header-parch">
+      <div class="art-part-tag-parch">📝 Constitutional Amendments</div>
+      <div class="art-number-parch">Article 368</div>
+      <div class="art-main-title-parch">Key Amendments to the Constitution</div>
+    </div>
+    <div class="sched-body">
+      <p>The Constitution has been amended <strong>106 times</strong> as of 2023. Here are the most important amendments:</p>
+      ${KEY_AMENDMENTS.map(a=>`<div class="amend-item">
+        <span class="amend-num">${a.num} Amendment</span><span class="amend-year">(${a.year})</span>
+        <div class="amend-desc">${a.desc}</div>
+      </div>`).join('')}
+    </div>`;
+  showScreen('schedule-detail');
+}
+
+// ═══════════════ SCHEDULES ═══════════════
+function renderSchedules() {
+  document.getElementById('schedulesList').innerHTML = SCHEDULES.map((s,i) => `
+    <div class="schedule-card" onclick="openSchedule(${i})">
+      <div class="sched-num">${s.num}</div>
+      <div class="sched-info">
+        <div class="sched-title">${s.title}</div>
+        <div class="sched-desc">${s.desc}</div>
+      </div>
+    </div>`).join('');
+}
+
+function openSchedule(idx) {
+  const s = SCHEDULES[idx];
+  document.getElementById('schedDetailTitle').textContent = s.num+' Schedule';
+  document.getElementById('schedBackBtn').onclick = () => goBack('schedules-view');
+  document.getElementById('schedDetailContent').innerHTML = `
+    <div class="article-header-parch">
+      <div class="art-part-tag-parch">📅 ${s.num} Schedule</div>
+      <div class="art-number-parch">Constitutional Schedule</div>
+      <div class="art-main-title-parch">${s.title}</div>
+    </div>
+    <div class="sched-body">${s.content}</div>`;
+  showScreen('schedule-detail');
+}
+
+// ═══════════════ FAVORITES ═══════════════
 function toggleFav() {
   if(!currentArticleId) return;
   const idx = favorites.indexOf(currentArticleId);
-  if(idx >= 0) favorites.splice(idx,1);
-  else favorites.push(currentArticleId);
+  if(idx>=0) favorites.splice(idx,1); else favorites.push(currentArticleId);
   localStorage.setItem('samvidhan_favs', JSON.stringify(favorites));
   updateFavBtn();
 }
 function updateFavBtn() {
   const btn = document.getElementById('favBtn');
-  if(favorites.includes(currentArticleId)) {
-    btn.textContent = '★'; btn.classList.add('fav-active');
-  } else {
-    btn.textContent = '☆'; btn.classList.remove('fav-active');
-  }
+  if(favorites.includes(currentArticleId)){btn.textContent='★';btn.classList.add('fav-active');}
+  else{btn.textContent='☆';btn.classList.remove('fav-active');}
 }
 function renderFavorites() {
   const c = document.getElementById('favsContent');
-  if(!favorites.length) {
-    c.innerHTML = `<div class="empty-state"><div class="empty-icon">⭐</div><div class="empty-text">No saved articles yet</div><div class="empty-sub">Tap ☆ on any article to save it here</div></div>`;
-    return;
-  }
-  c.innerHTML = favorites.map(id => {
-    const a = ARTICLES[id];
-    if(!a) return '';
-    return `<div class="article-row" onclick="openArticle('${id}','favorites-view')">
-      <div class="art-num-badge">${a.num}</div>
-      <div class="art-info">
-        <div class="art-title">${a.title}</div>
-        <div class="art-snippet">${a.part}</div>
-      </div>
-      <div class="art-arrow">›</div>
-    </div>`;
-  }).join('');
+  if(!favorites.length){c.innerHTML=`<div class="empty-state"><div class="empty-icon">⭐</div><div class="empty-text">No saved articles yet</div><div class="empty-sub">Tap ☆ on any article to save it here</div></div>`;return;}
+  c.innerHTML=favorites.map(id=>{const a=ARTICLES[id];if(!a)return'';return`<div class="article-row" onclick="openArticle('${id}','favorites-view')"><div class="art-num-badge">${a.num}</div><div class="art-info"><div class="art-title">${a.title}</div><div class="art-snippet">${a.part}</div></div><div class="art-arrow">›</div></div>`;}).join('');
 }
 
-// ═══════════════════════════════════════════
-// ARTICLE OF THE DAY
-// ═══════════════════════════════════════════
+// ═══════════════ AOD ═══════════════
 function renderAOD() {
   const ids = Object.keys(ARTICLES);
-  const dayIdx = Math.floor(Date.now() / 86400000) % ids.length;
-  const a = ARTICLES[ids[dayIdx]];
-  document.getElementById('aodTitle').textContent = `Article ${a.num}`;
+  const a = ARTICLES[ids[Math.floor(Date.now()/86400000)%ids.length]];
+  document.getElementById('aodTitle').textContent = a.num==='Preamble'?'Preamble':`Article ${a.num}`;
   document.getElementById('aodSubtitle').textContent = a.title;
   document.getElementById('aodBody').innerHTML = a.text.split('\n\n').map(p=>`<p>${p.trim()}</p>`).filter(p=>p!=='<p></p>').join('');
-  document.getElementById('aodFact').textContent = a.fact || 'This article forms a fundamental part of the Indian Constitution.';
+  document.getElementById('aodFact').textContent = a.fact||'This article forms a fundamental part of the Indian Constitution.';
 }
 
-// ═══════════════════════════════════════════
-// SEARCH
-// ═══════════════════════════════════════════
-function showSearchOverlay() {
-  document.getElementById('searchOverlay').classList.add('visible');
-}
+// ═══════════════ SEARCH ═══════════════
+function showSearchOverlay(){document.getElementById('searchOverlay').classList.add('visible');}
 function handleSearch(query) {
-  const overlay = document.getElementById('searchOverlay');
-  const results = document.getElementById('searchResults');
-  if(!query.trim()) {
-    overlay.classList.remove('visible');
-    return;
-  }
+  const overlay=document.getElementById('searchOverlay'),results=document.getElementById('searchResults');
+  if(!query.trim()){overlay.classList.remove('visible');return;}
   overlay.classList.add('visible');
-  const q = query.toLowerCase();
-  const matches = Object.entries(ARTICLES).filter(([id,a]) =>
-    a.title.toLowerCase().includes(q) || a.text.toLowerCase().includes(q) || a.num.toLowerCase().includes(q)
-  );
-  if(!matches.length) {
-    results.innerHTML = `<div class="empty-state" style="padding:40px"><div class="empty-icon">🔍</div><div class="empty-text">No results found</div></div>`;
-    return;
-  }
-  results.innerHTML = matches.slice(0,20).map(([id,a]) => {
-    const snippet = a.text.replace(new RegExp(query,'gi'), m=>`<em>${m}</em>`).substring(0,100);
-    return `<div class="result-item" onclick="openArticleById('${id}');clearSearch()">
-      <div class="result-art">Article ${a.num} · ${a.part}</div>
-      <div class="result-title">${a.title}</div>
-      <div class="result-snippet">${snippet}…</div>
-    </div>`;
-  }).join('');
+  const q=query.toLowerCase();
+  const matches=Object.entries(ARTICLES).filter(([id,a])=>a.title.toLowerCase().includes(q)||a.text.toLowerCase().includes(q)||a.num.toLowerCase().includes(q));
+  if(!matches.length){results.innerHTML=`<div class="empty-state" style="padding:40px"><div class="empty-icon">🔍</div><div class="empty-text">No results found</div></div>`;return;}
+  results.innerHTML=matches.slice(0,20).map(([id,a])=>`<div class="result-item" onclick="openArticleById('${id}');clearSearch()"><div class="result-art">Article ${a.num} · ${a.part}</div><div class="result-title">${a.title}</div><div class="result-snippet">${a.text.substring(0,100)}…</div></div>`).join('');
 }
-function clearSearch() {
-  document.getElementById('searchInput').value = '';
-  document.getElementById('searchOverlay').classList.remove('visible');
-}
-document.addEventListener('click', (e) => {
-  const overlay = document.getElementById('searchOverlay');
-  const input = document.getElementById('searchInput');
-  if(!overlay.contains(e.target) && e.target !== input) {
-    overlay.classList.remove('visible');
-  }
-});
-
-// ═══════════════════════════════════════════
-// PWA INSTALL
-// ═══════════════════════════════════════════
-const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-const isStandalone = window.navigator.standalone === true;
-if(isIOS && !isStandalone) {
-  setTimeout(() => {
-    const banner = document.getElementById('installBanner');
-    if(!localStorage.getItem('install_dismissed')) {
-      banner.classList.add('visible');
-    }
-  }, 3000);
-}
-document.querySelector('.install-close')?.addEventListener('click', () => {
-  localStorage.setItem('install_dismissed','1');
+function clearSearch(){document.getElementById('searchInput').value='';document.getElementById('searchOverlay').classList.remove('visible');}
+document.addEventListener('click',(e)=>{
+  const overlay=document.getElementById('searchOverlay'),input=document.getElementById('searchInput');
+  if(!overlay.contains(e.target)&&e.target!==input) overlay.classList.remove('visible');
 });
 
 // Init
 renderParts();
 renderAOD();
+renderSchedules();
 </script>
 </body>
 </html>
