@@ -19,7 +19,6 @@
   --text-primary:#F5F0E8; --text-secondary:rgba(245,240,232,0.65); --text-muted:rgba(245,240,232,0.4);
   --border:rgba(201,168,76,0.2); --border-soft:rgba(245,240,232,0.08);
   --radius:16px; --radius-sm:10px;
-  /* Parchment */
   --parch-bg:#f4e4c1; --parch-bg2:#ede0b0; --parch-text:#2c1a00; --parch-text2:#4a3010; --parch-border:#c8a96e;
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
@@ -27,7 +26,7 @@ html,body{width:100%;max-width:480px;margin:0 auto;font-family:'Inter',sans-seri
 .screen{display:none;min-height:100vh;flex-direction:column;width:100%;}
 .screen.active{display:flex;}
 
-/* ── SPLASH ── */
+/* SPLASH */
 #splash{background:radial-gradient(ellipse at 50% 30%,#1a2240 0%,var(--ink) 70%);align-items:center;justify-content:center;text-align:center;padding:40px 24px;position:relative;overflow:hidden;z-index:0;}
 #splash>*{position:relative;z-index:1;}
 #splash::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23C9A84C' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");pointer-events:none;}
@@ -45,7 +44,7 @@ html,body{width:100%;max-width:480px;margin:0 auto;font-family:'Inter',sans-seri
 .btn-explore{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--gold),#a07d30);color:var(--ink);font-weight:600;font-size:15px;padding:16px 36px;border-radius:50px;border:none;cursor:pointer;box-shadow:0 8px 32px rgba(201,168,76,0.35);transition:all 0.2s;}
 .btn-explore:active{transform:scale(0.97);}
 
-/* ── TOP BAR ── */
+/* TOP BAR */
 .top-bar{background:rgba(13,17,23,0.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:52px 20px 16px;border-bottom:1px solid var(--border-soft);position:sticky;top:0;z-index:100;}
 .top-bar-inner{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
 .app-logo{display:flex;align-items:center;gap:10px;}
@@ -58,7 +57,7 @@ html,body{width:100%;max-width:480px;margin:0 auto;font-family:'Inter',sans-seri
 .search-input::placeholder{color:var(--text-muted);}
 .search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:16px;}
 
-/* ── HOME CONTENT ── */
+/* HOME */
 #home{background:var(--ink);}
 .home-content{flex:1;overflow-y:auto;padding-bottom:90px;}
 .preamble-hero{margin:20px 16px;background:linear-gradient(135deg,#1a2240 0%,#0d1117 100%);border:1px solid var(--border);border-radius:20px;padding:24px;position:relative;overflow:hidden;cursor:pointer;transition:transform 0.2s;}
@@ -69,7 +68,7 @@ html,body{width:100%;max-width:480px;margin:0 auto;font-family:'Inter',sans-seri
 .hero-excerpt{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;color:var(--text-secondary);line-height:1.6;margin-bottom:16px;}
 .hero-cta{display:flex;align-items:center;gap:6px;color:var(--gold);font-size:13px;font-weight:500;}
 
-/* ── QUICK SHORTCUTS ── */
+/* SHORTCUTS */
 .shortcuts-section{padding:0 16px;margin-bottom:8px;}
 .shortcuts-scroll{display:flex;gap:10px;overflow-x:auto;padding-bottom:8px;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
 .shortcuts-scroll::-webkit-scrollbar{display:none;}
@@ -85,12 +84,12 @@ html,body{width:100%;max-width:480px;margin:0 auto;font-family:'Inter',sans-seri
 .chip-icon.neon-gold{background:linear-gradient(135deg,#8b6914,#c9a84c);box-shadow:0 0 16px rgba(201,168,76,0.4);}
 .chip-label{font-size:10px;font-weight:500;color:var(--text-secondary);text-align:center;line-height:1.3;max-width:60px;}
 
-/* ── SECTION LABEL ── */
+/* SECTION LABEL */
 .section-label{padding:0 16px;margin:20px 0 12px;display:flex;align-items:center;gap:10px;}
 .section-label span{font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);}
 .section-label::after{content:'';flex:1;height:1px;background:var(--border-soft);}
 
-/* ── PARTS LIST ── */
+/* PARTS */
 .parts-list{padding:0 16px;display:flex;flex-direction:column;gap:8px;}
 .part-card{background:var(--ink-mid);border:1px solid var(--border-soft);border-radius:var(--radius-sm);padding:16px 18px;display:flex;align-items:center;gap:16px;cursor:pointer;transition:all 0.2s;position:relative;overflow:hidden;}
 .part-card:active{transform:scale(0.98);background:var(--ink-soft);}
@@ -102,80 +101,102 @@ html,body{width:100%;max-width:480px;margin:0 auto;font-family:'Inter',sans-seri
 .part-range{font-size:12px;color:var(--text-muted);}
 .part-arrow{color:var(--text-muted);font-size:16px;flex-shrink:0;}
 
-/* ── SUB BAR ── */
+/* SUB BAR */
 .sub-bar{background:rgba(13,17,23,0.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:52px 20px 16px;border-bottom:1px solid var(--border-soft);position:sticky;top:0;z-index:100;}
 .sub-bar-inner{display:flex;align-items:center;gap:14px;}
 .back-btn{width:36px;height:36px;border-radius:10px;background:var(--ink-mid);border:1px solid var(--border-soft);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;font-size:16px;}
 .sub-bar-title{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .sub-bar-count{font-size:12px;color:var(--text-muted);margin-top:2px;}
 
-/* ── ARTICLES LIST ── */
+/* ARTICLES LIST */
 #articles-view{background:var(--ink);}
 .articles-content{flex:1;overflow-y:auto;padding:12px 16px 90px;}
 .article-row{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--border-soft);cursor:pointer;transition:all 0.15s;}
 .article-row:active{opacity:0.7;}
-.art-num-badge{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--ink-mid),var(--ink-soft));border:1px solid var(--border-soft);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700;color:var(--gold-light);flex-shrink:0;}
+.art-num-badge{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--ink-mid),var(--ink-soft));border:1px solid var(--border-soft);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:700;color:var(--gold-light);flex-shrink:0;}
 .art-info{flex:1;min-width:0;}
 .art-title{font-size:14px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:3px;}
 .art-snippet{font-size:12px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .art-arrow{color:var(--text-muted);font-size:14px;}
 
-/* ── ARTICLE DETAIL — PARCHMENT ── */
+/* ARTICLE DETAIL PARCHMENT */
 #article-detail{background:var(--parch-bg);}
 .detail-bar{background:rgba(180,140,80,0.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:52px 20px 16px;border-bottom:2px solid var(--parch-border);position:sticky;top:0;z-index:100;}
 .detail-bar-inner{display:flex;align-items:center;gap:14px;}
 .back-btn-parch{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,0.25);border:1px solid rgba(255,255,255,0.4);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;font-size:16px;color:#2c1a00;}
 .detail-bar-title{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;color:#2c1a00;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.icon-btn-parch{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,0.25);border:1px solid rgba(255,255,255,0.4);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;color:#2c1a00;transition:all 0.2s;}
+.icon-btn-parch{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,0.25);border:1px solid rgba(255,255,255,0.4);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;color:#2c1a00;transition:all 0.2s;flex-shrink:0;}
 .icon-btn-parch.fav-active{background:rgba(255,153,51,0.4);border-color:#ff9933;}
 
 .detail-content{flex:1;overflow-y:auto;padding-bottom:40px;background:var(--parch-bg);}
-
-/* Paper texture overlay */
-.detail-content::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:0.5;}
-
-.article-header-parch{padding:28px 24px 20px;border-bottom:2px solid var(--parch-border);background:linear-gradient(180deg,rgba(200,169,110,0.3) 0%,transparent 100%);position:relative;z-index:1;}
+.article-header-parch{padding:28px 24px 20px;border-bottom:2px solid var(--parch-border);background:linear-gradient(180deg,rgba(200,169,110,0.3) 0%,transparent 100%);}
 .art-part-tag-parch{display:inline-flex;align-items:center;gap:6px;background:rgba(139,105,20,0.15);border:1px solid rgba(139,105,20,0.35);color:#6b4400;font-size:11px;font-weight:600;padding:5px 12px;border-radius:20px;margin-bottom:16px;}
 .art-number-parch{font-family:'Cormorant Garamond',serif;font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#8b6914;margin-bottom:8px;}
 .art-main-title-parch{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;line-height:1.25;color:var(--parch-text);}
 
-.article-body-parch{padding:24px 24px 16px;position:relative;z-index:1;}
-.article-body-parch p{font-family:'Cormorant Garamond',serif;font-size:19px;line-height:1.85;color:var(--parch-text2);margin-bottom:18px;text-align:justify;}
+.article-body-parch{padding:24px 24px 8px;}
+.article-body-parch p{font-family:'Cormorant Garamond',serif;font-size:19px;line-height:1.85;color:var(--parch-text2);margin-bottom:16px;text-align:justify;}
 .article-body-parch p:first-child::first-letter{float:left;font-size:54px;font-weight:700;line-height:0.85;margin:6px 8px 0 0;color:#8b1a00;font-family:'Cormorant Garamond',serif;}
 
-.fact-card-parch{margin:0 20px 24px;background:rgba(139,105,20,0.1);border:1px solid var(--parch-border);border-radius:12px;padding:18px;position:relative;z-index:1;}
-.fact-label-parch{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#8b6914;margin-bottom:8px;}
-.fact-text-parch{font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--parch-text2);line-height:1.6;}
+/* AI Content boxes */
+.ai-section{margin:0 20px 16px;border-radius:12px;overflow:hidden;}
+.ai-section-header{padding:12px 16px;display:flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;}
+.ai-section-body{padding:14px 16px 16px;font-family:'Cormorant Garamond',serif;font-size:17px;line-height:1.7;color:var(--parch-text2);}
+.ai-section-body p{margin-bottom:10px;}
+.ai-section-body ul{padding-left:18px;}
+.ai-section-body li{margin-bottom:8px;}
+.ai-section-body .case-item{margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid rgba(139,105,20,0.15);}
+.ai-section-body .case-item:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+.ai-section-body .case-name{font-weight:700;color:#8b1a00;font-size:16px;}
+.ai-section-body .case-year{color:#8b6914;font-size:13px;margin-left:8px;}
+.ai-section-body .case-held{margin-top:4px;font-size:16px;}
+.ai-section-body .dev-item{margin-bottom:10px;padding-left:12px;border-left:3px solid #8b6914;}
 
-.nav-pills-parch{display:flex;gap:10px;padding:0 20px 28px;position:relative;z-index:1;}
+/* Section colors */
+.sec-fact{background:rgba(139,105,20,0.1);border:1px solid rgba(139,105,20,0.25);}
+.sec-fact .ai-section-header{background:rgba(139,105,20,0.12);color:#6b4400;}
+.sec-cases{background:rgba(139,26,0,0.06);border:1px solid rgba(139,26,0,0.15);}
+.sec-cases .ai-section-header{background:rgba(139,26,0,0.1);color:#8b1a00;}
+.sec-dev{background:rgba(0,80,160,0.06);border:1px solid rgba(0,80,160,0.15);}
+.sec-dev .ai-section-header{background:rgba(0,80,160,0.1);color:#003d7a;}
+.sec-interp{background:rgba(0,100,0,0.06);border:1px solid rgba(0,100,0,0.15);}
+.sec-interp .ai-section-header{background:rgba(0,100,0,0.1);color:#004d00;}
+
+/* Loading state */
+.ai-loading{padding:20px 24px;text-align:center;}
+.ai-loading-spinner{width:36px;height:36px;border:3px solid rgba(139,105,20,0.2);border-top-color:#8b6914;border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 12px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.ai-loading-text{font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--parch-text2);opacity:0.7;}
+
+/* Nav pills parchment */
+.nav-pills-parch{display:flex;gap:10px;padding:8px 20px 28px;}
 .nav-pill-parch{flex:1;background:rgba(139,105,20,0.12);border:1px solid var(--parch-border);border-radius:10px;padding:12px;text-align:center;cursor:pointer;font-family:'Cormorant Garamond',serif;font-size:14px;color:var(--parch-text2);transition:all 0.2s;}
 .nav-pill-parch:active{background:rgba(139,105,20,0.25);}
 .nav-pill-arrow-parch{font-size:18px;display:block;color:#8b1a00;margin-bottom:2px;}
 
-/* ── BOTTOM NAV ── */
+/* BOTTOM NAV */
 .bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:rgba(13,17,23,0.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid var(--border-soft);display:flex;padding:10px 0 28px;z-index:200;}
-.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;padding:6px 0;transition:all 0.15s;}
+.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;padding:6px 0;}
 .nav-icon{font-size:22px;}
-.nav-label{font-size:10px;font-weight:500;color:var(--text-muted);letter-spacing:0.3px;}
+.nav-label{font-size:10px;font-weight:500;color:var(--text-muted);}
 .nav-item.active .nav-label{color:var(--gold);}
 
-/* ── SEARCH OVERLAY ── */
+/* SEARCH */
 .search-results-overlay{display:none;position:fixed;top:140px;left:0;right:0;bottom:90px;background:var(--ink);z-index:150;overflow-y:auto;padding:12px 16px;max-width:480px;margin:0 auto;}
 .search-results-overlay.visible{display:block;}
 .result-item{padding:14px 0;border-bottom:1px solid var(--border-soft);cursor:pointer;}
 .result-art{font-size:11px;color:var(--gold);font-weight:500;margin-bottom:4px;}
 .result-title{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:600;margin-bottom:4px;}
 .result-snippet{font-size:12px;color:var(--text-muted);line-height:1.5;}
-.result-snippet em{color:var(--gold);font-style:normal;}
 
-/* ── FAVORITES ── */
+/* FAVORITES */
 #favorites-view{background:var(--ink);}
 .empty-state{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px;text-align:center;gap:16px;}
 .empty-icon{font-size:48px;opacity:0.3;}
 .empty-text{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--text-secondary);}
 .empty-sub{font-size:13px;color:var(--text-muted);}
 
-/* ── AOD ── */
+/* AOD */
 #aod-view{background:radial-gradient(ellipse at 50% 0%,#1a2240 0%,var(--ink) 60%);padding-bottom:90px;}
 .aod-header{padding:60px 24px 24px;border-bottom:1px solid var(--border-soft);}
 .aod-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,153,51,0.12);border:1px solid rgba(255,153,51,0.3);color:var(--saffron);font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:20px;}
@@ -186,25 +207,22 @@ html,body{width:100%;max-width:480px;margin:0 auto;font-family:'Inter',sans-seri
 .aod-fact-label{font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
 .aod-fact-text{font-size:14px;color:var(--text-secondary);line-height:1.6;}
 
-/* ── SCHEDULES VIEW ── */
+/* SCHEDULES */
 #schedules-view{background:var(--ink);}
 .schedule-card{background:var(--ink-mid);border:1px solid var(--border-soft);border-radius:var(--radius-sm);margin:0 16px 10px;padding:18px;cursor:pointer;transition:all 0.2s;display:flex;align-items:flex-start;gap:14px;}
-.schedule-card:active{transform:scale(0.98);background:var(--ink-soft);}
-.sched-num{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,rgba(201,168,76,0.2),rgba(201,168,76,0.05));border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700;color:var(--gold);flex-shrink:0;}
+.schedule-card:active{transform:scale(0.98);}
+.sched-num{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,rgba(201,168,76,0.2),rgba(201,168,76,0.05));border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:700;color:var(--gold);flex-shrink:0;}
 .sched-info{flex:1;}
 .sched-title{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:600;margin-bottom:4px;}
 .sched-desc{font-size:12px;color:var(--text-muted);line-height:1.4;}
-
-/* ── SCHEDULE DETAIL ── */
 #schedule-detail{background:var(--parch-bg);}
-.sched-detail-content{flex:1;overflow-y:auto;padding:0 0 40px;}
-.sched-body{padding:24px;font-family:'Cormorant Garamond',serif;font-size:18px;line-height:1.85;color:var(--parch-text2);position:relative;z-index:1;}
+.sched-body{padding:24px;font-family:'Cormorant Garamond',serif;font-size:18px;line-height:1.85;color:var(--parch-text2);}
 .sched-body p{margin-bottom:14px;text-align:justify;}
 .sched-body ul{padding-left:20px;margin-bottom:14px;}
 .sched-body li{margin-bottom:8px;font-size:17px;}
-.sched-body .lang-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0;}
-.sched-body .lang-item{background:rgba(139,105,20,0.1);border:1px solid var(--parch-border);border-radius:8px;padding:10px 12px;font-size:15px;color:var(--parch-text);}
-.sched-body .amend-item{background:rgba(139,105,20,0.08);border-left:3px solid #8b1a00;padding:10px 14px;margin-bottom:8px;border-radius:0 8px 8px 0;}
+.lang-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0;}
+.lang-item{background:rgba(139,105,20,0.1);border:1px solid var(--parch-border);border-radius:8px;padding:10px 12px;font-size:15px;color:var(--parch-text);}
+.amend-item{background:rgba(139,105,20,0.08);border-left:3px solid #8b1a00;padding:10px 14px;margin-bottom:10px;border-radius:0 8px 8px 0;}
 .amend-num{font-weight:700;color:#8b1a00;font-size:14px;}
 .amend-year{color:#8b6914;font-size:12px;margin-left:8px;}
 .amend-desc{font-size:15px;color:var(--parch-text2);margin-top:4px;}
@@ -267,47 +285,24 @@ html,body{width:100%;max-width:480px;margin:0 auto;font-family:'Inter',sans-seri
     </div>
   </div>
   <div class="home-content">
-    <div class="preamble-hero" onclick="openArticleById('preamble')">
+    <div class="preamble-hero" onclick="openArticle('preamble','home')">
       <div class="hero-tag">✦ Preamble</div>
       <div class="hero-title">We, the People<br>of India…</div>
       <div class="hero-excerpt">"…to secure to all its citizens: Justice, Liberty, Equality and to promote among them all Fraternity…"</div>
       <div class="hero-cta">Read Preamble <span>→</span></div>
     </div>
-
     <div class="section-label"><span>Quick Access</span></div>
     <div class="shortcuts-section">
       <div class="shortcuts-scroll">
-        <div class="shortcut-chip" onclick="openShortcut('fr')">
-          <div class="chip-icon neon-orange">⚖️</div>
-          <div class="chip-label">Fundamental Rights</div>
-        </div>
-        <div class="shortcut-chip" onclick="openShortcut('fd')">
-          <div class="chip-icon neon-green">🙏</div>
-          <div class="chip-label">Fundamental Duties</div>
-        </div>
-        <div class="shortcut-chip" onclick="openShortcut('dpsp')">
-          <div class="chip-icon neon-blue">📋</div>
-          <div class="chip-label">Directive Principles</div>
-        </div>
-        <div class="shortcut-chip" onclick="openShortcut('languages')">
-          <div class="chip-icon neon-purple">🗣️</div>
-          <div class="chip-label">8th Schedule Languages</div>
-        </div>
-        <div class="shortcut-chip" onclick="openShortcut('amendments')">
-          <div class="chip-icon neon-red">📝</div>
-          <div class="chip-label">Key Amendments</div>
-        </div>
-        <div class="shortcut-chip" onclick="openShortcut('emergency')">
-          <div class="chip-icon neon-teal">🚨</div>
-          <div class="chip-label">Emergency Provisions</div>
-        </div>
-        <div class="shortcut-chip" onclick="showScreen('schedules-view')">
-          <div class="chip-icon neon-gold">📅</div>
-          <div class="chip-label">12 Schedules</div>
-        </div>
+        <div class="shortcut-chip" onclick="openPartByShortcut('pIII','Fundamental Rights','12–35')"><div class="chip-icon neon-orange">⚖️</div><div class="chip-label">Fundamental Rights</div></div>
+        <div class="shortcut-chip" onclick="openPartByShortcut('pIVA','Fundamental Duties','51A')"><div class="chip-icon neon-green">🙏</div><div class="chip-label">Fundamental Duties</div></div>
+        <div class="shortcut-chip" onclick="openPartByShortcut('pIV','Directive Principles','36–51')"><div class="chip-icon neon-blue">📋</div><div class="chip-label">Directive Principles</div></div>
+        <div class="shortcut-chip" onclick="openSchedule(7)"><div class="chip-icon neon-purple">🗣️</div><div class="chip-label">8th Schedule Languages</div></div>
+        <div class="shortcut-chip" onclick="openAmendments()"><div class="chip-icon neon-red">📝</div><div class="chip-label">Key Amendments</div></div>
+        <div class="shortcut-chip" onclick="openPartByShortcut('pXVIII','Emergency Provisions','352–360')"><div class="chip-icon neon-teal">🚨</div><div class="chip-label">Emergency</div></div>
+        <div class="shortcut-chip" onclick="switchTab('schedules-view',null)"><div class="chip-icon neon-gold">📅</div><div class="chip-label">12 Schedules</div></div>
       </div>
     </div>
-
     <div class="section-label"><span>Parts of the Constitution</span></div>
     <div class="parts-list" id="partsList"></div>
   </div>
@@ -325,7 +320,7 @@ html,body{width:100%;max-width:480px;margin:0 auto;font-family:'Inter',sans-seri
   <div class="sub-bar">
     <div class="sub-bar-inner">
       <div class="back-btn" onclick="goBack('home')">←</div>
-      <div>
+      <div style="flex:1;min-width:0">
         <div class="sub-bar-title" id="partViewTitle">Part</div>
         <div class="sub-bar-count" id="partViewCount"></div>
       </div>
@@ -334,7 +329,7 @@ html,body{width:100%;max-width:480px;margin:0 auto;font-family:'Inter',sans-seri
   <div class="articles-content" id="articlesContent"></div>
 </div>
 
-<!-- ARTICLE DETAIL — PARCHMENT -->
+<!-- ARTICLE DETAIL PARCHMENT -->
 <div class="screen" id="article-detail">
   <div class="detail-bar">
     <div class="detail-bar-inner">
@@ -346,7 +341,7 @@ html,body{width:100%;max-width:480px;margin:0 auto;font-family:'Inter',sans-seri
   <div class="detail-content" id="detailContent"></div>
 </div>
 
-<!-- SCHEDULES LIST -->
+<!-- SCHEDULES -->
 <div class="screen" id="schedules-view">
   <div class="sub-bar">
     <div class="sub-bar-inner">
@@ -363,7 +358,7 @@ html,body{width:100%;max-width:480px;margin:0 auto;font-family:'Inter',sans-seri
   </div>
 </div>
 
-<!-- SCHEDULE DETAIL — PARCHMENT -->
+<!-- SCHEDULE DETAIL PARCHMENT -->
 <div class="screen" id="schedule-detail">
   <div class="detail-bar">
     <div class="detail-bar-inner">
@@ -371,7 +366,7 @@ html,body{width:100%;max-width:480px;margin:0 auto;font-family:'Inter',sans-seri
       <div class="detail-bar-title" id="schedDetailTitle">Schedule</div>
     </div>
   </div>
-  <div class="sched-detail-content" id="schedDetailContent"></div>
+  <div style="flex:1;overflow-y:auto;padding-bottom:40px;background:var(--parch-bg);" id="schedDetailContent"></div>
 </div>
 
 <!-- FAVORITES -->
@@ -406,179 +401,152 @@ html,body{width:100%;max-width:480px;margin:0 auto;font-family:'Inter',sans-seri
 </div>
 
 <script>
-// ═══════════════ DATA ═══════════════
+// ═══════════════ COMPLETE PARTS DATA ═══════════════
 const PARTS = [
-  {id:'pI',num:'I',name:'The Union and Its Territory',range:'1–4'},
-  {id:'pII',num:'II',name:'Citizenship',range:'5–11'},
-  {id:'pIII',num:'III',name:'Fundamental Rights',range:'12–35'},
-  {id:'pIV',num:'IV',name:'Directive Principles of State Policy',range:'36–51'},
-  {id:'pIVA',num:'IV-A',name:'Fundamental Duties',range:'51A'},
-  {id:'pV',num:'V',name:'The Union',range:'52–151'},
-  {id:'pVI',num:'VI',name:'The States',range:'152–237'},
-  {id:'pVIII',num:'VIII',name:'The Union Territories',range:'239–242'},
-  {id:'pIX',num:'IX',name:'The Panchayats',range:'243–243O'},
-  {id:'pIXA',num:'IX-A',name:'The Municipalities',range:'243P–243ZG'},
-  {id:'pX',num:'X',name:'The Scheduled and Tribal Areas',range:'244–244A'},
-  {id:'pXI',num:'XI',name:'Relations between Union & States',range:'245–263'},
-  {id:'pXII',num:'XII',name:'Finance, Property, Contracts & Suits',range:'264–300A'},
-  {id:'pXIV',num:'XIV',name:'Services Under the Union & States',range:'308–323'},
-  {id:'pXVA',num:'XIV-A',name:'Tribunals',range:'323A–323B'},
-  {id:'pXV',num:'XV',name:'Elections',range:'324–329A'},
-  {id:'pXVI',num:'XVI',name:'Special Provisions for Certain Classes',range:'330–342A'},
-  {id:'pXVII',num:'XVII',name:'Official Language',range:'343–351'},
-  {id:'pXVIII',num:'XVIII',name:'Emergency Provisions',range:'352–360'},
-  {id:'pXIX',num:'XIX',name:'Miscellaneous',range:'361–367'},
-  {id:'pXX',num:'XX',name:'Amendment of the Constitution',range:'368'},
-  {id:'pXXI',num:'XXI',name:'Temporary & Transitional Provisions',range:'369–392'},
-  {id:'pXXII',num:'XXII',name:'Short Title, Commencement, etc.',range:'393–395'},
+  {id:'pI',num:'I',name:'The Union and Its Territory',articles:[
+    {n:'1',t:'Name and territory of the Union'},{n:'2',t:'Admission or establishment of new States'},{n:'3',t:'Formation of new States and alteration of areas, boundaries or names'},{n:'4',t:'Laws made under Articles 2 and 3'}
+  ]},
+  {id:'pII',num:'II',name:'Citizenship',articles:[
+    {n:'5',t:'Citizenship at commencement'},{n:'6',t:'Rights of citizenship of certain persons who have migrated from Pakistan'},{n:'7',t:'Rights of citizenship of certain migrants to Pakistan'},{n:'8',t:'Rights of citizenship of certain persons of Indian origin residing outside India'},{n:'9',t:'Persons voluntarily acquiring citizenship of a foreign State not to be citizens'},{n:'10',t:'Continuance of rights of citizenship'},{n:'11',t:'Parliament to regulate the right of citizenship by law'}
+  ]},
+  {id:'pIII',num:'III',name:'Fundamental Rights',articles:[
+    {n:'12',t:'Definition of State'},{n:'13',t:'Laws inconsistent with Fundamental Rights'},{n:'14',t:'Equality before law'},{n:'15',t:'Prohibition of discrimination'},{n:'16',t:'Equality of opportunity in public employment'},{n:'17',t:'Abolition of Untouchability'},{n:'18',t:'Abolition of titles'},{n:'19',t:'Protection of six freedoms'},{n:'20',t:'Protection in respect of conviction for offences'},{n:'21',t:'Protection of life and personal liberty'},{n:'21A',t:'Right to Education'},{n:'22',t:'Protection against arrest and detention'},{n:'23',t:'Prohibition of traffic in human beings'},{n:'24',t:'Prohibition of child labour'},{n:'25',t:'Freedom of conscience and religion'},{n:'26',t:'Freedom to manage religious affairs'},{n:'27',t:'Freedom from taxes for promotion of religion'},{n:'28',t:'Freedom from religious instruction in State institutions'},{n:'29',t:'Protection of interests of minorities'},{n:'30',t:'Right of minorities to establish institutions'},{n:'31A',t:'Saving of laws providing for acquisition of estates'},{n:'31B',t:'Validation of certain Acts and Regulations (9th Schedule)'},{n:'32',t:'Remedies for enforcement of Fundamental Rights'},{n:'33',t:'Power of Parliament to modify rights for armed forces'},{n:'34',t:'Restriction on rights while martial law is in force'},{n:'35',t:'Legislation to give effect to Part III'}
+  ]},
+  {id:'pIV',num:'IV',name:'Directive Principles of State Policy',articles:[
+    {n:'36',t:'Definition'},{n:'37',t:'Application of principles in this part'},{n:'38',t:'State to secure a social order for welfare'},{n:'39',t:'Certain principles of policy to be followed by State'},{n:'39A',t:'Equal justice and free legal aid'},{n:'40',t:'Organisation of village panchayats'},{n:'41',t:'Right to work, education and public assistance'},{n:'42',t:'Provision for just and humane conditions of work'},{n:'43',t:'Living wage for workers'},{n:'43A',t:'Participation of workers in management'},{n:'43B',t:'Promotion of co-operative societies'},{n:'44',t:'Uniform civil code'},{n:'45',t:'Provision for early childhood care and education'},{n:'46',t:'Promotion of educational and economic interests of SCs, STs'},{n:'47',t:'Duty of State to raise level of nutrition and standard of living'},{n:'48',t:'Organisation of agriculture and animal husbandry'},{n:'48A',t:'Protection and improvement of environment'},{n:'49',t:'Protection of monuments and places of national importance'},{n:'50',t:'Separation of judiciary from executive'},{n:'51',t:'Promotion of international peace and security'}
+  ]},
+  {id:'pIVA',num:'IV-A',name:'Fundamental Duties',articles:[{n:'51A',t:'Fundamental Duties of every citizen'}]},
+  {id:'pV',num:'V',name:'The Union',articles:[
+    {n:'52',t:'The President of India'},{n:'53',t:'Executive power of the Union'},{n:'54',t:'Election of President'},{n:'55',t:'Manner of election of President'},{n:'56',t:'Term of office of President'},{n:'57',t:'Eligibility for re-election'},{n:'58',t:'Qualifications for election as President'},{n:'59',t:'Conditions of President\'s office'},{n:'60',t:'Oath or affirmation by the President'},{n:'61',t:'Procedure for impeachment of the President'},{n:'62',t:'Time of holding election to fill vacancy'},{n:'63',t:'The Vice-President of India'},{n:'64',t:'The Vice-President to be ex officio Chairman of Rajya Sabha'},{n:'65',t:'The Vice-President to act as President'},{n:'66',t:'Election of Vice-President'},{n:'67',t:'Term of office of Vice-President'},{n:'72',t:'Power of President to grant pardons'},{n:'74',t:'Council of Ministers to aid and advise President'},{n:'75',t:'Other provisions as to Ministers'},{n:'76',t:'Attorney-General for India'},{n:'77',t:'Conduct of business of Government of India'},{n:'78',t:'Duties of Prime Minister'},{n:'79',t:'Constitution of Parliament'},{n:'80',t:'Composition of Rajya Sabha'},{n:'81',t:'Composition of Lok Sabha'},{n:'85',t:'Sessions of Parliament, prorogation and dissolution'},{n:'100',t:'Voting in Houses, power of Houses to act notwithstanding vacancies'},{n:'105',t:'Powers, privileges of Houses of Parliament'},{n:'108',t:'Joint sitting of both Houses'},{n:'109',t:'Special procedure in respect of Money Bills'},{n:'110',t:'Definition of Money Bills'},{n:'111',t:'Assent to Bills'},{n:'112',t:'Annual financial statement'},{n:'123',t:'Power of President to promulgate Ordinances'},{n:'124',t:'Establishment and constitution of Supreme Court'},{n:'125',t:'Salaries of Judges'},{n:'126',t:'Appointment of acting Chief Justice'},{n:'127',t:'Appointment of ad hoc Judges'},{n:'128',t:'Attendance of retired Judges at sittings of Supreme Court'},{n:'129',t:'Supreme Court to be a court of record'},{n:'130',t:'Seat of Supreme Court'},{n:'131',t:'Original jurisdiction of Supreme Court'},{n:'132',t:'Appellate jurisdiction of Supreme Court in constitutional cases'},{n:'133',t:'Appellate jurisdiction in civil matters'},{n:'134',t:'Appellate jurisdiction in criminal matters'},{n:'136',t:'Special leave to appeal by Supreme Court'},{n:'137',t:'Review of judgments by Supreme Court'},{n:'141',t:'Law declared by Supreme Court to be binding'},{n:'142',t:'Enforcement of decrees of Supreme Court'},{n:'143',t:'Power of President to consult Supreme Court'},{n:'148',t:'Comptroller and Auditor-General of India'},{n:'149',t:'Duties and powers of CAG'},{n:'150',t:'Form of accounts of the Union and States'},{n:'151',t:'Audit reports'}
+  ]},
+  {id:'pVI',num:'VI',name:'The States',articles:[
+    {n:'152',t:'Definition'},{n:'153',t:'Governors of States'},{n:'154',t:'Executive power of State'},{n:'155',t:'Appointment of Governor'},{n:'156',t:'Term of office of Governor'},{n:'157',t:'Qualifications for appointment as Governor'},{n:'158',t:'Conditions of Governor\'s office'},{n:'159',t:'Oath or affirmation by the Governor'},{n:'161',t:'Power of Governor to grant pardons'},{n:'163',t:'Council of Ministers to aid and advise Governor'},{n:'164',t:'Other provisions as to Ministers'},{n:'165',t:'Advocate-General for the State'},{n:'168',t:'Constitution of Legislatures in States'},{n:'169',t:'Abolition or creation of Legislative Councils'},{n:'170',t:'Composition of Legislative Assemblies'},{n:'171',t:'Composition of Legislative Councils'},{n:'200',t:'Assent to Bills'},{n:'201',t:'Bills reserved for consideration of President'},{n:'202',t:'Annual financial statement of States'},{n:'207',t:'Special provisions as to financial Bills'},{n:'213',t:'Power of Governor to promulgate Ordinances'},{n:'214',t:'High Courts for States'},{n:'215',t:'High Courts to be courts of record'},{n:'216',t:'Constitution of High Courts'},{n:'217',t:'Appointment of Judges of High Courts'},{n:'219',t:'Oath or affirmation by Judges of High Courts'},{n:'220',t:'Restriction on practice in courts after being a permanent Judge'},{n:'225',t:'Jurisdiction of existing High Courts'},{n:'226',t:'Power of High Courts to issue writs'},{n:'227',t:'Power of superintendence over all courts'},{n:'233',t:'Appointment of district judges'},{n:'235',t:'Control over subordinate courts'},{n:'236',t:'Interpretation'},{n:'237',t:'Application of provisions of this Chapter to certain class or classes of magistrates'}
+  ]},
+  {id:'pVIII',num:'VIII',name:'The Union Territories',articles:[
+    {n:'239',t:'Administration of Union territories'},{n:'239A',t:'Creation of local Legislatures for certain Union territories'},{n:'239AA',t:'Special provisions with respect to Delhi'},{n:'239AB',t:'Provision in case of failure of constitutional machinery'},{n:'239B',t:'Power of administrator to promulgate Ordinances'},{n:'240',t:'Power of President to make regulations for certain Union territories'},{n:'241',t:'High Courts for Union territories'},{n:'242',t:'[Repealed]'}
+  ]},
+  {id:'pIX',num:'IX',name:'The Panchayats (73rd Amendment)',articles:[
+    {n:'243',t:'Definitions'},{n:'243A',t:'Gram Sabha'},{n:'243B',t:'Constitution of Panchayats'},{n:'243C',t:'Composition of Panchayats'},{n:'243D',t:'Reservation of seats'},{n:'243E',t:'Duration of Panchayats'},{n:'243F',t:'Disqualifications for membership'},{n:'243G',t:'Powers, authority and responsibilities of Panchayats'},{n:'243H',t:'Powers to impose taxes'},{n:'243I',t:'Constitution of Finance Commission'},{n:'243J',t:'Audit of accounts'},{n:'243K',t:'Elections to Panchayats'},{n:'243L',t:'Application to Union territories'},{n:'243M',t:'Part not to apply to certain areas'},{n:'243N',t:'Continuance of existing laws and Panchayats'},{n:'243O',t:'Bar to interference by courts in electoral matters'}
+  ]},
+  {id:'pIXA',num:'IX-A',name:'The Municipalities (74th Amendment)',articles:[
+    {n:'243P',t:'Definitions'},{n:'243Q',t:'Constitution of Municipalities'},{n:'243R',t:'Composition of Municipalities'},{n:'243S',t:'Constitution and composition of Wards Committees'},{n:'243T',t:'Reservation of seats'},{n:'243U',t:'Duration of Municipalities'},{n:'243V',t:'Disqualifications for membership'},{n:'243W',t:'Powers, authority and responsibilities of Municipalities'},{n:'243X',t:'Power to impose taxes'},{n:'243Y',t:'Finance Commission'},{n:'243Z',t:'Audit of accounts'},{n:'243ZA',t:'Elections to Municipalities'},{n:'243ZB',t:'Application to Union territories'},{n:'243ZC',t:'Part not to apply to certain areas'},{n:'243ZD',t:'Committee for district planning'},{n:'243ZE',t:'Committee for metropolitan planning'},{n:'243ZF',t:'Continuance of existing laws'},{n:'243ZG',t:'Bar to interference by courts'}
+  ]},
+  {id:'pXI',num:'XI',name:'Relations between Union and States',articles:[
+    {n:'245',t:'Extent of laws made by Parliament and Legislatures'},{n:'246',t:'Subject-matter of laws made by Parliament and Legislatures'},{n:'247',t:'Power of Parliament to provide for establishment of certain additional courts'},{n:'248',t:'Residuary powers of legislation'},{n:'249',t:'Power of Parliament in national interest'},{n:'250',t:'Power of Parliament to legislate with respect to any matter during Emergency'},{n:'251',t:'Inconsistency between laws made by Parliament and laws made by Legislatures'},{n:'252',t:'Power of Parliament to legislate for two or more States'},{n:'253',t:'Legislation for giving effect to international agreements'},{n:'254',t:'Inconsistency between laws made by Parliament and laws made by States'},{n:'255',t:'Requirements as to recommendations and previous sanctions'},{n:'256',t:'Obligation of States and the Union'},{n:'257',t:'Control of the Union over States'},{n:'262',t:'Adjudication of disputes relating to waters of inter-State rivers'},{n:'263',t:'Provisions with respect to an Inter-State Council'}
+  ]},
+  {id:'pXV',num:'XV',name:'Elections',articles:[
+    {n:'324',t:'Election Commission — superintendence of elections'},{n:'325',t:'No person to be ineligible for inclusion in electoral rolls'},{n:'326',t:'Elections to Lok Sabha and State Assemblies on basis of adult suffrage'},{n:'327',t:'Power of Parliament to make provision with respect to elections'},{n:'328',t:'Power of State Legislature to make provision with respect to elections'},{n:'329',t:'Bar to interference by courts in electoral matters'},{n:'329A',t:'Special provision as to elections to Parliament [Repealed]'}
+  ]},
+  {id:'pXVI',num:'XVI',name:'Special Provisions',articles:[
+    {n:'330',t:'Reservation of seats for SCs and STs in Lok Sabha'},{n:'331',t:'Representation of the Anglo-Indian community in Lok Sabha'},{n:'332',t:'Reservation of seats for SCs and STs in State Assemblies'},{n:'333',t:'Representation of the Anglo-Indian community in State Assemblies'},{n:'334',t:'Reservation of seats and special representation to cease after certain period'},{n:'335',t:'Claims of SCs and STs to services and posts'},{n:'336',t:'Special provision for Anglo-Indian community'},{n:'338',t:'National Commission for Scheduled Castes'},{n:'338A',t:'National Commission for Scheduled Tribes'},{n:'338B',t:'National Commission for Backward Classes'},{n:'340',t:'Appointment of a Commission to investigate conditions of backward classes'},{n:'341',t:'Scheduled Castes'},{n:'342',t:'Scheduled Tribes'},{n:'342A',t:'Socially and educationally backward classes'}
+  ]},
+  {id:'pXVII',num:'XVII',name:'Official Language',articles:[
+    {n:'343',t:'Official language of the Union'},{n:'344',t:'Commission and Committee of Parliament on official language'},{n:'345',t:'Official language or languages of a State'},{n:'346',t:'Official language for communication between States'},{n:'347',t:'Special provision relating to language spoken by a section of population'},{n:'348',t:'Language to be used in Supreme Court and High Courts'},{n:'349',t:'Special procedure for enactment of certain laws'},{n:'350',t:'Language to be used in representations for redress of grievances'},{n:'350A',t:'Facilities for instruction in mother-tongue'},{n:'350B',t:'Special Officer for linguistic minorities'},{n:'351',t:'Directive for development of the Hindi language'}
+  ]},
+  {id:'pXVIII',num:'XVIII',name:'Emergency Provisions',articles:[
+    {n:'352',t:'Proclamation of National Emergency'},{n:'353',t:'Effect of Proclamation of Emergency'},{n:'354',t:'Application of provisions relating to distribution of revenues'},{n:'355',t:'Duty of Union to protect States against external aggression'},{n:'356',t:'Provisions in case of failure of constitutional machinery in States (President\'s Rule)'},{n:'357',t:'Exercise of legislative powers under Proclamation'},{n:'358',t:'Suspension of provisions of Article 19 during Emergency'},{n:'359',t:'Suspension of enforcement of Part III rights during Emergency'},{n:'360',t:'Provisions as to Financial Emergency'}
+  ]},
+  {id:'pXIX',num:'XIX',name:'Miscellaneous',articles:[
+    {n:'361',t:'Protection of President and Governors'},{n:'362',t:'[Repealed]'},{n:'363',t:'Bar to interference by courts in disputes arising under certain treaties'},{n:'365',t:'Effect of failure to comply with Union directions'},{n:'366',t:'Definitions'},{n:'367',t:'Interpretation'}
+  ]},
+  {id:'pXX',num:'XX',name:'Amendment of the Constitution',articles:[{n:'368',t:'Power of Parliament to amend the Constitution and procedure therefor'}]},
+  {id:'pXXI',num:'XXI',name:'Temporary, Transitional and Special Provisions',articles:[
+    {n:'369',t:'Temporary power to Parliament to make laws'},{n:'370',t:'[Abrogated] Former special status of Jammu and Kashmir'},{n:'371',t:'Special provision with respect to Maharashtra and Gujarat'},{n:'371A',t:'Special provision with respect to Nagaland'},{n:'371B',t:'Special provision with respect to Assam'},{n:'371C',t:'Special provision with respect to Manipur'},{n:'371D',t:'Special provision with respect to Andhra Pradesh and Telangana'},{n:'371F',t:'Special provision with respect to Sikkim'},{n:'371G',t:'Special provision with respect to Mizoram'},{n:'371H',t:'Special provision with respect to Arunachal Pradesh'},{n:'371I',t:'Special provision with respect to Goa'},{n:'371J',t:'Special provision with respect to Karnataka'},{n:'372',t:'Continuance in force of existing laws and their adaptation'},{n:'373',t:'Power of President to make order in respect of persons under preventive detention'},{n:'374',t:'Provisions as to Judges of the Federal Court'},{n:'392',t:'Power of President to remove difficulties'}
+  ]},
+  {id:'pXXII',num:'XXII',name:'Short Title, Commencement, etc.',articles:[
+    {n:'393',t:'Short title'},{n:'394',t:'Commencement'},{n:'394A',t:'Authoritative text in Hindi language'},{n:'395',t:'Repeals'}
+  ]},
 ];
-
-const ARTICLES = {
-  preamble:{num:'Preamble',title:'Preamble to the Constitution',part:'Foundation',partId:null,
-    text:`WE, THE PEOPLE OF INDIA, having solemnly resolved to constitute India into a SOVEREIGN SOCIALIST SECULAR DEMOCRATIC REPUBLIC and to secure to all its citizens:\n\nJUSTICE, social, economic and political;\n\nLIBERTY of thought, expression, belief, faith and worship;\n\nEQUALITY of status and of opportunity; and to promote among them all\n\nFRATERNITY assuring the dignity of the individual and the unity and integrity of the Nation;\n\nIN OUR CONSTITUENT ASSEMBLY this twenty-sixth day of November, 1949, do HEREBY ADOPT, ENACT AND GIVE TO OURSELVES THIS CONSTITUTION.`,
-    fact:'The words "SOCIALIST" and "SECULAR" were added by the 42nd Constitutional Amendment in 1976 during the Emergency period proclaimed by PM Indira Gandhi.'},
-  a12:{num:'12',title:'Definition of State',part:'Part III – Fundamental Rights',partId:'pIII',
-    text:'In this part, unless the context otherwise requires, "the State" includes the Government and Parliament of India and the Government and the Legislature of each of the States and all local or other authorities within the territory of India or under the control of the Government of India.',
-    fact:'Article 12 is the gateway to Fundamental Rights. All rights in Part III are enforceable only against the "State" as defined here — not against private individuals.'},
-  a13:{num:'13',title:'Laws inconsistent with or in derogation of Fundamental Rights',part:'Part III – Fundamental Rights',partId:'pIII',
-    text:'All laws in force in the territory of India immediately before the commencement of this Constitution, in so far as they are inconsistent with the provisions of this Part, shall, to the extent of such inconsistency, be void. The State shall not make any law which takes away or abridges the rights conferred by this Part and any law made in contravention of this clause shall, to the extent of the contravention, be void.',
-    fact:'Article 13 is the constitutional basis for judicial review of legislation in India. The Supreme Court can strike down any law that violates Fundamental Rights.'},
-  a14:{num:'14',title:'Equality before law',part:'Part III – Fundamental Rights',partId:'pIII',
-    text:'The State shall not deny to any person equality before the law or the equal protection of the laws within the territory of India. This article prohibits class legislation but permits reasonable classification based on intelligible differentia having a rational nexus to the objective.',
-    fact:'"Equality before law" is borrowed from English law (rule of law by Dicey) and "Equal protection of laws" from the 14th Amendment of the US Constitution.'},
-  a15:{num:'15',title:'Prohibition of discrimination on grounds of religion, race, caste, sex or place of birth',part:'Part III – Fundamental Rights',partId:'pIII',
-    text:'The State shall not discriminate against any citizen on grounds only of religion, race, caste, sex, place of birth or any of them. No citizen shall, on grounds only of religion, race, caste, sex, place of birth or any of them, be subject to any disability, liability, restriction or condition with regard to access to shops, public restaurants, hotels and places of public entertainment.\n\nNothing in this article shall prevent the State from making any special provision for women and children, or for the advancement of any socially and educationally backward classes of citizens or for the Scheduled Castes and the Scheduled Tribes.',
-    fact:'The 103rd Amendment (2019) added Article 15(6) enabling 10% EWS reservation for economically weaker sections among general category.'},
-  a16:{num:'16',title:'Equality of opportunity in matters of public employment',part:'Part III – Fundamental Rights',partId:'pIII',
-    text:'There shall be equality of opportunity for all citizens in matters relating to employment or appointment to any office under the State. No citizen shall, on grounds only of religion, race, caste, sex, descent, place of birth, residence or any of them, be ineligible for, or discriminated against in respect of, any employment or office under the State.\n\nNothing in this article shall prevent the State from making any provision for the reservation of appointments or posts in favour of any backward class of citizens which, in the opinion of the State, is not adequately represented in the services under the State.',
-    fact:'The Supreme Court in Indra Sawhney case (1992) — Mandal Commission case — capped total reservations at 50%, with OBC quota set at 27%.'},
-  a17:{num:'17',title:'Abolition of Untouchability',part:'Part III – Fundamental Rights',partId:'pIII',
-    text:'"Untouchability" is abolished and its practice in any form is forbidden. The enforcement of any disability arising out of "Untouchability" shall be an offence punishable in accordance with law.',
-    fact:'This is an absolute right with no exceptions. The Protection of Civil Rights Act 1955 (formerly Untouchability Offences Act) and SC/ST Prevention of Atrocities Act 1989 enforce this article.'},
-  a19:{num:'19',title:'Protection of certain rights regarding freedom of speech, etc.',part:'Part III – Fundamental Rights',partId:'pIII',
-    text:'All citizens shall have the right to freedom of speech and expression; to assemble peaceably and without arms; to form associations or unions or co-operative societies; to move freely throughout the territory of India; to reside and settle in any part of the territory of India; and to practise any profession, or to carry on any occupation, trade or business.\n\nThese rights are subject to reasonable restrictions in the interest of sovereignty, integrity, public order, decency, morality, or relations with foreign states.',
-    fact:'Freedom of the Press is not mentioned separately but is included in "freedom of speech and expression." The right to internet access has been held to be part of Article 19(1)(a) by Kerala HC.'},
-  a21:{num:'21',title:'Protection of life and personal liberty',part:'Part III – Fundamental Rights',partId:'pIII',
-    text:'No person shall be deprived of his life or personal liberty except according to procedure established by law.\n\nThe Supreme Court has given this article the widest possible interpretation to include: right to livelihood, right to health, right to education (till 14 years), right to privacy (2017 Puttaswamy judgment), right to a clean environment, right to legal aid, right to a speedy trial, and right to dignity.',
-    fact:'Dr. B.R. Ambedkar called Article 21 the "heart of the Constitution." The Maneka Gandhi case (1978) held that the procedure must be fair, just, and reasonable — not merely any procedure established by law.'},
-  a32:{num:'32',title:'Remedies for enforcement of rights conferred by Part III',part:'Part III – Fundamental Rights',partId:'pIII',
-    text:'The right to move the Supreme Court by appropriate proceedings for the enforcement of the rights conferred by this Part is guaranteed. The Supreme Court shall have power to issue directions or orders or writs, including writs in the nature of habeas corpus, mandamus, prohibition, quo warranto and certiorari, whichever may be appropriate, for the enforcement of any of the rights conferred by this Part.',
-    fact:'Dr. B.R. Ambedkar called Article 32 the "heart and soul of the Constitution." It is itself a Fundamental Right — the right to constitutional remedies — and cannot be suspended except during a proclaimed Emergency.'},
-  a44:{num:'44',title:'Uniform civil code for the citizens',part:'Part IV – Directive Principles',partId:'pIV',
-    text:'The State shall endeavour to secure for the citizens a uniform civil code throughout the territory of India. This is a Directive Principle of State Policy — fundamental to governance but not directly enforceable in courts.',
-    fact:'Goa is the only Indian state that has a Uniform Civil Code (the Portuguese Civil Code of 1867, still in force). Article 44 remains one of the most politically debated provisions of the Indian Constitution.'},
-  a51A:{num:'51A',title:'Fundamental Duties',part:'Part IV-A – Fundamental Duties',partId:'pIVA',
-    text:'It shall be the duty of every citizen of India to: abide by the Constitution and respect its ideals, institutions, the National Flag and the National Anthem; cherish and follow the noble ideals of the national struggle for freedom; uphold and protect the sovereignty, unity and integrity of India; defend the country and render national service when called upon; promote harmony and the spirit of common brotherhood among all people of India; value and preserve the rich heritage of our composite culture; protect and improve the natural environment; develop scientific temper, humanism, and the spirit of inquiry; safeguard public property; strive towards excellence in all spheres; and (added by 86th Amendment) provide opportunities for education to children between 6 and 14 years.',
-    fact:'Fundamental Duties were added by the 42nd Constitutional Amendment (1976) on the recommendation of the Swaran Singh Committee. They are non-justiciable — courts cannot enforce them directly.'},
-  a52:{num:'52',title:'The President of India',part:'Part V – The Union',partId:'pV',
-    text:'There shall be a President of India. The President is the constitutional head of the executive of the Union. The executive power of the Union is vested in the President and shall be exercised by him either directly or through officers subordinate to him in accordance with this Constitution.',
-    fact:'India follows a parliamentary system, so the President acts as a constitutional (nominal) head. The real executive power is exercised by the Prime Minister and Council of Ministers.'},
-  a57:{num:'57',title:'Eligibility for re-election',part:'Part V – The Union',partId:'pV',
-    text:'A person who holds, or who has held, office as President shall, subject to the other provisions of this Constitution, be eligible for re-election to that office.',
-    fact:'Unlike the USA which limits Presidents to two terms, India\'s Constitution does not cap the number of terms. Dr. Rajendra Prasad served two terms as the first President of India.'},
-  a61:{num:'61',title:'Procedure for impeachment of the President',part:'Part V – The Union',partId:'pV',
-    text:'When a President is to be impeached for violation of the Constitution, the charge shall be preferred by either House of Parliament. The charge shall be investigated by the other House. If a resolution for impeachment is passed by a majority of not less than two-thirds of the total membership of the House, the President shall stand removed from office.',
-    fact:'No President of India has ever been impeached. Unlike US impeachment, Indian Presidential impeachment requires violation of the Constitution — not any other criminal offence.'},
-  a72:{num:'72',title:'Power of President to grant pardons',part:'Part V – The Union',partId:'pV',
-    text:'The President shall have the power to grant pardons, reprieves, respites or remissions of punishment or to suspend, remit or commute the sentence of any person convicted of any offence — including sentences by Court Martial and all sentences of death.',
-    fact:'The President\'s pardon power is wider than the Governor\'s power under Article 161, as it includes death sentences and court martial sentences. The President must act on the advice of the Cabinet.'},
-  a110:{num:'110',title:'Definition of "Money Bills"',part:'Part V – The Union',partId:'pV',
-    text:'A Bill is deemed to be a Money Bill if it contains only provisions dealing with: imposition, abolition, or regulation of any tax; regulation of borrowing of money by the Union; custody of the Consolidated Fund of India; appropriation of moneys; declaring any expenditure charged on the Consolidated Fund; or any matter incidental to the above.\n\nThe Speaker of Lok Sabha has final authority to certify a Bill as a Money Bill.',
-    fact:'Money Bills can only be introduced in Lok Sabha. The Rajya Sabha can only recommend amendments (not reject) and must return them within 14 days. Lok Sabha may or may not accept those recommendations.'},
-  a324:{num:'324',title:'Superintendence of elections vested in Election Commission',part:'Part XV – Elections',partId:'pXV',
-    text:'The superintendence, direction and control of the preparation of the electoral rolls for, and the conduct of, all elections to Parliament and to the Legislature of every State and of elections to the offices of President and Vice-President shall be vested in the Election Commission consisting of the Chief Election Commissioner and such number of other Election Commissioners as the President may from time to time fix.',
-    fact:'The Election Commission of India was established on 25 January 1950, a day before the Republic. The multi-member Election Commission structure was adopted after the 1989 amendment.'},
-  a343:{num:'343',title:'Official language of the Union',part:'Part XVII – Official Language',partId:'pXVII',
-    text:'The official language of the Union shall be Hindi in Devanagari script. The form of numerals to be used for the official purposes of the Union shall be the international form of Indian numerals.\n\nFor fifteen years from the commencement of the Constitution, English was to continue for official purposes. This period expired in 1965, but non-Hindi speaking states protested, leading to the Official Languages Act 1963 continuing English use.',
-    fact:'Despite Hindi being declared the official language, India has no declared "national language." The Constitution recognises 22 languages in the Eighth Schedule. Currently 22 languages are listed (originally 14 in 1950).'},
-  a352:{num:'352',title:'Proclamation of Emergency',part:'Part XVIII – Emergency Provisions',partId:'pXVIII',
-    text:'If the President is satisfied that a grave emergency exists whereby the security of India or of any part of its territory is threatened, whether by war or external aggression or armed rebellion, he may, by Proclamation, make a declaration to that effect.\n\nSuch a Proclamation must be approved by both Houses of Parliament by a special majority (2/3 members present and voting AND more than half of total membership) within one month.',
-    fact:'National Emergency has been proclaimed 3 times: 1962 (China war), 1971 (Pakistan war), and 1975–77 (internal disturbance — the most controversial, declared by PM Indira Gandhi). The 44th Amendment replaced "internal disturbance" with "armed rebellion."'},
-  a356:{num:'356',title:'Provisions in case of failure of constitutional machinery in States',part:'Part XVIII – Emergency Provisions',partId:'pXVIII',
-    text:'If the President, on receipt of a report from the Governor of a State or otherwise, is satisfied that the government of the State cannot be carried on in accordance with the provisions of this Constitution, the President may by Proclamation assume to himself all or any of the functions of the Government of the State and declare that the powers of the Legislature of the State shall be exercisable by or under the authority of Parliament.',
-    fact:'Article 356 (President\'s Rule) has been imposed over 100 times since 1950. The S.R. Bommai case (1994) significantly restricted its misuse by making it subject to judicial review.'},
-  a368:{num:'368',title:'Power of Parliament to amend the Constitution',part:'Part XX – Amendment of the Constitution',partId:'pXX',
-    text:'Parliament may amend any provision of this Constitution by introducing a Bill in either House. The Bill must be passed in each House by: (a) a majority of the total membership of that House; and (b) a majority of not less than two-thirds of the members present and voting.\n\nCertain provisions also require ratification by not less than one-half of the State Legislatures.',
-    fact:'The Kesavananda Bharati case (1973) — a 13-judge constitutional bench — established the Basic Structure doctrine: Parliament cannot amend the "basic structure" of the Constitution. The Constitution has been amended 106 times as of 2023.'},
-};
-
-const PART_ARTICLES = {
-  pIII:['a12','a13','a14','a15','a16','a17','a19','a21','a32'],
-  pIV:['a44'],
-  pIVA:['a51A'],
-  pV:['a52','a57','a61','a72','a110'],
-  pXV:['a324'],
-  pXVII:['a343'],
-  pXVIII:['a352','a356'],
-  pXX:['a368'],
-};
 
 const SCHEDULES = [
-  {num:'1st',title:'States and Union Territories',desc:'Lists all 28 States and 8 Union Territories of India with their territories.',
-   content:`<p>The First Schedule lists all the States and Union Territories of India. Originally there were 14 States and 6 Union Territories at the time of adoption. Today India has <strong>28 States</strong> and <strong>8 Union Territories</strong>.</p><p><strong>States include:</strong> Andhra Pradesh, Arunachal Pradesh, Assam, Bihar, Chhattisgarh, Goa, Gujarat, Haryana, Himachal Pradesh, Jharkhand, Karnataka, Kerala, Madhya Pradesh, Maharashtra, Manipur, Meghalaya, Mizoram, Nagaland, Odisha, Punjab, Rajasthan, Sikkim, Tamil Nadu, Telangana, Tripura, Uttar Pradesh, Uttarakhand, West Bengal.</p><p><strong>Union Territories:</strong> Andaman & Nicobar Islands, Chandigarh, Dadra & Nagar Haveli and Daman & Diu, Delhi (NCT), Jammu & Kashmir, Ladakh, Lakshadweep, Puducherry.</p><p>J&K and Ladakh were reorganised as UTs by the Jammu and Kashmir Reorganisation Act 2019, following the abrogation of Article 370.</p>`},
-  {num:'2nd',title:'Emoluments of Constitutional Functionaries',desc:'Salaries and allowances of President, Vice-President, Governors, Speakers, Judges.',
-   content:`<p>The Second Schedule contains provisions relating to the <strong>emoluments, allowances, privileges, and rights</strong> in respect of:</p><ul><li><strong>Part A:</strong> The President of India</li><li><strong>Part B:</strong> The Governors of States</li><li><strong>Part C:</strong> The Speaker and Deputy Speaker of Lok Sabha, Chairman and Deputy Chairman of Rajya Sabha, Speakers and Deputy Speakers of State Legislative Assemblies</li><li><strong>Part D:</strong> The Judges of the Supreme Court</li><li><strong>Part E:</strong> The Comptroller and Auditor-General of India</li></ul><p>These emoluments are charged on the Consolidated Fund of India and are not subject to vote in Parliament, ensuring independence of these constitutional functionaries.</p>`},
-  {num:'3rd',title:'Forms of Oaths and Affirmations',desc:'Oaths for Union and State officials — Ministers, MPs, MLAs, Judges.',
-   content:`<p>The Third Schedule prescribes the <strong>forms of oaths or affirmations</strong> to be taken by various constitutional functionaries:</p><ul><li>Union Ministers</li><li>Candidates for election to Parliament</li>Members of Parliament</li><li>Judges of the Supreme Court</li><li>The Comptroller and Auditor-General</li><li>State Ministers</li><li>Candidates for election to State Legislature</li><li>Members of State Legislatures</li><li>Judges of High Courts</li></ul><p>Each oath includes a pledge to bear true faith and allegiance to the Constitution of India, to uphold the sovereignty and integrity of India, and to faithfully discharge the duties of the office.</p>`},
-  {num:'4th',title:'Allocation of Seats in Rajya Sabha',desc:'Number of seats allocated to each State and UT in the Council of States.',
-   content:`<p>The Fourth Schedule allocates <strong>seats in the Rajya Sabha (Council of States)</strong> to each State and Union Territory.</p><p>Key allocations: Uttar Pradesh (31), Maharashtra (19), Tamil Nadu (18), Bihar (16), West Bengal (16), Karnataka (12), Andhra Pradesh (11), Gujarat (11), Madhya Pradesh (11), Rajasthan (10).</p><p>Total strength of Rajya Sabha is <strong>245 members</strong>: 233 elected by State and UT legislatures + 12 nominated by the President for distinguished service in literature, science, art, and social service.</p><p>Rajya Sabha is a <strong>permanent body</strong> — it never dissolves. One-third of its members retire every two years.</p>`},
-  {num:'5th',title:'Administration of Scheduled Areas and Scheduled Tribes',desc:'Provisions for administration of Scheduled Areas — tribal regions requiring special protection.',
-   content:`<p>The Fifth Schedule deals with the <strong>administration and control of Scheduled Areas and Scheduled Tribes</strong> in States other than Assam, Meghalaya, Tripura, and Mizoram.</p><p><strong>Key provisions:</strong></p><ul><li>The Governor of a State has special powers regarding Scheduled Areas</li><li>A Tribes Advisory Council must be established in each State having Scheduled Areas</li><li>The Governor can direct that any Act of Parliament or State Legislature shall not apply to a Scheduled Area, or shall apply with modifications</li><li>The President can declare any area as a Scheduled Area or alter the boundaries</li></ul><p>Currently Scheduled Areas exist in: Andhra Pradesh, Telangana, Chhattisgarh, Gujarat, Himachal Pradesh, Jharkhand, Madhya Pradesh, Maharashtra, Odisha, and Rajasthan.</p>`},
-  {num:'6th',title:'Administration of Tribal Areas in NE India',desc:'Special autonomous districts and regional councils for tribal areas in Assam, Meghalaya, Tripura, Mizoram.',
-   content:`<p>The Sixth Schedule provides for <strong>autonomous tribal administration in Assam, Meghalaya, Tripura, and Mizoram</strong> through Autonomous District Councils and Regional Councils.</p><p><strong>Autonomous Districts:</strong> Karbi Anglong, Dima Hasao, Bodoland (Assam); Khasi Hills, Jaintia Hills, Garo Hills (Meghalaya); Tripura Tribal Areas; Chakma, Mara, Lai (Mizoram).</p><p>These councils can make laws on: use of land, management of forests, use of waterways, regulation of shifting cultivation, establishment of village administration, money lending, social customs.</p><p>Laws made by these councils require assent of the Governor to become effective.</p>`},
-  {num:'7th',title:'Distribution of Legislative Powers — Three Lists',desc:'Union List (97 subjects), State List (66 subjects), Concurrent List (47 subjects).',
-   content:`<p>The Seventh Schedule divides legislative powers between the Union and States through <strong>three lists</strong>:</p><div class="amend-item"><span class="amend-num">Union List (List I)</span><div class="amend-desc">97 subjects on which only Parliament can legislate. Includes: Defence, Foreign Affairs, Atomic Energy, Railways, Banking, Currency, Census, Post & Telegraph, Inter-state trade.</div></div><div class="amend-item"><span class="amend-num">State List (List II)</span><div class="amend-desc">66 subjects on which State Legislatures can legislate. Includes: Police, Public order, Land, Agriculture, Local Government, Public Health, Forests (pre-42nd Amendment).</div></div><div class="amend-item"><span class="amend-num">Concurrent List (List III)</span><div class="amend-desc">47 subjects on which both Parliament and State Legislatures can legislate. In case of conflict, Central law prevails. Includes: Education (post-42nd Amendment), Forests, Criminal law, Marriage, Bankruptcy.</div></div><p>Originally there were 97+66+47 items. Numbers have changed over various amendments.</p>`},
-  {num:'8th',title:'Official Languages — 22 Languages',desc:'22 languages recognised by the Constitution. Originally 14, now 22 after amendments.',
-   content:`<p>The Eighth Schedule lists the <strong>official languages recognised by the Constitution of India</strong>. Originally 14 languages were listed in 1950. The current count is <strong>22 languages</strong>.</p><p><strong>Languages added over time:</strong></p><div class="amend-item"><span class="amend-num">Original 14 (1950)</span><div class="amend-desc">Assamese, Bengali, Gujarati, Hindi, Kannada, Kashmiri, Malayalam, Marathi, Oriya (Odia), Punjabi, Sanskrit, Tamil, Telugu, Urdu</div></div><div class="amend-item"><span class="amend-num">21st Amendment (1967)</span><div class="amend-desc">Added Sindhi (15th language)</div></div><div class="amend-item"><span class="amend-num">71st Amendment (1992)</span><div class="amend-desc">Added Konkani, Manipuri, Nepali (16th, 17th, 18th languages)</div></div><div class="amend-item"><span class="amend-num">92nd Amendment (2003)</span><div class="amend-desc">Added Bodo, Dogri, Maithili, Santhali (19th to 22nd languages)</div></div><div class="lang-grid"><div class="lang-item">1. Assamese</div><div class="lang-item">2. Bengali</div><div class="lang-item">3. Bodo</div><div class="lang-item">4. Dogri</div><div class="lang-item">5. Gujarati</div><div class="lang-item">6. Hindi</div><div class="lang-item">7. Kannada</div><div class="lang-item">8. Kashmiri</div><div class="lang-item">9. Konkani</div><div class="lang-item">10. Maithili</div><div class="lang-item">11. Malayalam</div><div class="lang-item">12. Manipuri</div><div class="lang-item">13. Marathi</div><div class="lang-item">14. Nepali</div><div class="lang-item">15. Odia</div><div class="lang-item">16. Punjabi</div><div class="lang-item">17. Sanskrit</div><div class="lang-item">18. Santhali</div><div class="lang-item">19. Sindhi</div><div class="lang-item">20. Tamil</div><div class="lang-item">21. Telugu</div><div class="lang-item">22. Urdu</div></div><p>There are demands to include Tulu, Rajasthani, Bhojpuri, and several other languages in the Eighth Schedule.</p>`},
-  {num:'9th',title:'Acts and Regulations protected from Judicial Review',desc:'Laws placed beyond judicial challenge, mostly relating to land reforms and zamindari abolition.',
-   content:`<p>The Ninth Schedule was added by the <strong>1st Constitutional Amendment (1951)</strong> to protect certain laws from judicial challenge on the grounds of violation of Fundamental Rights.</p><p>Originally it contained only 13 Acts (mainly land reform laws to abolish zamindari). As of now it contains <strong>284 Acts and Regulations</strong>.</p><p><strong>Purpose:</strong> To protect land reform legislation and other socio-economic laws that courts were striking down as violating the right to property (then a Fundamental Right under Article 31).</p><p>Key laws included: The Bihar Land Reforms Act 1950, The Uttar Pradesh Zamindari Abolition & Land Reforms Act 1950, The Madras Estates (Abolition & Conversion) Act 1948.</p><p><strong>Important ruling:</strong> In the I.R. Coelho case (2007), the Supreme Court held that laws added to the Ninth Schedule after 24 April 1973 (Kesavananda Bharati judgment date) can be challenged if they violate the basic structure of the Constitution.</p>`},
-  {num:'10th',title:'Anti-Defection Law',desc:'Provisions for disqualification of Members of Parliament and State Legislatures on grounds of defection.',
-   content:`<p>The Tenth Schedule was added by the <strong>52nd Constitutional Amendment (1985)</strong> during Rajiv Gandhi's government to combat political defections — the "aaya ram gaya ram" phenomenon.</p><p><strong>Grounds for disqualification:</strong></p><ul><li>If a member voluntarily gives up membership of their political party</li><li>If a member votes or abstains from voting in the House contrary to the direction of their party (party whip), without prior permission and without being condoned within 15 days</li><li>If an independent member joins a political party after election</li><li>If a nominated member joins a political party after 6 months of taking seat</li></ul><p><strong>Exception (Merger):</strong> Disqualification does not apply if at least two-thirds of the members of the legislature party agree to merge with another party.</p><p><strong>Decision:</strong> The Speaker/Chairman of the House decides on disqualification. Their decision can be challenged in High Courts and the Supreme Court.</p>`},
-  {num:'11th',title:'Powers of Panchayats — 29 Subjects',desc:'29 matters listed for Panchayati Raj institutions under the 73rd Amendment.',
-   content:`<p>The Eleventh Schedule was added by the <strong>73rd Constitutional Amendment (1992)</strong> — one of the most significant amendments for grassroots democracy. It lists <strong>29 subjects</strong> that may be entrusted to Panchayats.</p><p><strong>The 29 subjects include:</strong></p><ul><li>Agriculture, land improvement, soil conservation</li><li>Minor irrigation, water management</li><li>Animal husbandry, dairying, poultry</li><li>Fisheries</li><li>Social forestry and farm forestry</li><li>Minor forest produce</li><li>Small scale industries, including food processing industries</li><li>Khadi, village and cottage industries</li><li>Rural housing</li><li>Drinking water</li><li>Fuel and fodder</li><li>Roads, culverts, bridges, ferries, waterways</li><li>Rural electrification</li><li>Non-conventional energy sources</li><li>Poverty alleviation programme</li><li>Education, including primary and secondary schools</li><li>Technical training and vocational education</li><li>Adult and non-formal education</li><li>Libraries</li><li>Cultural activities</li><li>Markets and fairs</li><li>Health and sanitation</li><li>Family welfare</li><li>Women and child development</li><li>Social welfare, including welfare of the handicapped and mentally retarded</li><li>Welfare of the weaker sections, especially SC and ST</li><li>Public distribution system</li><li>Maintenance of community assets</li></ul>`},
-  {num:'12th',title:'Powers of Municipalities — 18 Subjects',desc:'18 matters listed for Urban Local Bodies under the 74th Amendment.',
-   content:`<p>The Twelfth Schedule was added by the <strong>74th Constitutional Amendment (1992)</strong> — the companion to the 73rd Amendment, for urban areas. It lists <strong>18 subjects</strong> that may be entrusted to Municipalities (Urban Local Bodies).</p><p><strong>The 18 subjects include:</strong></p><ul><li>Urban planning including town planning</li><li>Regulation of land use and construction of buildings</li><li>Planning for economic and social development</li><li>Roads and bridges</li><li>Water supply for domestic, industrial and commercial purposes</li><li>Public health, sanitation, conservancy, and solid waste management</li><li>Fire services</li><li>Urban forestry, protection of environment and ecological aspects</li><li>Safeguarding the interests of weaker sections of society, including the handicapped and mentally retarded</li><li>Slum improvement and upgradation</li><li>Urban poverty alleviation</li><li>Provision of urban amenities and facilities (parks, gardens, playgrounds)</li><li>Promotion of cultural, educational, and aesthetic aspects</li><li>Burials and burial grounds, cremations and cremation grounds</li><li>Cattle ponds, prevention of cruelty to animals</li><li>Vital statistics including registration of births and deaths</li><li>Public amenities including street lighting, parking lots, bus stops and public conveniences</li><li>Regulation of slaughterhouses and tanneries</li></ul><p>These 74th Amendment provisions are directly relevant to your work in PDS administration under Urban Local Bodies!</p>`},
+  {num:'1st',title:'States and Union Territories',desc:'Lists all 28 States and 8 Union Territories of India.',content:`<p>The First Schedule lists all the <strong>States and Union Territories</strong> of India. Originally 14 States and 6 UTs at adoption. Today: <strong>28 States and 8 Union Territories</strong>.</p><p><strong>States:</strong> Andhra Pradesh, Arunachal Pradesh, Assam, Bihar, Chhattisgarh, Goa, Gujarat, Haryana, Himachal Pradesh, Jharkhand, Karnataka, Kerala, Madhya Pradesh, Maharashtra, Manipur, Meghalaya, Mizoram, Nagaland, Odisha, Punjab, Rajasthan, Sikkim, Tamil Nadu, Telangana, Tripura, Uttar Pradesh, Uttarakhand, West Bengal.</p><p><strong>Union Territories:</strong> Andaman & Nicobar Islands, Chandigarh, Dadra & Nagar Haveli and Daman & Diu, Delhi (NCT), Jammu & Kashmir, Ladakh, Lakshadweep, Puducherry.</p><p>J&K and Ladakh were reorganised as UTs by the Jammu and Kashmir Reorganisation Act 2019, following the abrogation of Article 370.</p>`},
+  {num:'2nd',title:'Emoluments of Constitutional Functionaries',desc:'Salaries of President, Vice-President, Governors, Speakers, and Judges.',content:`<p>The Second Schedule contains provisions relating to emoluments, allowances and privileges of: President, Governors, Speaker/Deputy Speaker of Lok Sabha, Chairman/Deputy Chairman of Rajya Sabha, Speakers and Deputy Speakers of State Assemblies, Judges of Supreme Court and High Courts, and the Comptroller & Auditor-General.</p><p>These are charged on the <strong>Consolidated Fund of India</strong> and not subject to vote in Parliament, ensuring independence.</p>`},
+  {num:'3rd',title:'Forms of Oaths and Affirmations',desc:'Oaths for Union and State officials — Ministers, MPs, MLAs, Judges.',content:`<p>The Third Schedule prescribes forms of oaths/affirmations for: Union Ministers, Parliament candidates and members, Judges of Supreme Court, CAG, State Ministers, State Legislature candidates and members, and Judges of High Courts.</p><p>Each oath includes pledges to bear faith and allegiance to the Constitution, uphold sovereignty and integrity of India, and faithfully discharge duties of office.</p>`},
+  {num:'4th',title:'Allocation of Seats in Rajya Sabha',desc:'Seats allocated to each State and UT in the Council of States.',content:`<p>Allocates <strong>seats in the Rajya Sabha</strong> to States and UTs. Total strength: <strong>245 members</strong> (233 elected + 12 nominated by President for distinguished service in literature, science, art, social service).</p><p>Rajya Sabha is a <strong>permanent body</strong> — never dissolves. One-third of members retire every two years. Members elected by State Legislative Assembly members via Single Transferable Vote with proportional representation.</p>`},
+  {num:'5th',title:'Administration of Scheduled Areas (Non-NE)',desc:'Tribal regions in States other than the four NE States.',content:`<p>Deals with administration of Scheduled Areas and Scheduled Tribes in States other than Assam, Meghalaya, Tripura, and Mizoram.</p><p>Governor has special powers; Tribes Advisory Council must be established; Governor can modify or exempt Central/State laws in Scheduled Areas. President can declare/alter Scheduled Areas.</p><p><strong>States with Scheduled Areas:</strong> Andhra Pradesh, Telangana, Chhattisgarh, Gujarat, Himachal Pradesh, Jharkhand, Madhya Pradesh, Maharashtra, Odisha, Rajasthan.</p>`},
+  {num:'6th',title:'Administration of Tribal Areas in NE India',desc:'Autonomous districts and regional councils for Assam, Meghalaya, Tripura, Mizoram.',content:`<p>Provides for autonomous tribal administration in NE through Autonomous District Councils (ADCs) and Regional Councils with powers to make laws on land use, forests, money lending, customs.</p><p><strong>Key ADCs:</strong> Karbi Anglong, Dima Hasao, Bodoland (Assam); Khasi Hills, Jaintia Hills, Garo Hills (Meghalaya); Tripura Tribal Areas; Chakma, Mara, Lai (Mizoram).</p>`},
+  {num:'7th',title:'Distribution of Legislative Powers — Three Lists',desc:'Union List (97), State List (66), Concurrent List (47 subjects).',content:`<p>The Seventh Schedule divides legislative powers through three lists:</p><div class="amend-item"><span class="amend-num">Union List (List I) — 97 subjects</span><div class="amend-desc">Only Parliament can legislate: Defence, Foreign Affairs, Atomic Energy, Railways, Banking, Currency, Census, Post & Telegraph, Inter-state trade, Income Tax, Customs.</div></div><div class="amend-item"><span class="amend-num">State List (List II) — 66 subjects</span><div class="amend-desc">State Legislatures can legislate: Police, Public order, Land, Agriculture, Local Government, Public Health, Irrigation, Markets & Fairs.</div></div><div class="amend-item"><span class="amend-num">Concurrent List (List III) — 47 subjects</span><div class="amend-desc">Both Parliament and States can legislate. In case of conflict, Central law prevails: Education (post-42nd Amendment), Forests, Criminal law, Marriage, Bankruptcy, Labour.</div></div>`},
+  {num:'8th',title:'Official Languages — 22 Languages',desc:'22 languages recognised. Originally 14 in 1950, grew to 22 via amendments.',content:`<p>Lists the <strong>official languages recognised by the Constitution</strong>. Originally 14 languages in 1950, now <strong>22 languages</strong>.</p><div class="amend-item"><span class="amend-num">Original 14 (1950)</span><div class="amend-desc">Assamese, Bengali, Gujarati, Hindi, Kannada, Kashmiri, Malayalam, Marathi, Odia, Punjabi, Sanskrit, Tamil, Telugu, Urdu</div></div><div class="amend-item"><span class="amend-num">21st Amendment (1967)</span><div class="amend-desc">Added Sindhi → 15 languages</div></div><div class="amend-item"><span class="amend-num">71st Amendment (1992)</span><div class="amend-desc">Added Konkani, Manipuri, Nepali → 18 languages</div></div><div class="amend-item"><span class="amend-num">92nd Amendment (2003)</span><div class="amend-desc">Added Bodo, Dogri, Maithili, Santhali → 22 languages</div></div><div class="lang-grid"><div class="lang-item">1. Assamese</div><div class="lang-item">2. Bengali</div><div class="lang-item">3. Bodo ✦</div><div class="lang-item">4. Dogri ✦</div><div class="lang-item">5. Gujarati</div><div class="lang-item">6. Hindi</div><div class="lang-item">7. Kannada</div><div class="lang-item">8. Kashmiri</div><div class="lang-item">9. Konkani ✦</div><div class="lang-item">10. Maithili ✦</div><div class="lang-item">11. Malayalam</div><div class="lang-item">12. Manipuri ✦</div><div class="lang-item">13. Marathi</div><div class="lang-item">14. Nepali ✦</div><div class="lang-item">15. Odia</div><div class="lang-item">16. Punjabi</div><div class="lang-item">17. Sanskrit</div><div class="lang-item">18. Santhali ✦</div><div class="lang-item">19. Sindhi ✦</div><div class="lang-item">20. Tamil</div><div class="lang-item">21. Telugu</div><div class="lang-item">22. Urdu</div></div><p>✦ = added after original 14. Demands to include Tulu, Rajasthani, Bhojpuri are pending.</p>`},
+  {num:'9th',title:'Acts Protected from Judicial Review',desc:'284 Acts placed beyond challenge — mostly land reform laws.',content:`<p>Added by <strong>1st Amendment (1951)</strong> to protect land reform laws from challenge under Fundamental Rights. Now contains <strong>284 Acts</strong>.</p><p>Protects zamindari abolition Acts, land ceiling laws, and other socio-economic legislation.</p><p><strong>I.R. Coelho case (2007):</strong> The Supreme Court held that laws added after 24 April 1973 (Kesavananda Bharati date) can be challenged if they violate the basic structure of the Constitution.</p>`},
+  {num:'10th',title:'Anti-Defection Law',desc:'Disqualification of MPs/MLAs on grounds of defection — 52nd Amendment 1985.',content:`<p>Added by <strong>52nd Amendment (1985)</strong> to curb the "aaya ram gaya ram" political defection phenomenon.</p><p><strong>Grounds for disqualification:</strong> Voluntarily giving up party membership; voting against party whip without permission; independent member joining a party; nominated member joining a party after 6 months.</p><p><strong>Exception:</strong> Merger of at least two-thirds of legislature party members into another party.</p><p><strong>Decision authority:</strong> Speaker/Chairman of the House — challenged in Supreme Court in Keisham Meghachandra Singh case (2020) which held that the Speaker should not delay decisions.</p>`},
+  {num:'11th',title:'Powers of Panchayats — 29 Subjects',desc:'29 matters for Panchayati Raj institutions under 73rd Amendment 1992.',content:`<p>Added by <strong>73rd Amendment (1992)</strong>. Lists 29 subjects that may be entrusted to Panchayats.</p><ul><li>Agriculture, land improvement, soil conservation</li><li>Minor irrigation, water management</li><li>Animal husbandry, dairying, poultry, fisheries</li><li>Social forestry, minor forest produce</li><li>Small scale industries, khadi, village industries</li><li>Rural housing, drinking water, fuel and fodder</li><li>Roads, culverts, bridges, rural electrification</li><li>Non-conventional energy, poverty alleviation</li><li>Education (primary/secondary), libraries, cultural activities</li><li>Markets and fairs, health and sanitation, family welfare</li><li>Women and child development, social welfare</li><li>Public distribution system, maintenance of community assets</li></ul>`},
+  {num:'12th',title:'Powers of Municipalities — 18 Subjects',desc:'18 matters for Urban Local Bodies under 74th Amendment 1992.',content:`<p>Added by <strong>74th Amendment (1992)</strong>. Lists 18 subjects for Municipalities (ULBs).</p><ul><li>Urban planning and town planning</li><li>Regulation of land use and construction of buildings</li><li>Planning for economic and social development</li><li>Roads and bridges</li><li>Water supply (domestic, industrial, commercial)</li><li>Public health, sanitation, solid waste management</li><li>Fire services</li><li>Urban forestry, environmental protection</li><li>Welfare of weaker sections</li><li>Slum improvement and upgradation</li><li>Urban poverty alleviation</li><li>Urban amenities (parks, gardens, playgrounds)</li><li>Promotion of cultural, educational, aesthetic aspects</li><li>Burials/cremations and grounds</li><li>Cattle ponds, prevention of cruelty to animals</li><li>Vital statistics including birth/death registration</li><li>Public amenities (street lighting, parking, bus stops)</li><li>Regulation of slaughterhouses and tanneries</li></ul><p>Note: The <strong>Public Distribution System</strong> is in the 11th Schedule (Panchayats), while urban public amenities fall under the 12th Schedule — relevant to your PDS administration work!</p>`},
 ];
-
-const SHORTCUTS = {
-  fr:{title:'Fundamental Rights',back:'articles-view',articles:['a12','a13','a14','a15','a16','a17','a19','a21','a32']},
-  fd:{title:'Fundamental Duties',back:'articles-view',articles:['a51A']},
-  dpsp:{title:'Directive Principles',back:'articles-view',articles:['a44']},
-  emergency:{title:'Emergency Provisions',back:'articles-view',articles:['a352','a356']},
-  languages:{type:'schedule',scheduleIdx:7},
-  amendments:{type:'special'},
-};
 
 const KEY_AMENDMENTS = [
-  {num:'1st',year:1951,desc:'Added 9th Schedule to protect land reform laws from judicial review. Added reasonable restrictions on free speech.'},
-  {num:'7th',year:1956,desc:'Reorganised states on linguistic basis. Abolished Part B States. Adjusted Rajya Sabha seats.'},
-  {num:'13th',year:1962,desc:'Created the state of Nagaland with special provisions under Article 371A.'},
-  {num:'21st',year:1967,desc:'Added Sindhi as the 15th language in the Eighth Schedule.'},
-  {num:'24th',year:1971,desc:'Affirmed Parliament\'s power to amend Fundamental Rights (after Golak Nath case 1967).'},
-  {num:'25th',year:1971,desc:'Curtailed right to property; allowed acquisition of property for public purpose without full compensation.'},
-  {num:'42nd',year:1976,desc:'Called the "Mini Constitution." Added "Socialist," "Secular," "Integrity" to Preamble. Added Fundamental Duties. Shifted Education and Forests to Concurrent List. Extended President\'s Rule. Made Directive Principles superior to Fundamental Rights.'},
-  {num:'44th',year:1978,desc:'Restored many provisions changed by 42nd Amendment. Replaced "internal disturbance" with "armed rebellion" in Article 352. Right to property (Art. 31) removed as Fundamental Right; became only a legal right under Art. 300A.'},
-  {num:'52nd',year:1985,desc:'Added Tenth Schedule — the Anti-Defection Law — to prevent political horse-trading ("aaya ram gaya ram").'},
-  {num:'61st',year:1989,desc:'Lowered voting age from 21 to 18 years for elections to Lok Sabha and State Assemblies.'},
-  {num:'69th',year:1991,desc:'Gave special status to Delhi as National Capital Territory (NCT) with a Legislative Assembly and a Council of Ministers.'},
-  {num:'71st',year:1992,desc:'Added Konkani, Manipuri, and Nepali as the 16th, 17th, and 18th languages in the Eighth Schedule.'},
-  {num:'73rd',year:1992,desc:'Gave constitutional status to Panchayati Raj institutions. Added Part IX and the Eleventh Schedule (29 subjects for Panchayats). Mandated reservations for SC, ST, and Women in Panchayats.'},
-  {num:'74th',year:1992,desc:'Gave constitutional status to Urban Local Bodies (Municipalities). Added Part IX-A and Twelfth Schedule (18 subjects). Mandated reservations for SC, ST, and Women in Municipalities.'},
-  {num:'86th',year:2002,desc:'Made free and compulsory education a Fundamental Right for children 6–14 years (Article 21A). Added duty of parents to send children to school as Fundamental Duty 51A(k). Led to RTE Act 2009.'},
-  {num:'91st',year:2003,desc:'Limited Council of Ministers to 15% of Lok Sabha/Assembly strength. Strengthened anti-defection provisions.'},
-  {num:'92nd',year:2003,desc:'Added Bodo, Dogri, Maithili, and Santhali as the 19th to 22nd languages in the Eighth Schedule.'},
-  {num:'97th',year:2011,desc:'Added right to form cooperative societies as a Fundamental Right. Added a new Directive Principle (Article 43B). Added a new Part IX-B for Co-operative Societies.'},
-  {num:'100th',year:2015,desc:'Land Boundary Agreement with Bangladesh — exchanged 162 enclaves.'},
-  {num:'101st',year:2016,desc:'Introduced Goods and Services Tax (GST) — the biggest indirect tax reform. Added Articles 246A, 269A, 279A.'},
-  {num:'102nd',year:2018,desc:'Gave constitutional status to the National Commission for Backward Classes (NCBC) — Article 338B.'},
-  {num:'103rd',year:2019,desc:'Added 10% reservation for Economically Weaker Sections (EWS) among general category in education and government jobs.'},
-  {num:'104th',year:2020,desc:'Extended reservation of seats for SC and ST in Lok Sabha and State Assemblies by 10 more years (till 2030). Abolished Anglo-Indian reserved seats.'},
-  {num:'105th',year:2021,desc:'Restored States\' power to identify OBCs for reservation purposes — overriding the Supreme Court\'s Maratha reservation judgment.'},
-  {num:'106th',year:2023,desc:'Reserved one-third of seats for women in Lok Sabha, State Legislative Assemblies, and Delhi Assembly (Women\'s Reservation Act / Nari Shakti Vandan Adhiniyam). Comes into effect after next delimitation.'},
+  {num:'1st',year:1951,desc:'Added 9th Schedule to protect land reform laws. Added reasonable restrictions on free speech under Article 19.'},
+  {num:'7th',year:1956,desc:'Reorganised states on linguistic basis after States Reorganisation Commission. Abolished distinction between Part A, B, C States.'},
+  {num:'13th',year:1962,desc:'Created state of Nagaland with special provisions under Article 371A protecting Naga customary law.'},
+  {num:'21st',year:1967,desc:'Added Sindhi as 15th language in the Eighth Schedule.'},
+  {num:'24th',year:1971,desc:'Affirmed Parliament\'s power to amend any part of Constitution including Fundamental Rights (response to Golak Nath case 1967).'},
+  {num:'25th',year:1971,desc:'Curtailed right to property (Art. 31) for public purpose acquisition. Added Art. 31C protecting DPSP laws from FR challenge.'},
+  {num:'42nd',year:1976,desc:'Called "Mini Constitution." Added Socialist, Secular, Integrity to Preamble. Added Fundamental Duties (51A). Shifted Education and Forests to Concurrent List. Extended Lok Sabha term to 6 years. Made DPSPs superior to FRs.'},
+  {num:'44th',year:1978,desc:'Restored many 42nd Amendment changes. Replaced "internal disturbance" with "armed rebellion" in Art. 352. Removed Right to Property as FR — made a legal right under Art. 300A. Restored Supreme Court\'s power of judicial review.'},
+  {num:'52nd',year:1985,desc:'Added Tenth Schedule — Anti-Defection Law — to prevent political defections.'},
+  {num:'61st',year:1989,desc:'Lowered voting age from 21 to 18 years for Lok Sabha and State Assembly elections.'},
+  {num:'69th',year:1991,desc:'Gave special status to Delhi as NCT with Legislative Assembly, Council of Ministers, and LG.'},
+  {num:'71st',year:1992,desc:'Added Konkani, Manipuri, Nepali to 8th Schedule → 18 languages.'},
+  {num:'73rd',year:1992,desc:'Constitutional status to Panchayati Raj. Added Part IX and 11th Schedule (29 subjects). Mandatory reservation for SC/ST/Women in Panchayats.'},
+  {num:'74th',year:1992,desc:'Constitutional status to Urban Local Bodies. Added Part IX-A and 12th Schedule (18 subjects). Mandatory reservation for SC/ST/Women in Municipalities.'},
+  {num:'86th',year:2002,desc:'Article 21A: Free and compulsory education for children 6-14 as Fundamental Right. Led to RTE Act 2009.'},
+  {num:'91st',year:2003,desc:'Limited Council of Ministers size to 15% of Lok Sabha/Assembly strength. Strengthened anti-defection provisions.'},
+  {num:'92nd',year:2003,desc:'Added Bodo, Dogri, Maithili, Santhali to 8th Schedule → 22 languages.'},
+  {num:'97th',year:2011,desc:'Right to form cooperative societies as FR (Art. 19). New DPSP Art. 43B. New Part IX-B for Co-operative Societies.'},
+  {num:'101st',year:2016,desc:'Introduced GST — biggest indirect tax reform. Added Articles 246A, 269A, 279A. Concurrent power to levy GST for Union and States.'},
+  {num:'102nd',year:2018,desc:'Constitutional status to National Commission for Backward Classes — Article 338B.'},
+  {num:'103rd',year:2019,desc:'10% EWS reservation for economically weaker sections among general category in education and government jobs.'},
+  {num:'104th',year:2020,desc:'Extended SC/ST reservation in Lok Sabha and State Assemblies by 10 more years (till 2030). Abolished Anglo-Indian reserved seats.'},
+  {num:'105th',year:2021,desc:'Restored States\' power to identify OBCs — overriding Supreme Court\'s Maratha reservation judgment.'},
+  {num:'106th',year:2023,desc:'Women\'s Reservation — one-third seats for women in Lok Sabha, State Assemblies, Delhi Assembly. Comes into effect after next delimitation (Nari Shakti Vandan Adhiniyam).'},
 ];
+
+// ═══════════════ AI CONTENT CACHE ═══════════════
+const aiCache = {};
+
+async function fetchAIContent(articleNum, articleTitle, partName) {
+  const cacheKey = `art_${articleNum}`;
+  if(aiCache[cacheKey]) return aiCache[cacheKey];
+  
+  const prompt = `You are an expert on the Indian Constitution, writing for TNPSC Group I Mains exam preparation. For Article ${articleNum} (${articleTitle}) from ${partName} of the Indian Constitution, provide EXACTLY this JSON structure (no markdown, no extra text):
+{
+  "fact": "One most important exam-relevant fact about this article in 2 sentences",
+  "cases": [
+    {"name": "Case name v State/Party", "year": "YYYY", "held": "What was held/decided relevant to this article"},
+    {"name": "Case name v Party", "year": "YYYY", "held": "Brief holding"},
+    {"name": "Case name v Party", "year": "YYYY", "held": "Brief holding"}
+  ],
+  "recent": [
+    {"title": "Recent development title", "desc": "Brief description of recent development, new law, or state-level action since 2020"},
+    {"title": "Another recent development", "desc": "Brief description"}
+  ],
+  "interpretation": "How courts have interpreted this article in 2-3 sentences — scope, evolution, current position"
+}
+Provide 2-3 landmark cases and 2 recent developments. Keep each item concise for mobile reading. Return only valid JSON.`;
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-6',
+        max_tokens: 1000,
+        messages: [{role: 'user', content: prompt}]
+      })
+    });
+    const data = await response.json();
+    const text = data.content?.[0]?.text || '{}';
+    const clean = text.replace(/```json|```/g, '').trim();
+    const parsed = JSON.parse(clean);
+    aiCache[cacheKey] = parsed;
+    return parsed;
+  } catch(e) {
+    return null;
+  }
+}
 
 // ═══════════════ STATE ═══════════════
 let currentArticleId = null;
+let currentArticleData = null;
 let backTarget = 'home';
 let favorites = JSON.parse(localStorage.getItem('samvidhan_favs') || '[]');
 
@@ -590,7 +558,6 @@ function showScreen(id) {
 }
 function goHome() { showScreen('home'); renderParts(); }
 function goBack(target) { showScreen(target); }
-
 function switchTab(targetId, el) {
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   if(el) el.classList.add('active');
@@ -603,106 +570,163 @@ function switchTab(targetId, el) {
 
 // ═══════════════ PARTS ═══════════════
 function renderParts() {
-  const list = document.getElementById('partsList');
-  list.innerHTML = PARTS.map((p,i) => `
-    <div class="part-card ${i<3?'highlighted':''}" onclick="openPart('${p.id}','${p.name}','${p.range}')">
+  document.getElementById('partsList').innerHTML = PARTS.map((p,i) => `
+    <div class="part-card ${i<3?'highlighted':''}" onclick="openPart('${p.id}')">
       <div class="part-num">${p.num}</div>
       <div class="part-info">
         <div class="part-name">${p.name}</div>
-        <div class="part-range">Articles ${p.range}</div>
+        <div class="part-range">${p.articles.length} articles · ${p.articles[0].n}–${p.articles[p.articles.length-1].n}</div>
       </div>
       <div class="part-arrow">›</div>
     </div>`).join('');
 }
 
 // ═══════════════ OPEN PART ═══════════════
-function openPart(partId, partName, range) {
+function openPart(partId) {
   const part = PARTS.find(p=>p.id===partId);
-  document.getElementById('partViewTitle').textContent = 'Part '+(part?part.num:'')+' – '+partName;
-  const arts = PART_ARTICLES[partId] || [];
-  document.getElementById('partViewCount').textContent = arts.length ? `${arts.length} articles` : 'Content coming soon';
-  const content = document.getElementById('articlesContent');
-  if(!arts.length) {
-    content.innerHTML = `<div class="empty-state"><div class="empty-icon">📖</div><div class="empty-text">Articles ${range}</div><div class="empty-sub">Full content coming soon</div></div>`;
-  } else {
-    content.innerHTML = arts.map(id => {
-      const a = ARTICLES[id];
-      return `<div class="article-row" onclick="openArticle('${id}','articles-view')">
-        <div class="art-num-badge">${a.num}</div>
-        <div class="art-info"><div class="art-title">${a.title}</div><div class="art-snippet">${a.text.substring(0,60)}…</div></div>
-        <div class="art-arrow">›</div></div>`;
-    }).join('');
-  }
+  if(!part) return;
+  document.getElementById('partViewTitle').textContent = 'Part '+part.num+' – '+part.name;
+  document.getElementById('partViewCount').textContent = `${part.articles.length} articles`;
+  document.getElementById('articlesContent').innerHTML = part.articles.map(a => `
+    <div class="article-row" onclick="openArticle({n:'${a.n}',t:'${a.t.replace(/'/g,"\\'")}',part:'Part ${part.num} – ${part.name}',partId:'${partId}'}, 'articles-view')">
+      <div class="art-num-badge">${a.n}</div>
+      <div class="art-info">
+        <div class="art-title">${a.t}</div>
+        <div class="art-snippet">Article ${a.n} · Part ${part.num}</div>
+      </div>
+      <div class="art-arrow">›</div>
+    </div>`).join('');
   showScreen('articles-view');
 }
 
-// ═══════════════ OPEN ARTICLE ═══════════════
-function openArticle(id, from) {
+function openPartByShortcut(partId, name, range) { openPart(partId); }
+
+// ═══════════════ OPEN ARTICLE (AI-POWERED) ═══════════════
+async function openArticle(artObj, from) {
   backTarget = from || 'home';
-  currentArticleId = id;
-  const a = ARTICLES[id];
-  if(!a) return;
+  currentArticleId = `${artObj.n}_${artObj.part}`;
+  currentArticleData = artObj;
+
   document.getElementById('artBackBtn').onclick = () => goBack(backTarget);
-  document.getElementById('detailBarTitle').textContent = id==='preamble' ? 'Preamble' : `Article ${a.num}`;
+  document.getElementById('detailBarTitle').textContent = artObj.n === 'Preamble' ? 'Preamble' : `Article ${artObj.n}`;
   updateFavBtn();
-  const allIds = Object.keys(ARTICLES);
-  const idx = allIds.indexOf(id);
-  const prevId = idx > 0 ? allIds[idx-1] : null;
-  const nextId = idx < allIds.length-1 ? allIds[idx+1] : null;
+
+  // Render static shell immediately
   document.getElementById('detailContent').innerHTML = `
     <div class="article-header-parch">
-      <div class="art-part-tag-parch">📜 ${a.part}</div>
-      <div class="art-number-parch">${id==='preamble'?'Preamble':'Article '+a.num}</div>
-      <div class="art-main-title-parch">${a.title}</div>
+      <div class="art-part-tag-parch">📜 ${artObj.part}</div>
+      <div class="art-number-parch">${artObj.n==='Preamble'?'Preamble':'Article '+artObj.n}</div>
+      <div class="art-main-title-parch">${artObj.t}</div>
     </div>
     <div class="article-body-parch">
-      ${a.text.split('\n\n').map(p=>`<p>${p.trim()}</p>`).filter(p=>p!=='<p></p>').join('')}
+      <p>${getArticleBaseText(artObj.n, artObj.t)}</p>
     </div>
-    ${a.fact?`<div class="fact-card-parch"><div class="fact-label-parch">💡 Did You Know?</div><div class="fact-text-parch">${a.fact}</div></div>`:''}
-    <div class="nav-pills-parch">
-      ${prevId?`<div class="nav-pill-parch" onclick="openArticle('${prevId}','${backTarget}')"><span class="nav-pill-arrow-parch">←</span>${ARTICLES[prevId].num==='Preamble'?'Preamble':'Art. '+ARTICLES[prevId].num}</div>`:'<div></div>'}
-      ${nextId?`<div class="nav-pill-parch" onclick="openArticle('${nextId}','${backTarget}')"><span class="nav-pill-arrow-parch">→</span>Art. ${ARTICLES[nextId].num}</div>`:'<div></div>'}
+    <div id="aiContentArea">
+      <div class="ai-loading">
+        <div class="ai-loading-spinner"></div>
+        <div class="ai-loading-text">Loading cases, developments & interpretations…</div>
+      </div>
+    </div>
+    <div class="nav-pills-parch" style="margin-top:8px">
+      <div class="nav-pill-parch" onclick="goBack(backTarget)"><span class="nav-pill-arrow-parch">←</span>Back</div>
     </div>`;
-  showScreen('article-detail');
-}
-function openArticleById(id) { openArticle(id,'home'); }
 
-// ═══════════════ SHORTCUTS ═══════════════
-function openShortcut(key) {
-  const s = SHORTCUTS[key];
-  if(!s) return;
-  if(s.type==='schedule') { openSchedule(s.scheduleIdx); return; }
-  if(s.type==='special' && key==='amendments') { openAmendments(); return; }
-  // Show as article list
-  document.getElementById('partViewTitle').textContent = s.title;
-  document.getElementById('partViewCount').textContent = `${s.articles.length} articles`;
-  document.getElementById('articlesContent').innerHTML = s.articles.map(id => {
-    const a = ARTICLES[id];
-    return `<div class="article-row" onclick="openArticle('${id}','articles-view')">
-      <div class="art-num-badge">${a.num}</div>
-      <div class="art-info"><div class="art-title">${a.title}</div><div class="art-snippet">${a.text.substring(0,60)}…</div></div>
+  showScreen('article-detail');
+
+  // Fetch AI content
+  const aiData = await fetchAIContent(artObj.n, artObj.t, artObj.part);
+  const aiArea = document.getElementById('aiContentArea');
+  if(!aiArea) return;
+
+  if(!aiData) {
+    aiArea.innerHTML = `<div class="ai-section sec-fact"><div class="ai-section-header">💡 Key Fact</div><div class="ai-section-body"><p>This article forms a fundamental part of the Indian Constitution under ${artObj.part}. It establishes important constitutional provisions relating to ${artObj.t.toLowerCase()}.</p></div></div>`;
+    return;
+  }
+
+  let html = '';
+  if(aiData.fact) {
+    html += `<div class="ai-section sec-fact"><div class="ai-section-header">💡 Key Fact</div><div class="ai-section-body"><p>${aiData.fact}</p></div></div>`;
+  }
+  if(aiData.cases?.length) {
+    html += `<div class="ai-section sec-cases"><div class="ai-section-header">⚖️ Landmark Cases</div><div class="ai-section-body">${aiData.cases.map(c=>`<div class="case-item"><span class="case-name">${c.name}</span><span class="case-year">(${c.year})</span><div class="case-held">${c.held}</div></div>`).join('')}</div></div>`;
+  }
+  if(aiData.recent?.length) {
+    html += `<div class="ai-section sec-dev"><div class="ai-section-header">🆕 Recent Developments</div><div class="ai-section-body">${aiData.recent.map(r=>`<div class="dev-item"><strong>${r.title}</strong><br>${r.desc}</div>`).join('')}</div></div>`;
+  }
+  if(aiData.interpretation) {
+    html += `<div class="ai-section sec-interp"><div class="ai-section-header">🔍 Judicial Interpretation</div><div class="ai-section-body"><p>${aiData.interpretation}</p></div></div>`;
+  }
+  aiArea.innerHTML = html || '<div style="padding:16px;text-align:center;color:var(--parch-text2);font-family:Cormorant Garamond,serif;font-size:16px">Content loaded.</div>';
+}
+
+// Base text for common articles
+function getArticleBaseText(num, title) {
+  const BASE = {
+    'Preamble': 'WE, THE PEOPLE OF INDIA, having solemnly resolved to constitute India into a SOVEREIGN SOCIALIST SECULAR DEMOCRATIC REPUBLIC and to secure to all its citizens: JUSTICE, social, economic and political; LIBERTY of thought, expression, belief, faith and worship; EQUALITY of status and of opportunity; and to promote among them all FRATERNITY assuring the dignity of the individual and the unity and integrity of the Nation.',
+    '12': 'In this part, "the State" includes the Government and Parliament of India and the Government and the Legislature of each of the States and all local or other authorities within the territory of India or under the control of the Government of India.',
+    '13': 'All laws in force before the Constitution, in so far as they are inconsistent with the provisions of this Part, shall to the extent of such inconsistency be void. The State shall not make any law which takes away or abridges the rights conferred by this Part.',
+    '14': 'The State shall not deny to any person equality before the law or the equal protection of the laws within the territory of India.',
+    '15': 'The State shall not discriminate against any citizen on grounds only of religion, race, caste, sex, place of birth or any of them.',
+    '16': 'There shall be equality of opportunity for all citizens in matters relating to employment or appointment to any office under the State.',
+    '17': '"Untouchability" is abolished and its practice in any form is forbidden. The enforcement of any disability arising out of "Untouchability" shall be an offence punishable in accordance with law.',
+    '19': 'All citizens shall have the right to freedom of speech and expression; to assemble peaceably and without arms; to form associations or unions; to move freely throughout the territory of India; to reside and settle in any part of the territory of India; and to practise any profession, or to carry on any occupation, trade or business.',
+    '21': 'No person shall be deprived of his life or personal liberty except according to procedure established by law.',
+    '21A': 'The State shall provide free and compulsory education to all children of the age of six to fourteen years in such manner as the State may, by law, determine.',
+    '32': 'The right to move the Supreme Court by appropriate proceedings for the enforcement of the rights conferred by this Part is guaranteed. The Supreme Court shall have power to issue directions or orders or writs, including habeas corpus, mandamus, prohibition, quo warranto and certiorari.',
+    '44': 'The State shall endeavour to secure for the citizens a uniform civil code throughout the territory of India.',
+    '51A': 'It shall be the duty of every citizen of India to abide by the Constitution and respect its ideals and institutions, the National Flag and the National Anthem; to cherish the noble ideals of the national struggle for freedom; to uphold and protect the sovereignty, unity and integrity of India; to defend the country; to promote harmony and the spirit of common brotherhood; to preserve the rich heritage of our composite culture; to protect the environment; to develop scientific temper and humanism; to safeguard public property; and to strive towards excellence.',
+    '52': 'There shall be a President of India. The executive power of the Union shall be vested in the President and shall be exercised by him either directly or through officers subordinate to him in accordance with this Constitution.',
+    '352': 'If the President is satisfied that a grave emergency exists whereby the security of India or of any part of the territory thereof is threatened, whether by war or external aggression or armed rebellion, he may, by Proclamation, make a declaration to that effect.',
+    '356': 'If the President, on receipt of report from the Governor or otherwise, is satisfied that the government of the State cannot be carried on in accordance with the provisions of this Constitution, the President may by Proclamation assume to himself all or any functions of the Government of the State.',
+    '368': 'Parliament may amend any provision of this Constitution in accordance with the procedure laid down in this article. A Bill for constitutional amendment must be passed in each House by a majority of the total membership of that House and by a majority of not less than two-thirds of the members present and voting.',
+    '324': 'The superintendence, direction and control of the preparation of the electoral rolls for, and the conduct of, all elections to Parliament and to the Legislature of every State shall be vested in the Election Commission.',
+    '370': '[Abrogated by 370th Order 2019] This article previously gave special status to Jammu and Kashmir. Following Presidential Order C.O. 272 dated 5 August 2019, all provisions of the Constitution were extended to J&K, effectively abrogating the special status.',
+  };
+  return BASE[num] || `Article ${num} of the Indian Constitution deals with ${title.toLowerCase()}. This article is part of the constitutional framework that governs the rights, duties, and structure of the Indian democratic republic. Click the sections below to read landmark cases and recent developments related to this article.`;
+}
+
+// Preamble special
+function openPreamble() {
+  openArticle({n:'Preamble', t:'Preamble to the Constitution of India', part:'Foundation of the Constitution', partId:null}, 'home');
+}
+
+// ═══════════════ FAVORITES ═══════════════
+function toggleFav() {
+  if(!currentArticleId) return;
+  const label = currentArticleData ? `${currentArticleData.n}|${currentArticleData.t}|${currentArticleData.part}` : currentArticleId;
+  const idx = favorites.indexOf(label);
+  if(idx>=0) favorites.splice(idx,1); else favorites.push(label);
+  localStorage.setItem('samvidhan_favs', JSON.stringify(favorites));
+  updateFavBtn();
+}
+function updateFavBtn() {
+  const btn = document.getElementById('favBtn');
+  const label = currentArticleData ? `${currentArticleData.n}|${currentArticleData.t}|${currentArticleData.part}` : currentArticleId;
+  if(favorites.includes(label)){btn.textContent='★';btn.classList.add('fav-active');}
+  else{btn.textContent='☆';btn.classList.remove('fav-active');}
+}
+function renderFavorites() {
+  const c = document.getElementById('favsContent');
+  if(!favorites.length){c.innerHTML=`<div class="empty-state"><div class="empty-icon">⭐</div><div class="empty-text">No saved articles yet</div><div class="empty-sub">Tap ☆ on any article to save it here</div></div>`;return;}
+  c.innerHTML = favorites.map(label => {
+    const parts = label.split('|');
+    if(parts.length < 2) return '';
+    const [n, t, part] = parts;
+    return `<div class="article-row" onclick="openArticle({n:'${n}',t:'${t.replace(/'/g,"\\'")}',part:'${part}'}, 'favorites-view')">
+      <div class="art-num-badge">${n}</div>
+      <div class="art-info"><div class="art-title">${t}</div><div class="art-snippet">${part}</div></div>
       <div class="art-arrow">›</div></div>`;
   }).join('');
-  showScreen('articles-view');
 }
 
-function openAmendments() {
-  document.getElementById('schedDetailTitle').textContent = 'Key Amendments';
-  document.getElementById('schedBackBtn').onclick = () => goBack('home');
-  document.getElementById('schedDetailContent').innerHTML = `
-    <div class="article-header-parch">
-      <div class="art-part-tag-parch">📝 Constitutional Amendments</div>
-      <div class="art-number-parch">Article 368</div>
-      <div class="art-main-title-parch">Key Amendments to the Constitution</div>
-    </div>
-    <div class="sched-body">
-      <p>The Constitution has been amended <strong>106 times</strong> as of 2023. Here are the most important amendments:</p>
-      ${KEY_AMENDMENTS.map(a=>`<div class="amend-item">
-        <span class="amend-num">${a.num} Amendment</span><span class="amend-year">(${a.year})</span>
-        <div class="amend-desc">${a.desc}</div>
-      </div>`).join('')}
-    </div>`;
-  showScreen('schedule-detail');
+// ═══════════════ AOD ═══════════════
+function renderAOD() {
+  const allArts = PARTS.flatMap(p => p.articles.map(a => ({...a, part:'Part '+p.num+' – '+p.name})));
+  const a = allArts[Math.floor(Date.now()/86400000) % allArts.length];
+  document.getElementById('aodTitle').textContent = `Article ${a.n}`;
+  document.getElementById('aodSubtitle').textContent = a.t;
+  document.getElementById('aodBody').innerHTML = `<p>${getArticleBaseText(a.n, a.t)}</p>`;
+  document.getElementById('aodFact').textContent = `Article ${a.n} is part of ${a.part}. Open this article to read landmark cases and recent developments.`;
 }
 
 // ═══════════════ SCHEDULES ═══════════════
@@ -710,13 +734,9 @@ function renderSchedules() {
   document.getElementById('schedulesList').innerHTML = SCHEDULES.map((s,i) => `
     <div class="schedule-card" onclick="openSchedule(${i})">
       <div class="sched-num">${s.num}</div>
-      <div class="sched-info">
-        <div class="sched-title">${s.title}</div>
-        <div class="sched-desc">${s.desc}</div>
-      </div>
+      <div class="sched-info"><div class="sched-title">${s.title}</div><div class="sched-desc">${s.desc}</div></div>
     </div>`).join('');
 }
-
 function openSchedule(idx) {
   const s = SCHEDULES[idx];
   document.getElementById('schedDetailTitle').textContent = s.num+' Schedule';
@@ -730,34 +750,20 @@ function openSchedule(idx) {
     <div class="sched-body">${s.content}</div>`;
   showScreen('schedule-detail');
 }
-
-// ═══════════════ FAVORITES ═══════════════
-function toggleFav() {
-  if(!currentArticleId) return;
-  const idx = favorites.indexOf(currentArticleId);
-  if(idx>=0) favorites.splice(idx,1); else favorites.push(currentArticleId);
-  localStorage.setItem('samvidhan_favs', JSON.stringify(favorites));
-  updateFavBtn();
-}
-function updateFavBtn() {
-  const btn = document.getElementById('favBtn');
-  if(favorites.includes(currentArticleId)){btn.textContent='★';btn.classList.add('fav-active');}
-  else{btn.textContent='☆';btn.classList.remove('fav-active');}
-}
-function renderFavorites() {
-  const c = document.getElementById('favsContent');
-  if(!favorites.length){c.innerHTML=`<div class="empty-state"><div class="empty-icon">⭐</div><div class="empty-text">No saved articles yet</div><div class="empty-sub">Tap ☆ on any article to save it here</div></div>`;return;}
-  c.innerHTML=favorites.map(id=>{const a=ARTICLES[id];if(!a)return'';return`<div class="article-row" onclick="openArticle('${id}','favorites-view')"><div class="art-num-badge">${a.num}</div><div class="art-info"><div class="art-title">${a.title}</div><div class="art-snippet">${a.part}</div></div><div class="art-arrow">›</div></div>`;}).join('');
-}
-
-// ═══════════════ AOD ═══════════════
-function renderAOD() {
-  const ids = Object.keys(ARTICLES);
-  const a = ARTICLES[ids[Math.floor(Date.now()/86400000)%ids.length]];
-  document.getElementById('aodTitle').textContent = a.num==='Preamble'?'Preamble':`Article ${a.num}`;
-  document.getElementById('aodSubtitle').textContent = a.title;
-  document.getElementById('aodBody').innerHTML = a.text.split('\n\n').map(p=>`<p>${p.trim()}</p>`).filter(p=>p!=='<p></p>').join('');
-  document.getElementById('aodFact').textContent = a.fact||'This article forms a fundamental part of the Indian Constitution.';
+function openAmendments() {
+  document.getElementById('schedDetailTitle').textContent = 'Key Amendments';
+  document.getElementById('schedBackBtn').onclick = () => goBack('home');
+  document.getElementById('schedDetailContent').innerHTML = `
+    <div class="article-header-parch">
+      <div class="art-part-tag-parch">📝 Constitutional Amendments</div>
+      <div class="art-number-parch">Article 368</div>
+      <div class="art-main-title-parch">Key Amendments — 1st to 106th</div>
+    </div>
+    <div class="sched-body">
+      <p>The Constitution has been amended <strong>106 times</strong> as of 2023.</p>
+      ${KEY_AMENDMENTS.map(a=>`<div class="amend-item"><span class="amend-num">${a.num} Amendment</span><span class="amend-year">(${a.year})</span><div class="amend-desc">${a.desc}</div></div>`).join('')}
+    </div>`;
+  showScreen('schedule-detail');
 }
 
 // ═══════════════ SEARCH ═══════════════
@@ -767,14 +773,25 @@ function handleSearch(query) {
   if(!query.trim()){overlay.classList.remove('visible');return;}
   overlay.classList.add('visible');
   const q=query.toLowerCase();
-  const matches=Object.entries(ARTICLES).filter(([id,a])=>a.title.toLowerCase().includes(q)||a.text.toLowerCase().includes(q)||a.num.toLowerCase().includes(q));
-  if(!matches.length){results.innerHTML=`<div class="empty-state" style="padding:40px"><div class="empty-icon">🔍</div><div class="empty-text">No results found</div></div>`;return;}
-  results.innerHTML=matches.slice(0,20).map(([id,a])=>`<div class="result-item" onclick="openArticleById('${id}');clearSearch()"><div class="result-art">Article ${a.num} · ${a.part}</div><div class="result-title">${a.title}</div><div class="result-snippet">${a.text.substring(0,100)}…</div></div>`).join('');
+  const matches = [];
+  PARTS.forEach(p => {
+    p.articles.forEach(a => {
+      if(a.t.toLowerCase().includes(q) || a.n.toLowerCase().includes(q)) {
+        matches.push({...a, part:'Part '+p.num+' – '+p.name, partId:p.id});
+      }
+    });
+  });
+  if(!matches.length){results.innerHTML=`<div class="empty-state" style="padding:40px"><div class="empty-icon">🔍</div><div class="empty-text">No results</div></div>`;return;}
+  results.innerHTML=matches.slice(0,25).map(a=>`
+    <div class="result-item" onclick="openArticle({n:'${a.n}',t:'${a.t.replace(/'/g,"\\'")}',part:'${a.part}'}, 'home');clearSearch()">
+      <div class="result-art">Article ${a.n} · ${a.part}</div>
+      <div class="result-title">${a.t}</div>
+    </div>`).join('');
 }
 function clearSearch(){document.getElementById('searchInput').value='';document.getElementById('searchOverlay').classList.remove('visible');}
 document.addEventListener('click',(e)=>{
-  const overlay=document.getElementById('searchOverlay'),input=document.getElementById('searchInput');
-  if(!overlay.contains(e.target)&&e.target!==input) overlay.classList.remove('visible');
+  const o=document.getElementById('searchOverlay'),i=document.getElementById('searchInput');
+  if(o && i && !o.contains(e.target)&&e.target!==i) o.classList.remove('visible');
 });
 
 // Init
