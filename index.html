@@ -9,7 +9,7 @@
 <meta name="theme-color" content="#0D1117">
 <title>Constitution of India</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&family=Lexend:wght@400;500;600;700&family=Atkinson+Hyperlegible:wght@400;700&family=Atkinson+Hyperlegible+Mono&display=swap" rel="stylesheet">
 <style>
 :root {
   --ink:#0D1117; --ink-mid:#1C2333; --ink-soft:#2D3748;
@@ -156,7 +156,7 @@ html,body{width:100%;max-width:480px;margin:0 auto;font-family:'Inter',sans-seri
 .art-main-title-parch{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;line-height:1.25;color:var(--parch-text);}
 
 .article-body-parch{padding:24px 24px 8px;}
-.article-body-parch p{font-family:'Cormorant Garamond',serif;font-size:19px;line-height:1.85;color:var(--parch-text2);margin-bottom:16px;text-align:justify;}
+.article-body-parch p{font-family:var(--read-font,'Cormorant Garamond',serif);font-size:var(--read-size,19px);font-weight:var(--read-weight,400);line-height:var(--read-lh,1.85);color:var(--parch-text2);margin-bottom:16px;text-align:justify;}
 .article-body-parch p:first-child::first-letter{float:left;font-size:54px;font-weight:700;line-height:0.85;margin:6px 8px 0 0;color:#8b1a00;font-family:'Cormorant Garamond',serif;}
 
 /* AI Content boxes */
@@ -273,7 +273,7 @@ html,body{width:100%;max-width:480px;margin:0 auto;font-family:'Inter',sans-seri
 .clauses-area{padding:20px 20px 8px;}
 .clause-block{margin-bottom:16px;padding-left:0;}
 .clause-block .clause-label{display:inline-block;background:#8b1a00;color:#f4e4c1;font-family:'Inter',sans-serif;font-size:12px;font-weight:700;padding:3px 10px;border-radius:6px;margin-bottom:6px;letter-spacing:0.3px;}
-.clause-block .clause-text{font-family:'Cormorant Garamond',serif;font-size:18px;line-height:1.7;color:var(--parch-text2);text-align:justify;}
+.clause-block .clause-text{font-family:var(--read-font,'Cormorant Garamond',serif);font-size:var(--read-size,18px);font-weight:var(--read-weight,400);line-height:var(--read-lh,1.7);color:var(--parch-text2);text-align:justify;}
 .clause-block.first-clause .clause-text::first-letter{float:left;font-size:50px;font-weight:700;line-height:0.85;margin:6px 8px 0 0;color:#8b1a00;}
 /* KEYWORD CHIPS */
 .kw-wrap{display:flex;flex-wrap:wrap;gap:6px;}
@@ -285,6 +285,23 @@ html,body{width:100%;max-width:480px;margin:0 auto;font-family:'Inter',sans-seri
 /* KEY WORDS section */
 .sec-key{background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.25);}
 .sec-key .ai-section-header{background:rgba(201,168,76,0.15);color:#8b6914;}
+
+/* FONT SETTINGS PANEL */
+.font-panel{display:none;position:sticky;top:0;z-index:99;background:#fff;border-bottom:2px solid var(--parch-border);padding:16px;box-shadow:0 6px 20px rgba(0,0,0,0.15);animation:slideDown 0.2s ease;}
+.font-panel.open{display:block;}
+@keyframes slideDown{from{opacity:0;transform:translateY(-10px);}to{opacity:1;transform:translateY(0);}}
+.fp-section{margin-bottom:14px;}
+.fp-section:last-child{margin-bottom:0;}
+.fp-label{font-family:'Inter',sans-serif;font-size:12px;font-weight:700;color:#8b6914;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:8px;}
+.fp-fonts{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.fp-font-btn{background:#f4e4c1;border:2px solid var(--parch-border);border-radius:10px;padding:10px;font-size:16px;font-weight:600;color:#2c1a00;cursor:pointer;display:flex;flex-direction:column;align-items:flex-start;gap:2px;transition:all 0.15s;}
+.fp-font-btn span{font-family:'Inter',sans-serif;font-size:10px;font-weight:400;color:#8b6914;}
+.fp-font-btn.active{background:#8b1a00;color:#f4e4c1;border-color:#8b1a00;}
+.fp-font-btn.active span{color:rgba(244,228,193,0.8);}
+.fp-row{display:flex;gap:8px;}
+.fp-opt{flex:1;background:#f4e4c1;border:2px solid var(--parch-border);border-radius:10px;padding:10px;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;color:#2c1a00;cursor:pointer;transition:all 0.15s;}
+.fp-opt.active{background:#8b1a00;color:#f4e4c1;border-color:#8b1a00;}
+.fp-size-display{pointer-events:none;background:transparent;}
 </style>
 </head>
 <body>
@@ -401,7 +418,36 @@ html,body{width:100%;max-width:480px;margin:0 auto;font-family:'Inter',sans-seri
     <div class="detail-bar-inner">
       <div class="back-btn-parch" id="artBackBtn">←</div>
       <div class="detail-bar-title" id="detailBarTitle">Article</div>
+      <div class="icon-btn-parch" id="fontBtn" onclick="toggleFontPanel()" style="font-family:Georgia,serif;font-weight:700">Aa</div>
       <div class="icon-btn-parch" id="favBtn" onclick="toggleFav()">☆</div>
+    </div>
+  </div>
+  <!-- FONT SETTINGS PANEL -->
+  <div class="font-panel" id="fontPanel">
+    <div class="fp-section">
+      <div class="fp-label">📖 Reading Font</div>
+      <div class="fp-fonts">
+        <button class="fp-font-btn" data-font="lexend" onclick="setReadFont('lexend',this)" style="font-family:Lexend">Lexend<span>fast reading ✦</span></button>
+        <button class="fp-font-btn" data-font="atkinson" onclick="setReadFont('atkinson',this)" style="font-family:'Atkinson Hyperlegible'">Atkinson<span>max clarity ✦</span></button>
+        <button class="fp-font-btn" data-font="inter" onclick="setReadFont('inter',this)" style="font-family:Inter">Inter<span>clean screen</span></button>
+        <button class="fp-font-btn" data-font="serif" onclick="setReadFont('serif',this)" style="font-family:'Cormorant Garamond',serif">Garamond<span>classic</span></button>
+      </div>
+    </div>
+    <div class="fp-section">
+      <div class="fp-label">🅑 Weight</div>
+      <div class="fp-row">
+        <button class="fp-opt" onclick="setReadWeight('400',this)">Normal</button>
+        <button class="fp-opt" onclick="setReadWeight('500',this)">Medium</button>
+        <button class="fp-opt" onclick="setReadWeight('600',this)">Bold</button>
+      </div>
+    </div>
+    <div class="fp-section">
+      <div class="fp-label">🔠 Size</div>
+      <div class="fp-row">
+        <button class="fp-opt" onclick="setReadSize(-1)">A−</button>
+        <button class="fp-opt fp-size-display" id="sizeDisplay">18px</button>
+        <button class="fp-opt" onclick="setReadSize(1)">A+</button>
+      </div>
     </div>
   </div>
   <div class="detail-content" id="detailContent"></div>
@@ -1406,7 +1452,39 @@ document.addEventListener('click',(e)=>{
   if(o && i && !o.contains(e.target)&&e.target!==i) o.classList.remove('visible');
 });
 
+
+// ═══════════════ FONT / READING SETTINGS ═══════════════
+const FONT_MAP = {
+  lexend: "'Lexend', sans-serif",
+  atkinson: "'Atkinson Hyperlegible', sans-serif",
+  inter: "'Inter', sans-serif",
+  serif: "'Cormorant Garamond', serif"
+};
+let readSettings = JSON.parse(localStorage.getItem('samvidhan_read') || '{"font":"lexend","weight":"500","size":18}');
+
+function applyReadSettings() {
+  const root = document.documentElement;
+  root.style.setProperty('--read-font', FONT_MAP[readSettings.font] || FONT_MAP.lexend);
+  root.style.setProperty('--read-weight', readSettings.weight);
+  root.style.setProperty('--read-size', readSettings.size + 'px');
+  root.style.setProperty('--read-lh', readSettings.font==='serif' ? '1.85' : '1.65');
+  const sd = document.getElementById('sizeDisplay');
+  if(sd) sd.textContent = readSettings.size + 'px';
+  // update active states
+  document.querySelectorAll('.fp-font-btn').forEach(b=>b.classList.toggle('active', b.dataset.font===readSettings.font));
+  document.querySelectorAll('.fp-section').forEach(sec=>{
+    const lbl = sec.querySelector('.fp-label')?.textContent || '';
+    if(lbl.includes('Weight')) sec.querySelectorAll('.fp-opt').forEach(o=>o.classList.toggle('active', (o.textContent==='Normal'&&readSettings.weight==='400')||(o.textContent==='Medium'&&readSettings.weight==='500')||(o.textContent==='Bold'&&readSettings.weight==='600')));
+  });
+  localStorage.setItem('samvidhan_read', JSON.stringify(readSettings));
+}
+function toggleFontPanel(){ document.getElementById('fontPanel').classList.toggle('open'); applyReadSettings(); }
+function setReadFont(f, el){ readSettings.font=f; applyReadSettings(); }
+function setReadWeight(w, el){ readSettings.weight=w; applyReadSettings(); }
+function setReadSize(delta){ readSettings.size=Math.max(14,Math.min(28,readSettings.size+delta)); applyReadSettings(); }
+
 // Init
+applyReadSettings();
 renderParts();
 renderAOD();
 renderSchedules();
