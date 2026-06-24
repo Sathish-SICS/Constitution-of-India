@@ -251,6 +251,40 @@ html,body{width:100%;max-width:480px;margin:0 auto;font-family:'Inter',sans-seri
 ::-webkit-scrollbar{width:3px;}
 ::-webkit-scrollbar-track{background:transparent;}
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+
+/* PAGE TURN ANIMATION */
+.page-wrap{transform-origin:left center;}
+@keyframes pageTurnNext{
+  0%{transform:translateX(0) rotateY(0);opacity:1;}
+  35%{transform:translateX(-30px) rotateY(-8deg);opacity:0.5;}
+  50%{transform:translateX(30px) rotateY(6deg);opacity:0.3;}
+  100%{transform:translateX(0) rotateY(0);opacity:1;}
+}
+@keyframes pageTurnPrev{
+  0%{transform:translateX(0) rotateY(0);opacity:1;}
+  35%{transform:translateX(30px) rotateY(8deg);opacity:0.5;}
+  50%{transform:translateX(-30px) rotateY(-6deg);opacity:0.3;}
+  100%{transform:translateX(0) rotateY(0);opacity:1;}
+}
+.swipe-hint{text-align:center;padding:16px 0 30px;font-size:12px;color:rgba(139,105,20,0.6);font-style:italic;font-family:'Cormorant Garamond',serif;letter-spacing:0.5px;}
+.detail-content{perspective:1200px;}
+
+/* CLAUSE BLOCKS */
+.clauses-area{padding:20px 20px 8px;}
+.clause-block{margin-bottom:16px;padding-left:0;}
+.clause-block .clause-label{display:inline-block;background:#8b1a00;color:#f4e4c1;font-family:'Inter',sans-serif;font-size:12px;font-weight:700;padding:3px 10px;border-radius:6px;margin-bottom:6px;letter-spacing:0.3px;}
+.clause-block .clause-text{font-family:'Cormorant Garamond',serif;font-size:18px;line-height:1.7;color:var(--parch-text2);text-align:justify;}
+.clause-block.first-clause .clause-text::first-letter{float:left;font-size:50px;font-weight:700;line-height:0.85;margin:6px 8px 0 0;color:#8b1a00;}
+/* KEYWORD CHIPS */
+.kw-wrap{display:flex;flex-wrap:wrap;gap:6px;}
+.kw-chip{background:rgba(201,168,76,0.18);border:1px solid rgba(139,105,20,0.35);color:#6b4400;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;padding:5px 11px;border-radius:14px;}
+/* MNEMONIC */
+.sec-mnemonic{background:rgba(120,30,140,0.07);border:1px solid rgba(120,30,140,0.2);}
+.sec-mnemonic .ai-section-header{background:rgba(120,30,140,0.1);color:#6a1b8a;}
+.sec-mnemonic .ai-section-body p{color:#5a1570;font-size:18px;}
+/* KEY WORDS section */
+.sec-key{background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.25);}
+.sec-key .ai-section-header{background:rgba(201,168,76,0.15);color:#8b6914;}
 </style>
 </head>
 <body>
@@ -434,6 +468,331 @@ html,body{width:100%;max-width:480px;margin:0 auto;font-family:'Inter',sans-seri
 
 <script>
 // ═══════════════ COMPLETE PARTS DATA ═══════════════
+// ═══════════════ RICH ARTICLE DATA (clause-wise) ═══════════════
+// Structure: clauses[] = [{label, text}], keywords[], mnemonic, cases[], recent[]
+const ART_DATA = {
+  // ───────── PART II: CITIZENSHIP (5–11) ─────────
+  '5': {
+    clauses:[{label:'',text:'CITIZENSHIP AT THE COMMENCEMENT OF THE CONSTITUTION (26 Jan 1950): Every person who has his DOMICILE in India and (a) was BORN in India; or (b) either of whose PARENTS was born in India; or (c) who has been ordinarily RESIDENT in India for not less than FIVE years immediately before commencement — is a citizen of India.'}],
+    keywords:['Citizenship at commencement','Domicile + (born / parent born / 5-yr resident)','Single citizenship','Only at 26 Jan 1950'],
+    mnemonic:'Art 5 = "Start" → who was a citizen on Day 1 (26 Jan 1950). Test: Domicile + B/P/R (Born, Parent, Resident-5yr).',
+    cases:[{name:'State Trading Corp v CTO',year:'1963',held:'Only natural persons (not companies) can be citizens under Part II.'},{name:'Pradeep Jain v Union of India',year:'1984',held:'India has ONE domicile — domicile of the country, not of states; no separate state domicile.'}],
+    recent:[{title:'Constitution only covers 1950',desc:'Articles 5-11 only deal with citizenship AT commencement. ALL citizenship after 1950 is governed by the Citizenship Act, 1955 (see Article 11).'}]
+  },
+  '6': {
+    clauses:[{label:'',text:'RIGHTS OF CITIZENSHIP OF PERSONS MIGRATED FROM PAKISTAN TO INDIA: A person who migrated from Pakistan to India is a citizen if he or his parents/grandparents were born in undivided India (Govt of India Act 1935), AND — (b)(i) if migrated BEFORE 19 July 1948: ordinarily resident since migration; OR (b)(ii) if migrated ON/AFTER 19 July 1948: registered as citizen by an officer (must be resident for 6 months before registration).'}],
+    keywords:['Migrants FROM Pakistan TO India','Cut-off: 19 July 1948','Before 19/7/1948 = automatic','After = registration needed','Permit system date'],
+    mnemonic:'Art 6 = "6 came IN" (to India from Pak). KEY DATE: 19 July 1948 (permit system began).',
+    cases:[{name:'Kulathil Mammu v State of Kerala',year:'1966',held:'Interpreted "migration" under Arts 6 & 7 — must mean coming with intention to reside permanently.'}],
+    recent:[{title:'Why 19 July 1948',desc:'On 19 July 1948 the permit system for migration between India and Pakistan was introduced — hence the constitutional cut-off.'}]
+  },
+  '7': {
+    clauses:[{label:'',text:'RIGHTS OF CITIZENSHIP OF MIGRANTS TO PAKISTAN: A person who migrated FROM India TO Pakistan after 1 MARCH 1947 is NOT a citizen of India. PROVISO: But if such a person later RETURNED to India under a permit for resettlement/permanent return, he can become a citizen (treated as a migrant under Art 6(b)(ii)).'}],
+    keywords:['Migrants TO Pakistan','Cut-off: 1 March 1947','Not citizens','Returnees under permit = exception','Overrides Arts 5 & 6'],
+    mnemonic:'Art 7 = "7 went OUT" (to Pakistan). KEY DATE: 1 March 1947. But returnees can re-acquire.',
+    cases:[{name:'State of Bihar v Kumar Amar Singh',year:'1955',held:'Art 7 overrides Art 5 & 6; a migrant to Pakistan loses citizenship even if otherwise qualified, unless he returns under a permit.'}],
+    recent:[]
+  },
+  '8': {
+    clauses:[{label:'',text:'RIGHTS OF CITIZENSHIP OF PERSONS OF INDIAN ORIGIN RESIDING OUTSIDE INDIA: A person who, or whose parents/grandparents, were born in undivided India but is ordinarily residing in a FOREIGN country, shall be a citizen of India if REGISTERED as a citizen by the Indian diplomatic/consular representative in that country (PIO abroad).'}],
+    keywords:['PIO residing abroad','Born in undivided India','Registration by diplomatic mission','NRI/PIO citizenship route'],
+    mnemonic:'Art 8 = "8 abroad" → Indians living overseas register via embassy.',
+    cases:[],
+    recent:[{title:'OCI / PIO schemes',desc:'Modern Overseas Citizen of India (OCI) scheme (from 2005, merged with PIO in 2015) governs persons of Indian origin abroad under the Citizenship Act, not Art 8.'}]
+  },
+  '9': {
+    clauses:[{label:'',text:'PERSONS VOLUNTARILY ACQUIRING CITIZENSHIP OF A FOREIGN STATE NOT TO BE CITIZENS: No person shall be a citizen of India under Art 5, 6 or 8 if he has VOLUNTARILY acquired the citizenship of any foreign State. (India does NOT allow dual citizenship.)'}],
+    keywords:['No dual citizenship','Voluntary foreign citizenship = loss','Single citizenship principle','Decided by Govt, not courts'],
+    mnemonic:'Art 9 = "9 = Nine, say NO to dual citizenship."',
+    cases:[{name:'Izhar Ahmad Khan v Union of India',year:'1962',held:'Whether a person voluntarily acquired foreign citizenship is determined by the Central Government, not courts.'}],
+    recent:[{title:'No dual citizenship',desc:'India still prohibits dual citizenship. OCI is NOT dual citizenship — OCI cardholders cannot vote, hold constitutional office, or buy agricultural land.'}]
+  },
+  '10': {
+    clauses:[{label:'',text:'CONTINUANCE OF RIGHTS OF CITIZENSHIP: Every person who is or is deemed to be a citizen of India under the foregoing provisions shall CONTINUE to be a citizen, subject to any law made by Parliament.'}],
+    keywords:['Continuance of citizenship','Subject to Parliament law','Parliament can take away'],
+    mnemonic:'Art 10 = "continue" but Parliament has the final say.',
+    cases:[],
+    recent:[]
+  },
+  '11': {
+    clauses:[{label:'',text:'PARLIAMENT TO REGULATE CITIZENSHIP BY LAW: Nothing in the foregoing provisions shall derogate from the power of PARLIAMENT to make any provision with respect to ACQUISITION and TERMINATION of citizenship and all other matters relating to citizenship. → Parliament enacted the CITIZENSHIP ACT, 1955 under this power.'}],
+    keywords:['Parliament supreme on citizenship','Citizenship Act 1955','Acquisition & termination','Basis of CAA'],
+    mnemonic:'Art 11 = "11th hour, Parliament decides" → Citizenship Act 1955 + all amendments incl. CAA.',
+    cases:[],
+    recent:[{title:'CITIZENSHIP ACT 1955 — 5 ways to acquire',desc:'By Birth, Descent, Registration, Naturalisation, and Incorporation of territory.'},
+      {title:'Citizenship by BIRTH — critical dates',desc:'Born in India (a) before 1 July 1987: citizen by birth regardless of parents. (b) 1 July 1987 to 2 Dec 2004: citizen if AT LEAST ONE parent was Indian at birth. (c) On/after 3 Dec 2004: citizen only if BOTH parents are Indian, OR one parent is Indian AND the other is not an illegal migrant. [2003 Amendment, effective 3 Dec 2004.]'},
+      {title:'CAA 2019 (Citizenship Amendment Act)',desc:'Grants fast-track citizenship (by naturalisation) to Hindu, Sikh, Buddhist, Jain, Parsi & Christian migrants from Pakistan, Bangladesh & Afghanistan who entered India on or before 31 Dec 2014. Reduces naturalisation residence requirement from 11 to 5 years for them. RULES notified 11 March 2024. Excludes Muslims — basis of controversy & Art 14 challenge pending in SC.'},
+      {title:'Key amendment years',desc:'1986 (restricted birth citizenship), 1992 (citizenship by descent via mother too — gender equality), 2003 (introduced OCI, NRC concept, illegal migrant bar), 2005 (OCI scheme), 2015 (merged PIO into OCI), 2019 (CAA).'}]
+  },
+
+  // ───────── PART III: FUNDAMENTAL RIGHTS (12–35) ─────────
+  '12': {
+    clauses:[{label:'',text:'In this Part, unless the context otherwise requires, "the State" includes — (a) the Government and Parliament of India; (b) the Government and the Legislature of each State; (c) all local authorities (municipalities, panchayats, district boards); and (d) all other authorities within the territory of India or under the control of the Government of India.'}],
+    keywords:['Definition of State','Govt + Parliament','Local authorities','Other authorities','Test: deep & pervasive control'],
+    mnemonic:'GPLO — Government, Parliament, Local, Other authorities',
+    cases:[{name:'Rajasthan Electricity Board v Mohan Lal',year:'1967',held:'"Other authorities" includes all statutory bodies created by the Constitution or statute, having power to make rules/regulations.'},{name:'Ajay Hasia v Khalid Mujib',year:'1981',held:'Society registered under Societies Act = State if it is an instrumentality/agency of govt (deep & pervasive control test).'},{name:'Pradeep Kumar Biswas v IICB',year:'2002',held:'7-judge bench laid down tests for "State" — financial, functional, administrative control by govt.'}],
+    recent:[{title:'BCCI debate',desc:'Courts have held BCCI performs public functions and is amenable to writ jurisdiction even if not strictly "State".'}]
+  },
+  '13': {
+    clauses:[
+      {label:'13(1)',text:'All laws in force in the territory of India immediately before the commencement of this Constitution, in so far as they are inconsistent with the provisions of Part III, shall, to the extent of such inconsistency, be void. (Doctrine of Eclipse applies to pre-constitutional laws.)'},
+      {label:'13(2)',text:'The State shall not make any law which takes away or abridges the rights conferred by Part III, and any law made in contravention shall, to the extent of contravention, be void. (Doctrine of Severability.)'},
+      {label:'13(3)',text:'"Law" includes ordinance, order, bye-law, rule, regulation, notification, custom or usage having the force of law.'},
+      {label:'13(4)',text:'Nothing in this article shall apply to any amendment of this Constitution made under Article 368. (Added by 24th Amendment, 1971.)'}
+    ],
+    keywords:['Judicial Review','Doctrine of Eclipse','Doctrine of Severability','Law definition wide','13(4) added by 24th Amend'],
+    mnemonic:'13 = "thirteen reviews" → basis of Judicial Review',
+    cases:[{name:'Kesavananda Bharati v State of Kerala',year:'1973',held:'Constitutional amendments are subject to judicial review if they violate the Basic Structure. 13(4) does not give Parliament unlimited power.'},{name:'Golak Nath v State of Punjab',year:'1967',held:'Parliament cannot amend FRs — led to 24th Amendment inserting 13(4). Later modified by Kesavananda.'},{name:'Bhikaji Narain v State of MP',year:'1955',held:'Doctrine of Eclipse — a pre-constitutional law inconsistent with FR is not dead but eclipsed; revives if the FR is amended.'}],
+    recent:[{title:'Judicial review reaffirmed',desc:'Supreme Court continues to use Art 13 to strike down laws violating FRs (e.g. Sec 66A IT Act in Shreya Singhal 2015).'}]
+  },
+  '14': {
+    clauses:[{label:'',text:'The State shall not deny to any person — (i) equality before the law; or (ii) the equal protection of the laws — within the territory of India.'},
+      {label:'Note',text:'"Equality before law" (negative concept, from English Rule of Law/Dicey) = no one is above law. "Equal protection of laws" (positive concept, from 14th Amendment, US) = like should be treated alike. Permits REASONABLE CLASSIFICATION based on (a) intelligible differentia and (b) rational nexus to the object.'}],
+    keywords:['Equality before law (Dicey)','Equal protection (US 14th Amend)','Reasonable classification','Intelligible differentia','Rational nexus','Rule of Law','Available to PERSON (not just citizen)'],
+    mnemonic:'14 = "1 for all" → ID-RN test (Intelligible Differentia + Rational Nexus)',
+    cases:[{name:'E.P. Royappa v State of Tamil Nadu',year:'1974',held:'Equality is dynamic — introduced the "new doctrine": equality is antithetical to arbitrariness. Arbitrary action violates Art 14.'},{name:'Maneka Gandhi v Union of India',year:'1978',held:'Art 14 strikes at arbitrariness; 14, 19, 21 form a "golden triangle" and must be read together.'},{name:'Air India v Nargesh Meerza',year:'1981',held:'Rule terminating air hostess on first pregnancy held arbitrary and violative of Art 14.'}],
+    recent:[{title:'EWS reservation (2022)',desc:'Janhit Abhiyan v UOI (2022): SC upheld 103rd Amendment 10% EWS quota as not violating Art 14 / basic structure.'}]
+  },
+  '15': {
+    clauses:[
+      {label:'15(1)',text:'The State shall not discriminate against any citizen on grounds ONLY of religion, race, caste, sex, place of birth or any of them.'},
+      {label:'15(2)',text:'No citizen shall, on these grounds, be subject to any disability regarding access to shops, public restaurants, hotels, places of public entertainment; or use of wells, tanks, bathing ghats, roads, places of public resort maintained by State funds or dedicated to public use.'},
+      {label:'15(3)',text:'Nothing shall prevent the State from making any special provision for WOMEN and CHILDREN.'},
+      {label:'15(4)',text:'Special provision for advancement of socially & educationally backward classes (SEBCs), SCs and STs. (Added by 1st Amendment, 1951 — after Champakam Dorairajan.)'},
+      {label:'15(5)',text:'Special provision for SEBC/SC/ST admission to educational institutions including private (aided/unaided), except minority institutions. (93rd Amendment, 2005.)'},
+      {label:'15(6)',text:'Special provision (incl. up to 10% reservation) for Economically Weaker Sections (EWS). (103rd Amendment, 2019.)'}
+    ],
+    keywords:['Only RRCSP (Religion Race Caste Sex Place-of-birth)','Citizen only','15(3) women & children','15(4) SEBC/SC/ST – 1st Amend','15(5) private institutions – 93rd','15(6) EWS 10% – 103rd'],
+    mnemonic:'Grounds = "RRCSP" (Really Rich Cars Speed Past). Clauses 3-4-5-6 = Women→Backward→Private→EWS',
+    cases:[{name:'State of Madras v Champakam Dorairajan',year:'1951',held:'Caste-based reservation in colleges struck down → led to 1st Amendment adding 15(4).'},{name:'Indra Sawhney v Union of India',year:'1992',held:'Mandal case — though mainly on Art 16, clarified backward class identification & creamy layer.'},{name:'Ashoka Kumar Thakur v UOI',year:'2008',held:'Upheld 27% OBC quota in central educational institutions under 15(5); creamy layer to be excluded.'}],
+    recent:[{title:'EWS upheld (2022)',desc:'Janhit Abhiyan v UOI (2022): 3:2 verdict upheld 15(6) EWS reservation. Reservation on economic criteria alone is constitutionally valid.'}]
+  },
+  '16': {
+    clauses:[
+      {label:'16(1)',text:'Equality of opportunity for all citizens in matters of employment or appointment to any office under the State.'},
+      {label:'16(2)',text:'No citizen shall be discriminated against in respect of any State employment on grounds only of religion, race, caste, sex, descent, place of birth, residence or any of them.'},
+      {label:'16(3)',text:'Parliament may make a law prescribing residence requirement within a State/UT for certain employment.'},
+      {label:'16(4)',text:'State may make provision for reservation of appointments/posts in favour of any backward class not adequately represented in services.'},
+      {label:'16(4A)',text:'Reservation in PROMOTION with consequential seniority for SC/ST. (77th & 85th Amendments.)'},
+      {label:'16(4B)',text:'Unfilled reserved vacancies of a year carried forward; not counted against 50% ceiling of that year. (81st Amendment, 2000.)'},
+      {label:'16(5)',text:'Law may require office-holders of religious institutions to belong to that religion.'},
+      {label:'16(6)',text:'Reservation up to 10% for EWS in appointments. (103rd Amendment, 2019.)'}
+    ],
+    keywords:['Public employment equality','50% ceiling','16(4) reservation','16(4A) promotion + seniority – 77th/85th','16(4B) carry-forward – 81st','Creamy layer','16(6) EWS – 103rd'],
+    mnemonic:'16(4)=reservation, 4A=promotion, 4B=backlog. "4-4A-4B = Reserve-Promote-Backlog"',
+    cases:[{name:'Indra Sawhney v Union of India',year:'1992',held:'Mandal case (9-judge): 50% ceiling on reservations; creamy layer must be excluded from OBC; no reservation in promotions (later overridden by 77th Amend).'},{name:'M. Nagaraj v Union of India',year:'2006',held:'Upheld 16(4A)/(4B) promotion reservation subject to: backwardness, inadequate representation, administrative efficiency.'},{name:'Jarnail Singh v Lachhmi Narain Gupta',year:'2018',held:'Modified Nagaraj — State need not collect quantifiable data on backwardness of SC/ST for promotion; creamy layer applies to SC/ST in promotions.'}],
+    recent:[{title:'EWS in jobs (2019→)',desc:'16(6) provides 10% EWS reservation in govt jobs, upheld in Janhit Abhiyan (2022).'}]
+  },
+  '17': {
+    clauses:[{label:'',text:'"Untouchability" is ABOLISHED and its practice in any form is FORBIDDEN. The enforcement of any disability arising out of "Untouchability" shall be an offence punishable in accordance with law.'},
+      {label:'Note',text:'Absolute right — no exceptions. Available against private individuals too (horizontal application). Term "Untouchability" not defined in Constitution. Enforced by Protection of Civil Rights Act, 1955 and SC/ST (Prevention of Atrocities) Act, 1989.'}],
+    keywords:['Untouchability abolished','Absolute (no exceptions)','Against private persons too','Not defined in Constitution','PCR Act 1955','SC/ST Atrocities Act 1989'],
+    mnemonic:'17 = "1 humanity, 7 days" → no untouchability ever',
+    cases:[{name:'State of Karnataka v Appa Balu Ingale',year:'1993',held:'Art 17 strikes at the root of untouchability; can be enforced against private individuals.'},{name:'Devarajiah v B. Padmanna',year:'1958',held:'Term "untouchability" refers to social disabilities historically imposed on certain castes, not its literal/dictionary meaning.'}],
+    recent:[{title:'Sabarimala (2018)',desc:'Indian Young Lawyers Assn v State of Kerala — Justice Chandrachud linked exclusion to notions of "purity/pollution" akin to untouchability under Art 17.'}]
+  },
+  '18': {
+    clauses:[
+      {label:'18(1)',text:'No title, not being a military or academic distinction, shall be conferred by the State.'},
+      {label:'18(2)',text:'No citizen of India shall accept any title from any foreign State.'},
+      {label:'18(3)',text:'A non-citizen holding office of profit/trust under the State shall not accept any title from a foreign State without consent of the President.'},
+      {label:'18(4)',text:'No person holding office of profit/trust under the State shall, without President\'s consent, accept any present, emolument, or office from/under any foreign State.'}
+    ],
+    keywords:['Abolition of titles','Military & academic OK','No foreign titles','Bharat Ratna/Padma NOT titles','Cannot be used as suffix/prefix'],
+    mnemonic:'18 = "18+ no titles" except military & academic',
+    cases:[{name:'Balaji Raghavan v Union of India',year:'1996',held:'National Awards (Bharat Ratna, Padma Vibhushan, etc.) do NOT violate Art 18 as they are not "titles"; but they should not be used as prefix/suffix to names.'}],
+    recent:[]
+  },
+  '19': {
+    clauses:[
+      {label:'19(1)(a)',text:'Right to freedom of SPEECH and EXPRESSION. (Includes press freedom, right to information, right to silence, right to fly national flag, commercial speech.)'},
+      {label:'19(1)(b)',text:'Right to ASSEMBLE peaceably and without arms.'},
+      {label:'19(1)(c)',text:'Right to form ASSOCIATIONS or unions or co-operative societies. (Co-op added by 97th Amendment, 2011.)'},
+      {label:'19(1)(d)',text:'Right to MOVE freely throughout the territory of India.'},
+      {label:'19(1)(e)',text:'Right to RESIDE and settle in any part of the territory of India.'},
+      {label:'19(1)(g)',text:'Right to practise any PROFESSION, or carry on any occupation, trade or business. [Note: clause (f) — right to property — was REPEALED by 44th Amendment, 1978.]'},
+      {label:'19(2)',text:'Reasonable restrictions on 19(1)(a): sovereignty & integrity of India, security of State, friendly relations with foreign States, public order, decency or morality, contempt of court, defamation, incitement to an offence.'},
+      {label:'19(3)-(4)',text:'Restrictions on assembly & associations: sovereignty/integrity, public order, morality.'},
+      {label:'19(5)',text:'Restrictions on movement & residence: interests of general public, protection of Scheduled Tribes.'},
+      {label:'19(6)',text:'Restrictions on profession: interests of general public; State can prescribe professional/technical qualifications or carry on any trade itself (State monopoly).'}
+    ],
+    keywords:['SIX freedoms (was 7)','19(1)(a) Speech','19(1)(b) Assembly','19(1)(c) Association','19(1)(d) Movement','19(1)(e) Residence','19(1)(g) Profession','Property (f) REPEALED – 44th Amend','Reasonable restrictions','Available to CITIZENS only'],
+    mnemonic:'"SAAMRP" — Speech, Assembly, Association, Movement, Residence, Profession (6 freedoms). Lost: Property (44th).',
+    cases:[{name:'Romesh Thappar v State of Madras',year:'1950',held:'Freedom of press is implicit in 19(1)(a). "Public order" was added to 19(2) by 1st Amendment after this case.'},{name:'Shreya Singhal v Union of India',year:'2015',held:'Struck down Sec 66A of IT Act as violating 19(1)(a); distinguished discussion/advocacy from incitement.'},{name:'Bennett Coleman v Union of India',year:'1973',held:'Newsprint control policy violated freedom of press under 19(1)(a).'},{name:'Maneka Gandhi v UOI',year:'1978',held:'Right to travel abroad part of personal liberty; 19 & 21 interlinked.'}],
+    recent:[{title:'Internet access (2020)',desc:'Anuradha Bhasin v UOI (2020): Access to internet for trade/expression is protected under 19(1)(a) & 19(1)(g); indefinite suspension impermissible.'},{title:'Free speech of ministers (2023)',desc:'Kaushal Kishor case (2023): No additional restrictions on free speech beyond 19(2) can be imposed.'}]
+  },
+  '20': {
+    clauses:[
+      {label:'20(1)',text:'No EX-POST-FACTO law — no person convicted except for violation of a law in force at the time of the act; no penalty greater than that prescribed then.'},
+      {label:'20(2)',text:'No DOUBLE JEOPARDY — no person prosecuted and punished for the same offence more than once.'},
+      {label:'20(3)',text:'No SELF-INCRIMINATION — no person accused of an offence shall be compelled to be a witness against himself.'}
+    ],
+    keywords:['Protection re conviction','Ex-post-facto (20(1))','Double jeopardy (20(2))','Self-incrimination (20(3))','Available even during Emergency (non-suspendable)','Available to citizens & non-citizens'],
+    mnemonic:'"EDS" — Ex-post-facto, Double jeopardy, Self-incrimination. Article 20+21 CANNOT be suspended in Emergency (44th Amend).',
+    cases:[{name:'Maneka Gandhi v Union of India',year:'1978',held:'Reinforced procedural protections for the accused.'},{name:'Selvi v State of Karnataka',year:'2010',held:'Narco-analysis, polygraph, brain-mapping without consent violate Art 20(3) self-incrimination.'},{name:'State of Bombay v Kathi Kalu Oghad',year:'1961',held:'Giving fingerprints/specimen handwriting is NOT testimonial compulsion — does not violate 20(3).'}],
+    recent:[{title:'Digital evidence',desc:'Courts continue to apply 20(3) to compelled disclosure of passwords/biometrics — area of evolving law.'}]
+  },
+  '21': {
+    clauses:[{label:'',text:'No person shall be deprived of his LIFE or PERSONAL LIBERTY except according to PROCEDURE ESTABLISHED BY LAW.'},
+      {label:'Expanded meaning',text:'Post-Maneka Gandhi (1978), "procedure established by law" must be fair, just and reasonable (American "due process" read in). Art 21 now includes: right to live with dignity, livelihood, privacy, health, clean environment, speedy trial, legal aid, shelter, education, sleep, against handcuffing, against solitary confinement.'}],
+    keywords:['Life & personal liberty','Procedure established by law','Due process read-in (Maneka)','Privacy (Puttaswamy 2017)','Right to die with dignity','Available to PERSON (citizen + non-citizen)','Heart of FR','Non-suspendable in Emergency (44th)'],
+    mnemonic:'21 = "key to life" → umbrella right. Maneka = Procedure must be Fair-Just-Reasonable.',
+    cases:[{name:'A.K. Gopalan v State of Madras',year:'1950',held:'Initially narrow view — 19 & 21 are mutually exclusive (later overruled).'},{name:'Maneka Gandhi v Union of India',year:'1978',held:'Landmark — procedure must be fair, just, reasonable; 14-19-21 golden triangle; expanded scope of Art 21.'},{name:'K.S. Puttaswamy v Union of India',year:'2017',held:'9-judge bench — Right to Privacy is a fundamental right under Art 21.'},{name:'Common Cause v UOI',year:'2018',held:'Right to die with dignity & passive euthanasia (living will) recognised under Art 21.'}],
+    recent:[{title:'Right against climate change (2024)',desc:'M.K. Ranjitsinh v UOI (2024): SC recognised right to be free from adverse effects of climate change under Art 21 & 14.'},{title:'Privacy & Aadhaar (2018)',desc:'Aadhaar upheld but struck down mandatory linking for bank/mobile, applying Puttaswamy proportionality test.'}]
+  },
+  '21A': {
+    clauses:[{label:'',text:'The State shall provide FREE and COMPULSORY EDUCATION to all children of the age of SIX to FOURTEEN years in such manner as the State may, by law, determine. (Inserted by 86th Amendment, 2002.)'}],
+    keywords:['Right to Education','6 to 14 years','Free & compulsory','86th Amendment 2002','RTE Act 2009','Linked to DPSP Art 45 & Duty 51A(k)'],
+    mnemonic:'21A = "21 + Apple for school" → RTE 6-14. 86th Amendment trio: 21A + 45 amended + 51A(k).',
+    cases:[{name:'Unni Krishnan v State of AP',year:'1993',held:'Right to education up to 14 years is part of Art 21 — basis for later 86th Amendment.'},{name:'Society for Unaided Private Schools v UOI',year:'2012',held:'Upheld RTE Act 25% EWS reservation in private unaided schools (except minority).'}],
+    recent:[{title:'RTE amendments',desc:'No-detention policy under RTE Act was amended in 2019 allowing states to hold back students in classes 5 and 8.'}]
+  },
+  '22': {
+    clauses:[
+      {label:'22(1)',text:'Person arrested shall be informed of grounds of arrest; right to consult and be defended by a legal practitioner of choice.'},
+      {label:'22(2)',text:'Arrested person must be produced before nearest magistrate within 24 HOURS (excluding journey time); no detention beyond without magistrate\'s authority.'},
+      {label:'22(3)',text:'Clauses (1) & (2) do NOT apply to: (a) enemy aliens; (b) persons detained under PREVENTIVE DETENTION law.'},
+      {label:'22(4)',text:'Preventive detention beyond 3 months requires Advisory Board approval (now bodies as per 44th Amendment).'},
+      {label:'22(5)',text:'Detenu to be informed of grounds and given earliest opportunity to make representation.'},
+      {label:'22(7)',text:'Parliament may prescribe circumstances/maximum period of preventive detention.'}
+    ],
+    keywords:['Protection against arrest','24 hours rule','Right to legal counsel','Preventive detention','Advisory Board','Enemy aliens excluded','NSA, COFEPOSA, PSA'],
+    mnemonic:'22 = "two-two=24 hours". Punitive (after offence) vs Preventive (before offence) detention.',
+    cases:[{name:'A.K. Gopalan v State of Madras',year:'1950',held:'Upheld Preventive Detention Act, 1950 — early restrictive view of personal liberty.'},{name:'D.K. Basu v State of West Bengal',year:'1997',held:'Laid down detailed guidelines for arrest & detention to prevent custodial violence.'}],
+    recent:[{title:'Preventive detention scrutiny',desc:'SC (2022-23) repeatedly cautioned that preventive detention is an exceptional power; many state detention orders quashed for non-application of mind.'}]
+  },
+  '23': {
+    clauses:[
+      {label:'23(1)',text:'Traffic in human beings, begar (forced labour without payment), and other similar forms of FORCED LABOUR are prohibited; contravention is an offence punishable by law.'},
+      {label:'23(2)',text:'State may impose compulsory service for public purposes (e.g. military/social service); in doing so it shall not discriminate only on grounds of religion, race, caste or class.'}
+    ],
+    keywords:['Traffic in human beings','Begar / forced labour','Bonded labour','Available against private persons','Below minimum wage = forced labour','Compulsory public service allowed'],
+    mnemonic:'23 = "no trafficking, no begar". Enforced by Bonded Labour Act 1976, Immoral Traffic Act 1956.',
+    cases:[{name:'People\'s Union for Democratic Rights v UOI',year:'1982',held:'(Asiad case) Payment below minimum wage amounts to "forced labour" under Art 23; enforceable against private contractors.'},{name:'Bandhua Mukti Morcha v UOI',year:'1984',held:'Directions for identification and rehabilitation of bonded labourers; Art 23 read with Art 21.'}],
+    recent:[{title:'Anti-trafficking',desc:'Trafficking of Persons (Prevention, Protection and Rehabilitation) Bill efforts continue to strengthen Art 23 enforcement.'}]
+  },
+  '24': {
+    clauses:[{label:'',text:'No CHILD below the age of FOURTEEN years shall be employed to work in any FACTORY or MINE or engaged in any other HAZARDOUS employment.'},
+      {label:'Note',text:'Does not prohibit employment in non-hazardous/harmless work. Reinforced by Child Labour (Prohibition & Regulation) Act 1986, amended 2016 (bans employment below 14 in all occupations; 14-18 barred from hazardous work).'}],
+    keywords:['Child labour prohibited','Below 14 years','Factory / mine / hazardous','Non-hazardous allowed','Child Labour Act 1986/2016'],
+    mnemonic:'24 = "before 14, no factory". 24 & 21A both use age 14.',
+    cases:[{name:'M.C. Mehta v State of Tamil Nadu',year:'1996',held:'(Sivakasi case) Directions on child labour — set up Child Labour Rehabilitation Welfare Fund; employer to pay Rs 20,000 per child.'},{name:'People\'s Union for Democratic Rights v UOI',year:'1982',held:'Construction work is hazardous; children below 14 cannot be employed even if not listed.'}],
+    recent:[{title:'2016 Amendment',desc:'Child Labour Act amended in 2016 — complete prohibition below 14, "adolescent" (14-18) category barred from hazardous occupations.'}]
+  },
+  '25': {
+    clauses:[
+      {label:'25(1)',text:'All persons are equally entitled to FREEDOM OF CONSCIENCE and the right to freely PROFESS, PRACTISE and PROPAGATE religion — subject to public order, morality, health and other FR provisions.'},
+      {label:'25(2)',text:'State may make law: (a) regulating secular activity associated with religious practice; (b) providing for social welfare & reform, or throwing open Hindu religious institutions of a public character to all classes of Hindus.'},
+      {label:'Explanation',text:'Wearing & carrying of kirpans is part of profession of Sikh religion. "Hindu" includes Sikh, Jain, Buddhist for this purpose.'}
+    ],
+    keywords:['Freedom of religion','Profess Practise Propagate (3 Ps)','Conscience','Subject to public order/morality/health','State can regulate secular activity','Essential Religious Practices test'],
+    mnemonic:'25 = "3 Ps" — Profess, Practise, Propagate (NOT convert by force).',
+    cases:[{name:'Commissioner HRE v Lakshmindra (Shirur Mutt)',year:'1954',held:'Laid down "Essential Religious Practices" (ERP) doctrine — only essential practices are protected.'},{name:'Rev. Stainislaus v State of MP',year:'1977',held:'Right to "propagate" does NOT include right to convert; forcible conversion not protected.'},{name:'Indian Young Lawyers Assn v State of Kerala (Sabarimala)',year:'2018',held:'Banning women 10-50 yrs from Sabarimala violated Art 25; ERP test applied.'}],
+    recent:[{title:'Hijab case (2022)',desc:'Karnataka HC upheld hijab ban in schools applying ERP test; Supreme Court split verdict (2022), referred to larger bench.'}]
+  },
+  '26': {
+    clauses:[{label:'',text:'Subject to public order, morality and health, every religious denomination or section shall have the right to — (a) establish and maintain institutions for religious & charitable purposes; (b) manage its own affairs in matters of religion; (c) own and acquire movable & immovable property; (d) administer such property in accordance with law.'}],
+    keywords:['Religious denomination rights','Manage own affairs','Own & administer property','Collective right (vs 25 individual)','Subject to public order/morality/health'],
+    mnemonic:'25 = individual religion; 26 = group/denomination religion.',
+    cases:[{name:'S.P. Mittal v Union of India',year:'1983',held:'Laid down tests for "religious denomination": common faith, common organisation, distinctive name.'},{name:'Shirur Mutt case',year:'1954',held:'Distinguished matters of religion (protected) from secular administration (regulable).'}],
+    recent:[{title:'Temple management',desc:'Ongoing debates on State control of temple administration vs Art 26(d) rights of denominations.'}]
+  },
+  '27': {
+    clauses:[{label:'',text:'No person shall be COMPELLED to pay any TAX, the proceeds of which are specifically appropriated for the promotion or maintenance of any particular religion or religious denomination.'},
+      {label:'Note',text:'Bars taxes (compulsory), but NOT fees (for specific services). State can spend on all religions equally; bar is on funding ONE particular religion.'}],
+    keywords:['No tax for religion','Tax vs Fee distinction','Secular state','Promotes no particular religion'],
+    mnemonic:'27 = "no tax for a temple/church/mosque specifically".',
+    cases:[{name:'Commissioner HRE v Lakshmindra (Shirur Mutt)',year:'1954',held:'A "fee" for regulating secular administration of religious institutions is valid; only a "tax" for promoting religion is barred.'}],
+    recent:[]
+  },
+  '28': {
+    clauses:[
+      {label:'28(1)',text:'No religious instruction shall be provided in any educational institution WHOLLY maintained out of State funds.'},
+      {label:'28(2)',text:'Clause (1) does not apply to an institution administered by the State but established under an endowment/trust requiring religious instruction.'},
+      {label:'28(3)',text:'No person attending a State-recognised or State-aided institution shall be REQUIRED to take part in religious instruction/worship without their (or guardian\'s) consent.'}
+    ],
+    keywords:['Religious instruction in institutions','Wholly State-funded: none','State-aided: with consent','Endowment exception'],
+    mnemonic:'28 = "education + religion rules". Wholly funded→NO; Aided→consent; Endowment→allowed.',
+    cases:[{name:'Aruna Roy v Union of India',year:'2002',held:'Study of religions (value education) is not "religious instruction"; permissible.'},{name:'D.A.V. College v State of Punjab',year:'1971',held:'Compulsory study of Guru Nanak\'s teachings academically is not religious instruction under Art 28.'}],
+    recent:[]
+  },
+  '29': {
+    clauses:[
+      {label:'29(1)',text:'Any section of citizens having a distinct LANGUAGE, SCRIPT or CULTURE shall have the right to CONSERVE the same.'},
+      {label:'29(2)',text:'No citizen shall be denied admission into any State-maintained or State-aided educational institution on grounds only of religion, race, caste, language or any of them.'}
+    ],
+    keywords:['Protection of minorities','Conserve language/script/culture','Cultural & educational rights','29(1) all citizens','29(2) no admission denial','Applies to majority too'],
+    mnemonic:'29 = "conserve culture". 29(1) = group right; 29(2) = individual admission right.',
+    cases:[{name:'State of Madras v Champakam Dorairajan',year:'1951',held:'Caste-based admission quotas violated Art 29(2) → led to 1st Amendment & Art 15(4).'},{name:'D.A.V. College v State of Punjab',year:'1971',held:'29(1) right to conserve language is not absolute but a real right of minorities.'},{name:'TMA Pai Foundation v State of Karnataka',year:'2002',held:'Clarified minority rights under 29 & 30; "minority" determined State-wise.'}],
+    recent:[]
+  },
+  '30': {
+    clauses:[
+      {label:'30(1)',text:'All MINORITIES, whether based on religion or language, shall have the right to ESTABLISH and ADMINISTER educational institutions of their choice.'},
+      {label:'30(1A)',text:'In acquiring property of a minority educational institution, the State shall ensure the compensation does not restrict/abrogate this right. (44th Amendment.)'},
+      {label:'30(2)',text:'The State shall not, in granting aid, discriminate against any educational institution on the ground that it is under management of a minority.'}
+    ],
+    keywords:['Minority educational rights','Establish + Administer','Religious OR linguistic minority','No discrimination in aid','Only minorities (not majority)','TMA Pai tests'],
+    mnemonic:'30 = "minority schools". 29 protects all; 30 protects ONLY minorities (establish + administer).',
+    cases:[{name:'TMA Pai Foundation v State of Karnataka',year:'2002',held:'11-judge bench — minority status determined State-wise; reasonable regulation of minority institutions allowed; right not absolute.'},{name:'P.A. Inamdar v State of Maharashtra',year:'2005',held:'State cannot impose reservation in unaided minority/private institutions; admissions must be fair & transparent.'},{name:'St. Stephen\'s College v University of Delhi',year:'1992',held:'Minority institutions can have preferential admission for their community (up to ~50%).'}],
+    recent:[{title:'AMU minority status (2024)',desc:'Aligarh Muslim University case (2024): 7-judge bench overruled Azeez Basha (1967); held an institution does not lose minority status merely by being created via statute — referred to regular bench to decide AMU\'s status.'}]
+  },
+  '31A': {
+    clauses:[{label:'',text:'Saving of laws providing for ACQUISITION OF ESTATES, etc. — laws for agrarian reform/acquisition of estates are protected from challenge under Art 14 & 19. (Added by 1st Amendment, 1951.)'}],
+    keywords:['Saving of land reform laws','Protected from Art 14 & 19','Agrarian reform','1st Amendment'],
+    mnemonic:'31A = "Acquisition of estates protected".',
+    cases:[{name:'Kesavananda Bharati v State of Kerala',year:'1973',held:'Upheld validity of 31A but subject to basic structure doctrine.'}],
+    recent:[]
+  },
+  '31B': {
+    clauses:[{label:'',text:'Validation of certain Acts & Regulations placed in the NINTH SCHEDULE — they cannot be challenged for violating FRs. (Added by 1st Amendment, 1951.)'}],
+    keywords:['Ninth Schedule','Immunity from FR challenge','1st Amendment','284 Acts','I.R. Coelho limit'],
+    mnemonic:'31B = "Box (9th Schedule) of protected laws".',
+    cases:[{name:'I.R. Coelho v State of Tamil Nadu',year:'2007',held:'Laws placed in 9th Schedule AFTER 24 April 1973 (Kesavananda date) CAN be challenged if they violate basic structure.'},{name:'Waman Rao v Union of India',year:'1981',held:'Established the 1973 cut-off date for 9th Schedule immunity.'}],
+    recent:[]
+  },
+  '31C': {
+    clauses:[{label:'',text:'Saving of laws giving effect to certain DIRECTIVE PRINCIPLES (Art 39(b) & 39(c)) — such laws cannot be challenged under Art 14 & 19. (Added by 25th Amendment, 1971.)'}],
+    keywords:['DPSP over FR','Art 39(b) & 39(c)','25th Amendment','42nd tried to extend (struck down)'],
+    mnemonic:'31C = "C for DPSP-Centric laws protected".',
+    cases:[{name:'Kesavananda Bharati v UOI',year:'1973',held:'Upheld 1st part of 31C but struck down the clause barring judicial review.'},{name:'Minerva Mills v UOI',year:'1980',held:'Struck down 42nd Amendment\'s extension of 31C to ALL DPSPs; restored balance between FR and DPSP.'}],
+    recent:[]
+  },
+  '32': {
+    clauses:[
+      {label:'32(1)',text:'The right to move the Supreme Court by appropriate proceedings for ENFORCEMENT of Part III rights is GUARANTEED.'},
+      {label:'32(2)',text:'SC has power to issue directions, orders or WRITS — habeas corpus, mandamus, prohibition, quo warranto, certiorari — for enforcement of FRs.'},
+      {label:'32(3)',text:'Parliament may empower other courts to exercise these powers (without prejudice to SC).'},
+      {label:'32(4)',text:'This right shall NOT be suspended except as otherwise provided by the Constitution (i.e. during Emergency under Art 359).'}
+    ],
+    keywords:['Right to Constitutional Remedies','5 Writs','Itself a Fundamental Right','Heart & soul (Ambedkar)','SC writ jurisdiction','Suspendable only in Emergency (Art 359)'],
+    mnemonic:'5 Writs = "HC-MP-Q" → Habeas Corpus, Certiorari, Mandamus, Prohibition, Quo-warranto.',
+    cases:[{name:'Romesh Thappar v State of Madras',year:'1950',held:'A person can approach SC directly under Art 32 without going to HC first.'},{name:'Bandhua Mukti Morcha v UOI',year:'1984',held:'Expanded PIL & scope of Art 32 for enforcement of rights of the disadvantaged.'},{name:'ADM Jabalpur v Shivkant Shukla',year:'1976',held:'(Habeas Corpus case) Controversially held Art 32 could be suspended in Emergency — OVERRULED in Puttaswamy 2017.'}],
+    recent:[{title:'Art 32 importance reaffirmed',desc:'SC (2020) noted it is reluctant to discourage Art 32 petitions as it is a fundamental right itself; balance with Art 226 (HC).'}]
+  },
+  '33': {
+    clauses:[{label:'',text:'Parliament may by law RESTRICT or ABROGATE the application of Fundamental Rights to: members of Armed Forces, Forces charged with maintenance of public order, intelligence/counter-intelligence personnel, and telecommunication systems for these forces — to ensure proper discharge of duties & discipline.'}],
+    keywords:['Modification of FR for armed forces','Only Parliament','Discipline & duty','Army Act, Navy Act, etc.'],
+    mnemonic:'33 = "armed forces get fewer FRs for discipline".',
+    cases:[{name:'Ous Kutilingal Achudan Nair v UOI',year:'1976',held:'Civilian employees of armed forces (e.g. cooks, barbers) can also fall within Art 33 if they are members of the armed forces.'}],
+    recent:[]
+  },
+  '34': {
+    clauses:[{label:'',text:'Restriction on rights while MARTIAL LAW is in force — Parliament may by law indemnify any person in service of Union/State for acts done in connection with maintenance/restoration of order in any area where martial law was in force.'}],
+    keywords:['Martial law','Indemnity to officials','Not defined in Constitution','Different from National Emergency'],
+    mnemonic:'34 = "Martial law indemnity". Martial law ≠ Emergency (Art 352).',
+    cases:[{name:'Indemnity principle',year:'—',held:'Martial law is not expressly defined; based on English common law — military rule replacing ordinary law during breakdown of order.'}],
+    recent:[]
+  },
+  '35': {
+    clauses:[{label:'',text:'Legislation to give effect to certain Fundamental Rights — only PARLIAMENT (not State Legislatures) has power to make laws for: prescribing residence for employment (16(3)), restricting FR for forces (33), indemnity for martial law (34), and prescribing punishment for acts declared offences under Part III (e.g. untouchability under 17, traffic under 23).'}],
+    keywords:['Power to legislate for FR','Only Parliament','Uniformity across India','Covers 16(3), 32(3), 33, 34'],
+    mnemonic:'35 = "only Parliament makes FR-enforcing laws".',
+    cases:[],
+    recent:[]
+  }
+};
+
 const PARTS = [
   {id:'pI',num:'I',name:'The Union and Its Territory',articles:[
     {n:'1',t:'Name and territory of the Union'},{n:'2',t:'Admission or establishment of new States'},{n:'3',t:'Formation of new States and alteration of areas, boundaries or names'},{n:'4',t:'Laws made under Articles 2 and 3'}
@@ -539,21 +898,20 @@ async function fetchAIContent(articleNum, articleTitle, partName) {
   const cacheKey = `art_${articleNum}`;
   if(aiCache[cacheKey]) return aiCache[cacheKey];
   
-  const prompt = `You are an expert on the Indian Constitution, writing for TNPSC Group I Mains exam preparation. For Article ${articleNum} (${articleTitle}) from ${partName} of the Indian Constitution, provide EXACTLY this JSON structure (no markdown, no extra text):
+  const prompt = `You are an expert on the Indian Constitution. For Article ${articleNum} (${articleTitle}) of the Indian Constitution, provide the REAL, ACTUAL constitutional text and details. Return EXACTLY this JSON structure (no markdown, no extra text):
 {
+  "text": "The ACTUAL VERBATIM bare text of Article ${articleNum} as it appears in the Constitution of India. Use the real legal language. Include all clauses and sub-clauses. If the article is long, include the full text. Do NOT paraphrase or summarize — give the real article text. If amended or repealed, note that.",
   "fact": "One most important exam-relevant fact about this article in 2 sentences",
   "cases": [
-    {"name": "Case name v State/Party", "year": "YYYY", "held": "What was held/decided relevant to this article"},
-    {"name": "Case name v Party", "year": "YYYY", "held": "Brief holding"},
-    {"name": "Case name v Party", "year": "YYYY", "held": "Brief holding"}
+    {"name": "Real case name v State/Party", "year": "YYYY", "held": "What was actually held in this real case relevant to this article"},
+    {"name": "Real case name v Party", "year": "YYYY", "held": "Brief real holding"}
   ],
   "recent": [
-    {"title": "Recent development title", "desc": "Brief description of recent development, new law, or state-level action since 2020"},
-    {"title": "Another recent development", "desc": "Brief description"}
+    {"title": "Real recent development title", "desc": "Brief description of a real recent development, new law, amendment, or state-level action since 2019"}
   ],
-  "interpretation": "How courts have interpreted this article in 2-3 sentences — scope, evolution, current position"
+  "interpretation": "How courts have actually interpreted this article — scope, evolution, current legal position in 2-3 sentences"
 }
-Provide 2-3 landmark cases and 2 recent developments. Keep each item concise for mobile reading. Return only valid JSON.`;
+CRITICAL: The "text" field MUST contain the real verbatim text of the article, not a generic description. Provide 2-3 real landmark cases (only if they genuinely exist for this article) and 1-2 real recent developments. Return only valid JSON.`;
 
   try {
     const response = await fetch('https://api.anthropic.com/v1/messages', {
@@ -561,7 +919,7 @@ Provide 2-3 landmark cases and 2 recent developments. Keep each item concise for
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
         model: 'claude-sonnet-4-6',
-        max_tokens: 1000,
+        max_tokens: 2000,
         messages: [{role: 'user', content: prompt}]
       })
     });
@@ -720,28 +1078,29 @@ function renderArticleList(partId) {
 
   if(currentView === 'quick') {
     document.getElementById('articlesContent').innerHTML = arts.map(a => {
+      const rich = ART_DATA[a.n];
       const q = QUICK_DATA[a.n];
       const isImp = impList.includes(a.n);
-      if(q) {
-        return `<div class="quick-card" onclick="openArticle({n:'${a.n}',t:'${a.t.replace(/'/g,"\'")}',part:'Part ${part.num} – ${part.name}'}, 'articles-view')">
-          <div class="quick-card-header">
-            <div class="quick-badge">${a.n}</div>
-            <div class="quick-title">${a.t}${isImp?'<span class="imp-star">★</span>':''}</div>
-          </div>
-          <div class="quick-tags">
-            ${q.amend.map(am=>`<span class="qtag qtag-amend">${am}</span>`).join('')}
-            ${q.cases.slice(0,2).map(c=>`<span class="qtag qtag-case">⚖ ${c.split(' v ')[0]}</span>`).join('')}
-            ${q.keys.slice(0,3).map(k=>`<span class="qtag qtag-key">${k}</span>`).join('')}
-          </div>
+      const onclick = `openArticle({n:'${a.n}',t:'${a.t.replace(/'/g,"\\'")}',part:'Part ${part.num} – ${part.name}'}, 'articles-view')`;
+      // Prefer rich hardcoded data
+      if(rich) {
+        const cases = (rich.cases||[]).slice(0,2).map(c=>`<span class="qtag qtag-case">⚖ ${c.name.split(' v ')[0]}</span>`).join('');
+        const keys = (rich.keywords||[]).slice(0,4).map(k=>`<span class="qtag qtag-key">${k}</span>`).join('');
+        const mn = rich.mnemonic ? `<div class="quick-keywords">🧠 ${rich.mnemonic}</div>` : '';
+        return `<div class="quick-card" onclick="${onclick}">
+          <div class="quick-card-header"><div class="quick-badge">${a.n}</div><div class="quick-title">${a.t}${isImp?'<span class="imp-star">★</span>':''}</div></div>
+          <div class="quick-tags">${cases}${keys}</div>${mn}
+        </div>`;
+      } else if(q) {
+        return `<div class="quick-card" onclick="${onclick}">
+          <div class="quick-card-header"><div class="quick-badge">${a.n}</div><div class="quick-title">${a.t}${isImp?'<span class="imp-star">★</span>':''}</div></div>
+          <div class="quick-tags">${q.amend.map(am=>`<span class="qtag qtag-amend">${am}</span>`).join('')}${q.cases.slice(0,2).map(c=>`<span class="qtag qtag-case">⚖ ${c.split(' v ')[0]}</span>`).join('')}${q.keys.slice(0,3).map(k=>`<span class="qtag qtag-key">${k}</span>`).join('')}</div>
           <div class="quick-keywords">💡 ${q.imp}</div>
         </div>`;
       } else {
-        return `<div class="quick-card" onclick="openArticle({n:'${a.n}',t:'${a.t.replace(/'/g,"\'")}',part:'Part ${part.num} – ${part.name}'}, 'articles-view')">
-          <div class="quick-card-header">
-            <div class="quick-badge">${a.n}</div>
-            <div class="quick-title">${a.t}${isImp?'<span class="imp-star">★</span>':''}</div>
-          </div>
-          <div class="quick-keywords">Tap to read full article with AI-generated cases and developments →</div>
+        return `<div class="quick-card" onclick="${onclick}">
+          <div class="quick-card-header"><div class="quick-badge">${a.n}</div><div class="quick-title">${a.t}${isImp?'<span class="imp-star">★</span>':''}</div></div>
+          <div class="quick-keywords">⚡ Tap to load — AI generates clauses, cases & developments live →</div>
         </div>`;
       }
     }).join('') || `<div class="empty-state"><div class="empty-icon">📋</div><div class="empty-text">No articles in this filter</div></div>`;
@@ -780,58 +1139,126 @@ async function openArticle(artObj, from) {
   backTarget = from || 'home';
   currentArticleId = `${artObj.n}_${artObj.part}`;
   currentArticleData = artObj;
+  buildFlatList(artObj);
 
   document.getElementById('artBackBtn').onclick = () => goBack(backTarget);
   document.getElementById('detailBarTitle').textContent = artObj.n === 'Preamble' ? 'Preamble' : `Article ${artObj.n}`;
   updateFavBtn();
 
-  // Render static shell immediately
-  document.getElementById('detailContent').innerHTML = `
-    <div class="article-header-parch">
-      <div class="art-part-tag-parch">📜 ${artObj.part}</div>
-      <div class="art-number-parch">${artObj.n==='Preamble'?'Preamble':'Article '+artObj.n}</div>
-      <div class="art-main-title-parch">${artObj.t}</div>
-    </div>
-    <div class="article-body-parch">
-      <p>${getArticleBaseText(artObj.n, artObj.t)}</p>
-    </div>
-    <div id="aiContentArea">
-      <div class="ai-loading">
-        <div class="ai-loading-spinner"></div>
-        <div class="ai-loading-text">Loading cases, developments & interpretations…</div>
-      </div>
-    </div>
-    <div class="nav-pills-parch" style="margin-top:8px">
-      <div class="nav-pill-parch" onclick="goBack(backTarget)"><span class="nav-pill-arrow-parch">←</span>Back</div>
-    </div>`;
+  const rich = ART_DATA[artObj.n];
 
-  showScreen('article-detail');
-
-  // Fetch AI content
-  const aiData = await fetchAIContent(artObj.n, artObj.t, artObj.part);
-  const aiArea = document.getElementById('aiContentArea');
-  if(!aiArea) return;
-
-  if(!aiData) {
-    aiArea.innerHTML = `<div class="ai-section sec-fact"><div class="ai-section-header">💡 Key Fact</div><div class="ai-section-body"><p>This article forms a fundamental part of the Indian Constitution under ${artObj.part}. It establishes important constitutional provisions relating to ${artObj.t.toLowerCase()}.</p></div></div>`;
+  // If we have hardcoded rich data — render INSTANTLY, no AI, no loading
+  if(rich) {
+    renderRichArticle(artObj, rich);
+    showScreen('article-detail');
     return;
   }
 
+  // Otherwise: render shell + fetch AI
+  document.getElementById('detailContent').innerHTML = `
+    <div class="page-wrap" id="pageWrap">
+      <div class="article-header-parch">
+        <div class="art-part-tag-parch">📜 ${artObj.part}</div>
+        <div class="art-number-parch">${artObj.n==='Preamble'?'Preamble':'Article '+artObj.n}</div>
+        <div class="art-main-title-parch">${artObj.t}</div>
+      </div>
+      <div class="article-body-parch" id="articleTextArea">
+        <div class="ai-loading"><div class="ai-loading-spinner"></div><div class="ai-loading-text">Loading article text…</div></div>
+      </div>
+      <div id="aiContentArea"></div>
+      <div class="swipe-hint">← swipe to turn pages →</div>
+    </div>`;
+  showScreen('article-detail');
+
+  const aiData = await fetchAIContent(artObj.n, artObj.t, artObj.part);
+  const textArea = document.getElementById('articleTextArea');
+  const aiArea = document.getElementById('aiContentArea');
+  if(!textArea || !aiArea) return;
+
+  let realText = aiData?.text || getArticleBaseText(artObj.n, artObj.t);
+  textArea.innerHTML = realText.split('\n').filter(p=>p.trim()).map(p=>`<p>${p.trim()}</p>`).join('') || `<p>${realText}</p>`;
+
+  if(!aiData) { aiArea.innerHTML=''; return; }
   let html = '';
-  if(aiData.fact) {
-    html += `<div class="ai-section sec-fact"><div class="ai-section-header">💡 Key Fact</div><div class="ai-section-body"><p>${aiData.fact}</p></div></div>`;
-  }
-  if(aiData.cases?.length) {
-    html += `<div class="ai-section sec-cases"><div class="ai-section-header">⚖️ Landmark Cases</div><div class="ai-section-body">${aiData.cases.map(c=>`<div class="case-item"><span class="case-name">${c.name}</span><span class="case-year">(${c.year})</span><div class="case-held">${c.held}</div></div>`).join('')}</div></div>`;
-  }
-  if(aiData.recent?.length) {
-    html += `<div class="ai-section sec-dev"><div class="ai-section-header">🆕 Recent Developments</div><div class="ai-section-body">${aiData.recent.map(r=>`<div class="dev-item"><strong>${r.title}</strong><br>${r.desc}</div>`).join('')}</div></div>`;
-  }
-  if(aiData.interpretation) {
-    html += `<div class="ai-section sec-interp"><div class="ai-section-header">🔍 Judicial Interpretation</div><div class="ai-section-body"><p>${aiData.interpretation}</p></div></div>`;
-  }
-  aiArea.innerHTML = html || '<div style="padding:16px;text-align:center;color:var(--parch-text2);font-family:Cormorant Garamond,serif;font-size:16px">Content loaded.</div>';
+  if(aiData.fact) html += `<div class="ai-section sec-fact"><div class="ai-section-header">💡 Key Fact</div><div class="ai-section-body"><p>${aiData.fact}</p></div></div>`;
+  if(aiData.cases?.length) html += `<div class="ai-section sec-cases"><div class="ai-section-header">⚖️ Landmark Cases</div><div class="ai-section-body">${aiData.cases.map(c=>`<div class="case-item"><span class="case-name">${c.name}</span><span class="case-year">(${c.year})</span><div class="case-held">${c.held}</div></div>`).join('')}</div></div>`;
+  if(aiData.recent?.length) html += `<div class="ai-section sec-dev"><div class="ai-section-header">🆕 Recent Developments</div><div class="ai-section-body">${aiData.recent.map(r=>`<div class="dev-item"><strong>${r.title}</strong><br>${r.desc}</div>`).join('')}</div></div>`;
+  if(aiData.interpretation) html += `<div class="ai-section sec-interp"><div class="ai-section-header">🔍 Judicial Interpretation</div><div class="ai-section-body"><p>${aiData.interpretation}</p></div></div>`;
+  aiArea.innerHTML = html;
 }
+
+// Render hardcoded rich article (clauses + keywords + mnemonic + cases + recent)
+function renderRichArticle(artObj, rich) {
+  let clausesHtml = rich.clauses.map((c,i) => {
+    const label = c.label ? `<span class="clause-label">${c.label}</span>` : '';
+    return `<div class="clause-block${i===0&&!c.label?' first-clause':''}">${label}<div class="clause-text">${c.text}</div></div>`;
+  }).join('');
+
+  let kwHtml = rich.keywords?.length ? `<div class="ai-section sec-key"><div class="ai-section-header">🔑 Key Words</div><div class="ai-section-body"><div class="kw-wrap">${rich.keywords.map(k=>`<span class="kw-chip">${k}</span>`).join('')}</div></div></div>` : '';
+
+  let mnHtml = rich.mnemonic ? `<div class="ai-section sec-mnemonic"><div class="ai-section-header">🧠 Memory Hook</div><div class="ai-section-body"><p style="font-weight:600">${rich.mnemonic}</p></div></div>` : '';
+
+  let casesHtml = rich.cases?.length ? `<div class="ai-section sec-cases"><div class="ai-section-header">⚖️ Landmark Cases</div><div class="ai-section-body">${rich.cases.map(c=>`<div class="case-item"><span class="case-name">${c.name}</span>${c.year&&c.year!=='—'?`<span class="case-year">(${c.year})</span>`:''}<div class="case-held">${c.held}</div></div>`).join('')}</div></div>` : '';
+
+  let recentHtml = rich.recent?.length ? `<div class="ai-section sec-dev"><div class="ai-section-header">🆕 Recent Developments</div><div class="ai-section-body">${rich.recent.map(r=>`<div class="dev-item"><strong>${r.title}</strong><br>${r.desc}</div>`).join('')}</div></div>` : '';
+
+  document.getElementById('detailContent').innerHTML = `
+    <div class="page-wrap" id="pageWrap">
+      <div class="article-header-parch">
+        <div class="art-part-tag-parch">📜 ${artObj.part}</div>
+        <div class="art-number-parch">${artObj.n==='Preamble'?'Preamble':'Article '+artObj.n}</div>
+        <div class="art-main-title-parch">${artObj.t}</div>
+      </div>
+      <div class="clauses-area">${clausesHtml}</div>
+      ${kwHtml}${mnHtml}${casesHtml}${recentHtml}
+      <div class="swipe-hint">← swipe to turn pages →</div>
+    </div>`;
+}
+
+
+// ═══════════════ SWIPE NAVIGATION ═══════════════
+let flatArticleList = [];
+let flatIndex = -1;
+
+function buildFlatList(artObj) {
+  // Build a flat list of all articles across all parts
+  if(!flatArticleList.length) {
+    PARTS.forEach(p => {
+      p.articles.forEach(a => {
+        flatArticleList.push({n:a.n, t:a.t, part:'Part '+p.num+' – '+p.name});
+      });
+    });
+  }
+  flatIndex = flatArticleList.findIndex(a => a.n === artObj.n && a.part === artObj.part);
+}
+
+function navigateArticle(direction) {
+  if(flatIndex < 0) return;
+  const newIndex = flatIndex + direction;
+  if(newIndex < 0 || newIndex >= flatArticleList.length) return;
+  const next = flatArticleList[newIndex];
+  const wrap = document.getElementById('pageWrap');
+  if(wrap) {
+    wrap.style.animation = direction > 0 ? 'pageTurnNext 0.4s ease' : 'pageTurnPrev 0.4s ease';
+  }
+  setTimeout(() => openArticle(next, backTarget), direction !== 0 ? 180 : 0);
+}
+
+// Touch swipe handlers
+let touchStartX = 0, touchStartY = 0;
+document.addEventListener('touchstart', e => {
+  if(!document.getElementById('article-detail').classList.contains('active')) return;
+  touchStartX = e.changedTouches[0].screenX;
+  touchStartY = e.changedTouches[0].screenY;
+}, {passive:true});
+document.addEventListener('touchend', e => {
+  if(!document.getElementById('article-detail').classList.contains('active')) return;
+  const dx = e.changedTouches[0].screenX - touchStartX;
+  const dy = e.changedTouches[0].screenY - touchStartY;
+  if(Math.abs(dx) > 70 && Math.abs(dx) > Math.abs(dy)*1.5) {
+    navigateArticle(dx < 0 ? 1 : -1); // swipe left = next, swipe right = prev
+  }
+}, {passive:true});
 
 // Base text for common articles
 function getArticleBaseText(num, title) {
@@ -839,6 +1266,17 @@ function getArticleBaseText(num, title) {
     'Preamble': 'WE, THE PEOPLE OF INDIA, having solemnly resolved to constitute India into a SOVEREIGN SOCIALIST SECULAR DEMOCRATIC REPUBLIC and to secure to all its citizens: JUSTICE, social, economic and political; LIBERTY of thought, expression, belief, faith and worship; EQUALITY of status and of opportunity; and to promote among them all FRATERNITY assuring the dignity of the individual and the unity and integrity of the Nation.',
     '12': 'In this part, "the State" includes the Government and Parliament of India and the Government and the Legislature of each of the States and all local or other authorities within the territory of India or under the control of the Government of India.',
     '13': 'All laws in force before the Constitution, in so far as they are inconsistent with the provisions of this Part, shall to the extent of such inconsistency be void. The State shall not make any law which takes away or abridges the rights conferred by this Part.',
+    '5': 'At the commencement of this Constitution, every person who has his domicile in the territory of India and (a) who was born in the territory of India; or (b) either of whose parents was born in the territory of India; or (c) who has been ordinarily resident in the territory of India for not less than five years immediately preceding such commencement, shall be a citizen of India.',
+    '6': 'Notwithstanding anything in article 5, a person who has migrated to the territory of India from the territory now included in Pakistan shall be deemed to be a citizen of India at the commencement of this Constitution if — (a) he or either of his parents or any of his grandparents was born in India as defined in the Government of India Act, 1935; and (b)(i) in the case where such person has so migrated before the nineteenth day of July, 1948, he has been ordinarily resident in the territory of India since the date of his migration, or (ii) in the case where such person has so migrated on or after the nineteenth day of July, 1948, he has been registered as a citizen of India by an officer appointed in that behalf by the Government of the Dominion of India.',
+    '7': 'Notwithstanding anything in articles 5 and 6, a person who has after the first day of March, 1947, migrated from the territory of India to the territory now included in Pakistan shall not be deemed to be a citizen of India: Provided that nothing in this article shall apply to a person who, after having so migrated to the territory now included in Pakistan, has returned to the territory of India under a permit for resettlement or permanent return issued by or under the authority of any law.',
+    '8': 'Notwithstanding anything in article 5, any person who or either of whose parents or any of whose grandparents was born in India as defined in the Government of India Act, 1935, and who is ordinarily residing in any country outside India as so defined shall be deemed to be a citizen of India if he has been registered as a citizen of India by the diplomatic or consular representative of India in the country where he is for the time being residing.',
+    '9': 'No person shall be a citizen of India by virtue of article 5, or be deemed to be a citizen of India by virtue of article 6 or article 8, if he has voluntarily acquired the citizenship of any foreign State.',
+    '10': 'Every person who is or is deemed to be a citizen of India under any of the foregoing provisions of this Part shall, subject to the provisions of any law that may be made by Parliament, continue to be such citizen.',
+    '11': 'Nothing in the foregoing provisions of this Part shall derogate from the power of Parliament to make any provision with respect to the acquisition and termination of citizenship and all other matters relating to citizenship.',
+    '1': 'India, that is Bharat, shall be a Union of States. The States and the territories thereof shall be as specified in the First Schedule. The territory of India shall comprise the territories of the States, the Union territories specified in the First Schedule, and such other territories as may be acquired.',
+    '2': 'Parliament may by law admit into the Union, or establish, new States on such terms and conditions as it thinks fit.',
+    '3': 'Parliament may by law form a new State by separation of territory from any State or by uniting two or more States or parts of States; increase the area of any State; diminish the area of any State; alter the boundaries of any State; alter the name of any State.',
+    '4': 'Any law referred to in article 2 or article 3 shall contain such provisions for the amendment of the First Schedule and the Fourth Schedule as may be necessary, and shall not be deemed to be an amendment of this Constitution for the purposes of article 368.',
     '14': 'The State shall not deny to any person equality before the law or the equal protection of the laws within the territory of India.',
     '15': 'The State shall not discriminate against any citizen on grounds only of religion, race, caste, sex, place of birth or any of them.',
     '16': 'There shall be equality of opportunity for all citizens in matters relating to employment or appointment to any office under the State.',
