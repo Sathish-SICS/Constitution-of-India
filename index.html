@@ -551,6 +551,286 @@ html,body{width:100%;margin:0;font-family:'Inter',sans-serif;background:var(--in
 // ═══════════════ RICH ARTICLE DATA (clause-wise) ═══════════════
 // Structure: clauses[] = [{label, text}], keywords[], mnemonic, cases[], recent[]
 const ART_DATA = {
+  // ───────── PART I: THE UNION AND ITS TERRITORY (1–4) ─────────
+  '1': {
+    clauses:[
+      {label:'1(1)',text:'INDIA, that is BHARAT, shall be a UNION OF STATES.'},
+      {label:'1(2)',text:'The States and the territories thereof shall be as specified in the FIRST SCHEDULE.'},
+      {label:'1(3)',text:'The territory of India shall comprise — (a) the territories of the States; (b) the Union territories specified in the First Schedule; and (c) such other territories as may be ACQUIRED.'}
+    ],
+    keywords:['Union of States (not Federation)','India = Bharat','First Schedule','Indestructible Union','Territory of India > Union of States','Acquired territories'],
+    mnemonic:'Art 1 = "India that is Bharat, UNION of States" (Dr Ambedkar: union not based on agreement; states cannot secede).',
+    cases:[{name:'Berubari Union case (In re)',year:'1960',held:'Cession of Indian territory to a foreign country requires a constitutional amendment under Art 368, not merely executive action or a law under Art 3.'}],
+    recent:[{title:'Why "Union" not "Federation"',desc:'Dr Ambedkar explained "Union of States" signifies that India is an indestructible union — states have no right to secede, and it was not formed by an agreement among states (unlike the USA).'}]
+  },
+  '2': {
+    clauses:[{label:'',text:'ADMISSION OR ESTABLISHMENT OF NEW STATES: Parliament may by law admit into the Union, or establish, NEW STATES on such terms and conditions as it thinks fit. (Art 2 relates to NEW states not part of India earlier — e.g. Sikkim.)'}],
+    keywords:['Admission of new states','New / external territory','Sikkim (1975)','Parliament by simple majority'],
+    mnemonic:'Art 2 = "admit NEW (external) states". Art 3 = reorganise EXISTING states.',
+    cases:[],
+    recent:[{title:'Sikkim',desc:'Sikkim was admitted as a full state by the 36th Amendment (1975) — an example of Art 2 power.'}]
+  },
+  '3': {
+    clauses:[
+      {label:'',text:'FORMATION OF NEW STATES & ALTERATION OF AREAS/BOUNDARIES/NAMES: Parliament may by law — (a) form a new State by separation/union of territory; (b) increase the area of any State; (c) diminish the area of any State; (d) alter the boundaries of any State; (e) alter the name of any State.'},
+      {label:'Conditions',text:'A Bill under Art 3 can be introduced only on the PRESIDENT\'S RECOMMENDATION, and the President must REFER it to the concerned State Legislature for its views (but is NOT bound by those views).'}
+    ],
+    keywords:['Reorganisation of existing states','President recommendation needed','State views (not binding)','Simple majority','Not deemed Art 368 amendment'],
+    mnemonic:'Art 3 = "reshape EXISTING states". President recommends; State opinion is sought but NOT binding.',
+    cases:[{name:'Babulal Parate v State of Bombay',year:'1960',held:'State legislature\'s view under Art 3 is recommendatory only; Parliament is not bound by it.'}],
+    recent:[{title:'Telangana (2014)',desc:'Telangana was carved out of Andhra Pradesh under Art 3 by the AP Reorganisation Act 2014 — the 29th state.'},{title:'J&K bifurcation (2019)',desc:'J&K reorganised into two UTs (J&K and Ladakh) using Art 3 read with the J&K Reorganisation Act 2019.'}]
+  },
+  '4': {
+    clauses:[{label:'',text:'LAWS MADE UNDER ARTICLES 2 AND 3: Such laws may contain provisions for amendment of the First Schedule (states/UTs) and Fourth Schedule (Rajya Sabha seats), and such a law shall NOT be deemed to be an amendment of the Constitution under Article 368 (i.e. passed by SIMPLE MAJORITY).'}],
+    keywords:['Consequential amendments','First & Fourth Schedule','NOT an Art 368 amendment','Simple majority suffices'],
+    mnemonic:'Art 4 = "Art 2/3 laws need only SIMPLE majority" (not the special 368 procedure).',
+    cases:[],
+    recent:[]
+  },
+  // ───────── PART V: THE UNION — EXECUTIVE (52–78) ─────────
+  '52': {
+    clauses:[{label:'',text:'THE PRESIDENT OF INDIA: There shall be a President of India — the constitutional/nominal head of the State and head of the Union executive.'}],
+    keywords:['President of India','Constitutional/nominal head','First citizen','Head of Union executive'],
+    mnemonic:'52 = "There shall be a President" (the start of the Executive).',
+    cases:[],
+    recent:[]
+  },
+  '53': {
+    clauses:[{label:'',text:'EXECUTIVE POWER OF THE UNION is vested in the PRESIDENT, exercised by him directly or through officers subordinate to him. Supreme command of the Defence Forces is vested in the President.'}],
+    keywords:['Executive power vested in President','Supreme commander of armed forces','Exercised via Council of Ministers'],
+    mnemonic:'53 = "Executive power + Supreme Commander of Defence Forces".',
+    cases:[],
+    recent:[]
+  },
+  '54': {
+    clauses:[{label:'',text:'ELECTION OF PRESIDENT: Elected by an ELECTORAL COLLEGE consisting of — (a) elected members of both Houses of Parliament; and (b) elected members of the Legislative Assemblies of States and of UTs of Delhi & Puducherry. (Nominated members do NOT vote.)'}],
+    keywords:['Indirect election','Electoral College','Elected MPs + MLAs','Nominated members excluded','Delhi & Puducherry MLAs included'],
+    mnemonic:'54 = "Electoral College" (elected MPs + elected MLAs only). 70th Amend added Delhi & Puducherry.',
+    cases:[],
+    recent:[]
+  },
+  '55': {
+    clauses:[{label:'',text:'MANNER OF ELECTION: Election held by PROPORTIONAL REPRESENTATION via SINGLE TRANSFERABLE VOTE (STV) and SECRET BALLOT. Uniformity in the scale of representation of States; parity between the Union and the States in the value of votes (based on population & number of elected MLAs/MPs).'}],
+    keywords:['Proportional representation','Single Transferable Vote','Secret ballot','Value of vote formula','Uniformity & parity'],
+    mnemonic:'55 = "STV + secret ballot". Vote value = population ÷ (elected MLAs × 1000) etc.',
+    cases:[],
+    recent:[]
+  },
+  '56': {
+    clauses:[{label:'',text:'TERM OF OFFICE: The President holds office for FIVE YEARS from the date of entering office, and is eligible for re-election. Can resign by writing to the Vice-President; continues till successor enters office.'}],
+    keywords:['5-year term','Re-eligible','Resignation to Vice-President','Holds till successor'],
+    mnemonic:'56 = "5-year term".',
+    cases:[],
+    recent:[]
+  },
+  '58': {
+    clauses:[{label:'',text:'QUALIFICATIONS FOR ELECTION AS PRESIDENT: (a) Citizen of India; (b) completed 35 YEARS of age; (c) qualified for election as a member of the LOK SABHA; (d) must NOT hold any office of profit under the Union/State/local authority (sitting President, VP, Governor, Minister are exempt).'}],
+    keywords:['Citizen of India','35 years minimum','Lok Sabha eligibility','No office of profit'],
+    mnemonic:'58 = "35 years + Lok Sabha qualified + no office of profit".',
+    cases:[],
+    recent:[]
+  },
+  '61': {
+    clauses:[
+      {label:'',text:'IMPEACHMENT OF THE PRESIDENT: The only ground is VIOLATION OF THE CONSTITUTION. The charge may be initiated by EITHER House; the resolution must be passed by a 2/3 MAJORITY of the TOTAL membership of that House after 14 days notice. The OTHER House then investigates, and if it also passes by 2/3 of total membership, the President is removed.'},
+      {label:'Note',text:'Nominated members CAN participate in impeachment (unlike election). State legislatures do NOT participate. No President has ever been impeached.'}
+    ],
+    keywords:['Impeachment','Only ground: violation of Constitution','2/3 of TOTAL membership','Quasi-judicial','Nominated members participate','Never used'],
+    mnemonic:'61 = "Impeachment for violating Constitution" — 2/3 of TOTAL in both Houses. (Election excludes nominated; impeachment includes them.)',
+    cases:[],
+    recent:[]
+  },
+  '63': {
+    clauses:[{label:'',text:'THE VICE-PRESIDENT OF INDIA: There shall be a Vice-President of India — the second-highest constitutional office.'}],
+    keywords:['Vice-President','Second highest office','Ex-officio Rajya Sabha Chairman'],
+    mnemonic:'63 = "Vice-President exists" (modelled on US VP).',
+    cases:[],
+    recent:[]
+  },
+  '66': {
+    clauses:[{label:'',text:'ELECTION OF VICE-PRESIDENT: Elected by an ELECTORAL COLLEGE consisting of members of BOTH HOUSES of Parliament (both elected AND nominated) by proportional representation via STV & secret ballot. Qualifications: citizen, 35 years, qualified for election to RAJYA SABHA, no office of profit.'}],
+    keywords:['VP election','Both Houses only (no MLAs)','Nominated members included','35 years','Rajya Sabha eligibility'],
+    mnemonic:'66 = "VP elected by Parliament only" (NO state MLAs, unlike President). Nominated members vote.',
+    cases:[],
+    recent:[]
+  },
+  '72': {
+    clauses:[{label:'',text:'PARDONING POWER OF THE PRESIDENT: Power to grant PARDONS, reprieves, respites, remissions, or to suspend/remit/commute sentences — in cases of (a) punishment by COURT MARTIAL; (b) offences against UNION law; (c) all cases of DEATH SENTENCE.'}],
+    keywords:['Pardon power','Pardon/Commute/Remit/Respite/Reprieve','Court martial','Death sentence','Wider than Governor (Art 161)'],
+    mnemonic:'72 = President pardon (incl. DEATH + court martial). Governor (161) CANNOT pardon death/court-martial.',
+    cases:[{name:'Kehar Singh v Union of India',year:'1989',held:'President\'s pardon power under Art 72 is subject to limited judicial review; President can examine evidence afresh.'},{name:'Epuru Sudhakar v Govt of AP',year:'2006',held:'Pardon can be judicially reviewed if exercised arbitrarily, mala fide, or on irrelevant grounds.'}],
+    recent:[]
+  },
+  '74': {
+    clauses:[
+      {label:'74(1)',text:'COUNCIL OF MINISTERS to AID AND ADVISE the President, with the PRIME MINISTER at the head. The President SHALL ACT in accordance with such advice. (Made binding by 42nd Amendment; the 44th Amendment allowed the President to return advice ONCE for reconsideration, after which it is binding.)'},
+      {label:'74(2)',text:'The advice tendered by Ministers to the President shall NOT be inquired into by any court.'}
+    ],
+    keywords:['Council of Ministers aids President','Advice binding (42nd Amend)','Return once (44th Amend)','Advice not justiciable','PM heads'],
+    mnemonic:'74 = "CoM aids & advises". 42nd = binding; 44th = President may return ONCE.',
+    cases:[{name:'Shamsher Singh v State of Punjab',year:'1974',held:'President/Governor is a constitutional head who acts on the aid & advice of the Council of Ministers, except in a few discretionary matters.'}],
+    recent:[]
+  },
+  '75': {
+    clauses:[
+      {label:'75(1)',text:'The PRIME MINISTER is appointed by the President; other Ministers are appointed by the President on the PM\'s advice.'},
+      {label:'75(1A)',text:'Total number of Ministers (incl. PM) shall NOT exceed 15% of the total strength of the LOK SABHA. (91st Amendment, 2003.)'},
+      {label:'75(3)',text:'The Council of Ministers is COLLECTIVELY RESPONSIBLE to the Lok Sabha.'}
+    ],
+    keywords:['PM & Ministers appointment','15% cap (91st Amend)','Collective responsibility','Ministers hold office at President pleasure'],
+    mnemonic:'75 = "PM + Ministers". 15% cap (91st Amend). Collective responsibility to Lok Sabha.',
+    cases:[],
+    recent:[]
+  },
+  '76': {
+    clauses:[{label:'',text:'ATTORNEY-GENERAL FOR INDIA: The highest law officer of India, appointed by the President. Must be qualified to be a Supreme Court judge. Has right of audience in all courts and to speak in (but not vote in) Parliament.'}],
+    keywords:['Attorney-General','Highest law officer','Appointed by President','SC judge qualification','No vote in Parliament'],
+    mnemonic:'76 = "Attorney-General" (govt\'s top lawyer). AGI is NOT a govt servant; can do private practice.',
+    cases:[],
+    recent:[]
+  },
+  '78': {
+    clauses:[{label:'',text:'DUTIES OF THE PRIME MINISTER: (a) communicate to the President all CoM decisions on administration & legislation; (b) furnish information the President calls for; (c) submit for CoM consideration any matter on which a Minister has decided but the Council has not considered. (Art 78 = link between President & CoM.)'}],
+    keywords:['PM duties','Link between President & CoM','Communicate decisions','Furnish information'],
+    mnemonic:'78 = "PM is the bridge between President and Cabinet".',
+    cases:[],
+    recent:[]
+  },
+  // ───────── PART V: PARLIAMENT (79–123) ─────────
+  '79': {
+    clauses:[{label:'',text:'CONSTITUTION OF PARLIAMENT: Parliament of the Union consists of the PRESIDENT, the COUNCIL OF STATES (Rajya Sabha) and the HOUSE OF THE PEOPLE (Lok Sabha).'}],
+    keywords:['Parliament = President + RS + LS','Bicameral','President is part of Parliament'],
+    mnemonic:'79 = "Parliament = President + Rajya Sabha + Lok Sabha". (President is part but not a member.)',
+    cases:[],
+    recent:[]
+  },
+  '80': {
+    clauses:[{label:'',text:'COMPOSITION OF RAJYA SABHA (Council of States): MAX 250 members — up to 238 representatives of States & UTs (elected by elected MLAs via STV), plus 12 NOMINATED by the President for special knowledge in literature, science, art & social service. Permanent body — 1/3 retire every 2 years; 6-year term.'}],
+    keywords:['Rajya Sabha','Max 250 (238 + 12 nominated)','Permanent body','6-year term','1/3 retire every 2 years','STV election'],
+    mnemonic:'80 = "Rajya Sabha = 250 max" (238 elected + 12 nominated). Permanent house.',
+    cases:[],
+    recent:[{title:'Nominated members & art/science',desc:'12 nominated members come from literature, science, art and social service — e.g. sportspersons, artists nominated over the years.'}]
+  },
+  '81': {
+    clauses:[{label:'',text:'COMPOSITION OF LOK SABHA (House of the People): MAX 550 members — up to 530 from States + 20 from UTs, chosen by DIRECT ELECTION from territorial constituencies. (The 2 Anglo-Indian nominated seats were abolished by the 104th Amendment, 2020.) 5-year term.'}],
+    keywords:['Lok Sabha','Max 550 (530 states + 20 UTs)','Direct election','Anglo-Indian seats abolished (104th)','5-year term','Population-based'],
+    mnemonic:'81 = "Lok Sabha = 550 max". Direct election. 104th Amend ended Anglo-Indian nomination.',
+    cases:[],
+    recent:[{title:'Delimitation freeze',desc:'Seat numbers frozen based on 1971 census until the first census after 2026 (84th & 87th Amendments).'}]
+  },
+  '85': {
+    clauses:[{label:'',text:'SESSIONS, PROROGATION & DISSOLUTION: The President summons each House; the gap between two sessions must NOT exceed SIX MONTHS. The President may prorogue the Houses or DISSOLVE the Lok Sabha (Rajya Sabha cannot be dissolved).'}],
+    keywords:['6-month gap rule','3 sessions (Budget/Monsoon/Winter)','Prorogation','Dissolution of Lok Sabha only','Summoning'],
+    mnemonic:'85 = "max 6-month gap between sessions". Only Lok Sabha is dissolved; Rajya Sabha is permanent.',
+    cases:[],
+    recent:[]
+  },
+  '100': {
+    clauses:[{label:'',text:'VOTING, QUORUM: Decisions in each House are by majority of members present & voting (Speaker/Chairman has a casting vote in a tie, not a first vote). QUORUM = 1/10th of the total members of the House.'}],
+    keywords:['Quorum = 1/10th','Casting vote of Speaker/Chairman','Majority of present & voting'],
+    mnemonic:'100 = "Quorum 1/10th + casting vote". (1/10 → think "100 → 10%").',
+    cases:[],
+    recent:[]
+  },
+  '105': {
+    clauses:[{label:'',text:'POWERS & PRIVILEGES OF PARLIAMENT & MEMBERS: Freedom of SPEECH in Parliament; no member liable in any court for anything said or any vote given in Parliament or its committees; immunity for publication of proceedings under parliamentary authority.'}],
+    keywords:['Parliamentary privileges','Freedom of speech in House','No court liability for speech/vote','Immunity'],
+    mnemonic:'105 = "Privileges + freedom of speech in Parliament" (immune from courts).',
+    cases:[{name:'P.V. Narasimha Rao v State (CBI)',year:'1998',held:'Earlier held bribe-taking MPs who voted got immunity under Art 105 — OVERRULED in 2024.'},{name:'Sita Soren v Union of India',year:'2024',held:'7-judge bench overruled the 1998 view: an MP/MLA taking a BRIBE for a vote/speech is NOT protected by parliamentary privilege under Art 105/194.'}],
+    recent:[{title:'Bribery not immune (2024)',desc:'Sita Soren (2024): legislators accepting bribes for votes can be prosecuted — privilege does not cover bribery.'}]
+  },
+  '108': {
+    clauses:[{label:'',text:'JOINT SITTING of both Houses: Summoned by the President to resolve a DEADLOCK over an ordinary bill (if other House rejects it, or 6 months pass, or disagrees on amendments). Presided over by the SPEAKER of Lok Sabha. NOT available for Money Bills or Constitutional Amendment Bills.'}],
+    keywords:['Joint sitting','Deadlock resolution','Speaker presides','Only ordinary bills','Not for Money/Amendment bills','Held 3 times'],
+    mnemonic:'108 = "Joint sitting" (Speaker presides). Held only 3 times: Dowry Prohibition 1961, Banking Service 1978, POTA 2002.',
+    cases:[],
+    recent:[]
+  },
+  '110': {
+    clauses:[
+      {label:'',text:'MONEY BILL — deals ONLY with: taxation; borrowing by govt; Consolidated Fund/Contingency Fund; appropriation; declaring expenditure charged on Consolidated Fund; receipt/custody of money; or incidental matters.'},
+      {label:'Procedure',text:'Introduced ONLY in Lok Sabha (on President\'s recommendation). Rajya Sabha can only RECOMMEND changes within 14 days (cannot reject/amend). The SPEAKER\'s certification that a bill is a Money Bill is FINAL.'}
+    ],
+    keywords:['Money Bill','Lok Sabha only','Speaker certifies (final)','RS = 14 days, recommend only','Art 110 list'],
+    mnemonic:'110 = "Money Bill" — Lok Sabha only, Speaker certifies, RS has 14 days advisory.',
+    cases:[{name:'Rojer Mathew v South Indian Bank',year:'2019',held:'Referred to a larger bench the question of what qualifies as a Money Bill (Aadhaar/Finance Act route).'},{name:'K.S. Puttaswamy (Aadhaar)',year:'2018',held:'Upheld passing Aadhaar Act as a Money Bill (4:1); Justice Chandrachud dissented calling it a fraud on the Constitution.'}],
+    recent:[]
+  },
+  '112': {
+    clauses:[{label:'',text:'ANNUAL FINANCIAL STATEMENT (UNION BUDGET): The President causes to be laid before Parliament the estimated receipts & expenditure for each financial year. Distinguishes expenditure CHARGED on the Consolidated Fund (non-votable) from other expenditure (votable as demands for grants).'}],
+    keywords:['Union Budget','Annual Financial Statement','Charged vs Voted expenditure','Consolidated Fund'],
+    mnemonic:'112 = "Budget = Annual Financial Statement". Charged expenditure is non-votable.',
+    cases:[],
+    recent:[]
+  },
+  '123': {
+    clauses:[{label:'',text:'ORDINANCE-MAKING POWER OF THE PRESIDENT: When Parliament is NOT in session, the President may promulgate an Ordinance having the same force as an Act. It must be laid before Parliament and ceases to operate 6 WEEKS after Parliament reassembles (or earlier if disapproved).'}],
+    keywords:['Ordinance','Parliament not in session','Force of law','6 weeks after reassembly','Cabinet advice','Cannot bypass legislature repeatedly'],
+    mnemonic:'123 = President Ordinance (Centre). 213 = Governor Ordinance (State). Lapses 6 weeks after reassembly.',
+    cases:[{name:'D.C. Wadhwa v State of Bihar',year:'1987',held:'Re-promulgation of ordinances without placing before legislature ("ordinance raj") is unconstitutional.'},{name:'Krishna Kumar Singh v State of Bihar',year:'2017',held:'7-judge bench — re-promulgation is a fraud on the Constitution; ordinances are subject to judicial review.'}],
+    recent:[]
+  },
+  // ───────── PART V: UNION JUDICIARY (124–147) ─────────
+  '124': {
+    clauses:[
+      {label:'124(1)',text:'ESTABLISHMENT OF SUPREME COURT: There shall be a Supreme Court of India consisting of a CHIEF JUSTICE OF INDIA and, until Parliament prescribes more, up to 33 OTHER JUDGES (34 total incl. CJI).'},
+      {label:'124(2)',text:'Judges appointed by the President; hold office until 65 YEARS of age. Removal only by impeachment (proved misbehaviour or incapacity) — address by both Houses with special majority.'}
+    ],
+    keywords:['Supreme Court','CJI + 33 judges (34 total)','Retire at 65','Collegium system','Removal by impeachment','NJAC struck down'],
+    mnemonic:'124 = "Supreme Court setup". Retire age 65 (SC) vs 62 (HC). Collegium since Second Judges case.',
+    cases:[{name:'Second Judges Case (SCAORA v UOI)',year:'1993',held:'Established the COLLEGIUM system — "consultation" with CJI means concurrence; judiciary primacy in appointments.'},{name:'Third Judges Case',year:'1998',held:'Collegium = CJI + 4 senior-most SC judges.'},{name:'NJAC / Fourth Judges Case',year:'2015',held:'Struck down the 99th Amendment & NJAC Act; restored collegium; independence of judiciary is basic structure.'}],
+    recent:[{title:'Collegium debate',desc:'The collegium vs NJAC debate on judicial appointments continues; govt periodically raises transparency concerns.'}]
+  },
+  '129': {
+    clauses:[{label:'',text:'SUPREME COURT AS A COURT OF RECORD: The SC is a court of record — its proceedings & decisions are recorded as evidence and have evidentiary value; it has the power to PUNISH FOR CONTEMPT OF ITSELF.'}],
+    keywords:['Court of record','Contempt power','Evidentiary value','Self-punishing for contempt'],
+    mnemonic:'129 = "SC = Court of Record + contempt power". (215 = High Court of record.)',
+    cases:[],
+    recent:[]
+  },
+  '131': {
+    clauses:[{label:'',text:'ORIGINAL JURISDICTION OF SUPREME COURT: Exclusive original jurisdiction in disputes between — (a) the Centre and one/more States; (b) the Centre & States on one side and other States on the other; (c) between two or more States. (Federal disputes.)'}],
+    keywords:['Original jurisdiction','Centre vs State disputes','Inter-state disputes','Federal umpire','Exclusive'],
+    mnemonic:'131 = "Original jurisdiction" = federal disputes (Centre v State, State v State).',
+    cases:[{name:'State of West Bengal v Union of India',year:'1963',held:'Discussed scope of Art 131; states are not fully sovereign — Centre can acquire state property.'},{name:'State of Karnataka v Union of India',year:'1977',held:'Clarified the scope of original jurisdiction under Art 131.'}],
+    recent:[]
+  },
+  '136': {
+    clauses:[{label:'',text:'SPECIAL LEAVE PETITION (SLP): The Supreme Court may, in its DISCRETION, grant special leave to appeal from ANY judgment, decree, sentence or order of any court or tribunal (except military tribunals). A discretionary, extraordinary residuary power.'}],
+    keywords:['Special Leave Petition','Discretionary power','From any court/tribunal','Except military courts','Residuary appellate power'],
+    mnemonic:'136 = "SLP — discretionary special appeal" from ANY court (except armed forces tribunals).',
+    cases:[{name:'Pritam Singh v State',year:'1950',held:'Art 136 power is to be exercised sparingly and in exceptional cases.'}],
+    recent:[]
+  },
+  '141': {
+    clauses:[{label:'',text:'LAW DECLARED BY SUPREME COURT IS BINDING ON ALL COURTS: The law declared by the SC shall be binding on all courts within the territory of India. (Doctrine of precedent / stare decisis.)'}],
+    keywords:['Binding precedent','Stare decisis','Ratio decidendi binding','Obiter not binding','Binds all courts'],
+    mnemonic:'141 = "SC law binds ALL courts". Only the ratio (not obiter) is binding.',
+    cases:[{name:'Bengal Immunity Co v State of Bihar',year:'1955',held:'SC is not bound by its own previous decisions; can overrule itself.'}],
+    recent:[]
+  },
+  '142': {
+    clauses:[{label:'',text:'ENFORCEMENT OF DECREES & COMPLETE JUSTICE: The Supreme Court may pass any decree or order necessary for doing COMPLETE JUSTICE in any cause/matter before it; such decree is enforceable throughout India.'}],
+    keywords:['Complete justice','Extraordinary power','Ayodhya, Bhopal, etc.','Cannot override substantive law'],
+    mnemonic:'142 = "Complete Justice" power (used in Ayodhya 2019, Bhopal gas, etc.).',
+    cases:[{name:'Union Carbide v Union of India',year:'1991',held:'Used Art 142 to approve the Bhopal gas tragedy settlement.'},{name:'M. Siddiq (Ayodhya) v Mahant Suresh Das',year:'2019',held:'Used Art 142 to do complete justice in the Ayodhya land dispute.'}],
+    recent:[{title:'Art 142 debate (2025)',desc:'Recent debates on the limits of Art 142 — whether the SC can set deadlines for the President/Governor on assent to bills.'}]
+  },
+  '143': {
+    clauses:[{label:'',text:'ADVISORY JURISDICTION: The President may refer to the Supreme Court any question of LAW or FACT of public importance for its opinion. The SC\'s opinion is ADVISORY (not binding) and not a "law" under Art 141.'}],
+    keywords:['Advisory jurisdiction','President reference','Opinion not binding','Public importance'],
+    mnemonic:'143 = "Advisory opinion to President" (NOT binding). E.g. Berubari, 3rd Judges, 2G reference.',
+    cases:[{name:'In re Berubari Union',year:'1960',held:'Advisory opinion that cession of territory needs constitutional amendment.'},{name:'In re Special Reference (Presidential Reference, 2025)',year:'2025',held:'SC examined questions on timelines for gubernatorial/Presidential assent to bills.'}],
+    recent:[]
+  },
+  '148': {
+    clauses:[{label:'',text:'COMPTROLLER AND AUDITOR-GENERAL (CAG): An independent constitutional authority appointed by the President; audits all accounts of the Union & States; "Guardian of the Public Purse". Removal like a Supreme Court judge; salary charged on Consolidated Fund.'}],
+    keywords:['CAG','Guardian of public purse','Appointed by President','Independent','Removal like SC judge','Audits Union & States'],
+    mnemonic:'148 = "CAG = Guardian of Public Purse". Dr Ambedkar: most important officer under the Constitution.',
+    cases:[],
+    recent:[]
+  },
+
   // ───────── PART X: THE SCHEDULED AND TRIBAL AREAS (244–244A) ─────────
   '244': {
     clauses:[
