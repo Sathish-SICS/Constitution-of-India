@@ -287,8 +287,14 @@ html,body{width:100%;margin:0;font-family:'Inter',sans-serif;background:var(--in
 .sec-key .ai-section-header{background:rgba(201,168,76,0.15);color:#8b6914;}
 
 /* FONT SETTINGS PANEL */
-.font-panel{display:none;position:sticky;top:0;z-index:99;background:#fff;border-bottom:2px solid var(--parch-border);padding:16px;box-shadow:0 6px 20px rgba(0,0,0,0.15);animation:slideDown 0.2s ease;}
+.font-panel{display:none;position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:600px;z-index:1000;background:var(--parch-bg,#f4e4c1);border-top:2px solid var(--parch-border,#c8a96e);border-radius:20px 20px 0 0;padding:20px 20px 40px;box-shadow:0 -8px 40px rgba(0,0,0,0.3);animation:slideUp 0.25s ease;max-height:80vh;overflow-y:auto;}
 .font-panel.open{display:block;}
+@keyframes slideUp{from{transform:translateX(-50%) translateY(100%);}to{transform:translateX(-50%) translateY(0);}}
+.font-panel-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:999;}
+.font-panel-overlay.open{display:block;}
+.fp-close-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;}
+.fp-close-btn{background:rgba(139,105,20,0.15);border:none;border-radius:20px;padding:6px 16px;font-family:'Inter',sans-serif;font-size:13px;font-weight:600;color:#6b4400;cursor:pointer;}
+.fp-handle{width:40px;height:4px;background:var(--parch-border,#c8a96e);border-radius:2px;margin:0 auto 16px;}
 @keyframes slideDown{from{opacity:0;transform:translateY(-10px);}to{opacity:1;transform:translateY(0);}}
 .fp-section{margin-bottom:14px;}
 .fp-section:last-child{margin-bottom:0;}
@@ -445,8 +451,11 @@ html,body{width:100%;margin:0;font-family:'Inter',sans-serif;background:var(--in
       <div class="icon-btn-parch" id="favBtn" onclick="toggleFav()">☆</div>
     </div>
   </div>
+  <div class="font-panel-overlay" id="fontOverlay" onclick="toggleFontPanel()"></div>
   <!-- FONT SETTINGS PANEL -->
   <div class="font-panel" id="fontPanel">
+    <div class="fp-handle"></div>
+    <div class="fp-close-row"><span style="font-family:Georgia,serif;font-weight:700;color:#6b4400;font-size:16px">Reading Settings</span><button class="fp-close-btn" onclick="toggleFontPanel()">Done ✓</button></div>
     <div class="fp-section">
       <div class="fp-label">📖 Reading Font</div>
       <div class="fp-fonts">
@@ -551,6 +560,696 @@ html,body{width:100%;margin:0;font-family:'Inter',sans-serif;background:var(--in
 // ═══════════════ RICH ARTICLE DATA (clause-wise) ═══════════════
 // Structure: clauses[] = [{label, text}], keywords[], mnemonic, cases[], recent[]
 const ART_DATA = {
+  // ───────── PART XI: RELATIONS BETWEEN UNION AND STATES (245–263) ─────────
+  '245': {
+    clauses:[
+      {label:'245(1)',text:'EXTENT OF LAWS: Parliament may make laws for the WHOLE or ANY PART of the territory of India. A State Legislature may make laws for the WHOLE or ANY PART of that State.'},
+      {label:'245(2)',text:'No law made by Parliament shall be deemed invalid on the ground that it would have EXTRA-TERRITORIAL OPERATION.'}
+    ],
+    keywords:['Extent of legislative powers','Parliament = whole India','State = within State only','Extra-territorial operation of Parliamentary law','Territorial nexus doctrine'],
+    mnemonic:'245 = "Parliament = all India; State = within State. Parliament laws can operate OUTSIDE India too."',
+    cases:[{name:'State of West Bengal v Union of India',year:'1963',held:'Parliament has plenary power to legislate for the whole of India; states have no right to secede.'},{name:'GVK Industries v Union of India',year:'2011',held:'Parliament can legislate extra-territorially only if there is a REAL & SUBSTANTIAL connection to India (territorial nexus doctrine).'}],
+    recent:[]
+  },
+  '246': {
+    clauses:[
+      {label:'246(1)',text:'Parliament has EXCLUSIVE power to make laws with respect to any matter in the UNION LIST (List I of the 7th Schedule) — including matters not enumerated but incidental to Union List entries.'},
+      {label:'246(2)',text:'Parliament has power (CONCURRENT with States) to make laws on matters in the CONCURRENT LIST (List III).'},
+      {label:'246(3)',text:'Subject to clauses (1) and (2), the State Legislature has EXCLUSIVE power over STATE LIST (List II) matters.'},
+      {label:'246(4)',text:'Parliament has power to make laws with respect to any matter for any UT, even if it is in the State List.'},
+      {label:'246A',text:'(Added by 101st Amendment, 2016 — GST) CONCURRENT power of Parliament AND State Legislatures to make laws with respect to Goods and Services Tax (GST). Parliament has exclusive power to legislate on inter-State supply of goods/services.'}
+    ],
+    keywords:['Union List 97 (List I)','State List 66 (List II)','Concurrent List 47 (List III)','Residuary = Parliament (Art 248)','246A = GST (101st Amend 2016)','Parliament can legislate for UTs on State List'],
+    mnemonic:'246 = "Three Lists: U-S-C". 246A = GST (101st Amend 2016). Remember: original counts 97-66-47; 42nd Amend (1976) shifted Education & Forests to Concurrent.',
+    cases:[{name:'State of West Bengal v Union of India',year:'1963',held:'Parliament\'s power over Union List is supreme; State cannot challenge a valid Central law.'},{name:'Offshore Mineral Development Ltd v State of Gujarat',year:'1980',held:'Doctrine of pith and substance — courts look at the true nature of a law to determine which List it belongs to.'}],
+    recent:[{title:'101st Amendment 2016 — GST',desc:'Inserted Art 246A giving CONCURRENT power to levy GST. Also added Art 269A (inter-State supply taxed by Centre, shared) and Art 279A (GST Council — 1/3 Centre + 2/3 States vote weightage). Came into force 1 July 2017.'}]
+  },
+  '247': {
+    clauses:[{label:'',text:'POWER OF PARLIAMENT TO PROVIDE FOR CERTAIN ADDITIONAL COURTS: Parliament may establish additional courts for better administration of Central laws or existing laws on matters in the Union List.'}],
+    keywords:['Additional courts for Central laws','Union List administration','Parliament creates courts'],
+    mnemonic:'247 = "Parliament creates additional courts for Central laws".',
+    cases:[],
+    recent:[]
+  },
+  '248': {
+    clauses:[{label:'',text:'RESIDUARY POWERS OF LEGISLATION: Parliament has EXCLUSIVE power to make any law with respect to any matter NOT enumerated in the Concurrent or State List. This includes the power to impose tax not mentioned in either list. (Entry 97 of Union List = residuary entry.) Compare: In USA and Australia, residuary powers vest with STATES; in India, with the CENTRE.'}],
+    keywords:['Residuary powers with Parliament/Centre','Entry 97 Union List','Not in State or Concurrent List','Opposite of USA/Australia','Central bias'],
+    mnemonic:'248 = "Residuary = Centre (Entry 97)". India is CENTRE-BIASED (unlike USA where residuary = States).',
+    cases:[{name:'Delhi Laws Act case',year:'1951',held:'Discussed limits of residuary power — Parliament can legislate on matters not enumerated in any List.'}],
+    recent:[]
+  },
+  '249': {
+    clauses:[{label:'',text:'PARLIAMENT\'S POWER TO LEGISLATE IN NATIONAL INTEREST ON STATE LIST: If the RAJYA SABHA passes a resolution by 2/3 of members present & voting that it is necessary in NATIONAL INTEREST, Parliament may make laws for the whole/part of India on any State List matter. Such a law remains in force for ONE YEAR (renewable).'}],
+    keywords:['National interest','Rajya Sabha resolution','2/3 majority','Parliament legislates on State List','1-year + renewable','Temporary override'],
+    mnemonic:'249 = "Rajya Sabha 2/3 → Parliament legislates on State List in NATIONAL INTEREST for 1 year".',
+    cases:[],
+    recent:[]
+  },
+  '250': {
+    clauses:[{label:'',text:'PARLIAMENT\'S POWER TO LEGISLATE DURING NATIONAL EMERGENCY (Art 352): When a National Emergency is in operation, Parliament has power to make laws for the whole or any part of India with respect to any matter in the STATE LIST. Such laws cease to operate six months after the Emergency ceases.'}],
+    keywords:['Emergency → Parliament legislates on State List','National Emergency (Art 352)','Laws lapse 6 months after Emergency ends','India becomes unitary'],
+    mnemonic:'250 = "Emergency → Parliament takes State List". 6 months after Emergency → State control returns.',
+    cases:[],
+    recent:[]
+  },
+  '251': {
+    clauses:[{label:'',text:'INCONSISTENCY BETWEEN LAWS MADE BY PARLIAMENT AND STATE LEGISLATURES: When Parliament makes a law under Art 249 (national interest) or Art 250 (Emergency), any State law that is repugnant to it shall be inoperative to the extent of repugnancy, while the Central law remains in force.'}],
+    keywords:['Central law prevails','Repugnancy doctrine','Art 249 and 250 context','State law inoperative to extent of inconsistency'],
+    mnemonic:'251 = "Central law prevails over State law" (in Art 249/250 context).',
+    cases:[],
+    recent:[]
+  },
+  '252': {
+    clauses:[{label:'',text:'POWER OF PARLIAMENT TO LEGISLATE FOR TWO OR MORE STATES BY CONSENT: If the Legislatures of TWO OR MORE States pass resolutions to that effect, Parliament may make a law on a State List matter for those States. Other States may subsequently ADOPT the law by resolution. Such a law can be AMENDED only by Parliament (not State Legislatures).'}],
+    keywords:['Two or more States consent','Parliament legislates on State List','Adoption by other States','Parliament amends later (not States)','Voluntary arrangement'],
+    mnemonic:'252 = "Two-State consent → Parliament legislates for them". E.g. Wildlife Protection Act 1972.',
+    cases:[],
+    recent:[{title:'Examples',desc:'Wildlife Protection Act 1972, Prize Competition Act, adoption of several uniform laws adopted by multiple States under Art 252.'}]
+  },
+  '253': {
+    clauses:[{label:'',text:'LEGISLATION FOR GIVING EFFECT TO INTERNATIONAL AGREEMENTS: Parliament has power to make any law for the whole or any part of India for implementing any TREATY, AGREEMENT or CONVENTION with any other country, or any decision made at any international conference, association or other body — EVEN IF the subject matter is in the State List.'}],
+    keywords:['International treaties','Parliament can legislate on State List','UNFCCC, WTO, UNCLOS obligations','India\'s treaty obligations override State List','No State consent needed'],
+    mnemonic:'253 = "Treaties → Parliament can override State List". India signs treaty → Parliament implements even on State subjects.',
+    cases:[{name:'Maganbhai Ishwarbhai Patel v Union of India',year:'1969',held:'Parliament\'s power under Art 253 to implement treaties is wide; does not need State consent even for State List matters.'}],
+    recent:[{title:'Paris Agreement 2015',desc:'India\'s commitments under the Paris Agreement on Climate Change (2015) can be legislated by Parliament under Art 253 even if subjects touch the State List (e.g. Agriculture, Forests).'}]
+  },
+  '254': {
+    clauses:[
+      {label:'254(1)',text:'REPUGNANCY BETWEEN CENTRAL AND STATE LAWS (Concurrent List): If a State law is REPUGNANT (inconsistent) to a Central law (or existing law) on a Concurrent List matter — the Central law prevails; the State law is VOID to the extent of repugnancy.'},
+      {label:'254(2)',text:'EXCEPTION: If the State law has been RESERVED for consideration of the PRESIDENT and has received his ASSENT — the State law prevails in that State (over the earlier Central law, NOT a later one).'}
+    ],
+    keywords:['Concurrent List conflict','Central law prevails','254(2) exception: Presidential assent','State law with Presidential assent can override earlier Central law','Repugnancy doctrine'],
+    mnemonic:'254 = "Concurrent clash → Centre wins. EXCEPTION: State law + Presidential assent → State wins (over older Central law)".',
+    cases:[{name:'Hoechst Pharmaceuticals v State of Bihar',year:'1983',held:'Doctrine of repugnancy — Central law and State law on the same Concurrent List subject: Central law prevails unless Art 254(2) exception applies.'},{name:'M. Karunanidhi v Union of India',year:'1979',held:'Three tests for repugnancy: direct conflict, both laws intend to be exhaustive on same field, or both cover same field though no direct conflict.'}],
+    recent:[]
+  },
+  '255': {
+    clauses:[{label:'',text:'REQUIREMENTS AS TO RECOMMENDATIONS AND PREVIOUS SANCTIONS: A law shall not be invalid merely because a required recommendation or sanction was not given — if the recommendation/sanction was given before the law was presented (i.e. only procedural defect). (Saves a law from invalidity on technical procedural grounds.)'}],
+    keywords:['Procedure cures defect','Recommendation/sanction','Not invalidated for procedural gap','Curative provision'],
+    mnemonic:'255 = "Procedure: prior recommendation/sanction cures technical defect".',
+    cases:[],
+    recent:[]
+  },
+  '256': {
+    clauses:[{label:'',text:'OBLIGATION OF STATES AND THE UNION: The executive power of every State shall be so exercised as to ENSURE COMPLIANCE with the laws made by Parliament and any existing laws. The Union may give DIRECTIONS to a State as necessary for that purpose.'}],
+    keywords:['State must comply with Central laws','Union can give directions','Art 365 consequence of non-compliance (President Rule)'],
+    mnemonic:'256 = "States MUST comply with Parliament laws; Centre can direct". Non-compliance → Art 365 → Art 356.',
+    cases:[],
+    recent:[]
+  },
+  '257': {
+    clauses:[
+      {label:'257(1)',text:'CONTROL OF UNION OVER STATES: The executive power of every State must not impede or prejudice the executive power of the Union. The Union may give DIRECTIONS to States to prevent such impediment.'},
+      {label:'257(2)',text:'The Union may direct States to construct and maintain means of communication declared to be of national/military importance.'},
+      {label:'257(3)',text:'The Union may direct States to provide protection to railway property within the State.'},
+      {label:'257A',text:'(Inserted by 42nd Amendment 1976; DELETED by 44th Amendment 1978) — Allowed Union to deploy armed forces in States without State request.'}
+    ],
+    keywords:['Union directions to States','No impediment to Union executive','National/military communications','Railway protection','257A deleted (42nd added, 44th deleted)'],
+    mnemonic:'257 = "Union directs States on national importance matters". 257A was added (42nd/1976) and deleted (44th/1978).',
+    cases:[],
+    recent:[]
+  },
+  '262': {
+    clauses:[{label:'',text:'ADJUDICATION OF INTER-STATE WATER DISPUTES: Parliament may by law provide for adjudication of any dispute or complaint with respect to the USE, DISTRIBUTION or CONTROL of waters of any inter-State river or river valley. Parliament may also provide that neither the SC nor any other court shall exercise jurisdiction in respect of such disputes.'}],
+    keywords:['Inter-State river water disputes','Parliament can bar SC jurisdiction','River Water Disputes Act 1956','Tribunals: Cauvery, Krishna, Narmada, Godavari etc.'],
+    mnemonic:'262 = "River water disputes — Parliament-created tribunals, SC barred". Key: only Article where Parliament can OUST SC jurisdiction.',
+    cases:[{name:'State of Karnataka v State of Tamil Nadu (Cauvery)',year:'2018',held:'SC clarified water allocation; despite Art 262 bar, SC can exercise jurisdiction to enforce tribunal awards.'}],
+    recent:[{title:'Cauvery Water Disputes Tribunal',desc:'Final award modified by SC in 2018. Inter-State River Water Disputes (Amendment) Act 2019 — disputes to be resolved within 4.5 years.'}]
+  },
+  '263': {
+    clauses:[{label:'',text:'INTER-STATE COUNCIL: The President may establish an INTER-STATE COUNCIL if it appears to him that the public interests would be served — for (a) inquiring into and advising on disputes between States; (b) investigating subjects of common interest; (c) making recommendations for better coordination of policy and action. The Inter-State Council was established in 1990 under Art 263 by Presidential Order.'}],
+    keywords:['Inter-State Council','President establishes','1990 established','Disputes + coordination','Advisory body','Sarkaria Commission recommended'],
+    mnemonic:'263 = "Inter-State Council (1990)" — advisory; disputes + coordination. Sarkaria Commission (1988) recommended its establishment.',
+    cases:[{name:'State of Rajasthan v Union of India',year:'1977',held:'Discussed Centre-State relations and need for cooperative federalism — context in which Inter-State Council was later set up.'}],
+    recent:[{title:'Revived 2016 & 2023',desc:'Inter-State Council was reconstituted in 2016 under PM Modi and again in 2023 with new Standing Committee. Sarkaria (1988) and Punchhi (2010) Commission recommendations on Centre-State relations are linked to Art 263.'}]
+  },
+
+  // ───────── PART VIII: THE UNION TERRITORIES (239–242) ─────────
+  '239': {
+    clauses:[
+      {label:'239(1)',text:'ADMINISTRATION OF UNION TERRITORIES: Every UT shall be administered by the PRESIDENT through an ADMINISTRATOR appointed by him. The Administrator has different designations: Lieutenant Governor (LG) for Delhi, Puducherry, J&K, Ladakh, Andaman & Nicobar; Administrator for Chandigarh, Lakshadweep, DNH & DD.'},
+      {label:'239(2)',text:'Notwithstanding anything in Part VI, the President may appoint the Governor of an adjoining State as the Administrator of a UT — the Governor then acts in his capacity as such independently of his CoM.'}
+    ],
+    keywords:['President administers UTs','Administrator / LG','8 UTs','LG for major UTs','Governor can be UT administrator'],
+    mnemonic:'239 = "President → Administrator/LG for UTs". Compare: States have elected Governors; UTs have appointed Administrators.',
+    cases:[{name:'NCT Delhi v Union of India',year:'2018',held:'Constitutional bench — Delhi\'s elected govt has power over all matters except Land, Police, Public Order; LG bound by CoM advice in other matters.'},{name:'Govt of NCT Delhi v Union of India',year:'2023',held:'5-judge bench — Delhi govt has control over services (IAS/DANICS postings); Parliament then passed GNCTD Amendment 2023 restoring LG power over services.'}],
+    recent:[{title:'GNCTD Amendment Act 2023',desc:'Parliament enacted the Government of NCT of Delhi (Amendment) Act 2023 giving the LG control over services in Delhi, overriding the SC 2023 judgment. Delhi CM Arvind Kejriwal challenged it in SC.'}]
+  },
+  '239A': {
+    clauses:[{label:'',text:'CREATION OF LOCAL LEGISLATURES FOR CERTAIN UTs: Parliament may by law create — for the UT of PUDUCHERRY — a Legislature (of elected/partly elected/partly nominated members) and a Council of Ministers. (The only UT with a legislature created under this provision — besides Delhi under 239AA.)'}],
+    keywords:['Puducherry Legislature','Created by Parliament','Partly elected','Council of Ministers for Puducherry','239A ≠ 239AA'],
+    mnemonic:'239A = "Puducherry gets a Legislature" (Parliament creates it). 239AA = Delhi gets a special status.',
+    cases:[],
+    recent:[]
+  },
+  '239AA': {
+    clauses:[
+      {label:'239AA(1)',text:'SPECIAL PROVISIONS FOR DELHI (NCT): Delhi shall be called the NATIONAL CAPITAL TERRITORY OF DELHI. The Administrator shall be designated as the LIEUTENANT GOVERNOR.'},
+      {label:'239AA(2)',text:'There shall be a LEGISLATIVE ASSEMBLY for Delhi — 70 seats, all directly elected.'},
+      {label:'239AA(3)',text:'The Legislative Assembly shall have power to make laws on ALL MATTERS in the State List & Concurrent List EXCEPT — (i) Public Order; (ii) Police; (iii) Land. (These three remain with the Centre/LG.)'},
+      {label:'239AA(4)',text:'In case of inconsistency between a Delhi Assembly law and a Parliamentary law on the same matter — Parliament prevails.'},
+      {label:'239AA(7)',text:'In the discharge of functions under the Constitution, the LG shall act on the AID AND ADVICE of the CoM, EXCEPT on matters related to Public Order, Police and Land, or when referring a matter to the President.'}
+    ],
+    keywords:['NCT of Delhi','Lt Governor','70-seat Assembly','Excluded: Police, Land, Public Order','LG bound by CoM (except 3 excluded)','69th Amendment 1991'],
+    mnemonic:'239AA = "Delhi special status". 3 excluded subjects: P-L-O (Police, Land, Order). Added by 69th Amendment 1991.',
+    cases:[{name:'NCT Delhi v Union of India (Constitution Bench)',year:'2018',held:'5-judge bench — Delhi elected govt has real power over all matters except the 3 excluded; LG cannot obstruct elected govt; must act on CoM advice.'},{name:'Govt of NCT Delhi v Union of India',year:'2023',held:'Services (including transfers of IAS officers) fall within the legislative/executive domain of Delhi govt — not within the 3 excluded subjects. Led to GNCTD Amendment Act 2023.'}],
+    recent:[{title:'GNCTD Amendment Act 2023',desc:'Parliament restored LG\'s control over services via statute after SC judgment. This is the most contested LG-vs-CM issue. The constitutional validity of this Amendment is pending before SC.'},{title:'New Assembly 2025',desc:'Delhi Assembly elections held February 2025 — BJP won after 27 years; AAP defeated.'}]
+  },
+  '239AB': {
+    clauses:[{label:'',text:'PROVISION IN CASE OF FAILURE OF CONSTITUTIONAL MACHINERY IN DELHI: If the President is satisfied that the administration of the NCT cannot be carried on in accordance with the constitutional provisions, he may suspend the operation of any provision of Art 239AA and make incidental provisions. (President\'s Rule equivalent for Delhi.)'}],
+    keywords:['President Rule equivalent for Delhi','Failure of constitutional machinery','Similar to Art 356 for States'],
+    mnemonic:'239AB = "Delhi\'s Art 356 equivalent" — President\'s Rule in Delhi.',
+    cases:[],
+    recent:[{title:'President Rule in Delhi',desc:'President\'s Rule was imposed in Delhi in 1991, 1998, and 2014 (briefly, before AAP formed govt).'}]
+  },
+  '239B': {
+    clauses:[{label:'',text:'POWER OF ADMINISTRATOR TO PROMULGATE ORDINANCES: When the Legislature of a UT (i.e. Puducherry) is NOT in session, the Administrator may promulgate Ordinances — with prior instructions from the PRESIDENT (unlike Governor who does not need prior Presidential approval). The Ordinance must be laid before the Legislature and lapses after 6 weeks of reassembly.'}],
+    keywords:['UT Administrator Ordinance','Prior Presidential instructions needed','Puducherry mainly','6-week lapse','Unlike Governor Ordinance (213)'],
+    mnemonic:'239B = "UT Ordinance needs PRESIDENT\'s prior approval" (unlike State Governor who acts independently).',
+    cases:[],
+    recent:[]
+  },
+  '240': {
+    clauses:[{label:'',text:'POWER OF PRESIDENT TO MAKE REGULATIONS FOR CERTAIN UTs: The President may make regulations for the PEACE, PROGRESS AND GOOD GOVERNMENT of certain UTs — specifically: Andaman & Nicobar Islands, Lakshadweep, Dadra & Nagar Haveli and Daman & Diu, Puducherry (when Legislature suspended). Such regulations have the force of Acts of Parliament.'}],
+    keywords:['Presidential regulations for UTs','Peace progress good government','Andaman & Nicobar','Lakshadweep','DNH & DD','Force of Parliamentary Act'],
+    mnemonic:'240 = "President makes regulations for specified UTs" (where there is no legislature).',
+    cases:[],
+    recent:[]
+  },
+  '241': {
+    clauses:[{label:'',text:'HIGH COURTS FOR UNION TERRITORIES: Parliament may by law constitute a HC for a UT, or declare any court in a UT to be a HC for all or any purposes. Currently: Delhi has its own HC (Delhi HC). Other UTs are under the jurisdiction of adjoining State HCs (e.g. Bombay HC covers DNH & DD; Madras HC covers Puducherry; Calcutta HC covers Andaman & Nicobar; Kerala HC covers Lakshadweep).'}],
+    keywords:['UT HC by Parliament law','Delhi HC (own HC)','Other UTs under adjoining state HCs','No HC for Ladakh (J&K HC)'],
+    mnemonic:'241 = "Parliament creates HC for UTs". Only Delhi has its own dedicated HC.',
+    cases:[],
+    recent:[{title:'Jammu & Kashmir HC',desc:'After J&K became a UT, the existing J&K High Court continues to function with jurisdiction over both J&K UT and Ladakh UT.'}]
+  },
+
+  // ───────── PART VI: THE STATES (152–237) ─────────
+  '152': {
+    clauses:[{label:'',text:'DEFINITION: In this Part, unless the context otherwise requires, "State" does NOT include the State of Jammu and Kashmir. (Note: This exception is now redundant after the abrogation of Art 370 in 2019 and J&K becoming a UT.)'}],
+    keywords:['Definition of State in Part VI','J&K excluded originally','Now redundant post-2019','UTs not covered'],
+    mnemonic:'152 = "Defines State in Part VI — J&K was special (now redundant after 370 abrogation)".',
+    cases:[],
+    recent:[{title:'Post-2019',desc:'After J&K became a Union Territory (Oct 2019), the Art 152 exclusion is practically redundant. J&K UT now governed by Part VIII.'}]
+  },
+  '153': {
+    clauses:[{label:'',text:'GOVERNORS OF STATES: There shall be a Governor for each State. One person may be appointed Governor of TWO OR MORE States simultaneously. (Added proviso by 7th Amendment, 1956.)'}],
+    keywords:['Governor for each State','One person can be Governor of 2+ States','Constitutional head of State','7th Amendment 1956'],
+    mnemonic:'153 = "One Governor, possibly more States" (cost-saving provision since 7th Amend).',
+    cases:[],
+    recent:[]
+  },
+  '154': {
+    clauses:[{label:'',text:'EXECUTIVE POWER OF STATE: The EXECUTIVE POWER of the State is vested in the GOVERNOR and shall be exercised by him either directly or through officers subordinate to him — in accordance with the Constitution. (Mirrors Art 53 for the Union.)'}],
+    keywords:['Executive power of State','Vested in Governor','Exercised via CoM','Mirrors Art 53'],
+    mnemonic:'154 = "State executive power in Governor" (mirrors Art 53 for President).',
+    cases:[{name:'Shamsher Singh v State of Punjab',year:'1974',held:'Governor is a constitutional head; acts on the aid and advice of the State Council of Ministers, except in constitutionally specified discretionary matters.'}],
+    recent:[]
+  },
+  '155': {
+    clauses:[{label:'',text:'APPOINTMENT OF GOVERNOR: The Governor of a State shall be appointed by the PRESIDENT by warrant under his hand and seal.'}],
+    keywords:['Governor appointed by President','Not elected','Agent of Centre','Pleasure of President (Art 156)'],
+    mnemonic:'155 = "President appoints Governor" (NOT elected — unlike US State Governors).',
+    cases:[{name:'B.P. Singhal v Union of India',year:'2010',held:'Governor can be removed by President (holds at pleasure), but not arbitrarily; there must be some reason — removal without any cause is justiciable.'}],
+    recent:[]
+  },
+  '156': {
+    clauses:[
+      {label:'156(1)',text:'The Governor shall hold office during the PLEASURE OF THE PRESIDENT.'},
+      {label:'156(2)',text:'The Governor may resign by writing to the President.'},
+      {label:'156(3)',text:'Subject to the foregoing, a Governor shall hold office for a term of FIVE YEARS from the date of entry.'}
+    ],
+    keywords:['5-year term','Pleasure of President','No fixed security of tenure','Can be removed anytime','B.P. Singhal case'],
+    mnemonic:'156 = "5 years BUT at President pleasure" — unlike judges, Governor has no fixed tenure guarantee.',
+    cases:[{name:'B.P. Singhal v Union of India',year:'2010',held:'Removal of Governor without reason is invalid; but standard of proof is low — the President need not assign reasons publicly.'}],
+    recent:[]
+  },
+  '157': {
+    clauses:[{label:'',text:'QUALIFICATIONS FOR APPOINTMENT AS GOVERNOR: (a) Must be a CITIZEN OF INDIA; (b) must have completed the age of 35 YEARS. (Unlike President, no requirement to qualify for Lok Sabha membership; must not hold any office of profit.)'}],
+    keywords:['Citizen of India','35 years minimum age','No Lok Sabha eligibility required','No office of profit'],
+    mnemonic:'157 = "35 years, Indian citizen" (simpler than President qualification at Art 58).',
+    cases:[],
+    recent:[]
+  },
+  '158': {
+    clauses:[
+      {label:'158(1)',text:'The Governor shall NOT be a member of either House of Parliament or of the Legislature of any State.'},
+      {label:'158(2)',text:'The Governor shall not hold any other OFFICE OF PROFIT.'},
+      {label:'158(3)',text:'The Governor is entitled, without payment of rent, to the use of the official RESIDENCE (Raj Bhavan) and such emoluments, allowances and privileges as Parliament may by law determine.'},
+      {label:'158(3A)',text:'Where the same person is appointed as Governor of two or more States, the emoluments are shared by those States in such proportion as the President determines.'}
+    ],
+    keywords:['No member of any legislature','No office of profit','Raj Bhavan (rent free)','Emoluments charged on Consolidated Fund of State'],
+    mnemonic:'158 = "Governor conditions: no legislature, no profit, free Raj Bhavan".',
+    cases:[],
+    recent:[]
+  },
+  '159': {
+    clauses:[{label:'',text:'OATH OR AFFIRMATION BY GOVERNOR: Administered by the CHIEF JUSTICE of the High Court of the State (or the seniormost judge when CJ is unavailable). The oath is to faithfully execute the office and to preserve, protect and defend the Constitution and the law.'}],
+    keywords:['Oath by Chief Justice of HC','Preserve protect defend Constitution','Administered by CJ of HC'],
+    mnemonic:'159 = "Governor oath by CJ of HC". Compare: President oath by CJ of SC (Art 60).',
+    cases:[],
+    recent:[]
+  },
+  '161': {
+    clauses:[{label:'',text:'PARDONING POWER OF GOVERNOR: Power to grant pardons, reprieves, respites, remissions or to suspend/remit/commute sentences of any person convicted of any offence against any law relating to a matter to which the EXECUTIVE POWER OF THE STATE EXTENDS. Governor CANNOT pardon death sentences (that is the President under Art 72) or court-martial sentences.'}],
+    keywords:['Governor pardon power','Only State law offences','CANNOT pardon death sentence','CANNOT pardon court-martial','Narrower than President (Art 72)'],
+    mnemonic:'161 = "Governor pardon — narrow". DEATH sentences → Art 72 (President only).',
+    cases:[{name:'Epuru Sudhakar v Govt of AP',year:'2006',held:'Governor\'s pardon power under Art 161 is subject to judicial review if exercised arbitrarily or on irrelevant grounds.'}],
+    recent:[]
+  },
+  '163': {
+    clauses:[
+      {label:'163(1)',text:'COUNCIL OF MINISTERS: There shall be a CoM with the CHIEF MINISTER at the head to AID AND ADVISE the Governor in the exercise of his functions — EXCEPT in so far as the Governor is required to exercise functions in his DISCRETION.'},
+      {label:'163(2)',text:'If any question arises whether a matter is within the Governor\'s discretion, the decision of the Governor shall be FINAL and the validity of anything done by the Governor shall NOT be called in question on the ground that he ought or ought not to have acted in his discretion.'},
+      {label:'163(3)',text:'The advice tendered by Ministers to the Governor shall NOT be inquired into by any court.'}
+    ],
+    keywords:['CoM aids Governor','Chief Minister heads','Governor discretion (limited)','Advice not justiciable','Key difference from Art 74'],
+    mnemonic:'163 = "State CoM + Governor discretion". Key: Governor HAS some discretion (unlike President who has almost none).',
+    cases:[{name:'Nabam Rebia v Deputy Speaker',year:'2016',held:'Governor cannot summon/prorogue Assembly at his own discretion to help the ruling party; Governor bound by CM advice in ordinary matters.'},{name:'Shivraj Singh Chouhan v Speaker MP',year:'2020',held:'Floor test is the only way to determine majority; Governor cannot be partisan.'}],
+    recent:[{title:'Governor vs State Govt disputes',desc:'Several Governors (Tamil Nadu, Kerala, Telangana, West Bengal) had conflicts with elected governments (2021-24) over withholding Bills and creating constitutional crises — SC intervened in many cases.'}]
+  },
+  '164': {
+    clauses:[
+      {label:'164(1)',text:'The CHIEF MINISTER shall be appointed by the Governor; other Ministers shall be appointed by the Governor on the advice of the Chief Minister. The Ministers in certain States (Chhattisgarh, Jharkhand, MP, Odisha) must have a Minister in charge of tribal welfare.'},
+      {label:'164(1A)',text:'Total number of Ministers (incl. CM) shall NOT exceed 15% of the total strength of the Legislative Assembly (minimum 12). (91st Amendment, 2003.)'},
+      {label:'164(2)',text:'The CoM shall be COLLECTIVELY RESPONSIBLE to the Legislative Assembly of the State.'},
+      {label:'164(3)',text:'A Minister who is not a member of the Legislature for a period of SIX CONSECUTIVE MONTHS shall cease to be a Minister.'}
+    ],
+    keywords:['CM appointed by Governor','15% cap on Ministers (91st Amend)','Collective responsibility to Vidhan Sabha','6-month non-membership = disqualification','Tribal welfare minister in 4 states'],
+    mnemonic:'164 = "State CoM = 15% cap (91st) + collective responsibility + 6-month rule". Mirrors Art 75 for Centre.',
+    cases:[],
+    recent:[]
+  },
+  '165': {
+    clauses:[{label:'',text:'ADVOCATE-GENERAL FOR THE STATE: The Governor appoints a person qualified to be a High Court judge as ADVOCATE-GENERAL (AG). The AG is the highest law officer of the State; holds office during the pleasure of the Governor; right of audience in all State courts; can speak (but not vote) in State Legislature.'}],
+    keywords:['Advocate-General','HC judge qualification','Appointed by Governor','Highest law officer of State','No vote in Legislature'],
+    mnemonic:'165 = "State AG — parallel to Union AG (Art 76)". Pleasure of Governor, can speak not vote.',
+    cases:[],
+    recent:[]
+  },
+  '168': {
+    clauses:[{label:'',text:'CONSTITUTION OF LEGISLATURE OF STATES: For every State there shall be a Legislature consisting of the GOVERNOR and — (a) in Andhra Pradesh, Maharashtra, Bihar, Karnataka, Telangana, Uttar Pradesh: two Houses (BICAMERAL); (b) other States: one House (UNICAMERAL). States with two Houses: Legislative Council (Vidhan Parishad) + Legislative Assembly (Vidhan Sabha).'}],
+    keywords:['6 bicameral states','AP, Maharashtra, Bihar, Karnataka, Telangana, UP','Vidhan Sabha + Vidhan Parishad','Governor part of Legislature'],
+    mnemonic:'168 = "6 bicameral states: A-M-B-K-T-U (A Mango Brings Kids To Uttar Pradesh)".',
+    cases:[],
+    recent:[{title:'J&K Legislative Council',desc:'J&K had a bicameral legislature which was abolished when it became a UT in 2019.'}]
+  },
+  '169': {
+    clauses:[{label:'',text:'ABOLITION OR CREATION OF LEGISLATIVE COUNCILS: Parliament may by law create or abolish the Legislative Council of a State if the Legislative Assembly of that State passes a resolution to that effect by a special majority (majority of total membership + 2/3 of present & voting). Such law is NOT deemed a constitutional amendment under Art 368.'}],
+    keywords:['Parliament creates/abolishes LC','State Assembly resolution (special majority)','Not Art 368 amendment','Simple majority in Parliament sufficient'],
+    mnemonic:'169 = "Parliament can add/remove Vidhan Parishad" on State Assembly resolution.',
+    cases:[],
+    recent:[{title:'Andhra Pradesh',desc:'Andhra Pradesh Legislative Council was abolished in 2020 by the Assembly passing a resolution, then restored in 2024 after change of government.'}]
+  },
+  '170': {
+    clauses:[{label:'',text:'COMPOSITION OF LEGISLATIVE ASSEMBLIES (Vidhan Sabha): Not less than 60 and not more than 500 ELECTED MEMBERS from territorial constituencies. EXCEPTION: Sikkim and Goa — less than 60 members. Governor nominates 1 Anglo-Indian (now abolished by 104th Amendment, 2020). 5-year term.'}],
+    keywords:['60 to 500 members','Elected by direct election','60-member exception: Sikkim, Goa','Anglo-Indian abolished (104th)','5-year term'],
+    mnemonic:'170 = "Vidhan Sabha: 60–500 members". Exceptions: Sikkim & Goa (under 60).',
+    cases:[],
+    recent:[]
+  },
+  '171': {
+    clauses:[
+      {label:'171(1)',text:'COMPOSITION OF LEGISLATIVE COUNCILS (Vidhan Parishad): Total members NOT MORE THAN 1/3 of total Vidhan Sabha seats; and NOT LESS THAN 40.'},
+      {label:'171(2)',text:'ELECTION: 1/3 by MLAs; 1/12 by graduates (of 3+ years standing) in the State; 1/12 by teachers (secondary schools or above, 3+ years); 1/6 by members of Local Bodies; 1/6 nominated by Governor (literature, science, art, co-operative movement, social service).'}
+    ],
+    keywords:['1/3 of Vidhan Sabha (max)','Minimum 40 members','5 categories: MLAs + graduates + teachers + local bodies + Governor','Permanent house (1/3 retire every 2 years)','6-year term'],
+    mnemonic:'171 = "Vidhan Parishad: max 1/3 of Assembly, min 40. MGTLG — MLAs, Graduates, Teachers, Local bodies, Governor-nominated".',
+    cases:[],
+    recent:[]
+  },
+  '200': {
+    clauses:[{label:'',text:'ASSENT TO BILLS: When a Bill passed by the State Legislature is presented to the Governor, the Governor shall — (a) give assent; or (b) withhold assent; or (c) return it for reconsideration (not a Money Bill); or (d) RESERVE the Bill for consideration of the PRESIDENT. A Bill reserved for the President may receive his assent/withholding.'}],
+    keywords:['Governor assent options','4 options: assent/withhold/return/reserve','President considers reserved bills','Money Bills cannot be returned'],
+    mnemonic:'200 = "Governor 4 options" — Assent, Withhold, Return (not Money Bill), Reserve for President.',
+    cases:[{name:'In Re: Governor of Tamil Nadu (2023)',year:'2023',held:'SC held Governor cannot sit on Bills indefinitely; must act within reasonable time. Directed to decide on 10 pending Bills.'}],
+    recent:[{title:'Governor controversy (2022-24)',desc:'Governors of Kerala, Tamil Nadu, Telangana, Punjab withheld/sat on Bills for months — SC in 2023 ruled Governor cannot pocket-veto Bills; must act promptly.'}]
+  },
+  '201': {
+    clauses:[{label:'',text:'BILLS RESERVED FOR CONSIDERATION OF PRESIDENT: When a Bill is reserved by the Governor for the President, the President shall — (a) give assent; (b) withhold assent; or (c) direct the Governor to return it (not a Money Bill) for reconsideration. If re-passed by the State Legislature, the President is NOT bound to give assent.'}],
+    keywords:['President can withhold assent to State bills','3 options for President','No override mechanism for States','Pocket veto possible'],
+    mnemonic:'201 = "President has final say on reserved State Bills" — no automatic override.',
+    cases:[],
+    recent:[]
+  },
+  '202': {
+    clauses:[{label:'',text:'ANNUAL FINANCIAL STATEMENT (STATE BUDGET): The Governor causes the annual statement of estimated receipts and expenditure (State Budget) to be laid before both Houses of State Legislature. Distinguishes CHARGED (non-votable) from VOTED (votable) expenditure.'}],
+    keywords:['State Budget','Annual Financial Statement','Charged vs Voted expenditure','Consolidated Fund of State'],
+    mnemonic:'202 = "State Budget" (mirrors Art 112 for Union Budget).',
+    cases:[],
+    recent:[]
+  },
+  '213': {
+    clauses:[{label:'',text:'POWER OF GOVERNOR TO PROMULGATE ORDINANCES: When State Legislature is NOT in session, the Governor may promulgate Ordinances — same force as a State Act; must be laid before the Legislature; lapses SIX WEEKS after Assembly reassembles. Cannot be promulgated on matters on which State Legislature has no power; CANNOT be repromulgated repeatedly to bypass Legislature.'}],
+    keywords:['Governor Ordinance','Legislature not in session','6-week lapse','Same force as Act','Cannot bypass Legislature (Krishna Kumar 2017)'],
+    mnemonic:'213 = "Governor Ordinance" (mirrors Art 123 for President). 6-week rule; no re-promulgation bypass.',
+    cases:[{name:'D.C. Wadhwa v State of Bihar',year:'1987',held:'"Ordinance raj" — repromulgation of Ordinances to bypass Legislature is unconstitutional.'},{name:'Krishna Kumar Singh v State of Bihar',year:'2017',held:'7-judge bench confirmed re-promulgation is fraud on Constitution; Ordinances subject to judicial review.'}],
+    recent:[]
+  },
+  '214': {
+    clauses:[{label:'',text:'HIGH COURTS FOR STATES: There shall be a HIGH COURT for each State. (One HC can also serve multiple states — e.g. Punjab & Haryana HC at Chandigarh, Bombay HC covers Maharashtra, Goa, Dadra & Nagar Haveli and Daman & Diu.)'}],
+    keywords:['One HC per State (generally)','Shared HCs for some states','Punjab & Haryana HC','Bombay HC (4 jurisdictions)'],
+    mnemonic:'214 = "High Court for each State". Some HCs are shared.',
+    cases:[],
+    recent:[]
+  },
+  '215': {
+    clauses:[{label:'',text:'HIGH COURTS TO BE COURTS OF RECORD: Every HC is a court of record — its decisions have evidentiary value; it has power to punish for CONTEMPT OF COURT (of itself). (Mirrors Art 129 for SC.)'}],
+    keywords:['Court of record','Contempt power','Evidentiary value','Mirrors Art 129 (SC)'],
+    mnemonic:'215 = "HC = court of record" (129 = SC; 215 = HC).',
+    cases:[],
+    recent:[]
+  },
+  '216': {
+    clauses:[{label:'',text:'CONSTITUTION OF HIGH COURTS: Every HC shall consist of a Chief Justice and such other judges as the President may from time to time deem it necessary to appoint.'}],
+    keywords:['Chief Justice + judges','President appoints HC judges','Collegium recommendation','No fixed number'],
+    mnemonic:'216 = "HC composition — CJ + judges appointed by President".',
+    cases:[],
+    recent:[]
+  },
+  '217': {
+    clauses:[
+      {label:'217(1)',text:'APPOINTMENT OF HC JUDGES: Appointed by the President after consultation with (a) the CJI; (b) the Governor of the State; and (c) the CJ of the HC (except for CJ appointment). Actually done via the COLLEGIUM system.'},
+      {label:'217(1A)',text:'A person recommended for appointment as HC judge must be BETWEEN 35 AND 62 YEARS of age.'},
+      {label:'Retirement',text:'HC judges retire at 62 years (compare: SC judges at 65 years). They can be appointed as ad hoc judges of the SC under Art 127.'}
+    ],
+    keywords:['HC judge appointment','Collegium + President','Retire at 62 (vs 65 for SC)','Minimum 35 years','Consultation with CJI + Governor + CJ of HC'],
+    mnemonic:'217 = "HC judges retire at 62" (SC at 65). Collegium recommends.',
+    cases:[{name:'Second Judges Case (SCAORA v UOI)',year:'1993',held:'Established collegium system; "consultation" with CJI means concurrence; applies to HC appointments under Art 217 too.'}],
+    recent:[]
+  },
+  '219': {
+    clauses:[{label:'',text:'OATH OR AFFIRMATION BY HC JUDGES: Every HC judge shall, before entering office, make and subscribe an oath/affirmation before the GOVERNOR OF THE STATE (or a person appointed by the Governor). For the Chief Justice: oath administered by the Governor.'}],
+    keywords:['HC Judge oath','Administered by Governor','Preserve protect defend Constitution'],
+    mnemonic:'219 = "HC judges oath before Governor". Compare: SC judges (124) take oath before President.',
+    cases:[],
+    recent:[]
+  },
+  '220': {
+    clauses:[{label:'',text:'RESTRICTION ON PRACTICE AFTER BEING A PERMANENT JUDGE: A person who has held office as a PERMANENT JUDGE of an HC shall not plead or act in any court or before any authority in India EXCEPT the SC and the OTHER HCs.'}],
+    keywords:['No practice in own HC after retirement','Can practice in SC and other HCs','Prevents conflict of interest'],
+    mnemonic:'220 = "Retired HC judge cannot practice in SAME HC" — can go to SC or OTHER HCs.',
+    cases:[],
+    recent:[]
+  },
+  '226': {
+    clauses:[
+      {label:'226(1)',text:'POWER OF HIGH COURTS TO ISSUE WRITS: Every HC shall have power to issue directions, orders or WRITS — including habeas corpus, mandamus, prohibition, quo warranto and certiorari — to ANY PERSON OR AUTHORITY (including the Government) for enforcement of FRs AND for any OTHER purpose.'},
+      {label:'Key difference from Art 32',text:'HC writ jurisdiction (226) is WIDER than SC (Art 32) — it covers not only FR violations but ANY legal right. HC can refuse to exercise discretion where adequate alternate remedy exists.'}
+    ],
+    keywords:['HC writ jurisdiction','5 writs','Wider than Art 32','For FRs AND any other purpose','Can refuse if alternate remedy','Concurrent with SC under Art 32'],
+    mnemonic:'226 = "HC writs — wider than Art 32". HC: any right; SC (32): only Fundamental Rights.',
+    cases:[{name:'Whirlpool Corporation v Registrar of Trademarks',year:'1998',held:'HC can entertain a writ under Art 226 even when alternate remedy exists in cases of fundamental rights violation, natural justice breach, or where the order is wholly without jurisdiction.'},{name:'L. Chandra Kumar v Union of India',year:'1997',held:'Art 226 power of HC is part of basic structure; cannot be ousted by Parliament even for tribunal orders.'}],
+    recent:[]
+  },
+  '227': {
+    clauses:[{label:'',text:'POWER OF SUPERINTENDENCE OVER ALL COURTS: Every HC shall have superintendence over ALL courts and tribunals within its territory (except courts constituted by Parliament by law). The HC may — call for returns; make general rules; prescribe forms; fix fees.'}],
+    keywords:['Superintendence over all courts','All courts in territory','Cannot superintend SC','Administrative + judicial supervision'],
+    mnemonic:'227 = "HC is the boss of all lower courts in its territory".',
+    cases:[{name:'Waryam Singh v Amarnath',year:'1954',held:'Art 227 gives HC wide supervisory jurisdiction — includes power to interfere when lower court acts without jurisdiction or commits grave error.'}],
+    recent:[]
+  },
+  '233': {
+    clauses:[{label:'',text:'APPOINTMENT OF DISTRICT JUDGES: District Judges in a State are appointed, posted and promoted by the Governor in consultation with the HC exercising jurisdiction over the State.'}],
+    keywords:['District Judge appointment','Governor + HC consultation','Subordinate judiciary','Most senior trial court judge'],
+    mnemonic:'233 = "District Judge — Governor appoints on HC advice".',
+    cases:[],
+    recent:[]
+  },
+  '235': {
+    clauses:[{label:'',text:'CONTROL OVER SUBORDINATE COURTS: The control over District Courts and other courts subordinate to the HC (excluding posting, promotion, grant of leave — that is the Governor\'s) is VESTED IN THE HC. The HC supervises the functioning of all subordinate courts.'}],
+    keywords:['HC controls subordinate courts','District courts under HC','Supervision of functioning','Governor posts/promotes District Judges'],
+    mnemonic:'235 = "HC controls subordinate courts" (Governor controls District Judge appointments).',
+    cases:[],
+    recent:[]
+  },
+
+  // ───────── PART IX: THE PANCHAYATS (243–243O) — 73rd Amendment 1992 ─────────
+  '243': {
+    clauses:[
+      {label:'Definitions',text:'DEFINITIONS under Part IX:'},
+      {label:'"District"',text:'A district in a State.'},
+      {label:'"Gram Sabha"',text:'A body consisting of ALL persons registered as voters in the electoral rolls for a village-level Panchayat area.'},
+      {label:'"Intermediate level"',text:'A level between village and district levels — the BLOCK/TALUK/MANDAL level Panchayat.'},
+      {label:'"Panchayat"',text:'An institution of self-government for rural areas at village, intermediate or district level.'},
+      {label:'"Panchayat area"',text:'The territorial area of a Panchayat.'},
+      {label:'"Population"',text:'Population as ascertained at the LAST PRECEDING CENSUS (for purposes of Part IX).'},
+      {label:'"Village"',text:'A village specified by the Governor by public notification, or any other area deemed a village.'}
+    ],
+    keywords:['Definitions for Part IX','Gram Sabha = all registered voters','Three tiers','73rd Amendment 1992','Art 40 DPSP realised'],
+    mnemonic:'243 = "Defines Panchayat structure". Gram Sabha = ALL voters (not elected members). Inspired by Art 40 DPSP.',
+    cases:[{name:'State of Uttaranchal v Balwant Singh Chaufal',year:'2010',held:'Gram Sabha is the foundation of Panchayati Raj; State cannot sideline it in decision-making.'}],
+    recent:[{title:'73rd Amendment (1992)',desc:'Added Part IX (Arts 243-243O) and 11th Schedule; gave constitutional status to PRIs. Came into force 24 April 1993.'}]
+  },
+  '243A': {
+    clauses:[{label:'',text:'GRAM SABHA: A Gram Sabha may exercise such POWERS and perform such FUNCTIONS at the village level as the Legislature of a State may, by law, provide.'}],
+    keywords:['Gram Sabha powers','Village level','State law decides powers','Foundation of PRI','All adult voters'],
+    mnemonic:'243A = "Gram Sabha" — the bedrock of PRIs. Actual powers = what the State gives.',
+    cases:[{name:'Nandini Sundar v State of Chhattisgarh',year:'2011',held:'Gram Sabha consent is necessary for decisions affecting tribal communities in Scheduled Areas.'}],
+    recent:[{title:'PESA Act 1996',desc:'Panchayats (Extension to Scheduled Areas) Act 1996 gives Gram Sabhas in Scheduled Areas (5th Schedule) special powers: consent for land acquisition, control over minor forest produce, regulation of money-lending, management of natural resources.'}]
+  },
+  '243B': {
+    clauses:[{label:'',text:'CONSTITUTION OF PANCHAYATS: There shall be constituted in every State, Panchayats at the VILLAGE, INTERMEDIATE and DISTRICT levels. EXCEPTION: A State with a population not exceeding 20 LAKH may not constitute Intermediate-level Panchayats.'}],
+    keywords:['Three-tier structure','Village-Block-District','Exception: pop under 20 lakh (no intermediate)','Mandatory to constitute'],
+    mnemonic:'243B = "Build three tiers" — Village, Block/Taluk (Intermediate), District. States under 20L population may skip intermediate.',
+    cases:[],
+    recent:[]
+  },
+  '243C': {
+    clauses:[
+      {label:'243C(1)',text:'COMPOSITION: Subject to Art 243C, the Legislature of a State may, by law, make provisions with respect to composition of Panchayats.'},
+      {label:'243C(2)',text:'All seats in a Panchayat shall be FILLED by persons CHOSEN BY DIRECT ELECTION from territorial constituencies.'},
+      {label:'243C(3)',text:'The Chairperson of the Panchayat and other members of State Legislature/Parliament may be given representation but without right to vote in Panchayat meetings (if not directly elected).'}
+    ],
+    keywords:['Direct election to all seats','Territorial constituencies','Chairperson representation','No voting right for non-elected members'],
+    mnemonic:'243C = "Composition — all seats by DIRECT election". No indirect/nominated seats (except ex-officio/Chairperson).',
+    cases:[],
+    recent:[]
+  },
+  '243D': {
+    clauses:[
+      {label:'243D(1)',text:'RESERVATION OF SEATS: Seats reserved for — (a) Scheduled Castes (SC) — in proportion to their population; (b) Scheduled Tribes (ST) — in proportion to their population.'},
+      {label:'243D(2)',text:'Not less than 1/3 of seats reserved for SCs & STs under 243D(1) shall be reserved for WOMEN.'},
+      {label:'243D(3)',text:'Not less than 1/3 of TOTAL SEATS in every Panchayat shall be reserved for WOMEN (including SC/ST women).'},
+      {label:'243D(4)',text:'Office of Chairperson at each level shall be reserved for SCs, STs and WOMEN in such manner as the State Legislature decides.'},
+      {label:'243D(5)',text:'Reservation under this article shall cease to have effect after the expiry of the period specified in Art 334.'}
+    ],
+    keywords:['SC/ST proportional reservation','1/3 women mandatory','Chairperson reservation','Rotation','Many states = 50% women','243D most exam-asked'],
+    mnemonic:'243D = "Reserved seats" → SC/ST proportional + WOMEN 1/3 minimum. 14 states have raised women quota to 50%.',
+    cases:[{name:'K. Krishna Murthy v Union of India',year:'2010',held:'Reservation for OBCs in local body elections is constitutionally valid; 243D does not prohibit it, but specific conditions must be met (triple test).'},{name:'Vikas Kishanrao Gawali v State of Maharashtra',year:'2021',held:'Triple test for OBC reservation in local bodies: (a) commission to collect data on OBC backwardness, (b) adequate representation, (c) total reservation not to exceed 50%.'}],
+    recent:[{title:'OBC reservation in local bodies',desc:'SC laid down TRIPLE TEST in 2021: (1) empirical inquiry by dedicated commission; (2) adequate representation inadequate; (3) total reservation under 50%. Many states failed this test initially.'}]
+  },
+  '243E': {
+    clauses:[{label:'',text:'DURATION OF PANCHAYATS: Every Panchayat shall continue for FIVE YEARS from the date appointed for its first meeting; no longer. Dissolution: a Panchayat may be dissolved before its term expires, but ELECTIONS must be held BEFORE the expiry of 6 MONTHS from dissolution, and the reconstituted body serves only the REMAINDER of the 5-year term.'}],
+    keywords:['5-year term','Elections within 6 months of dissolution','Remainder of term only','Mandatory elections'],
+    mnemonic:'243E = "5-year term; dissolve → election in 6 months for leftover term".',
+    cases:[],
+    recent:[]
+  },
+  '243F': {
+    clauses:[{label:'',text:'DISQUALIFICATIONS: A person shall be disqualified from being chosen/continuing as a member of a Panchayat if he is so disqualified under any law for the time being in force for elections to the Legislature of the State. MINIMUM AGE: 21 years (not 25 as for Lok Sabha). Disputes on disqualification: decided by authority prescribed by State Legislature.'}],
+    keywords:['Minimum age 21','State law disqualification','Not 25 as for Lok Sabha','Dispute → State-prescribed authority'],
+    mnemonic:'243F = "21 years minimum age" for Panchayat (compare: 25 for Lok Sabha, 30 for Rajya Sabha).',
+    cases:[],
+    recent:[]
+  },
+  '243G': {
+    clauses:[{label:'',text:'POWERS, AUTHORITY AND RESPONSIBILITIES OF PANCHAYATS: The Legislature of a State may, by law, endow Panchayats with such powers and authority as may be necessary to enable them to function as INSTITUTIONS OF SELF-GOVERNMENT. In particular, preparation of plans and implementation of schemes for ECONOMIC DEVELOPMENT and SOCIAL JUSTICE — including the 29 matters in the ELEVENTH SCHEDULE.'}],
+    keywords:['Institutions of self-government','State may devolve powers','Economic development & social justice','11th Schedule 29 subjects','Key word: MAY (not mandatory)'],
+    mnemonic:'243G = "G for Governance" — Panchayats as self-government units. State MAY devolve 11th Schedule subjects (not mandatory).',
+    cases:[],
+    recent:[]
+  },
+  '243H': {
+    clauses:[{label:'',text:'POWERS TO IMPOSE TAXES: The Legislature of a State may, by law, authorise a Panchayat to levy, collect and appropriate taxes, duties, tolls and fees; assign to Panchayats any taxes/duties/fees collected by the State; provide grants-in-aid from the Consolidated Fund of the State.'}],
+    keywords:['Panchayat taxation power','State grants power by law','Grants-in-aid from Consolidated Fund','Financial autonomy'],
+    mnemonic:'243H = "H for Has money" — Panchayat financial powers (State must enable it).',
+    cases:[],
+    recent:[]
+  },
+  '243I': {
+    clauses:[{label:'',text:'CONSTITUTION OF FINANCE COMMISSION: The Governor shall, within 1 YEAR of the 73rd Amendment commencement, and thereafter at the expiry of every FIVE YEARS, constitute a FINANCE COMMISSION to review the financial position of Panchayats and recommend distribution of taxes/duties/fees between State and Panchayats.'}],
+    keywords:['State Finance Commission (SFC)','Every 5 years','Governor constitutes','Recommend financial devolution'],
+    mnemonic:'243I = "I for Income review" — SFC every 5 years, like Central Finance Commission.',
+    cases:[],
+    recent:[]
+  },
+  '243J': {
+    clauses:[{label:'',text:'AUDIT OF ACCOUNTS OF PANCHAYATS: The Legislature of a State may, by law, make provisions with respect to the maintenance of accounts by Panchayats and auditing of such accounts.'}],
+    keywords:['Audit of Panchayat accounts','State law provides','Financial accountability'],
+    mnemonic:'243J = "J for Journal/accounts audit".',
+    cases:[],
+    recent:[]
+  },
+  '243K': {
+    clauses:[
+      {label:'243K(1)',text:'ELECTIONS TO PANCHAYATS: The superintendence, direction and control of the preparation of electoral rolls and conduct of all elections to Panchayats shall be vested in the STATE ELECTION COMMISSION (SEC).'},
+      {label:'243K(2)',text:'The State Election Commissioner shall be appointed by the GOVERNOR and can be removed only in the manner and on the grounds as a HIGH COURT JUDGE.'}
+    ],
+    keywords:['State Election Commission','Panchayat elections','Governor appoints SEC','Removal like HC judge','Independent body'],
+    mnemonic:'243K = "K for Kamdaar (election officer)" — SEC for Panchayat elections. Compare: Art 324 = Election Commission of India for national/state elections.',
+    cases:[{name:'Kishansing Tomar v Municipal Corporation Ahmedabad',year:'2006',held:'State Election Commission is independent; State cannot interfere in election schedule.'}],
+    recent:[]
+  },
+  '243L': {
+    clauses:[{label:'',text:'APPLICATION TO UNION TERRITORIES: The President may, by public notification, direct that provisions of this Part shall apply to any Union Territory with such exceptions/modifications as he specifies.'}],
+    keywords:['Part IX → UTs','President extends','With modifications'],
+    mnemonic:'243L = "L for Large extension to UTs".',
+    cases:[],
+    recent:[]
+  },
+  '243M': {
+    clauses:[{label:'',text:'PART NOT TO APPLY TO CERTAIN AREAS: Art 243B-243O do NOT apply to — (a) Scheduled Areas under 5th Schedule; (b) Tribal Areas under 6th Schedule (Assam, Meghalaya, Mizoram, Tripura); (c) the hill districts of Manipur (for which District Councils exist); (d) Darjeeling (West Bengal). Parliament may extend with modifications.'}],
+    keywords:['Exemptions from Part IX','Scheduled Areas (5th Schedule)','6th Schedule tribal areas','Manipur hill districts','Darjeeling'],
+    mnemonic:'243M = "M for Minus areas" — excluded from Part IX.',
+    cases:[],
+    recent:[]
+  },
+  '243N': {
+    clauses:[{label:'',text:'CONTINUANCE OF EXISTING LAWS: All Panchayats/laws in existence immediately before the commencement of the 73rd Amendment shall continue for 1 YEAR or until altered/repealed by a competent legislature, whichever is earlier.'}],
+    keywords:['Continuance of existing laws','1-year transition','73rd Amendment commencement'],
+    mnemonic:'243N = "N for Now → 1-year transition".',
+    cases:[],
+    recent:[]
+  },
+  '243O': {
+    clauses:[{label:'',text:'BAR TO INTERFERENCE BY COURTS IN ELECTORAL MATTERS: Courts shall NOT interfere in electoral matters relating to Panchayats — (a) election programme/schedule; (b) questioning election validity except by an election petition. (Mirrors Art 329 for Parliament/State Assemblies.)'}],
+    keywords:['Bar to court interference','Election petition only','No injunction against elections','Mirrors Art 329'],
+    mnemonic:'243O = "O for Off-limits to courts" during elections.',
+    cases:[],
+    recent:[]
+  },
+
+  // ───────── PART IX-A: THE MUNICIPALITIES (243P–243ZG) — 74th Amendment 1992 ─────────
+  '243P': {
+    clauses:[
+      {label:'Definitions',text:'DEFINITIONS under Part IX-A:'},
+      {label:'"Committee"',text:'A Ward Committee or other committee constituted under Art 243S.'},
+      {label:'"District"',text:'A district in a State.'},
+      {label:'"Metropolitan area"',text:'An area having a population of 10 LAKH OR MORE in one or more districts; notified by the Governor.'},
+      {label:'"Municipal area"',text:'The territorial area of a Municipality as notified by the Governor.'},
+      {label:'"Municipality"',text:'An institution of self-government constituted under Art 243Q.'},
+      {label:'"Transitional area" / "Smaller urban area" / "Larger urban area"',text:'As specified by the Governor having regard to population, density of population, revenue, percentage of employment in non-agricultural activities, and economic importance.'}
+    ],
+    keywords:['Definitions Part IX-A','Metropolitan area ≥10 lakh pop','74th Amendment 1992','Urban Local Bodies','Transitional/Smaller/Larger urban areas'],
+    mnemonic:'243P = "P for Pattanam/Patnam (city) definitions". Metropolitan area = 10 lakh+ population.',
+    cases:[],
+    recent:[]
+  },
+  '243Q': {
+    clauses:[
+      {label:'243Q(1)',text:'CONSTITUTION OF MUNICIPALITIES: Three types of ULBs: (a) NAGAR PANCHAYAT for a TRANSITIONAL AREA (rural→urban); (b) MUNICIPAL COUNCIL for a SMALLER URBAN AREA; (c) MUNICIPAL CORPORATION for a LARGER URBAN AREA.'},
+      {label:'243Q(2)',text:'A Municipality may NOT be constituted in an industrial township where such functions are performed by an Industrial Township authority.'}
+    ],
+    keywords:['Three types of ULBs','Nagar Panchayat (transitional)','Municipal Council (smaller)','Municipal Corporation (larger)','Industrial township exception'],
+    mnemonic:'243Q = "Q for Quality of city" determines type. NP → MC → Corporation (smallest to largest). Industrial townships excluded.',
+    cases:[],
+    recent:[]
+  },
+  '243R': {
+    clauses:[{label:'',text:'COMPOSITION OF MUNICIPALITIES: All seats shall be filled by DIRECT ELECTION from wards. State may provide for representation of — persons with special knowledge (without voting rights); MPs, MLAs, MLCs from the area (without voting rights); Chairpersons of ward committees.'}],
+    keywords:['Direct election to all seats','Special knowledge persons (no vote)','MPs/MLAs (no vote)','Chairperson of wards'],
+    mnemonic:'243R = "R for Representation — direct election + non-voting special members".',
+    cases:[],
+    recent:[]
+  },
+  '243S': {
+    clauses:[{label:'',text:'WARD COMMITTEES: For a Municipality of population THREE LAKH OR MORE, there SHALL be constituted WARD COMMITTEES consisting of one or more wards within the territorial area. For smaller Municipalities, State may constitute other committees.'}],
+    keywords:['Ward Committees mandatory if pop ≥3 lakh','Below 3 lakh = State discretion','Ward Councillors chair'],
+    mnemonic:'243S = "S for Small wards" (Ward Committee = 3 lakh+ mandatory).',
+    cases:[],
+    recent:[]
+  },
+  '243T': {
+    clauses:[
+      {label:'243T(1)',text:'RESERVATION OF SEATS: SC seats reserved proportional to their population; ST seats reserved proportional to their population.'},
+      {label:'243T(3)',text:'NOT LESS THAN 1/3 of the total seats shall be reserved for WOMEN (including SC/ST women seats).'},
+      {label:'243T(4)',text:'Offices of Chairpersons of Municipalities shall be reserved for SCs, STs and WOMEN as State Legislature determines.'},
+      {label:'Note',text:'SAME pattern as Art 243D for Panchayats. Many states have raised women reservation to 50% in urban local bodies.'}
+    ],
+    keywords:['SC/ST proportional','1/3 women mandatory','Chairperson reservation','Same as 243D for Panchayats','50% in some states'],
+    mnemonic:'243T = "T for Town reservation" — mirrors 243D (Panchayats) for urban bodies.',
+    cases:[{name:'Vikas Kishanrao Gawali v State of Maharashtra',year:'2021',held:'Triple test for OBC reservation applies equally to Urban Local Bodies.'}],
+    recent:[]
+  },
+  '243U': {
+    clauses:[{label:'',text:'DURATION OF MUNICIPALITIES: Every Municipality shall continue for FIVE YEARS; dissolution before term: new election within SIX MONTHS; reconstituted body serves only REMAINDER of the 5-year term. (Same as Art 243E for Panchayats.)'}],
+    keywords:['5-year term','6-month election after dissolution','Remainder of term'],
+    mnemonic:'243U = "U for Urban 5-year term" (mirrors 243E for Panchayats).',
+    cases:[],
+    recent:[]
+  },
+  '243V': {
+    clauses:[{label:'',text:'DISQUALIFICATIONS: Same grounds as State Legislature disqualification laws. Minimum AGE: 21 years. Disputes: decided by authority prescribed by State Legislature.'}],
+    keywords:['21 years minimum age','State law disqualification','Same as 243F for Panchayats'],
+    mnemonic:'243V = "V for Vote age 21" in Municipalities (same as 243F).',
+    cases:[],
+    recent:[]
+  },
+  '243W': {
+    clauses:[{label:'',text:'POWERS, AUTHORITY AND RESPONSIBILITIES OF MUNICIPALITIES: The State Legislature MAY endow Municipalities with powers to function as INSTITUTIONS OF SELF-GOVERNMENT — including preparation of plans and implementation for ECONOMIC DEVELOPMENT and SOCIAL JUSTICE, for the 18 matters in the TWELFTH SCHEDULE.'}],
+    keywords:['Institutions of self-government','MAY devolve (not mandatory)','12th Schedule 18 subjects','Economic development & social justice'],
+    mnemonic:'243W = "W for Ward powers" — same as 243G but for urban. 12th Schedule 18 subjects.',
+    cases:[],
+    recent:[]
+  },
+  '243X': {
+    clauses:[{label:'',text:'POWER TO IMPOSE TAXES: State Legislature may authorise Municipalities to levy taxes, duties, tolls and fees; assign State taxes to Municipalities; grant-in-aid from Consolidated Fund of State. (Same as Art 243H for Panchayats.)'}],
+    keywords:['Municipality taxation','State enables by law','Grants-in-aid','Property tax (main source)'],
+    mnemonic:'243X = "X for eXchequer of Municipalities".',
+    cases:[],
+    recent:[]
+  },
+  '243Y': {
+    clauses:[{label:'',text:'FINANCE COMMISSION: The Finance Commission constituted under Art 243I (for Panchayats) shall ALSO review the financial position of Municipalities and make recommendations on financial devolution. (So the SAME State Finance Commission covers both Panchayats and Municipalities.)'}],
+    keywords:['Same SFC for Panchayats & Municipalities','Every 5 years','Governor constitutes','Financial position review'],
+    mnemonic:'243Y = "Y the same SFC" — one State Finance Commission covers both PRIs and ULBs.',
+    cases:[],
+    recent:[]
+  },
+  '243Z': {
+    clauses:[{label:'',text:'AUDIT OF ACCOUNTS: State Legislature may provide for maintenance and audit of Municipal accounts. (Same as Art 243J for Panchayats.)'}],
+    keywords:['Municipal audit','State law','Financial accountability'],
+    mnemonic:'243Z = "Z for Zero leakage — municipal accounts audit".',
+    cases:[],
+    recent:[]
+  },
+  '243ZA': {
+    clauses:[{label:'',text:'ELECTIONS TO MUNICIPALITIES: Superintendence, direction and control of all Municipal elections vested in the STATE ELECTION COMMISSION (same body as for Panchayats under 243K). SEC appointed by Governor; removed only like an HC judge.'}],
+    keywords:['SEC conducts Municipal elections','Same SEC as Panchayats','Governor appoints SEC','Removal like HC judge'],
+    mnemonic:'243ZA = "ZA for Zero-interference Area — SEC independent".',
+    cases:[],
+    recent:[]
+  },
+  '243ZD': {
+    clauses:[{label:'',text:'DISTRICT PLANNING COMMITTEE (DPC): There shall be constituted in every State at the DISTRICT LEVEL a DISTRICT PLANNING COMMITTEE to consolidate the plans prepared by Panchayats and Municipalities and to prepare a DRAFT DEVELOPMENT PLAN for the district as a whole. Composition: 4/5 (80%) of members elected by elected members of Panchayats & Municipalities; 1/5 by State Legislature.'}],
+    keywords:['DPC at District level','Consolidates Panchayat + Municipal plans','4/5 elected by local bodies','Draft development plan'],
+    mnemonic:'243ZD = "ZD for Zone-level Development Plan" — DPC integrates urban+rural planning.',
+    cases:[],
+    recent:[]
+  },
+  '243ZE': {
+    clauses:[{label:'',text:'METROPOLITAN PLANNING COMMITTEE (MPC): For every METROPOLITAN AREA (population 10 lakh+), there shall be constituted a METROPOLITAN PLANNING COMMITTEE to prepare a draft development plan. Composition: not less than 2/3 of members elected by Municipalities and Panchayats in the area.'}],
+    keywords:['MPC for metropolitan areas','Pop 10 lakh+','2/3 elected by local bodies','Draft development plan','Integrated planning'],
+    mnemonic:'243ZE = "ZE for Zero-to-mega city plan" — MPC for cities of 10L+ population.',
+    cases:[],
+    recent:[{title:'Delhi MPC',desc:'The National Capital Region Planning Board and Delhi Development Authority exist but the full MPC structure under 243ZE has not been fully operationalised in Delhi.'}]
+  },
+  '243ZF': {
+    clauses:[{label:'',text:'CONTINUANCE OF EXISTING LAWS: Existing Municipalities/laws continue for 1 YEAR from the commencement of the 74th Amendment or until altered by competent authority, whichever is earlier.'}],
+    keywords:['1-year transition','Existing laws continue','74th Amendment commencement'],
+    mnemonic:'243ZF = "ZF transition" — same as 243N for Panchayats.',
+    cases:[],
+    recent:[]
+  },
+  '243ZG': {
+    clauses:[{label:'',text:'BAR TO INTERFERENCE BY COURTS IN ELECTORAL MATTERS: No court shall interfere with the election schedule/programme or question an election except by an election petition. (Same as Art 243O for Panchayats and Art 329 for Parliament/Assembly elections.)'}],
+    keywords:['Bar to court interference','Election petition only','Mirrors 243O & Art 329'],
+    mnemonic:'243ZG = "ZG = Zero court Go" during Municipal elections.',
+    cases:[],
+    recent:[]
+  },
+
   // ───────── PART I: THE UNION AND ITS TERRITORY (1–4) ─────────
   '1': {
     clauses:[
@@ -1586,18 +2285,67 @@ const PARTS = [
 ];
 
 const SCHEDULES = [
-  {num:'1st',title:'States and Union Territories',desc:'Lists all 28 States and 8 Union Territories of India.',content:`<p>The First Schedule lists all the <strong>States and Union Territories</strong> of India. Originally 14 States and 6 UTs at adoption. Today: <strong>28 States and 8 Union Territories</strong>.</p><p><strong>States:</strong> Andhra Pradesh, Arunachal Pradesh, Assam, Bihar, Chhattisgarh, Goa, Gujarat, Haryana, Himachal Pradesh, Jharkhand, Karnataka, Kerala, Madhya Pradesh, Maharashtra, Manipur, Meghalaya, Mizoram, Nagaland, Odisha, Punjab, Rajasthan, Sikkim, Tamil Nadu, Telangana, Tripura, Uttar Pradesh, Uttarakhand, West Bengal.</p><p><strong>Union Territories:</strong> Andaman & Nicobar Islands, Chandigarh, Dadra & Nagar Haveli and Daman & Diu, Delhi (NCT), Jammu & Kashmir, Ladakh, Lakshadweep, Puducherry.</p><p>J&K and Ladakh were reorganised as UTs by the Jammu and Kashmir Reorganisation Act 2019, following the abrogation of Article 370.</p>`},
-  {num:'2nd',title:'Emoluments of Constitutional Functionaries',desc:'Salaries of President, Vice-President, Governors, Speakers, and Judges.',content:`<p>The Second Schedule contains provisions relating to emoluments, allowances and privileges of: President, Governors, Speaker/Deputy Speaker of Lok Sabha, Chairman/Deputy Chairman of Rajya Sabha, Speakers and Deputy Speakers of State Assemblies, Judges of Supreme Court and High Courts, and the Comptroller & Auditor-General.</p><p>These are charged on the <strong>Consolidated Fund of India</strong> and not subject to vote in Parliament, ensuring independence.</p>`},
-  {num:'3rd',title:'Forms of Oaths and Affirmations',desc:'Oaths for Union and State officials — Ministers, MPs, MLAs, Judges.',content:`<p>The Third Schedule prescribes forms of oaths/affirmations for: Union Ministers, Parliament candidates and members, Judges of Supreme Court, CAG, State Ministers, State Legislature candidates and members, and Judges of High Courts.</p><p>Each oath includes pledges to bear faith and allegiance to the Constitution, uphold sovereignty and integrity of India, and faithfully discharge duties of office.</p>`},
-  {num:'4th',title:'Allocation of Seats in Rajya Sabha',desc:'Seats allocated to each State and UT in the Council of States.',content:`<p>Allocates <strong>seats in the Rajya Sabha</strong> to States and UTs. Total strength: <strong>245 members</strong> (233 elected + 12 nominated by President for distinguished service in literature, science, art, social service).</p><p>Rajya Sabha is a <strong>permanent body</strong> — never dissolves. One-third of members retire every two years. Members elected by State Legislative Assembly members via Single Transferable Vote with proportional representation.</p>`},
-  {num:'5th',title:'Administration of Scheduled Areas (Non-NE)',desc:'Tribal regions in States other than the four NE States.',content:`<p>Deals with administration of Scheduled Areas and Scheduled Tribes in States other than Assam, Meghalaya, Tripura, and Mizoram.</p><p>Governor has special powers; Tribes Advisory Council must be established; Governor can modify or exempt Central/State laws in Scheduled Areas. President can declare/alter Scheduled Areas.</p><p><strong>States with Scheduled Areas:</strong> Andhra Pradesh, Telangana, Chhattisgarh, Gujarat, Himachal Pradesh, Jharkhand, Madhya Pradesh, Maharashtra, Odisha, Rajasthan.</p>`},
-  {num:'6th',title:'Administration of Tribal Areas in NE India',desc:'Autonomous districts and regional councils for Assam, Meghalaya, Tripura, Mizoram.',content:`<p>Provides for autonomous tribal administration in NE through Autonomous District Councils (ADCs) and Regional Councils with powers to make laws on land use, forests, money lending, customs.</p><p><strong>Key ADCs:</strong> Karbi Anglong, Dima Hasao, Bodoland (Assam); Khasi Hills, Jaintia Hills, Garo Hills (Meghalaya); Tripura Tribal Areas; Chakma, Mara, Lai (Mizoram).</p>`},
-  {num:'7th',title:'Distribution of Legislative Powers — Three Lists',desc:'Union List (97), State List (66), Concurrent List (47 subjects).',content:`<p>The Seventh Schedule divides legislative powers through three lists:</p><div class="amend-item"><span class="amend-num">Union List (List I) — 97 subjects</span><div class="amend-desc">Only Parliament can legislate: Defence, Foreign Affairs, Atomic Energy, Railways, Banking, Currency, Census, Post & Telegraph, Inter-state trade, Income Tax, Customs.</div></div><div class="amend-item"><span class="amend-num">State List (List II) — 66 subjects</span><div class="amend-desc">State Legislatures can legislate: Police, Public order, Land, Agriculture, Local Government, Public Health, Irrigation, Markets & Fairs.</div></div><div class="amend-item"><span class="amend-num">Concurrent List (List III) — 47 subjects</span><div class="amend-desc">Both Parliament and States can legislate. In case of conflict, Central law prevails: Education (post-42nd Amendment), Forests, Criminal law, Marriage, Bankruptcy, Labour.</div></div>`},
-  {num:'8th',title:'Official Languages — 22 Languages',desc:'22 languages recognised. Originally 14 in 1950, grew to 22 via amendments.',content:`<p>Lists the <strong>official languages recognised by the Constitution</strong>. Originally 14 languages in 1950, now <strong>22 languages</strong>.</p><div class="amend-item"><span class="amend-num">Original 14 (1950)</span><div class="amend-desc">Assamese, Bengali, Gujarati, Hindi, Kannada, Kashmiri, Malayalam, Marathi, Odia, Punjabi, Sanskrit, Tamil, Telugu, Urdu</div></div><div class="amend-item"><span class="amend-num">21st Amendment (1967)</span><div class="amend-desc">Added Sindhi → 15 languages</div></div><div class="amend-item"><span class="amend-num">71st Amendment (1992)</span><div class="amend-desc">Added Konkani, Manipuri, Nepali → 18 languages</div></div><div class="amend-item"><span class="amend-num">92nd Amendment (2003)</span><div class="amend-desc">Added Bodo, Dogri, Maithili, Santhali → 22 languages</div></div><div class="lang-grid"><div class="lang-item">1. Assamese</div><div class="lang-item">2. Bengali</div><div class="lang-item">3. Bodo ✦</div><div class="lang-item">4. Dogri ✦</div><div class="lang-item">5. Gujarati</div><div class="lang-item">6. Hindi</div><div class="lang-item">7. Kannada</div><div class="lang-item">8. Kashmiri</div><div class="lang-item">9. Konkani ✦</div><div class="lang-item">10. Maithili ✦</div><div class="lang-item">11. Malayalam</div><div class="lang-item">12. Manipuri ✦</div><div class="lang-item">13. Marathi</div><div class="lang-item">14. Nepali ✦</div><div class="lang-item">15. Odia</div><div class="lang-item">16. Punjabi</div><div class="lang-item">17. Sanskrit</div><div class="lang-item">18. Santhali ✦</div><div class="lang-item">19. Sindhi ✦</div><div class="lang-item">20. Tamil</div><div class="lang-item">21. Telugu</div><div class="lang-item">22. Urdu</div></div><p>✦ = added after original 14. Demands to include Tulu, Rajasthani, Bhojpuri are pending.</p>`},
-  {num:'9th',title:'Acts Protected from Judicial Review',desc:'284 Acts placed beyond challenge — mostly land reform laws.',content:`<p>Added by <strong>1st Amendment (1951)</strong> to protect land reform laws from challenge under Fundamental Rights. Now contains <strong>284 Acts</strong>.</p><p>Protects zamindari abolition Acts, land ceiling laws, and other socio-economic legislation.</p><p><strong>I.R. Coelho case (2007):</strong> The Supreme Court held that laws added after 24 April 1973 (Kesavananda Bharati date) can be challenged if they violate the basic structure of the Constitution.</p>`},
-  {num:'10th',title:'Anti-Defection Law',desc:'Disqualification of MPs/MLAs on grounds of defection — 52nd Amendment 1985.',content:`<p>Added by <strong>52nd Amendment (1985)</strong> to curb the "aaya ram gaya ram" political defection phenomenon.</p><p><strong>Grounds for disqualification:</strong> Voluntarily giving up party membership; voting against party whip without permission; independent member joining a party; nominated member joining a party after 6 months.</p><p><strong>Exception:</strong> Merger of at least two-thirds of legislature party members into another party.</p><p><strong>Decision authority:</strong> Speaker/Chairman of the House — challenged in Supreme Court in Keisham Meghachandra Singh case (2020) which held that the Speaker should not delay decisions.</p>`},
-  {num:'11th',title:'Powers of Panchayats — 29 Subjects',desc:'29 matters for Panchayati Raj institutions under 73rd Amendment 1992.',content:`<p>Added by <strong>73rd Amendment (1992)</strong>. Lists 29 subjects that may be entrusted to Panchayats.</p><ul><li>Agriculture, land improvement, soil conservation</li><li>Minor irrigation, water management</li><li>Animal husbandry, dairying, poultry, fisheries</li><li>Social forestry, minor forest produce</li><li>Small scale industries, khadi, village industries</li><li>Rural housing, drinking water, fuel and fodder</li><li>Roads, culverts, bridges, rural electrification</li><li>Non-conventional energy, poverty alleviation</li><li>Education (primary/secondary), libraries, cultural activities</li><li>Markets and fairs, health and sanitation, family welfare</li><li>Women and child development, social welfare</li><li>Public distribution system, maintenance of community assets</li></ul>`},
-  {num:'12th',title:'Powers of Municipalities — 18 Subjects',desc:'18 matters for Urban Local Bodies under 74th Amendment 1992.',content:`<p>Added by <strong>74th Amendment (1992)</strong>. Lists 18 subjects for Municipalities (ULBs).</p><ul><li>Urban planning and town planning</li><li>Regulation of land use and construction of buildings</li><li>Planning for economic and social development</li><li>Roads and bridges</li><li>Water supply (domestic, industrial, commercial)</li><li>Public health, sanitation, solid waste management</li><li>Fire services</li><li>Urban forestry, environmental protection</li><li>Welfare of weaker sections</li><li>Slum improvement and upgradation</li><li>Urban poverty alleviation</li><li>Urban amenities (parks, gardens, playgrounds)</li><li>Promotion of cultural, educational, aesthetic aspects</li><li>Burials/cremations and grounds</li><li>Cattle ponds, prevention of cruelty to animals</li><li>Vital statistics including birth/death registration</li><li>Public amenities (street lighting, parking, bus stops)</li><li>Regulation of slaughterhouses and tanneries</li></ul><p>Note: The <strong>Public Distribution System</strong> is in the 11th Schedule (Panchayats), while urban public amenities fall under the 12th Schedule — relevant to your PDS administration work!</p>`},
+  {num:'1st',title:'States and Union Territories',desc:'28 States + 8 UTs. Article 1 & 4.',mnemonic:'1st = "1 country, listed states". Linked to Art 1(2).',content:`<p>The First Schedule lists all <strong>States and Union Territories</strong> with their territories. Linked to <strong>Article 1</strong>. Originally <strong>14 States + 6 UTs</strong> (1950); today <strong>28 States + 8 UTs</strong>.</p>
+<div class="amend-item"><span class="amend-num">🔑 Key Point</span><div class="amend-desc">Changes to this Schedule (creating/renaming states) need only a SIMPLE MAJORITY under Art 4 — NOT the Art 368 amendment procedure.</div></div>
+<p><strong>28 States:</strong> Andhra Pradesh, Arunachal Pradesh, Assam, Bihar, Chhattisgarh, Goa, Gujarat, Haryana, Himachal Pradesh, Jharkhand, Karnataka, Kerala, Madhya Pradesh, Maharashtra, Manipur, Meghalaya, Mizoram, Nagaland, Odisha, Punjab, Rajasthan, Sikkim, Tamil Nadu, Telangana, Tripura, Uttar Pradesh, Uttarakhand, West Bengal.</p>
+<p><strong>8 UTs:</strong> Andaman & Nicobar, Chandigarh, Dadra & Nagar Haveli and Daman & Diu (merged 2020), Delhi (NCT), Jammu & Kashmir, Ladakh, Lakshadweep, Puducherry.</p>
+<div class="amend-item"><span class="amend-num">🆕 Recent</span><div class="amend-desc">J&K & Ladakh became UTs via the J&K Reorganisation Act 2019 (Art 370 abrogation). Telangana = 29th state→now 28 states after J&K became UT. DNH and Daman & Diu merged into one UT in 2020.</div></div>`},
+
+  {num:'2nd',title:'Emoluments of Constitutional Functionaries',desc:'Salaries of President, VP, Governors, Speakers, Judges, CAG.',mnemonic:'2nd = "2 = salary/pay" of top constitutional posts (charged on Consolidated Fund).',content:`<p>Specifies <strong>emoluments, allowances, privileges</strong> of high constitutional functionaries:</p>
+<ul><li>President & Governors</li><li>Speaker/Deputy Speaker (Lok Sabha) & Chairman/Deputy Chairman (Rajya Sabha)</li><li>Speakers/Deputy Speakers of State Assemblies & Chairmen of Councils</li><li>Judges of Supreme Court & High Courts</li><li>Comptroller & Auditor-General (CAG)</li></ul>
+<div class="amend-item"><span class="amend-num">🔑 Key Point</span><div class="amend-desc">These salaries are CHARGED on the Consolidated Fund of India — NON-VOTABLE in Parliament — to guarantee independence. Cannot be varied to their disadvantage during their term (except in a Financial Emergency under Art 360).</div></div>`},
+
+  {num:'3rd',title:'Forms of Oaths and Affirmations',desc:'Oath texts for Ministers, MPs, MLAs, Judges, CAG.',mnemonic:'3rd = "3 = swear/oath" (forms of oaths & affirmations).',content:`<p>Prescribes the exact <strong>forms of oaths/affirmations</strong> for:</p>
+<ul><li>Union Ministers & State Ministers</li><li>Candidates for & members of Parliament / State Legislatures</li><li>Judges of Supreme Court & High Courts</li><li>Comptroller & Auditor-General</li></ul>
+<div class="amend-item"><span class="amend-num">🔑 Key Point</span><div class="amend-desc">The President & Governors take oath under Art 60 & 159 respectively — their oath forms are in the ARTICLES, not the 3rd Schedule. The oath pledges allegiance to the Constitution and to uphold sovereignty & integrity of India.</div></div>`},
+
+  {num:'4th',title:'Allocation of Seats in Rajya Sabha',desc:'Seats per State/UT in the Council of States.',mnemonic:'4th = "4 = Rajya Sabha seats" allocation (think: 4 corners = states sending members).',content:`<p>Allocates <strong>Rajya Sabha seats</strong> to each State & UT. Total strength <strong>245</strong> (233 elected + 12 nominated).</p>
+<div class="amend-item"><span class="amend-num">🔑 Highest Allocations</span><div class="amend-desc">Uttar Pradesh 31 · Maharashtra 19 · Tamil Nadu 18 · Bihar 16 · West Bengal 16 · Karnataka 12 · Andhra Pradesh 11.</div></div>
+<div class="amend-item"><span class="amend-num">🔑 Key Point</span><div class="amend-desc">Rajya Sabha is a PERMANENT body (never dissolved); 1/3 of members retire every 2 years; 6-year term. Elected by elected MLAs via Single Transferable Vote (proportional representation). Changing seat allocation needs only Art 4 simple majority.</div></div>`},
+
+  {num:'5th',title:'Administration of Scheduled Areas & STs',desc:'Tribal areas in states OTHER than the 4 NE states. Art 244(1).',mnemonic:'5th = "5 fingers grip the land" → tribal LAND protection (non-NE). Art 244(1).',content:`<p>Governs administration of <strong>Scheduled Areas & Scheduled Tribes</strong> in States OTHER than Assam, Meghalaya, Tripura, Mizoram. Linked to <strong>Art 244(1)</strong>.</p>
+<ul><li>GOVERNOR has special powers; can direct that a Central/State law shall not apply or apply with modifications.</li><li>A TRIBES ADVISORY COUNCIL (max 20 members, 3/4 from ST MLAs) is set up.</li><li>The PRESIDENT declares/alters Scheduled Areas.</li></ul>
+<div class="amend-item"><span class="amend-num">🔑 States (10)</span><div class="amend-desc">Andhra Pradesh, Telangana, Chhattisgarh, Gujarat, Himachal Pradesh, Jharkhand, Madhya Pradesh, Maharashtra, Odisha, Rajasthan.</div></div>
+<div class="amend-item"><span class="amend-num">⚖️ Samatha v State of AP (1997)</span><div class="amend-desc">Tribal land in Scheduled Areas cannot be transferred to non-tribals/private mining companies. PESA Act 1996 extends Panchayat self-rule to these areas.</div></div>`},
+
+  {num:'6th',title:'Administration of Tribal Areas in NE',desc:'Autonomous District Councils in Assam, Meghalaya, Tripura, Mizoram. Art 244(2).',mnemonic:'6th = "6 = NE autonomy" (4 states: Assam, Meghalaya, Tripura, Mizoram). Art 244(2) & 275.',content:`<p>Provides autonomous tribal self-governance in <strong>Assam, Meghalaya, Tripura, Mizoram</strong> through <strong>Autonomous District Councils (ADCs)</strong> & Regional Councils. Linked to <strong>Art 244(2) & 275</strong>.</p>
+<ul><li>ADCs can make laws on land, forests, water, shifting cultivation, inheritance, marriage, social customs.</li><li>Can constitute village courts; collect land revenue & certain taxes.</li><li>Governor's assent needed for some laws.</li></ul>
+<div class="amend-item"><span class="amend-num">🔑 Key ADCs</span><div class="amend-desc">Bodoland, Karbi Anglong, Dima Hasao (Assam); Khasi Hills, Jaintia Hills, Garo Hills (Meghalaya); Tripura Tribal Areas District; Chakma, Mara, Lai (Mizoram). Total 10 ADCs.</div></div>
+<div class="amend-item"><span class="amend-num">5th vs 6th</span><div class="amend-desc">5th Schedule = Governor + President control; 6th Schedule = greater autonomy via elected councils. Demands exist to extend 6th Schedule to Ladakh.</div></div>`},
+
+  {num:'7th',title:'Distribution of Powers — Union/State/Concurrent Lists',desc:'Union (98), State (59), Concurrent (52) — original 97/66/47. Art 246.',mnemonic:'7th = "7 lucky lists" → 3 Lists. Original: Union 97, State 66, Concurrent 47. Art 246.',content:`<p>Divides legislative powers via THREE LISTS (<strong>Art 246</strong>). Note: original counts were Union 97, State 66, Concurrent 47; after deletions/additions current counts differ slightly (commonly quoted as ~98/59/52).</p>
+<div class="amend-item"><span class="amend-num">Union List (List I) — 97 (orig.)</span><div class="amend-desc">ONLY Parliament. Defence, Foreign Affairs, Atomic Energy, Railways, Banking, Currency, Census, Citizenship, Post & Telegraph, Inter-state trade, Income Tax, Customs.</div></div>
+<div class="amend-item"><span class="amend-num">State List (List II) — 66 (orig.)</span><div class="amend-desc">State Legislatures. Police, Public Order, Prisons, Local Government, Public Health & Sanitation, Agriculture, Land, Liquor, Markets & Fairs, Betting & Gambling.</div></div>
+<div class="amend-item"><span class="amend-num">Concurrent List (List III) — 47 (orig.)</span><div class="amend-desc">BOTH legislate; Central law prevails on conflict (Art 254). Criminal Law & Procedure, Marriage & Divorce, Education (42nd Amend), Forests (42nd Amend), Weights & Measures, Bankruptcy, Trade Unions, Electricity.</div></div>
+<div class="amend-item"><span class="amend-num">🔑 Key Points</span><div class="amend-desc">RESIDUARY powers → Parliament (Art 248). 42nd Amendment (1976) moved Education, Forests, Weights & Measures, Protection of Wild Animals & Birds, Administration of Justice from State→Concurrent List.</div></div>`},
+
+  {num:'8th',title:'Official Languages — 22 Languages',desc:'14 (1950) → 22 today. Sindhi(21st), Konkani/Manipuri/Nepali(71st), Bodo/Dogri/Maithili/Santhali(92nd).',mnemonic:'8th = "8 → languages". 14→15(Sindhi 21st)→18(KMN 71st)→22(BDMS 92nd).',content:`<p>Lists languages officially recognised. Started with <strong>14 (1950)</strong>, now <strong>22</strong>. Linked to Art 344 & 351.</p>
+<div class="amend-item"><span class="amend-num">Original 14 (1950)</span><div class="amend-desc">Assamese, Bengali, Gujarati, Hindi, Kannada, Kashmiri, Malayalam, Marathi, Odia, Punjabi, Sanskrit, Tamil, Telugu, Urdu.</div></div>
+<div class="amend-item"><span class="amend-num">21st Amendment (1967)</span><div class="amend-desc">+ Sindhi → 15</div></div>
+<div class="amend-item"><span class="amend-num">71st Amendment (1992)</span><div class="amend-desc">+ Konkani, Manipuri, Nepali → 18</div></div>
+<div class="amend-item"><span class="amend-num">92nd Amendment (2003)</span><div class="amend-desc">+ Bodo, Dogri, Maithili, Santhali → 22</div></div>
+<div class="lang-grid"><div class="lang-item">1. Assamese</div><div class="lang-item">2. Bengali</div><div class="lang-item">3. Bodo ✦</div><div class="lang-item">4. Dogri ✦</div><div class="lang-item">5. Gujarati</div><div class="lang-item">6. Hindi</div><div class="lang-item">7. Kannada</div><div class="lang-item">8. Kashmiri</div><div class="lang-item">9. Konkani ✦</div><div class="lang-item">10. Maithili ✦</div><div class="lang-item">11. Malayalam</div><div class="lang-item">12. Manipuri ✦</div><div class="lang-item">13. Marathi</div><div class="lang-item">14. Nepali ✦</div><div class="lang-item">15. Odia</div><div class="lang-item">16. Punjabi</div><div class="lang-item">17. Sanskrit</div><div class="lang-item">18. Santhali ✦</div><div class="lang-item">19. Sindhi ✦</div><div class="lang-item">20. Tamil</div><div class="lang-item">21. Telugu</div><div class="lang-item">22. Urdu</div></div>
+<div class="amend-item"><span class="amend-num">🆕 Classical Languages</span><div class="amend-desc">Separate from 8th Schedule: 11 Classical Languages as of 2024 — Tamil(2004), Sanskrit, Telugu, Kannada, Malayalam, Odia, and (2024) Marathi, Pali, Prakrit, Assamese, Bengali. Demands pending to add Tulu, Bhojpuri, Rajasthani to 8th Schedule.</div></div>`},
+
+  {num:'9th',title:'Acts Immune from FR Challenge',desc:'Added by 1st Amend 1951. ~284 Acts. Land reform protection.',mnemonic:'9th = "9 = shield" → protects land-reform laws from FR challenge. 1st Amend.',content:`<p>Added by the <strong>1st Amendment (1951)</strong>. Acts placed here get IMMUNITY from challenge for violating Fundamental Rights (via <strong>Art 31B</strong>). Now contains ~<strong>284 Acts</strong>.</p>
+<p>Mainly protects: zamindari abolition, land ceiling laws, and socio-economic reforms.</p>
+<div class="amend-item"><span class="amend-num">⚖️ I.R. Coelho v State of TN (2007)</span><div class="amend-desc">9-judge bench: Acts inserted into the 9th Schedule AFTER 24 April 1973 (Kesavananda date) CAN be struck down if they violate the BASIC STRUCTURE / damage FRs like Art 14, 19, 21.</div></div>
+<div class="amend-item"><span class="amend-num">⚖️ Waman Rao v UOI (1981)</span><div class="amend-desc">Fixed the 24-April-1973 cut-off for 9th Schedule immunity.</div></div>`},
+
+  {num:'10th',title:'Anti-Defection Law',desc:'Added 52nd Amend 1985. Disqualification of MPs/MLAs.',mnemonic:'10th = "10 = defection ten-dency". 52nd Amend 1985. Speaker decides.',content:`<p>Added by the <strong>52nd Amendment (1985)</strong> to stop "Aaya Ram Gaya Ram" defections.</p>
+<div class="amend-item"><span class="amend-num">Grounds for disqualification</span><div class="amend-desc">(1) Voluntarily giving up party membership; (2) Voting/abstaining against party WHIP without permission (not condoned in 15 days); (3) Independent member joining a party; (4) Nominated member joining a party after 6 months.</div></div>
+<div class="amend-item"><span class="amend-num">Exception (Merger)</span><div class="amend-desc">No disqualification if 2/3 of the legislature party MERGES with another party. NOTE: 91st Amendment (2003) DELETED the earlier "split" (1/3) exception.</div></div>
+<div class="amend-item"><span class="amend-num">⚖️ Cases</span><div class="amend-desc">Kihoto Hollohan (1992): Speaker's decision subject to judicial review; whip provision valid. Keisham Meghachandra Singh (2020): Speaker should decide within ~3 months; suggested an independent tribunal.</div></div>`},
+
+  {num:'11th',title:'Powers of Panchayats — 29 Subjects',desc:'Added 73rd Amend 1992. Part IX. Rural local govt.',mnemonic:'11th = "11 → rural Panchayats". 73rd Amend, 29 subjects, Part IX.',content:`<p>Added by the <strong>73rd Amendment (1992)</strong> — gave constitutional status to PANCHAYATI RAJ (Part IX). Lists <strong>29 subjects</strong> that States may devolve to Panchayats.</p>
+<div class="amend-item"><span class="amend-num">🔑 Key 73rd Amend features</span><div class="amend-desc">3-tier system (Village/Block/District); 5-year term; reservation for SC/ST (proportional) & WOMEN (1/3, many states now 50%); State Election Commission; State Finance Commission every 5 years; Gram Sabha.</div></div>
+<p><strong>29 subjects include:</strong> Agriculture, land improvement, minor irrigation, animal husbandry, fisheries, social forestry, minor forest produce, small-scale & cottage industries, rural housing, drinking water, roads, rural electrification, poverty alleviation, education (primary/secondary), libraries, markets & fairs, health & sanitation, family welfare, women & child development, social welfare, <strong>Public Distribution System</strong>, maintenance of community assets.</p>
+<div class="amend-item"><span class="amend-num">📌 Relevant to your work</span><div class="amend-desc">The PUBLIC DISTRIBUTION SYSTEM (entry 28) is a devolved Panchayat subject under the 11th Schedule — directly tied to PDS administration at the rural level.</div></div>`},
+
+  {num:'12th',title:'Powers of Municipalities — 18 Subjects',desc:'Added 74th Amend 1992. Part IX-A. Urban local govt.',mnemonic:'12th = "12 → urban Municipalities". 74th Amend, 18 subjects, Part IX-A.',content:`<p>Added by the <strong>74th Amendment (1992)</strong> — constitutional status to URBAN LOCAL BODIES (Part IX-A). Lists <strong>18 subjects</strong> for Municipalities.</p>
+<div class="amend-item"><span class="amend-num">🔑 Key 74th Amend features</span><div class="amend-desc">3 types of ULBs: Nagar Panchayat (transitional area), Municipal Council (smaller urban), Municipal Corporation (larger urban). 5-year term; reservation for SC/ST & women (1/3); Ward Committees; District Planning Committee (Art 243ZD); Metropolitan Planning Committee (Art 243ZE).</div></div>
+<p><strong>18 subjects include:</strong> Urban planning, regulation of land use & buildings, economic & social development planning, roads & bridges, water supply, public health & sanitation & solid waste, fire services, urban forestry & environment, slum improvement, urban poverty alleviation, parks & gardens, cultural/educational/aesthetic promotion, burials & cremations, cattle pounds, vital statistics (birth/death registration), public amenities (street lighting, parking, bus stops), regulation of slaughterhouses & tanneries.</p>
+<div class="amend-item"><span class="amend-num">📌 Note</span><div class="amend-desc">The 11th (Panchayat) & 74th (Municipality) Schedules were companion amendments of 1992 — together they form the basis of LOCAL SELF-GOVERNMENT in India.</div></div>`},
 ];
 
 const KEY_AMENDMENTS = [
@@ -1721,11 +2469,11 @@ const IMPORTANT = {
   pIVA: ['51A'],
   pV:   ['52','53','54','58','60','61','72','74','75','76','78','79','80','81','85','105','108','110','111','112','123','124','129','131','136','141','142','148'],
   pVI:  ['153','155','156','161','163','164','168','200','213','214','216','217','226','227'],
-  pVIII:['239','239AA','240'],
-  pIX:  ['243','243A','243B','243D','243G','243K'],
-  pIXA: ['243P','243Q','243T','243W','243ZD','243ZE'],
+  pVIII:['239','239A','239AA','239AB','239B','240','241'],
+  pIX:  ['243','243A','243B','243C','243D','243E','243F','243G','243H','243I','243J','243K','243M','243O'],
+  pIXA: ['243P','243Q','243R','243S','243T','243U','243V','243W','243X','243Y','243ZA','243ZD','243ZE','243ZG'],
   pX:   ['244','244A'],
-  pXI:  ['245','246','248','249','250','252','253','254','262'],
+  pXI:  ['245','246','247','248','249','250','251','252','253','254','255','256','257','262','263'],
   pXV:  ['324','325','326','329'],
   pXVI: ['330','332','334','335','338','338A','338B','341','342','342A'],
   pXVII:['343','344','345','346','348','350A','350B','351'],
@@ -2090,12 +2838,14 @@ function openSchedule(idx) {
   const s = SCHEDULES[idx];
   document.getElementById('schedDetailTitle').textContent = s.num+' Schedule';
   document.getElementById('schedBackBtn').onclick = () => goBack('schedules-view');
+  const mn = s.mnemonic ? `<div class="ai-section sec-mnemonic" style="margin:16px 20px 0"><div class="ai-section-header">🧠 Memory Hook</div><div class="ai-section-body"><p style="font-weight:600">${s.mnemonic}</p></div></div>` : '';
   document.getElementById('schedDetailContent').innerHTML = `
     <div class="article-header-parch">
       <div class="art-part-tag-parch">📅 ${s.num} Schedule</div>
       <div class="art-number-parch">Constitutional Schedule</div>
       <div class="art-main-title-parch">${s.title}</div>
     </div>
+    ${mn}
     <div class="sched-body">${s.content}</div>`;
   showScreen('schedule-detail');
 }
@@ -2169,7 +2919,11 @@ function applyReadSettings() {
   });
   localStorage.setItem('samvidhan_read', JSON.stringify(readSettings));
 }
-function toggleFontPanel(){ document.getElementById('fontPanel').classList.toggle('open'); applyReadSettings(); applyBg(); }
+function toggleFontPanel(){
+  document.getElementById('fontPanel').classList.toggle('open');
+  document.getElementById('fontOverlay').classList.toggle('open');
+  applyReadSettings(); applyBg();
+}
 function setReadFont(f, el){ readSettings.font=f; applyReadSettings(); }
 function setReadWeight(w, el){ readSettings.weight=w; applyReadSettings(); }
 function setReadSize(delta){ readSettings.size=Math.max(14,Math.min(28,readSettings.size+delta)); applyReadSettings(); }
