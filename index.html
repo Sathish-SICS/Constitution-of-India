@@ -118,15 +118,15 @@ html,body{width:100%;max-width:480px;margin:0 auto;font-family:'Inter',sans-seri
 .quick-card:active{opacity:0.7;}
 .quick-card-header{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
 .quick-badge{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--ink-soft),var(--ink-mid));border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:700;color:var(--gold-light);flex-shrink:0;}
-.quick-title{font-size:13px;font-weight:600;color:var(--text-primary);line-height:1.3;flex:1;}
+.quick-title{font-family:var(--read-font,'Inter',sans-serif);font-size:calc(var(--read-size,15px) - 1px);font-weight:600;color:var(--text-primary);line-height:1.3;flex:1;}
 .quick-tags{display:flex;flex-wrap:wrap;gap:5px;}
-.qtag{font-size:10px;font-weight:600;padding:3px 8px;border-radius:12px;letter-spacing:0.3px;}
+.qtag{font-size:12px;font-weight:600;padding:4px 10px;border-radius:12px;letter-spacing:0.2px;}
 .qtag-year{background:rgba(255,153,51,0.15);color:var(--saffron);border:1px solid rgba(255,153,51,0.25);}
 .qtag-case{background:rgba(139,26,0,0.12);color:#cc3300;border:1px solid rgba(139,26,0,0.2);}
 .qtag-key{background:var(--gold-dim);color:var(--gold);border:1px solid var(--border);}
 .qtag-amend{background:rgba(0,102,255,0.1);color:#4488ff;border:1px solid rgba(0,102,255,0.2);}
 .qtag-imp{background:rgba(0,150,0,0.1);color:#00aa44;border:1px solid rgba(0,150,0,0.2);}
-.quick-keywords{font-size:11px;color:var(--text-muted);margin-top:6px;line-height:1.6;}
+.quick-keywords{font-family:var(--read-font,'Inter',sans-serif);font-size:13px;color:var(--text-secondary);margin-top:8px;line-height:1.6;}
 .imp-star{color:var(--saffron);font-size:10px;margin-left:4px;}
 
 /* ARTICLES LIST */
@@ -150,10 +150,10 @@ html,body{width:100%;max-width:480px;margin:0 auto;font-family:'Inter',sans-seri
 .icon-btn-parch.fav-active{background:rgba(255,153,51,0.4);border-color:#ff9933;}
 
 .detail-content{flex:1;overflow-y:auto;padding-bottom:40px;background:var(--parch-bg);}
-.article-header-parch{padding:28px 24px 20px;border-bottom:2px solid var(--parch-border);background:linear-gradient(180deg,rgba(200,169,110,0.3) 0%,transparent 100%);}
-.art-part-tag-parch{display:inline-flex;align-items:center;gap:6px;background:rgba(139,105,20,0.15);border:1px solid rgba(139,105,20,0.35);color:#6b4400;font-size:11px;font-weight:600;padding:5px 12px;border-radius:20px;margin-bottom:16px;}
-.art-number-parch{font-family:'Cormorant Garamond',serif;font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#8b6914;margin-bottom:8px;}
-.art-main-title-parch{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;line-height:1.25;color:var(--parch-text);}
+.article-header-parch{padding:16px 20px 14px;border-bottom:2px solid var(--parch-border);background:var(--parch-bg);position:sticky;top:0;z-index:50;}
+.art-part-tag-parch{display:inline-flex;align-items:center;gap:6px;background:rgba(139,105,20,0.15);border:1px solid rgba(139,105,20,0.35);color:#6b4400;font-size:10px;font-weight:600;padding:3px 10px;border-radius:20px;margin-bottom:6px;}
+.art-number-parch{font-family:'Cormorant Garamond',serif;font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:#8b6914;margin-bottom:4px;}
+.art-main-title-parch{font-family:'Cormorant Garamond',serif;font-size:23px;font-weight:700;line-height:1.2;color:var(--parch-text);}
 
 .article-body-parch{padding:24px 24px 8px;}
 .article-body-parch p{font-family:var(--read-font,'Cormorant Garamond',serif);font-size:var(--read-size,19px);font-weight:var(--read-weight,400);line-height:var(--read-lh,1.85);color:var(--parch-text2);margin-bottom:16px;text-align:justify;}
@@ -537,6 +537,88 @@ html,body{width:100%;max-width:480px;margin:0 auto;font-family:'Inter',sans-seri
 // ═══════════════ RICH ARTICLE DATA (clause-wise) ═══════════════
 // Structure: clauses[] = [{label, text}], keywords[], mnemonic, cases[], recent[]
 const ART_DATA = {
+  // ───────── PART X: THE SCHEDULED AND TRIBAL AREAS (244–244A) ─────────
+  '244': {
+    clauses:[
+      {label:'244(1)',text:'The provisions of the FIFTH SCHEDULE shall apply to the administration and control of the Scheduled Areas and Scheduled Tribes in any State (other than Assam, Meghalaya, Tripura and Mizoram).'},
+      {label:'244(2)',text:'The provisions of the SIXTH SCHEDULE shall apply to the administration of the tribal areas in the States of ASSAM, MEGHALAYA, TRIPURA and MIZORAM.'}
+    ],
+    keywords:['5th Schedule = other states','6th Schedule = Assam Meghalaya Tripura Mizoram','Scheduled Areas','Tribal autonomy','Governor special role'],
+    mnemonic:'244 = "5th Schedule (rest of India) vs 6th Schedule (4 NE states: A-M-T-M)".',
+    cases:[{name:'Samatha v State of Andhra Pradesh',year:'1997',held:'Transfer of tribal land in Scheduled Areas to non-tribals/private companies for mining is prohibited; protected tribal land rights.'}],
+    recent:[{title:'PESA Act 1996',desc:'Panchayats (Extension to Scheduled Areas) Act 1996 extends Part IX Panchayat provisions to Fifth Schedule areas with tribal self-governance.'}]
+  },
+  '244A': {
+    clauses:[{label:'',text:'Parliament may by law form an AUTONOMOUS STATE within the State of ASSAM comprising certain tribal areas, with its own Legislature or Council of Ministers. (Added by 22nd Amendment, 1969.)'}],
+    keywords:['Autonomous State within Assam','22nd Amendment 1969','Tribal areas of Assam'],
+    mnemonic:'244A = "Autonomous state in Assam" (22nd Amend).',
+    cases:[],
+    recent:[]
+  },
+  // ───────── PART XVIII: EMERGENCY PROVISIONS (352–360) ─────────
+  '352': {
+    clauses:[
+      {label:'352(1)',text:'NATIONAL EMERGENCY: If the President is satisfied that a grave emergency exists threatening the security of India or any part, by WAR, EXTERNAL AGGRESSION or ARMED REBELLION, he may proclaim a National Emergency. ("Armed rebellion" replaced "internal disturbance" by the 44th Amendment, 1978.)'},
+      {label:'352(3)',text:'The President can proclaim Emergency only on the WRITTEN ADVICE of the CABINET (added by 44th Amendment).'},
+      {label:'352(4)',text:'The Proclamation must be approved by BOTH Houses within ONE MONTH, by a SPECIAL MAJORITY (majority of total membership + 2/3 of members present & voting).'},
+      {label:'352(5)',text:'Once approved, Emergency continues for SIX MONTHS and can be extended every 6 months with parliamentary approval.'}
+    ],
+    keywords:['National Emergency','War/External Aggression/Armed Rebellion','Written Cabinet advice (44th)','1 month approval','Special majority','6-month renewal','Proclaimed 1962,1971,1975'],
+    mnemonic:'352 = "National Emergency". 44th Amend changes: "armed rebellion" + written Cabinet advice + 1 month + special majority.',
+    cases:[{name:'Minerva Mills v Union of India',year:'1980',held:'Judicial review of Emergency proclamation is possible; struck down clauses making it immune.'},{name:'ADM Jabalpur v Shivkant Shukla',year:'1976',held:'(Habeas Corpus case) Held FR enforcement could be suspended in Emergency — widely criticised, OVERRULED in Puttaswamy 2017.'}],
+    recent:[{title:'Three proclamations',desc:'1962 (China war), 1971 (Pakistan war), 1975-77 (internal disturbance — most controversial, by PM Indira Gandhi). The 1975 misuse led to the corrective 44th Amendment 1978.'}]
+  },
+  '353': {
+    clauses:[{label:'',text:'EFFECT OF NATIONAL EMERGENCY: (a) The Union executive power extends to giving directions to any State on how to exercise its executive power. (b) Parliament gets power to make laws on STATE LIST subjects (federal structure becomes unitary).'}],
+    keywords:['Centre-State becomes unitary','Union directs States','Parliament legislates on State List','Effect of 352'],
+    mnemonic:'353 = "Effect of Emergency" → India becomes unitary; Centre controls States.',
+    cases:[],
+    recent:[]
+  },
+  '355': {
+    clauses:[{label:'',text:'DUTY OF THE UNION: It shall be the duty of the Union to protect every State against EXTERNAL AGGRESSION and INTERNAL DISTURBANCE, and to ensure that the government of every State is carried on in accordance with the provisions of the Constitution.'}],
+    keywords:['Union duty to protect States','External aggression + internal disturbance','Basis for Art 356','Justification for President Rule'],
+    mnemonic:'355 = "Union\'s DUTY to protect states" (gateway to Art 356).',
+    cases:[{name:'Sarbananda Sonowal v Union of India',year:'2005',held:'Struck down IMDT Act; held that protection against external aggression/illegal migration is the Union\'s duty under Art 355.'}],
+    recent:[]
+  },
+  '356': {
+    clauses:[
+      {label:'356(1)',text:'PRESIDENT\'S RULE (State Emergency): If the President, on report of the Governor or otherwise, is satisfied that the government of a State cannot be carried on in accordance with the Constitution, he may assume to himself the functions of the State Government and declare Parliament shall exercise the State Legislature\'s powers.'},
+      {label:'356(3)',text:'Proclamation must be approved by BOTH Houses within TWO MONTHS.'},
+      {label:'Duration',text:'Valid for 6 months at a time, MAXIMUM 3 YEARS (with conditions after 1 year per 44th Amendment — needs Emergency in force + EC certification).'}
+    ],
+    keywords:['President Rule','Failure of constitutional machinery','Governor report','2 months approval','Max 3 years','S.R. Bommai 1994'],
+    mnemonic:'356 = "President\'s Rule" in a State. Compare: 352=National, 356=State, 360=Financial.',
+    cases:[{name:'S.R. Bommai v Union of India',year:'1994',held:'9-judge bench — Art 356 is subject to judicial review; floor test in Assembly is the proper test of majority, not Governor\'s subjective opinion; secularism is basic structure.'},{name:'Rameshwar Prasad v Union of India',year:'2006',held:'Dissolution of Bihar Assembly (2005) on Governor\'s report held unconstitutional & mala fide.'},{name:'Nabam Rebia v Deputy Speaker',year:'2016',held:'(Arunachal Pradesh) Restricted Governor\'s discretionary powers; restored dismissed government.'}],
+    recent:[{title:'Used 100+ times',desc:'President\'s Rule has been imposed over 130 times since 1950. S.R. Bommai (1994) drastically reduced its political misuse.'}]
+  },
+  '358': {
+    clauses:[{label:'',text:'SUSPENSION OF ARTICLE 19 DURING EMERGENCY: When a National Emergency is proclaimed on grounds of WAR or EXTERNAL AGGRESSION (NOT armed rebellion), the six freedoms under Article 19 are AUTOMATICALLY SUSPENDED. (Restricted to external grounds by 44th Amendment.)'}],
+    keywords:['Article 19 auto-suspended','Only on war/external aggression','NOT armed rebellion','44th Amendment limit','Automatic'],
+    mnemonic:'358 = "19 auto-gone" but only in EXTERNAL emergency (war/aggression), not internal.',
+    cases:[],
+    recent:[]
+  },
+  '359': {
+    clauses:[{label:'',text:'SUSPENSION OF ENFORCEMENT OF OTHER FUNDAMENTAL RIGHTS DURING EMERGENCY: The President may by order suspend the right to move courts for enforcement of specified Fundamental Rights. HOWEVER, after the 44th Amendment, Articles 20 and 21 can NEVER be suspended.'}],
+    keywords:['Suspends right to move courts','President order needed (not automatic)','Articles 20 & 21 NEVER suspended (44th Amend)','Applies to citizens & non-citizens'],
+    mnemonic:'359 = "President suspends FR remedies" BUT 20 & 21 are sacred (44th Amend). 358=auto/19 only; 359=order/any FR except 20,21.',
+    cases:[{name:'ADM Jabalpur v Shivkant Shukla',year:'1976',held:'Allowed suspension of even Art 21 during 1975 Emergency — this is what the 44th Amendment fixed by protecting 20 & 21. Overruled in 2017.'}],
+    recent:[]
+  },
+  '360': {
+    clauses:[
+      {label:'360(1)',text:'FINANCIAL EMERGENCY: If the President is satisfied that a situation has arisen whereby the FINANCIAL STABILITY or CREDIT of India (or any part) is threatened, he may proclaim a Financial Emergency.'},
+      {label:'Effect',text:'Union can direct States to observe financial propriety; reduce salaries of State employees AND Supreme Court / High Court JUDGES; reserve money bills for President\'s consideration.'},
+      {label:'Approval',text:'Must be approved by both Houses within TWO MONTHS. Once approved, continues indefinitely until revoked (no maximum period).'}
+    ],
+    keywords:['Financial Emergency','NEVER proclaimed in India','Reduce salaries incl. judges','2 months approval','No maximum duration'],
+    mnemonic:'360 = "Financial Emergency" — NEVER used. Can cut even judges\' salaries.',
+    cases:[],
+    recent:[{title:'Never invoked',desc:'Financial Emergency has never been proclaimed in India, even during the 1991 balance-of-payments crisis or COVID-19.'}]
+  },
+
   '51A': {
     clauses:[
       {label:'Intro',text:'FUNDAMENTAL DUTIES — added by the 42nd Amendment (1976) on recommendation of the SWARAN SINGH COMMITTEE. Originally 10 duties; the 11th added by the 86th Amendment (2002). NON-JUSTICIABLE (not enforceable by courts).'},
