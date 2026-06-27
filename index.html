@@ -331,6 +331,27 @@ html,body{width:100%;margin:0;font-family:'Inter',sans-serif;background:var(--in
 /* Ensure detail/schedule parchment screens show parch bg full column height */
 #article-detail.screen, #schedule-detail.screen { background: var(--parch-bg); }
 #article-detail .detail-content, #schedule-detail .sched-detail-content { min-height: 100vh; }
+
+/* ── OFFICES VIEW ── */
+#offices-view{background:var(--ink);}
+.office-tabs{display:flex;overflow-x:auto;gap:8px;padding:12px 16px 8px;-webkit-overflow-scrolling:touch;scrollbar-width:none;border-bottom:1px solid var(--border-soft);}
+.office-tabs::-webkit-scrollbar{display:none;}
+.office-tab{flex-shrink:0;padding:7px 14px;border-radius:20px;border:1px solid var(--border-soft);background:var(--ink-mid);color:var(--text-muted);font-size:12px;font-weight:600;cursor:pointer;transition:all 0.15s;white-space:nowrap;}
+.office-tab.active{background:var(--gold);color:var(--ink);border-color:var(--gold);}
+.office-note{font-size:11px;color:var(--text-muted);padding:10px 16px;line-height:1.5;border-bottom:1px solid var(--border-soft);}
+.office-note strong{color:var(--gold);}
+.office-list{padding:0 16px 90px;}
+.office-card{border-bottom:1px solid var(--border-soft);padding:14px 0;display:flex;gap:12px;align-items:flex-start;}
+.office-no{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:13px;font-weight:700;flex-shrink:0;}
+.office-body{flex:1;min-width:0;}
+.office-name{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;color:var(--text-primary);margin-bottom:3px;}
+.office-tenure{font-size:12px;font-weight:600;color:var(--gold);margin-bottom:3px;}
+.office-note-text{font-size:12px;color:var(--text-muted);line-height:1.5;}
+.office-party{font-size:11px;color:var(--text-secondary);margin-bottom:2px;}
+.office-search{padding:10px 16px 0;}
+.office-search input{width:100%;background:var(--ink-mid);border:1px solid var(--border);border-radius:10px;padding:10px 14px;color:var(--text-primary);font-size:13px;outline:none;}
+.office-search input:focus{border-color:var(--gold);}
+.office-search input::placeholder{color:var(--text-muted);}
 </style>
 </head>
 <body>
@@ -411,6 +432,7 @@ html,body{width:100%;margin:0;font-family:'Inter',sans-serif;background:var(--in
   <div class="bottom-nav">
     <div class="nav-item active" onclick="switchTab('home',this)"><span class="nav-icon">📜</span><span class="nav-label">Constitution</span></div>
     <div class="nav-item" onclick="switchTab('schedules-view',this)"><span class="nav-icon">📅</span><span class="nav-label">Schedules</span></div>
+    <div class="nav-item" onclick="switchTab('offices-view',this)"><span class="nav-icon">🏛️</span><span class="nav-label">Offices</span></div>
     <div class="nav-item" onclick="switchTab('favorites-view',this)"><span class="nav-icon">⭐</span><span class="nav-label">Saved</span></div>
     <div class="nav-item" onclick="switchTab('aod-view',this)"><span class="nav-icon">☀️</span><span class="nav-label">Today</span></div>
   </div>
@@ -550,6 +572,7 @@ html,body{width:100%;margin:0;font-family:'Inter',sans-serif;background:var(--in
   <div class="bottom-nav">
     <div class="nav-item" onclick="switchTab('home',this)"><span class="nav-icon">📜</span><span class="nav-label">Constitution</span></div>
     <div class="nav-item" onclick="switchTab('schedules-view',this)"><span class="nav-icon">📅</span><span class="nav-label">Schedules</span></div>
+    <div class="nav-item" onclick="switchTab('offices-view',this)"><span class="nav-icon">🏛️</span><span class="nav-label">Offices</span></div>
     <div class="nav-item" onclick="switchTab('favorites-view',this)"><span class="nav-icon">⭐</span><span class="nav-label">Saved</span></div>
     <div class="nav-item active" onclick="switchTab('aod-view',this)"><span class="nav-icon">☀️</span><span class="nav-label">Today</span></div>
   </div>
@@ -560,6 +583,383 @@ html,body{width:100%;margin:0;font-family:'Inter',sans-serif;background:var(--in
 // ═══════════════ RICH ARTICLE DATA (clause-wise) ═══════════════
 // Structure: clauses[] = [{label, text}], keywords[], mnemonic, cases[], recent[]
 const ART_DATA = {
+  // ───────── PART XX: AMENDMENT OF THE CONSTITUTION (368) ─────────
+  '368': {
+    clauses:[
+      {label:'368(1)',text:'POWER OF PARLIAMENT TO AMEND THE CONSTITUTION: Notwithstanding anything in this Constitution, Parliament may in exercise of its CONSTITUENT POWER amend by way of ADDITION, VARIATION or REPEAL any provision of this Constitution in accordance with the procedure laid down in this article.'},
+      {label:'368(2)',text:'PROCEDURE: A Bill for constitutional amendment may be introduced in EITHER House of Parliament (NOT in State Legislatures). It must be passed in EACH House by — (a) a majority of the TOTAL MEMBERSHIP of that House; AND (b) a majority of NOT LESS THAN 2/3 of members PRESENT AND VOTING. After passage, it shall be presented to the PRESIDENT who SHALL GIVE HIS ASSENT (no option to withhold — 24th Amendment 1971).'},
+      {label:'368(2) Proviso — Joint Ratification',text:'Certain provisions require, in ADDITION to the 368(2) procedure, ratification by the Legislatures of NOT LESS THAN HALF of the States before being presented to the President. These are: (1) Art 54, 55 (Election of President); (2) Art 73, 162 (Extent of executive power); (3) Art 241 (HC for UTs); (4) Chapter IV of Part V (Union Judiciary); (5) Chapter V of Part VI (HCs in States); (6) Chapter I of Part XI (Legislative Centre-State relations); (7) 7th Schedule (Three Lists); (8) Representation of States in Parliament; (9) Art 368 ITSELF.'},
+      {label:'368(3)',text:'Nothing in Art 13 shall apply to any amendment made under this article. (Added by 24th Amendment, 1971 — to prevent courts from striking down amendments as violating FRs under Art 13.)'},
+      {label:'Types of Amendment',text:'THREE types: (A) SIMPLE MAJORITY — for ordinary laws and some constitutional provisions like Arts 2, 3, 4, 100, 105, 169, 239A etc.; (B) SPECIAL MAJORITY (368(2)) — for most Part III, V, VI, VII, XI, XIV, XV, XVIII, XX articles; (C) SPECIAL MAJORITY + HALF STATE RATIFICATION (368(2) proviso) — for 9 specified categories above.'}
+    ],
+    keywords:[
+      'Constituent power of Parliament',
+      'Either House (not State Legislatures)',
+      'Special majority: Total membership majority + 2/3 present & voting',
+      'President MUST assent (24th Amend 1971)',
+      '3 types of amendment: Simple / Special / Special + State ratification',
+      '9 provisions need State ratification',
+      'No joint sitting for Art 368 Bill',
+      '368(3): Art 13 does not apply (24th Amend 1971)',
+      '106 amendments so far (2023)'
+    ],
+    mnemonic:'368 = "3 types: Simple / Special (2/3 + Total) / Special + ½ States". Remember 9 categories needing State ratification as "PE-JC-LS-7R-368" (President election, Executive power, Judiciary Union, Courts States, Leg relations, 7th Schedule, Representation, 368 itself).',
+    cases:[
+      {name:'Shankari Prasad v Union of India',year:'1951',held:'Parliament can amend ANY part of the Constitution including Fundamental Rights. "Law" in Art 13 does not include a constitutional amendment. Upheld 1st Amendment (1951).'},
+      {name:'Sajjan Singh v State of Rajasthan',year:'1964',held:'Reaffirmed Shankari Prasad — FRs can be amended. Upheld 17th Amendment.'},
+      {name:'Golak Nath v State of Punjab',year:'1967',held:'11-judge bench REVERSED Shankari Prasad — Parliament CANNOT amend Fundamental Rights. Constitutional amendment = "law" under Art 13. Led directly to 24th Amendment 1971.'},
+      {name:'Kesavananda Bharati v State of Kerala',year:'1973',held:'13-judge bench (7:6) — OVERRULED Golak Nath. Parliament CAN amend FRs. BUT laid down the BASIC STRUCTURE DOCTRINE — Parliament cannot destroy/abrogate the BASIC STRUCTURE of the Constitution. The 24th Amendment (adding 368(3)) upheld. Most important constitutional case in Indian history.'},
+      {name:'Indira Gandhi v Raj Narain',year:'1975',held:'Applied basic structure doctrine — struck down 39th Amendment (1975) that immunised PM\'s election from judicial review. "Free and fair elections", "judicial review", "separation of powers" = basic structure.'},
+      {name:'Minerva Mills v Union of India',year:'1980',held:'Struck down clauses of 42nd Amendment (1976) that (a) made DPSPs superior to ALL FRs and (b) placed amendments beyond judicial review. Balance between FR and DPSP = basic structure. Parliament\'s limited amending power itself = basic structure.'},
+      {name:'Waman Rao v Union of India',year:'1981',held:'Laws in 9th Schedule inserted BEFORE 24 April 1973 have immunity from FR challenge; those AFTER do not (I.R. Coelho 2007 refined further).'},
+      {name:'S.R. Bommai v Union of India',year:'1994',held:'Secularism, federalism, democracy = basic structure. Art 356 (President\'s Rule) subject to judicial review.'},
+      {name:'I.R. Coelho v State of Tamil Nadu',year:'2007',held:'9-judge bench — laws inserted in 9th Schedule after 24 April 1973 can be struck down if they violate the basic structure (especially Arts 14, 19, 21).'},
+      {name:'Nagaraj (M. Nagaraj v Union of India)',year:'2006',held:'77th, 81st, 85th Amendments (reservation in promotion) upheld; they do not violate basic structure, BUT State must collect data on backwardness and inadequacy of representation.'},
+      {name:'NJAC Case (Supreme Court Advocates-on-Record v Union of India)',year:'2015',held:'99th Amendment and NJAC Act struck down — independence of judiciary (collegium system) is part of basic structure; Parliament cannot give executive a say in judicial appointments.'},
+      {name:'Janhit Abhiyan v Union of India',year:'2022',held:'103rd Amendment (EWS reservation 10%) upheld 3:2 — reservation on economic grounds alone does not violate basic structure; equality is not violated.'}
+    ],
+    recent:[
+      {title:'106th Amendment (2023) — Women\'s Reservation',desc:'Constitution (One Hundred and Sixth Amendment) Act 2023 (Nari Shakti Vandan Adhiniyam) — reserves 1/3 seats for women in Lok Sabha, State Assemblies, and Delhi Assembly. Adds Arts 330A, 332A, 239AA amendment. Comes into effect ONLY AFTER next delimitation (post-2026 census). Required BOTH special majority AND State ratification (since it amends representation provisions).'},
+      {title:'Total amendments: 106 (as of 2024)',desc:'105th Amendment (2021) — restored State power to identify OBCs (overriding Maratha judgment). 104th (2020) — extended SC/ST reservation 10 years + abolished Anglo-Indian seats. 103rd (2019) — EWS 10% reservation. 101st (2016) — GST. 99th (2014) — NJAC (struck down 2015).'},
+      {title:'Basic Structure — What is it?',desc:'No exhaustive list exists. Elements recognised so far include: Supremacy of Constitution, Republican & Democratic form of govt, Secular character, Separation of powers, Federal character, Unity & integrity of India, Sovereign Democratic Republic, Parliamentary democracy, Free & fair elections, Judicial review, Independence of judiciary, Rule of law, Harmony between FRs & DPSPs, Limited amending power of Parliament, Fundamental Rights (Art 32), Welfare state.'}
+    ]
+  },
+
+  // ───────── PART XIV: SERVICES UNDER THE UNION AND STATES (308–323) ─────────
+  '308': {
+    clauses:[{label:'',text:'INTERPRETATION: In this Part, "State" does NOT include the State of Jammu and Kashmir. (Practically redundant now after J&K became a UT in 2019.)'}],
+    keywords:['Definition for Part XIV','J&K excluded (now UT)','Services context'],
+    mnemonic:'308 = "Defines State for Part XIV (J&K excluded — now redundant post-2019)".',
+    cases:[],
+    recent:[]
+  },
+  '309': {
+    clauses:[{label:'',text:'RECRUITMENT AND CONDITIONS OF SERVICE: Subject to the provisions of the Constitution, Parliament may regulate the recruitment and conditions of service of persons appointed to PUBLIC SERVICES and POSTS in connection with the affairs of the Union; a State Legislature for the State. Until such provision is made, the Executive may make rules. This is the legislative authority for service rules — the basis of CCS (Conduct) Rules, CCS (CCA) Rules, etc.'}],
+    keywords:['Recruitment & service conditions','Parliament (Union) / State Legislature (State)','Executive rules as interim','CCS Rules basis','Public services and posts'],
+    mnemonic:'309 = "Parliament/State Legislature regulates SERVICE RULES". Basis of IAS/IPS/IFS recruitment rules.',
+    cases:[{name:'B.S. Vadera v Union of India',year:'1969',held:'Service rules made under Art 309 are subordinate legislation; cannot override constitutional provisions or fundamental rights.'},{name:'State of Uttar Pradesh v Chandra Mohan Nigam',year:'1977',held:'Rules under Art 309 can be made retrospectively affecting existing employees, subject to reasonableness.'}],
+    recent:[{title:'Lateral Entry (2023-24)',desc:'UPSC advertised lateral entry into Joint Secretary/Director/Deputy Secretary posts (2023). Political controversy led to withdrawal in August 2024 — reservation concerns in lateral entry raised by ruling coalition partners.'}]
+  },
+  '310': {
+    clauses:[
+      {label:'310(1)',text:'TENURE OF OFFICE: Every person who is a member of a defence service, civil service of the Union, or holds any post connected with the affairs of the Union holds office DURING THE PLEASURE OF THE PRESIDENT. Every person who is a member of a civil service of a State or holds a post under a State holds office DURING THE PLEASURE OF THE GOVERNOR.'},
+      {label:'310(2)',text:'EXCEPTION: Notwithstanding clause (1), any contract under which a person, not being a member of a defence or civil service, is appointed to hold a post in connection with the affairs of the Union/State may, if the President/Governor deems it necessary in the public interest, provide for the payment of compensation if before the agreed time the post is abolished or the occupant is required to vacate.'}
+    ],
+    keywords:['Doctrine of Pleasure','At pleasure of President (Union)','At pleasure of Governor (State)','No fixed tenure for civil servants','Exception: contract posts with compensation','Not absolute — Art 311 safeguards'],
+    mnemonic:'310 = "Doctrine of Pleasure — BUT Art 311 gives procedural safeguards against arbitrary removal".',
+    cases:[{name:'Parshotam Lal Dhingra v Union of India',year:'1958',held:'Doctrine of Pleasure is not absolute; Art 311 safeguards apply. Reduction in rank = punishment requiring inquiry.'},{name:'Shyam Lal v State of Uttar Pradesh',year:'1954',held:'Compulsory retirement is different from dismissal; may or may not attract Art 311 depending on nature.'}],
+    recent:[]
+  },
+  '311': {
+    clauses:[
+      {label:'311(1)',text:'SAFEGUARDS AGAINST ARBITRARY DISMISSAL: No person who is a member of a civil service of the Union/State or holds a civil post shall be DISMISSED or REMOVED by an authority SUBORDINATE to that by which he was appointed.'},
+      {label:'311(2)',text:'No such person shall be dismissed, removed or REDUCED IN RANK except after an INQUIRY in which he has been INFORMED of the charges against him and given a REASONABLE OPPORTUNITY of being heard (show-cause notice + personal hearing).'},
+      {label:'311(2) Exceptions (3 clauses)',text:'NO INQUIRY is needed where: (a) the person is convicted on a criminal charge; (b) it is not reasonably practicable to hold such inquiry (e.g. security reasons); (c) the President/Governor is satisfied, for reasons to be recorded in writing, that in the interest of STATE SECURITY it is not expedient to hold an inquiry. In cases (b) and (c), the authority dismissing must record reasons.'}
+    ],
+    keywords:['Safeguards for civil servants','Not dismissed by subordinate authority','Charge sheet + inquiry + hearing (natural justice)','3 exceptions to inquiry','Security reasons','Art 311 vs Doctrine of Pleasure (310)'],
+    mnemonic:'311 = "3 protections: (1) not by subordinate (2) inquiry + hearing (3) three exceptions — criminal conviction, impracticable, state security". The CIVIL SERVANT\'S SHIELD.',
+    cases:[{name:'Parshotam Lal Dhingra v Union of India',year:'1958',held:'Distinguished between dismissal (Art 311 applies) and compulsory retirement (may not). A reduction in rank as penalty requires Art 311 inquiry.'},{name:'Union of India v Tulsiram Patel',year:'1985',held:'Constitution Bench — explained the three proviso exceptions to Art 311(2) in detail; exception (b) and (c) are available to the disciplinary authority but must not be abused.'},{name:'State of Orissa v Ram Narayan Das',year:'1961',held:'Dismissal without inquiry when inquiry was practicable = void. Remedy = reinstatement or back wages.'}],
+    recent:[{title:'CCS (CCA) Rules 1965',desc:'Central Civil Services (Classification, Control and Appeal) Rules 1965 implement Art 311 for Central govt employees. Disciplinary proceedings: charge sheet → inquiry → findings → penalty order → appeal to CAT/HC.'},{title:'Central Administrative Tribunal (Art 323A)',desc:'CAT established by Administrative Tribunals Act 1985 under Art 323A handles service disputes of Central employees — first forum before HC under Art 226.'}]
+  },
+  '312': {
+    clauses:[
+      {label:'312(1)',text:'ALL-INDIA SERVICES (AIS): If the Rajya Sabha passes a resolution by NOT LESS THAN 2/3 of members present and voting, declaring it necessary in the national interest, Parliament may by law provide for the creation of ONE OR MORE ALL-INDIA SERVICES (including an All-India Judicial Service) common to the Union and States, and regulate recruitment and conditions of service.'},
+      {label:'312(2)',text:'The Services known as the Indian Administrative Service and the Indian Police Service shall be deemed to be services created by Parliament under this article.'},
+      {label:'312(3)',text:'The All-India Judicial Service shall not include any post inferior to that of a District Judge.'}
+    ],
+    keywords:['All-India Services','IAS, IPS, IFoS','Rajya Sabha 2/3 resolution','National interest','Art 312(2): IAS & IPS deemed AIS','All-India Judicial Service proposed (not yet created)','Common to Union and States'],
+    mnemonic:'312 = "AIS: IAS + IPS + IFoS. Rajya Sabha 2/3 to CREATE new AIS. Art 312(2) deems IAS & IPS as AIS." All India Judicial Service = proposed but NOT yet created.',
+    cases:[{name:'B.S. Yadav v State of Haryana',year:'1980',held:'All-India Service officers serve under State governments but are ultimately controlled by the Centre; State cannot overrule Central government in AIS matters.'},{name:'T.S.R. Subramanian v Union of India',year:'2013',held:'IAS officers need not follow oral instructions; all instructions must be in writing; officers have a right to put dissent on record.'}],
+    recent:[{title:'IFoS (Indian Forest Service)',desc:'Indian Forest Service (IFoS) was created in 1966 under the Forest Service Act 1927 — the THIRD All-India Service after IAS and IPS.'},{title:'All-India Judicial Service debate',desc:'Parliament\'s Standing Committee (2023) recommended creation of AIJS; NJAC judgment (2015) context; Law Commission (2006) had recommended it. Still not created as of 2024 due to States\' opposition.'}]
+  },
+  '315': {
+    clauses:[
+      {label:'315(1)',text:'PUBLIC SERVICE COMMISSIONS: There shall be a UNION PUBLIC SERVICE COMMISSION (UPSC) for the Union, and a PUBLIC SERVICE COMMISSION FOR EACH STATE (State Public Service Commission — SPSC). Parliament may by law provide for the appointment of one SPSC to serve two or more States.'},
+      {label:'315(2)',text:'Two or more States may agree to a JOINT STATE PUBLIC SERVICE COMMISSION — established by Parliament by law on such agreement.'}
+    ],
+    keywords:['UPSC for Union','SPSC for each State','Joint SPSC possible','Constitutional bodies','Art 315-323','Independent recruitment bodies'],
+    mnemonic:'315 = "UPSC (Union) + SPSC (State) + Joint SPSC (possible)". All constitutional bodies.',
+    cases:[],
+    recent:[]
+  },
+  '316': {
+    clauses:[
+      {label:'316(1)',text:'APPOINTMENT OF MEMBERS: The Chairman and other members of UPSC are appointed by the PRESIDENT. The Chairman and members of a State PSC are appointed by the GOVERNOR. (For a Joint SPSC — by the President.)'},
+      {label:'316(2)',text:'At least ONE-HALF of the members of every PSC shall be persons who have held office under the Government of India or a State for at least TEN YEARS.'}
+    ],
+    keywords:['UPSC Chairman by President','SPSC Chairman by Governor','1/2 members must have 10-year govt service','Joint PSC by President'],
+    mnemonic:'316 = "President appoints UPSC; Governor appoints SPSC. Half members = 10-year govt experience".',
+    cases:[],
+    recent:[]
+  },
+  '317': {
+    clauses:[
+      {label:'317(1)',text:'REMOVAL OF MEMBERS: A member of a PSC shall only be removed from office by ORDER OF THE PRESIDENT on the ground of MISBEHAVIOUR after an inquiry by the SUPREME COURT (under Art 145) and on the SC\'s report. (For SPSC/Joint PSC members — also removed by President, not Governor.)'},
+      {label:'317(3)',text:'A member of a PSC shall be removed by the President if — (a) he is adjudged an insolvent; (b) he engages in paid employment outside his office; (c) he is, in the opinion of the President, unfit to continue due to infirmity of mind/body.'},
+      {label:'317(4)',text:'A member of a STATE PSC (SPSC) who is removed on grounds in clause (3) shall also be removed by the President (not the Governor) — ensuring Central authority in disciplinary matters.'}
+    ],
+    keywords:['Removal by President only','SC inquiry for misbehaviour','Governor cannot remove SPSC member','Insolvency/paid employment = automatic removal','Independence of PSC'],
+    mnemonic:'317 = "ONLY PRESIDENT removes PSC members (not Governor even for SPSC) — after SC inquiry for misbehaviour". Ensures independence.',
+    cases:[],
+    recent:[]
+  },
+  '318': {
+    clauses:[{label:'',text:'POWER TO MAKE REGULATIONS: The President may, by regulations, determine the NUMBER OF MEMBERS of the UPSC and their CONDITIONS OF SERVICE. For a State PSC — the Governor makes such regulations. Conditions of service shall not be varied to a member\'s DISADVANTAGE after appointment.'}],
+    keywords:['Service conditions by President regulation','Cannot vary to disadvantage','Protects PSC independence'],
+    mnemonic:'318 = "President fixes UPSC conditions; Governor fixes SPSC conditions — both protected from reduction".',
+    cases:[],
+    recent:[]
+  },
+  '319': {
+    clauses:[{label:'',text:'PROHIBITION AS TO HOLDING OFFICES BY MEMBERS OF COMMISSION ON CEASING TO BE SUCH: On ceasing to be a member of a PSC — (a) the CHAIRMAN of UPSC is NOT eligible for further employment under the Govt of India or any State; (b) the CHAIRMAN of an SPSC is eligible to be appointed as UPSC Chairman or member, but not for other govt employment under that State; (c) Other UPSC members are eligible to be SPSC Chairman; (d) Other SPSC members are eligible for UPSC membership or another SPSC Chairmanship but not other govt employment.'}],
+    keywords:['Post-retirement restrictions','UPSC Chairman = no further govt employment','SPSC Chairman → can become UPSC Chairman/member','Ensures independence during tenure','Golden handshake restriction'],
+    mnemonic:'319 = "UPSC Chairman retires from govt service forever. SPSC Chairman can go to UPSC. Other PSC members have restricted lateral movement".',
+    cases:[],
+    recent:[]
+  },
+  '320': {
+    clauses:[
+      {label:'320(1)',text:'FUNCTIONS OF PUBLIC SERVICE COMMISSIONS: It shall be the DUTY of the UPSC to conduct EXAMINATIONS for appointments to the services of the Union.'},
+      {label:'320(2)',text:'The UPSC must be consulted on all matters relating to — methods of recruitment to civil services/posts; principles for appointments, promotions, transfers; disciplinary matters (if requested by the person concerned); claims by or in respect of civil servants regarding pay/service conditions.'},
+      {label:'320(3)',text:'The PSC need NOT be consulted on posts reserved for Scheduled Castes/Tribes/OBCs or on matters where consultation is not required by Parliament/State Legislature law.'}
+    ],
+    keywords:['UPSC conducts exams','UPSC consulted on recruitment/promotions','Disciplinary matters','SC/ST/OBC posts — no mandatory consultation','Advisory role (not binding)','Civil Services Examination'],
+    mnemonic:'320 = "UPSC: exams + consultation on recruitment/discipline". UPSC advice = advisory (Govt can overrule).',
+    cases:[{name:'Mervyn Coutinho v Collector of Customs',year:'1967',held:'UPSC consultation is mandatory in prescribed cases; failure to consult vitiates the appointment.'},{name:'A.K. Kraipak v Union of India',year:'1969',held:'Natural justice must be observed in selection by UPSC/Selection Board; member of selecting body cannot be a candidate for the same post.'}],
+    recent:[{title:'UPSC CSE 2024',desc:'UPSC Civil Services Examination 2024 — Final result declared 2024; 1016 candidates selected. Ongoing controversy over UPSC Lateral Entry appointments withdrawn in 2024.'},{title:'UPSC Mains pattern',desc:'GS Papers I-IV + Essay + Optional Subject + Personality Test (Interview). CSAT (Paper II) qualifying since 2015.'}]
+  },
+  '321': {
+    clauses:[{label:'',text:'POWER TO EXTEND FUNCTIONS OF COMMISSION: Parliament may by law extend the functions of UPSC to include — (a) services of a local authority, body corporate or public institution; (b) other matters. The Governor may, with the APPROVAL OF THE PRESIDENT, extend the functions of an SPSC to any local authority, body corporate etc. within the State.'}],
+    keywords:['Extend UPSC/SPSC functions','Local bodies','Parliament extends UPSC functions','Governor extends SPSC (with President approval)'],
+    mnemonic:'321 = "UPSC can be extended to local bodies/public institutions by Parliament".',
+    cases:[],
+    recent:[]
+  },
+  '322': {
+    clauses:[{label:'',text:'EXPENSES OF COMMISSIONS: The expenses of the UPSC (including salaries, allowances and pensions) shall be CHARGED ON THE CONSOLIDATED FUND OF INDIA — not subject to vote in Parliament. SPSC expenses shall be charged on the Consolidated Fund of the State.'}],
+    keywords:['Charged on Consolidated Fund','Non-votable','Ensures independence','Not subject to Parliament vote'],
+    mnemonic:'322 = "PSC expenses CHARGED (non-votable)" — like SC judges, CAG, etc. Ensures independence.',
+    cases:[],
+    recent:[]
+  },
+  '323': {
+    clauses:[{label:'',text:'REPORTS OF COMMISSIONS: It shall be the duty of the UPSC to present annually to the PRESIDENT a report on the work done by the Commission. The President shall cause the report to be laid before each House of Parliament with a memorandum explaining cases where UPSC advice was NOT accepted. Similarly, the SPSC presents its report to the GOVERNOR, who causes it to be laid before the State Legislature.'}],
+    keywords:['Annual report to President (UPSC)','Annual report to Governor (SPSC)','Cases where advice not accepted must be explained','Laid before Parliament/State Legislature','Accountability mechanism'],
+    mnemonic:'323 = "PSC Annual Report to President/Governor → laid before Parliament/Legislature. Non-acceptance must be EXPLAINED".',
+    cases:[],
+    recent:[]
+  },
+  '323A': {
+    clauses:[{label:'',text:'ADMINISTRATIVE TRIBUNALS (Part XIV-A): Parliament may by law provide for the adjudication or trial of disputes relating to RECRUITMENT AND CONDITIONS OF SERVICE of persons appointed to public services of the Union, States, local bodies, public corporations etc. — by administrative tribunals. Parliament may exclude jurisdiction of ALL COURTS EXCEPT THE SUPREME COURT under Art 136. (Added by 42nd Amendment, 1976.)'}],
+    keywords:['Administrative Tribunals','Art 323A added by 42nd Amend 1976','Administrative Tribunals Act 1985','CAT = Central Administrative Tribunal','SAT = State Administrative Tribunal','SC under Art 136 not excluded','HC jurisdiction under 226/227 restored by L. Chandra Kumar 1997'],
+    mnemonic:'323A = "Tribunals for service disputes (42nd Amend 1976). CAT Act 1985. L. Chandra Kumar 1997 restored HC writ jurisdiction".',
+    cases:[{name:'S.P. Sampath Kumar v Union of India',year:'1987',held:'Administrative Tribunals Act 1985 valid; tribunals are substitute for HC jurisdiction.'},{name:'L. Chandra Kumar v Union of India',year:'1997',held:'HC jurisdiction under Art 226/227 CANNOT be excluded by tribunals — it is part of basic structure. Tribunal decisions are subject to HC review. Overruled S.P. Sampath Kumar partially.'}],
+    recent:[{title:'CAT jurisdiction',desc:'Central Administrative Tribunal (CAT) — 17 benches across India — handles service matters of Central govt employees. First appeal lies to HC Division Bench, then SC.'}]
+  },
+
+  // ───────── PART XV: ELECTIONS (324–329A) ─────────
+  '324': {
+    clauses:[
+      {label:'324(1)',text:'SUPERINTENDENCE, DIRECTION AND CONTROL of the preparation of electoral rolls for, and the conduct of, all elections to Parliament, State Legislatures, and offices of President & Vice-President shall be vested in the ELECTION COMMISSION OF INDIA (ECI).'},
+      {label:'324(2)',text:'COMPOSITION: The Election Commission shall consist of the CHIEF ELECTION COMMISSIONER (CEC) and such number of other Election Commissioners as the President may fix. Currently: CEC + 2 Election Commissioners (multi-member since 1989).'},
+      {label:'324(3)',text:'When other Election Commissioners are appointed, the CEC shall act as the CHAIRMAN of the Election Commission.'},
+      {label:'324(4)',text:'The President may appoint Regional Commissioners to assist the Election Commission.'},
+      {label:'324(5)',text:'The CEC shall NOT be removed from office EXCEPT in the SAME MANNER and on the SAME GROUNDS as a JUDGE OF THE SUPREME COURT (i.e. by Parliament by special majority on grounds of proved misbehaviour or incapacity). Other Election Commissioners can be removed by the President on the RECOMMENDATION OF THE CEC.'},
+      {label:'324(6)',text:'Conditions of service of CEC/ECs shall not be varied to their DISADVANTAGE after appointment.'}
+    ],
+    keywords:['Election Commission of India','CEC + 2 ECs (since 1989)','President appoints','CEC removal like SC Judge','EC removal on CEC recommendation','Independent constitutional body','Art 324 = comprehensive election power'],
+    mnemonic:'324 = "ECI — CEC removed like SC Judge. 3 members since 1989. President appoints but cannot easily remove CEC."',
+    cases:[{name:'T.N. Seshan v Union of India',year:'1995',held:'CEC has vast powers under Art 324; Election Commission is a constitutional body with plenary powers to ensure free and fair elections. Other ECs have equal powers as CEC.'},{name:'Anoop Baranwal v Union of India',year:'2023',held:'5-judge SC bench — appointment of CEC and ECs must be by a COMMITTEE comprising the PM, Leader of Opposition, and CJI — until Parliament makes a law. Parliament then enacted the Chief Election Commissioner and Other Election Commissioners (Appointment, Conditions of Service and Term of Office) Act 2023 replacing CJI with a Cabinet Minister.'},{name:'Association for Democratic Reforms v Union of India',year:'2002',held:'Voters have a right to know the antecedents (criminal background, assets, education) of candidates — disclosure mandatory.'}],
+    recent:[{title:'CEC/EC Appointment Act 2023',desc:'Parliament enacted the Chief Election Commissioner and Other Election Commissioners Act 2023 — appointment by a 3-member committee: PM (Chair), Leader of Opposition in Lok Sabha, and a Union Cabinet Minister nominated by PM. CJI excluded (replacing the SC\'s interim direction in Anoop Baranwal). Challenged in SC.'},{title:'Model Code of Conduct',desc:'MCC not a statutory document — based on Art 324\'s plenary power. Comes into effect on announcement of election schedule.'},{title:'VVPAT (2019 onwards)',desc:'Voter Verifiable Paper Audit Trail mandatory for all EVMs since 2019 General Elections; SC dismissed demand for 100% VVPAT counting in 2024.'}]
+  },
+  '325': {
+    clauses:[{label:'',text:'NO PERSON TO BE INELIGIBLE FOR INCLUSION IN ELECTORAL ROLLS on grounds only of RELIGION, RACE, CASTE, SEX or any of them. There shall be ONE GENERAL ELECTORAL ROLL for every territorial constituency — no separate rolls on communal grounds. (Abolishes the communal electorate system that existed under British rule.)'}],
+    keywords:['One general electoral roll','No separate communal rolls','No discrimination on RRCS grounds','Religion Race Caste Sex','Abolishes communal electorate','Universal franchise basis'],
+    mnemonic:'325 = "ONE roll for ALL — no communal segregation". Abolishes the separate Hindu/Muslim/Sikh electorates of colonial era.',
+    cases:[],
+    recent:[]
+  },
+  '326': {
+    clauses:[{label:'',text:'ELECTIONS ON BASIS OF ADULT SUFFRAGE: Elections to Lok Sabha and State Legislative Assemblies shall be on the basis of ADULT SUFFRAGE — every person who is a CITIZEN OF INDIA and who is NOT LESS THAN 18 YEARS of age (originally 21; reduced to 18 by the 61st Amendment, 1989) and is not otherwise disqualified shall be entitled to be registered as a voter. Disqualifications: non-residence, unsound mind, crime, corrupt/illegal practice.'}],
+    keywords:['Adult suffrage','18 years (61st Amend 1989)','Originally 21 years','Universal adult franchise','Lok Sabha + State Assemblies','Citizen of India'],
+    mnemonic:'326 = "Vote at 18" — 61st Amendment 1989 reduced from 21. Universal adult franchise.',
+    cases:[],
+    recent:[{title:'61st Amendment 1989',desc:'Reduced voting age from 21 to 18 years, enfranchising millions of youth voters. Came into force before 1989 General Elections under Rajiv Gandhi govt.'}]
+  },
+  '327': {
+    clauses:[{label:'',text:'POWER OF PARLIAMENT TO MAKE PROVISION WITH RESPECT TO ELECTIONS TO LEGISLATURES: Parliament may by law make provision with respect to all matters relating to, or in connection with, elections to either House of Parliament or to the House/Houses of the Legislature of a State — including the preparation of electoral rolls, delimitation of constituencies, and all other matters necessary for securing the due constitution of such Houses.'}],
+    keywords:['Parliament makes election laws','Electoral rolls','Delimitation of constituencies','Representation of People Act 1950 & 1951','Parliament\'s comprehensive election power'],
+    mnemonic:'327 = "Parliament makes ALL election laws for Central + State legislatures". Key laws: Representation of People Act 1950 (electoral rolls) & 1951 (conduct of elections).',
+    cases:[],
+    recent:[{title:'Delimitation Commission',desc:'Delimitation of constituencies done by Delimitation Commission (statutory body under Delimitation Act). Seats frozen based on 1971 census until after 2026 census (84th Amend 2001 + 87th Amend 2003). Next delimitation expected after 2026.'}]
+  },
+  '328': {
+    clauses:[{label:'',text:'POWER OF STATE LEGISLATURE TO MAKE PROVISION WITH RESPECT TO ELECTIONS TO THAT LEGISLATURE: Subject to the provisions of the Constitution and any law made by Parliament, the Legislature of a State may make provision with respect to all matters relating to elections to the House/Houses of Legislature of the State.'}],
+    keywords:['State legislature makes election laws','Subject to Parliament law','For STATE legislature elections only','Not for Parliament elections'],
+    mnemonic:'328 = "State can make election laws for its own Legislature" — subject to Central law prevailing (Art 254).',
+    cases:[],
+    recent:[]
+  },
+  '329': {
+    clauses:[
+      {label:'329(a)',text:'BAR TO INTERFERENCE BY COURTS IN ELECTORAL MATTERS: Notwithstanding anything in the Constitution, the VALIDITY of any law relating to the DELIMITATION OF CONSTITUENCIES or allotment of seats shall NOT be called in question in any court.'},
+      {label:'329(b)',text:'No election to either House of Parliament or to the House/Houses of the Legislature of a State shall be called in question EXCEPT by an ELECTION PETITION presented to such authority (Election Tribunal/HC) and in such manner as may be provided for by or under any law made by the appropriate Legislature.'}
+    ],
+    keywords:['Bar to court interference','No challenge to delimitation laws','Election disputes only by election petition','High Court jurisdiction (election petitions)','Representation of People Act 1951 S.80'],
+    mnemonic:'329 = "Courts hands off elections — only election petition after election". Mirrors 243O (Panchayats) and 243ZG (Municipalities).',
+    cases:[{name:'Indira Gandhi v Raj Narain',year:'1975',held:'Allahabad HC voided Indira Gandhi\'s election via election petition (S.80 RPA 1951). Govt passed 39th Amendment to immunise PM\'s election from court challenge — struck down in Indira Nehru Gandhi v Raj Narain (1975) as violating basic structure.'},{name:'PUCL v Union of India',year:'2003',held:'Right to know antecedents of candidates is part of right to information under Art 19(1)(a); disclosure of criminal cases, assets and liabilities mandatory.'}],
+    recent:[{title:'Supreme Court on election petitions',desc:'SC has consistently held Art 329(b) is a complete bar to pre-election interference; writ petitions challenging ongoing elections are not maintainable.'}]
+  },
+  '329A': {
+    clauses:[{label:'',text:'SPECIAL PROVISION AS TO ELECTIONS TO PARLIAMENT — REPEALED: Art 329A was inserted by the 39th Amendment (1975) during the Emergency to immunise the elections of the Prime Minister, Speaker, President and Vice-President from judicial challenge. It was STRUCK DOWN by the SC in the Indira Gandhi v Raj Narain case (1975) as violating the basic structure (free & fair elections, judicial review, rule of law). Formally REPEALED by the 44th Amendment (1978).'}],
+    keywords:['39th Amendment 1975','Inserted during Emergency','Immunised PM election','Struck down by SC (basic structure)','Repealed by 44th Amendment 1978','Indira Gandhi v Raj Narain case'],
+    mnemonic:'329A = "Born (39th/1975) and killed (SC/1975 + 44th/1978) in the same year — Emergency-era controversial amendment".',
+    cases:[{name:'Indira Nehru Gandhi v Raj Narain',year:'1975',held:'SC struck down the 39th Amendment inserting Art 329A — said Parliament cannot by constitutional amendment validate a void election; free & fair elections is part of basic structure; judicial review cannot be excluded.'}],
+    recent:[{title:'44th Amendment 1978',desc:'Formally repealed Art 329A as part of the post-Emergency constitutional restoration by the Janata Party government.'}]
+  },
+
+  // ───────── PART XII: FINANCE, PROPERTY, CONTRACTS & SUITS (264–300A) ─────────
+  '264': {
+    clauses:[{label:'',text:'INTERPRETATION: In this Part, "Finance Commission" means a Finance Commission constituted under Article 280.'}],
+    keywords:['Definition','Finance Commission = Art 280 body','Part XII interpretation'],
+    mnemonic:'264 = "Defines Finance Commission for Part XII". Links to Art 280.',
+    cases:[],
+    recent:[]
+  },
+  '265': {
+    clauses:[{label:'',text:'TAXES NOT TO BE IMPOSED SAVE BY AUTHORITY OF LAW: No tax shall be levied or collected except by AUTHORITY OF LAW. (This is the constitutional basis for the rule against arbitrary taxation — the State cannot impose tax without legislative sanction.)'}],
+    keywords:['No tax without law','Authority of law','Prevents arbitrary taxation','Basis of tax legislation','Fundamental fiscal rule'],
+    mnemonic:'265 = "No tax without LAW" — the golden rule of taxation.',
+    cases:[{name:'Hingir Rampur Coal Co v State of Orissa',year:'1961',held:'Tax imposed without authority of law is unconstitutional under Art 265.'},{name:'Kunnathat Thathunni Moopil Nair v State of Kerala',year:'1961',held:'A tax so arbitrary as to be confiscatory violates Art 265 read with Art 14.'}],
+    recent:[]
+  },
+  '266': {
+    clauses:[
+      {label:'266(1)',text:'CONSOLIDATED FUND OF INDIA (CFI): All revenues received by the Government of India, all loans raised, and all money received in repayment of loans shall form one consolidated fund called the CONSOLIDATED FUND OF INDIA. No money can be appropriated from the CFI except in accordance with law and for purposes/amounts voted by Parliament.'},
+      {label:'266(2)',text:'CONSOLIDATED FUND OF STATE: Similarly, all revenues, loans and loan repayments of each State form the CONSOLIDATED FUND OF THE STATE — appropriated only as authorised by the State Legislature.'},
+      {label:'266(3)',text:'Revenues and other public moneys not credited to the CFI shall be credited to the PUBLIC ACCOUNT of India/State.'}
+    ],
+    keywords:['Consolidated Fund of India (CFI)','Consolidated Fund of State','Public Account','All revenues + loans','Appropriation by law only','Charged vs Voted'],
+    mnemonic:'266 = "CFI = All money IN + OUT only by law". CFI → Voted/Charged. Public Account → other moneys.',
+    cases:[],
+    recent:[]
+  },
+  '267': {
+    clauses:[
+      {label:'267(1)',text:'CONTINGENCY FUND OF INDIA: Parliament may establish a Contingency Fund of India — placed at the disposal of the PRESIDENT — to enable advances to meet unforeseen expenditure. Amount: ₹500 crore (enhanced from ₹50 crore by the Contingency Fund of India (Amendment) Act, 2021 — now ₹30,000 crore).'},
+      {label:'267(2)',text:'State Contingency Fund: Similarly placed at the disposal of the GOVERNOR of the State.'}
+    ],
+    keywords:['Contingency Fund','Unforeseen expenditure','President\'s disposal (Centre)','Governor\'s disposal (State)','₹30,000 crore (2021)','Parliament/Legislature establishes'],
+    mnemonic:'267 = "Emergency piggy bank" — Contingency Fund for unforeseen needs. President (Centre), Governor (State).',
+    cases:[],
+    recent:[{title:'2021 Enhancement',desc:'Contingency Fund of India (Amendment) Act 2021 raised the corpus from ₹500 crore to ₹30,000 crore to meet COVID-19 and other emergency expenditure needs.'}]
+  },
+  '268': {
+    clauses:[{label:'',text:'DUTIES LEVIED BY UNION BUT COLLECTED AND APPROPRIATED BY STATES: Stamp duties and excise duties on medicinal & toilet preparations containing alcohol/narcotics shall be levied by the UNION but shall be COLLECTED and RETAINED by the STATES in which such duties are leviable. (These do not form part of the CFI.)'}],
+    keywords:['Stamp duties','Excise on medicinal/toilet preparations','Levied by Union','Collected by States','States retain proceeds','Not CFI'],
+    mnemonic:'268 = "Centre levies, State collects & keeps" (stamp duty on bills of exchange, cheques, etc.).',
+    cases:[],
+    recent:[]
+  },
+  '269': {
+    clauses:[
+      {label:'269(1)',text:'TAXES LEVIED AND COLLECTED BY UNION BUT ASSIGNED TO STATES: Taxes on sale/purchase of goods (other than newspapers) and taxes on consignment of goods are levied and collected by the Union but ALL PROCEEDS go to States.'},
+      {label:'269A',text:'(Added by 101st Amendment, 2016 — GST) TAXES ON INTER-STATE SUPPLY: GST on inter-State supply of goods/services is levied and collected by the CENTRE, then divided between Centre and States as per law (Art 270). 50% of IGST to Centre, 50% to States based on destination principle.'}
+    ],
+    keywords:['Taxes assigned to States','269A = IGST (101st Amend 2016)','Inter-State GST to Centre then shared','Destination principle','101st Amendment 2016'],
+    mnemonic:'269 = "Centre levies, ALL proceeds to States". 269A = IGST (Centre collects, shares with States).',
+    cases:[],
+    recent:[{title:'101st Amendment 2016 — GST',desc:'Art 269A inserted for IGST (Integrated GST on inter-State supply). Came into force 1 July 2017. IGST collected by Centre and distributed to consuming States.'}]
+  },
+  '270': {
+    clauses:[{label:'',text:'TAXES LEVIED AND DISTRIBUTED BETWEEN UNION AND STATES: All taxes and duties referred to in the UNION LIST (except those in Art 268, 269, Art 271 surcharge, and any cess for specific purposes) are levied and collected by the Centre and DISTRIBUTED between the Union and States as per the Finance Commission\'s recommendations — i.e. the DIVISIBLE POOL. Currently: States get 41% of the divisible pool (15th Finance Commission, 2021–26).'}],
+    keywords:['Divisible pool','Centre + States share','Finance Commission recommends','41% to States (15th FC)','Excludes: cesses, surcharges, Art 268/269 taxes'],
+    mnemonic:'270 = "Divisible Pool — Centre + States share". 15th FC (2021-26): States get 41%.',
+    cases:[],
+    recent:[{title:'15th Finance Commission (2021–26)',desc:'Constituted 2017 under N.K. Singh; recommended 41% share to States (down from 42% by 14th FC, due to J&K becoming a UT). 14th FC (2015–20) had recommended 42% — highest ever.'}]
+  },
+  '271': {
+    clauses:[{label:'',text:'SURCHARGE ON CERTAIN DUTIES AND TAXES: Parliament may at any time increase any duty/tax in the Union List by a SURCHARGE — the proceeds of which shall go ENTIRELY TO THE UNION (not shared with States). This is why surcharges and cesses are criticised — they reduce the divisible pool.'}],
+    keywords:['Surcharge entirely to Centre','Not shared with States','Reduces divisible pool','Health & Education Cess','Critics say Centre abuses surcharge route'],
+    mnemonic:'271 = "Surcharge = Centre keeps ALL" (States get nothing from surcharges/cesses).',
+    cases:[],
+    recent:[{title:'Cess concerns',desc:'15th Finance Commission noted excessive use of cesses/surcharges (e.g. Health & Education Cess, Krishi Kalyan Cess) reduces States\' share from divisible pool. In 2020-21, cesses were ~15% of gross tax revenue.'}]
+  },
+  '275': {
+    clauses:[{label:'',text:'GRANTS FROM THE UNION TO CERTAIN STATES: Parliament may by law make grants out of the CFI to States that need assistance — in particular for promoting the welfare of Scheduled Tribes or raising the level of administration in Scheduled Areas. Such grants are determined on Finance Commission recommendations. (This is a STATUTORY GRANT, not a loan.)'}],
+    keywords:['Grants to States','Statutory grant','Finance Commission recommends','Scheduled Tribes/Areas','From Consolidated Fund of India'],
+    mnemonic:'275 = "Grants to needy States" (statutory; linked to Finance Commission).',
+    cases:[],
+    recent:[]
+  },
+  '276': {
+    clauses:[{label:'',text:'TAXES ON PROFESSIONS, TRADES, CALLINGS AND EMPLOYMENTS: Notwithstanding Art 246, a State Legislature may make laws for levying taxes on professions, trades, callings and employments. MAXIMUM LIMIT: ₹2,500 per person per year. (This limit was ₹250 originally; enhanced to ₹2,500 by 60th Amendment, 1988.)'}],
+    keywords:['Profession tax','State power','₹2,500 limit per year','60th Amendment 1988','Entry 60 State List'],
+    mnemonic:'276 = "Profession tax by States — max ₹2,500/year (60th Amend 1988)".',
+    cases:[],
+    recent:[]
+  },
+  '279A': {
+    clauses:[
+      {label:'279A(1)',text:'GST COUNCIL: The President shall, within 60 days of the 101st Amendment (2016), constitute a GOODS AND SERVICES TAX COUNCIL.'},
+      {label:'279A(4)',text:'COMPOSITION: Union Finance Minister (Chairperson) + Union Minister of State for Finance + Finance/Taxation Ministers of all States.'},
+      {label:'279A(6)',text:'VOTING: Every decision of the GST Council shall be taken by a majority of NOT LESS THAN 3/4 of the weighted votes of members present and voting. WEIGHTAGE: Union Government = 1/3 of total votes; all State Governments together = 2/3 of total votes.'},
+      {label:'279A(9)',text:'The GST Council shall examine matters relating to GST and make recommendations — on taxes to be subsumed, exemptions, thresholds, rates, special provisions for certain States.'}
+    ],
+    keywords:['GST Council (Art 279A)','101st Amendment 2016','3/4 weighted majority','Centre = 1/3 vote; States = 2/3 vote','Union FM chairs','Recommendations on GST rates/exemptions','Cooperative federalism'],
+    mnemonic:'279A = "GST Council — 3/4 weighted majority. Centre:States = 1:2 vote ratio". Added by 101st Amend 2016.',
+    cases:[{name:'Union of India v Mohit Minerals Pvt Ltd',year:'2022',held:'GST Council\'s recommendations are NOT binding on Parliament/State Legislatures — they are recommendatory; Parliament and States are free to deviate from GST Council decisions.'}],
+    recent:[{title:'GST 7th Anniversary (July 2024)',desc:'GST collected ₹2.1 lakh crore in April 2024 (highest ever). Ongoing: GST on insurance, rate rationalisation, and bringing petroleum products under GST are pending decisions.'}]
+  },
+  '280': {
+    clauses:[
+      {label:'280(1)',text:'FINANCE COMMISSION: The President shall, within two years of the commencement of the Constitution and thereafter at the expiry of every FIVE YEARS (or earlier), constitute a Finance Commission — a Chairman and 4 other members.'},
+      {label:'280(3)',text:'DUTIES: The Finance Commission shall make recommendations regarding — (a) distribution of net proceeds of taxes between Centre & States (divisible pool); (b) principles governing grants-in-aid to States (Art 275); (c) measures to augment Consolidated Fund of States to supplement resources of Panchayats (Art 243I) and Municipalities (Art 243Y); (d) any other matter in the interest of sound finance referred by the President.'}
+    ],
+    keywords:['Finance Commission every 5 years','Chairman + 4 members','Appointed by President','Quasi-judicial body','Divisible pool + grants-in-aid','243I + 243Y (local bodies)','15 FCs so far'],
+    mnemonic:'280 = "Finance Commission — every 5 years, 5 members, shares the divisible pool". 15th FC: 2021-26 (N.K. Singh). 16th FC: 2026-31 (Arvind Panagariya, 2024).',
+    cases:[],
+    recent:[{title:'16th Finance Commission (2024)',desc:'Constituted in December 2024 under Dr. Arvind Panagariya; will give recommendations for 2026-31. Key issues: vertical devolution (Centre-State share), horizontal distribution among States, local body grants.'}]
+  },
+  '281': {
+    clauses:[{label:'',text:'RECOMMENDATIONS OF THE FINANCE COMMISSION: The President shall cause every recommendation made by the Finance Commission together with an explanatory memorandum as to the action taken thereon to be laid before each House of Parliament. (The FC recommendations are ADVISORY — not binding — but are generally accepted by the government.)'}],
+    keywords:['FC recommendations laid before Parliament','Advisory in nature','Explanatory memorandum','Generally accepted'],
+    mnemonic:'281 = "FC recommendations → Parliament (advisory, not binding)".',
+    cases:[],
+    recent:[]
+  },
+  '282': {
+    clauses:[{label:'',text:'EXPENDITURE DEFRAYABLE BY THE UNION OR A STATE OUT OF ITS OWN REVENUES: The Union or a State may make any grants for any public purpose, notwithstanding that the purpose is not one with respect to which Parliament or the State Legislature may make laws. (Basis of DISCRETIONARY GRANTS — Centre can give grants to States even for State List subjects.)'}],
+    keywords:['Discretionary grants','Any public purpose','Not limited to legislative competence','Basis of centrally sponsored schemes','Centre can fund State subjects'],
+    mnemonic:'282 = "Discretionary grants — Centre funds any State purpose" (basis of Centrally Sponsored Schemes like MGNREGA, PM Awas Yojana).',
+    cases:[{name:'Bhim Singh v Union of India',year:'2010',held:'Art 282 grants are at the discretion of the Centre; States cannot claim them as a matter of right.'}],
+    recent:[{title:'Centrally Sponsored Schemes',desc:'Art 282 is the constitutional basis for Central schemes like MGNREGA, PM-KISAN, PM Awas Yojana, Midday Meal, National Health Mission — Centre funds even though subjects are in the State/Concurrent List.'}]
+  },
+  '292': {
+    clauses:[{label:'',text:'BORROWING BY THE GOVERNMENT OF INDIA: The Central Government may borrow money upon the SECURITY OF THE CONSOLIDATED FUND OF INDIA within limits fixed by Parliament by law. (Fiscal Responsibility & Budget Management Act 2003 — FRBM — sets fiscal deficit and debt limits for the Centre.)'}],
+    keywords:['Central borrowing','Security of CFI','Parliament sets limits','FRBM Act 2003','Fiscal deficit target'],
+    mnemonic:'292 = "Centre borrows on CFI security; FRBM sets limits".',
+    cases:[],
+    recent:[{title:'FRBM Act 2003 (amended 2018)',desc:'Fiscal Responsibility & Budget Management Act targets fiscal deficit. 15th FC allowed 4% fiscal deficit for States due to COVID-19. Escape clause: 0.5% relaxation in exceptional circumstances.'}]
+  },
+  '293': {
+    clauses:[
+      {label:'293(1)',text:'BORROWING BY STATES: A State may borrow within India upon the security of the CONSOLIDATED FUND OF THE STATE, subject to limits prescribed by the State Legislature.'},
+      {label:'293(3)',text:'A State CANNOT borrow without the CONSENT OF THE CENTRE as long as any loan made by the Centre to that State or guaranteed by the Centre is outstanding.'}
+    ],
+    keywords:['State borrowing','Only within India','Consolidated Fund of State','Centre consent if loan outstanding','No external borrowing by States'],
+    mnemonic:'293 = "States borrow only within India; Centre consent needed if loan outstanding". States CANNOT borrow externally.',
+    cases:[],
+    recent:[{title:'State debt crisis',desc:'Several States (Punjab, Rajasthan, Kerala) face high debt burdens. 15th Finance Commission set State fiscal deficit at 3% of GSDP, with relaxation up to 3.5-4% for reform-linked States.'}]
+  },
+  '300A': {
+    clauses:[{label:'',text:'RIGHT TO PROPERTY (Legal right, NOT Fundamental Right): No person shall be deprived of his property SAVE BY AUTHORITY OF LAW. (Art 300A was inserted by the 44th Amendment, 1978, after the Right to Property was deleted from Part III as a Fundamental Right — it was Art 31. Now it is only a Constitutional right, enforceable in HC under Art 226 but NOT in SC under Art 32.)'}],
+    keywords:['Right to property','NOT a Fundamental Right','Legal/Constitutional right only','44th Amendment 1978','Art 31 deleted','Enforceable in HC (226) not SC (32)','Just compensation not required'],
+    mnemonic:'300A = "Property right DOWNGRADED by 44th Amend 1978" — from FR to mere legal right. Art 31 (FR) → deleted; Art 300A (legal right) inserted.',
+    cases:[{name:'Jilubhai Nanbhai Khachar v State of Gujarat',year:'1994',held:'Art 300A is not a Fundamental Right; no compensation is constitutionally mandated, but deprivation must be by authority of law.'},{name:'K.T. Plantation Pvt Ltd v State of Karnataka',year:'2011',held:'Art 300A requires that deprivation of property must be by authority of law — not arbitrary executive action.'}],
+    recent:[{title:'Property rights and tribal land',desc:'SC (2023-24) has been protective of tribal property rights under Art 300A read with Art 21 and the Scheduled Tribes rights framework.'}]
+  },
+
   // ───────── PART XI: RELATIONS BETWEEN UNION AND STATES (245–263) ─────────
   '245': {
     clauses:[
@@ -2260,6 +2660,27 @@ const PARTS = [
   {id:'pXI',num:'XI',name:'Relations between Union and States',articles:[
     {n:'245',t:'Extent of laws made by Parliament and Legislatures'},{n:'246',t:'Subject-matter of laws made by Parliament and Legislatures'},{n:'247',t:'Power of Parliament to provide for establishment of certain additional courts'},{n:'248',t:'Residuary powers of legislation'},{n:'249',t:'Power of Parliament in national interest'},{n:'250',t:'Power of Parliament to legislate with respect to any matter during Emergency'},{n:'251',t:'Inconsistency between laws made by Parliament and laws made by Legislatures'},{n:'252',t:'Power of Parliament to legislate for two or more States'},{n:'253',t:'Legislation for giving effect to international agreements'},{n:'254',t:'Inconsistency between laws made by Parliament and laws made by States'},{n:'255',t:'Requirements as to recommendations and previous sanctions'},{n:'256',t:'Obligation of States and the Union'},{n:'257',t:'Control of the Union over States'},{n:'262',t:'Adjudication of disputes relating to waters of inter-State rivers'},{n:'263',t:'Provisions with respect to an Inter-State Council'}
   ]},
+  {id:'pXII',num:'XII',name:'Finance, Property, Contracts & Suits',articles:[
+    {n:'264',t:'Interpretation'},{n:'265',t:'Taxes not to be imposed save by authority of law'},
+    {n:'266',t:'Consolidated Funds and public accounts'},{n:'267',t:'Contingency Fund'},
+    {n:'268',t:'Duties levied by Union but collected by States'},{n:'269',t:'Taxes levied by Union but assigned to States'},
+    {n:'269A',t:'Levy and collection of GST in inter-State trade (101st Amend 2016)'},{n:'270',t:'Taxes levied and distributed between Union and States'},
+    {n:'271',t:'Surcharge on certain duties and taxes'},{n:'275',t:'Grants from Union to certain States'},
+    {n:'276',t:'Taxes on professions, trades, callings and employments'},{n:'279A',t:'Goods and Services Tax Council (101st Amend 2016)'},
+    {n:'280',t:'Finance Commission'},{n:'281',t:'Recommendations of Finance Commission'},
+    {n:'282',t:'Expenditure defrayable by Union or State'},{n:'292',t:'Borrowing by Central Government'},
+    {n:'293',t:'Borrowing by States'},{n:'300A',t:'Right to property — not deprived save by authority of law (44th Amend 1978)'}
+  ]},
+  {id:'pXIV',num:'XIV',name:'Services Under the Union and States',articles:[
+    {n:'308',t:'Interpretation'},{n:'309',t:'Recruitment and conditions of service of persons serving the Union or a State'},
+    {n:'310',t:'Tenure of office of persons serving the Union or a State'},{n:'311',t:'Dismissal, removal or reduction in rank of persons employed in civil capacities'},
+    {n:'312',t:'All-India Services'},{n:'315',t:'Public Service Commissions for the Union and States'},
+    {n:'316',t:'Appointment and term of office of members of UPSC/SPSC'},{n:'317',t:'Removal and suspension of a member of a PSC'},
+    {n:'318',t:'Power to make regulations as to conditions of service of members of the PSC'},{n:'319',t:'Prohibition as to holding offices by members of Commission on ceasing to be such'},
+    {n:'320',t:'Functions of Public Service Commissions'},{n:'321',t:'Power to extend functions of Public Service Commissions'},
+    {n:'322',t:'Expenses of Public Service Commissions'},{n:'323',t:'Reports of Public Service Commissions'},
+    {n:'323A',t:'Administrative Tribunals (Part XIV-A, 42nd Amendment 1976)'}
+  ]},
   {id:'pXV',num:'XV',name:'Elections',articles:[
     {n:'324',t:'Election Commission — superintendence of elections'},{n:'325',t:'No person to be ineligible for inclusion in electoral rolls'},{n:'326',t:'Elections to Lok Sabha and State Assemblies on basis of adult suffrage'},{n:'327',t:'Power of Parliament to make provision with respect to elections'},{n:'328',t:'Power of State Legislature to make provision with respect to elections'},{n:'329',t:'Bar to interference by courts in electoral matters'},{n:'329A',t:'Special provision as to elections to Parliament [Repealed]'}
   ]},
@@ -2438,6 +2859,7 @@ function switchTab(targetId, el) {
   showScreen(targetId);
   if(targetId==='favorites-view') renderFavorites();
   if(targetId==='aod-view') renderAOD();
+  if(targetId==='offices-view') initOffices();
   if(targetId==='home') renderParts();
   if(targetId==='schedules-view') renderSchedules();
 }
@@ -2473,8 +2895,10 @@ const IMPORTANT = {
   pIX:  ['243','243A','243B','243C','243D','243E','243F','243G','243H','243I','243J','243K','243M','243O'],
   pIXA: ['243P','243Q','243R','243S','243T','243U','243V','243W','243X','243Y','243ZA','243ZD','243ZE','243ZG'],
   pX:   ['244','244A'],
+  pXII: ['264','265','266','267','268','269','270','271','275','276','279A','280','281','282','292','293','300A'],
   pXI:  ['245','246','247','248','249','250','251','252','253','254','255','256','257','262','263'],
-  pXV:  ['324','325','326','329'],
+  pXIV: ['308','309','310','311','312','315','316','317','318','319','320','321','322','323','323A'],
+  pXV:  ['324','325','326','327','328','329','329A'],
   pXVI: ['330','332','334','335','338','338A','338B','341','342','342A'],
   pXVII:['343','344','345','346','348','350A','350B','351'],
   pXVIII:['352','353','355','356','358','359','360'],
@@ -2958,6 +3382,287 @@ function applyBg() {
 function setBg(name, el){ readSettings.bg = name; applyBg(); }
 
 
+// ═══════════════ CONSTITUTIONAL OFFICE HOLDERS DATA ═══════════════
+const OFFICE_DATA = {
+  president: {
+    title: 'Presidents of India',
+    icon: '🏛️',
+    color: '#8b1a00',
+    note: 'Art 52-62 | 5-year term | Elected by Electoral College | Retire at no fixed age',
+    holders: [
+      {no:'1', name:'Dr. Rajendra Prasad', tenure:'26 Jan 1950 – 13 May 1962', party:'INC', note:'Only President to serve two full terms. Longest serving.'},
+      {no:'2', name:'Dr. S. Radhakrishnan', tenure:'13 May 1962 – 13 May 1967', party:'INC', note:'Philosopher-statesman. His birthday (5 Sep) = Teachers Day.'},
+      {no:'3', name:'Dr. Zakir Husain', tenure:'13 May 1967 – 3 May 1969', party:'INC', note:'First Muslim President. Died in office (first President to do so).'},
+      {no:'—', name:'V.V. Giri (Acting)', tenure:'3 May 1969 – 20 Jul 1969', party:'INC', note:'Acting President after Zakir Husain\'s death.'},
+      {no:'—', name:'Justice M. Hidayatullah (Acting)', tenure:'20 Jul 1969 – 24 Aug 1969', party:'—', note:'CJI acting as President. Only CJI to serve as acting President.'},
+      {no:'4', name:'V.V. Giri', tenure:'24 Aug 1969 – 24 Aug 1974', party:'INC', note:'First President elected as independent candidate. Closest-ever election (contested Neelam Sanjiva Reddy).'},
+      {no:'5', name:'Fakhruddin Ali Ahmed', tenure:'24 Aug 1974 – 11 Feb 1977', party:'INC', note:'Second President to die in office. Signed Emergency Proclamation (1975).'},
+      {no:'—', name:'B.D. Jatti (Acting)', tenure:'11 Feb 1977 – 25 Jul 1977', party:'—', note:'Acting President after Fakhruddin Ali Ahmed\'s death.'},
+      {no:'6', name:'Neelam Sanjiva Reddy', tenure:'25 Jul 1977 – 25 Jul 1982', party:'Janata Party', note:'Elected UNOPPOSED — only President to be elected unanimously. First from Andhra Pradesh.'},
+      {no:'7', name:'Giani Zail Singh', tenure:'25 Jul 1982 – 25 Jul 1987', party:'INC', note:'First Sikh President. Used pocket-veto on Postal Bill 1986.'},
+      {no:'8', name:'R. Venkataraman', tenure:'25 Jul 1987 – 25 Jul 1992', party:'INC', note:'Appointed 4 different Prime Ministers during his term.'},
+      {no:'9', name:'Dr. Shankar Dayal Sharma', tenure:'25 Jul 1992 – 25 Jul 1997', party:'INC', note:'Former VP and CM of Madhya Pradesh.'},
+      {no:'10', name:'K.R. Narayanan', tenure:'25 Jul 1997 – 25 Jul 2002', party:'INC', note:'First Dalit President. First President to vote in a State election (Kerala).'},
+      {no:'11', name:'Dr. A.P.J. Abdul Kalam', tenure:'25 Jul 2002 – 25 Jul 2007', party:'BJP (supported)', note:'"People\'s President". Missile man of India. Only scientist President.'},
+      {no:'12', name:'Smt. Pratibha Patil', tenure:'25 Jul 2007 – 25 Jul 2012', party:'INC', note:'FIRST WOMAN PRESIDENT of India. First from Maharashtra.'},
+      {no:'13', name:'Shri Pranab Mukherjee', tenure:'25 Jul 2012 – 25 Jul 2017', party:'INC', note:'Former Finance Minister & External Affairs Minister. Bharat Ratna 2019.'},
+      {no:'14', name:'Shri Ram Nath Kovind', tenure:'25 Jul 2017 – 25 Jul 2022', party:'BJP', note:'Second Dalit President. Former Governor of Bihar.'},
+      {no:'15', name:'Smt. Droupadi Murmu', tenure:'25 Jul 2022 – present', party:'BJP (NDA)', note:'FIRST TRIBAL (Adivasi) WOMAN PRESIDENT. From Mayurbhanj, Odisha. Santali community.'},
+    ]
+  },
+  vicepresident: {
+    title: 'Vice-Presidents of India',
+    icon: '🔔',
+    color: '#8b4500',
+    note: 'Art 63-71 | 5-year term | Ex-officio Chairman of Rajya Sabha | Elected by both Houses of Parliament (incl. nominated members)',
+    holders: [
+      {no:'1', name:'Dr. S. Radhakrishnan', tenure:'1952 – 1962', party:'INC', note:'Served two terms as VP before becoming President.'},
+      {no:'2', name:'Dr. Zakir Husain', tenure:'1962 – 1967', party:'INC', note:'Became 3rd President.'},
+      {no:'3', name:'V.V. Giri', tenure:'1967 – 1969', party:'INC', note:'Resigned to contest Presidential election.'},
+      {no:'4', name:'G.S. Pathak', tenure:'1969 – 1974', party:'INC', note:''},
+      {no:'5', name:'B.D. Jatti', tenure:'1974 – 1979', party:'INC', note:'Served as Acting President (1977).'},
+      {no:'6', name:'Justice M. Hidayatullah', tenure:'1979 – 1984', party:'—', note:'Former CJI who served as Acting President (1969).'},
+      {no:'7', name:'R. Venkataraman', tenure:'1984 – 1987', party:'INC', note:'Became 8th President.'},
+      {no:'8', name:'Dr. Shankar Dayal Sharma', tenure:'1987 – 1992', party:'INC', note:'Became 9th President.'},
+      {no:'9', name:'K.R. Narayanan', tenure:'1992 – 1997', party:'INC', note:'Became 10th President.'},
+      {no:'10', name:'Shri Krishan Kant', tenure:'1997 – 2002', party:'INC', note:'Died in office (2002) — only VP to die in office.'},
+      {no:'11', name:'Shri Bhairon Singh Shekhawat', tenure:'2002 – 2007', party:'BJP', note:'First non-Congress VP. Former CM of Rajasthan.'},
+      {no:'12', name:'Shri Hamid Ansari', tenure:'2007 – 2017', party:'INC (supported)', note:'Served TWO full terms as VP. Former Ambassador.'},
+      {no:'13', name:'Shri M. Venkaiah Naidu', tenure:'2017 – 2022', party:'BJP', note:'Former Union Minister. First VP from Andhra Pradesh.'},
+      {no:'14', name:'Shri Jagdeep Dhankhar', tenure:'2022 – present', party:'BJP (NDA)', note:'Former Governor of West Bengal. Current Chairman of Rajya Sabha.'},
+    ]
+  },
+  cec: {
+    title: 'Chief Election Commissioners',
+    icon: '🗳️',
+    color: '#00440a',
+    note: 'Art 324 | 6-year term OR till age 65 (whichever earlier) | Removed only like SC Judge | Appointment: CEC Act 2023 (PM + LoP + Cabinet Minister)',
+    holders: [
+      {no:'1', name:'Sukumar Sen', tenure:'1950 – 1958', party:'—', note:'First CEC. Conducted first two General Elections (1951-52 and 1957).'},
+      {no:'2', name:'K.V.K. Sundaram', tenure:'1958 – 1967', party:'—', note:'Conducted 1962 and 1967 General Elections.'},
+      {no:'3', name:'S.P. Sen Verma', tenure:'1967 – 1972', party:'—', note:'Conducted 1971 General Election (Indira Gandhi\'s landslide).'},
+      {no:'4', name:'Dr. Nagendra Singh', tenure:'1972 – 1973', party:'—', note:'Shortest tenure as CEC. Later became ICJ judge.'},
+      {no:'5', name:'T. Swaminathan', tenure:'1973 – 1977', party:'—', note:'Conducted 1977 elections (post-Emergency — historic defeat of Indira Gandhi).'},
+      {no:'6', name:'S.L. Shakdhar', tenure:'1977 – 1982', party:'—', note:'EC became multi-member body during his time (briefly, then reverted).'},
+      {no:'7', name:'R.K. Trivedi', tenure:'1982 – 1985', party:'—', note:''},
+      {no:'8', name:'R.V.S. Peri Sastri', tenure:'1986 – 1990', party:'—', note:''},
+      {no:'9', name:'Smt. V.S. Ramadevi', tenure:'Nov 1990 – Dec 1990', party:'—', note:'FIRST WOMAN CEC. Shortest tenure (26 days).'},
+      {no:'10', name:'T.N. Seshan', tenure:'1990 – 1996', party:'—', note:'MOST FAMOUS CEC. Enforced Model Code of Conduct strictly. T.N. Seshan v UOI (1995). Reformed electoral process fundamentally.'},
+      {no:'11', name:'M.S. Gill', tenure:'1996 – 2001', party:'—', note:'Introduced Electronic Voting Machines (EVMs) nationwide.'},
+      {no:'12', name:'J.M. Lyngdoh', tenure:'2001 – 2004', party:'—', note:'Conducted Gujarat elections (2002) despite controversy. Awarded Ramon Magsaysay Award.'},
+      {no:'13', name:'T.S. Krishnamurthy', tenure:'2004 – 2005', party:'—', note:'Conducted 2004 General Elections (UPA surprise win).'},
+      {no:'14', name:'B.B. Tandon', tenure:'2005 – 2006', party:'—', note:''},
+      {no:'15', name:'N. Gopalaswami', tenure:'2006 – 2009', party:'—', note:'Recommended removal of EC Navin Chawla — controversial.'},
+      {no:'16', name:'Navin Chawla', tenure:'2009 – 2010', party:'—', note:'Conducted 2009 General Elections.'},
+      {no:'17', name:'S.Y. Quraishi', tenure:'2010 – 2012', party:'—', note:'Introduced NOTA (None of the Above) recommendation.'},
+      {no:'18', name:'V.S. Sampath', tenure:'2012 – 2015', party:'—', note:'Introduced NOTA in 2013 (after SC order in PUCL case).'},
+      {no:'19', name:'H.S. Brahma', tenure:'2015', party:'—', note:'Short tenure.'},
+      {no:'20', name:'Dr. Nasim Zaidi', tenure:'2015 – 2017', party:'—', note:''},
+      {no:'21', name:'Achal Kumar Joti', tenure:'2017 – 2018', party:'—', note:''},
+      {no:'22', name:'O.P. Rawat', tenure:'2018', party:'—', note:''},
+      {no:'23', name:'Sunil Arora', tenure:'2018 – 2021', party:'—', note:'Conducted 2019 General Elections (BJP landslide 303 seats).'},
+      {no:'24', name:'Sushil Chandra', tenure:'2021 – 2022', party:'—', note:''},
+      {no:'25', name:'Rajiv Kumar', tenure:'2022 – 2025', party:'—', note:'Conducted 2024 General Elections. Appointed under new CEC Act 2023.'},
+      {no:'26', name:'Gyanesh Kumar', tenure:'2025 – present', party:'—', note:'Current CEC. First appointed under CEC/EC Appointment Act 2023.'},
+    ]
+  },
+  financecommission: {
+    title: 'Finance Commissions of India',
+    icon: '💰',
+    color: '#1a4080',
+    note: 'Art 280 | Constituted every 5 years | Chairman + 4 members | Recommends tax devolution to States from Divisible Pool',
+    holders: [
+      {no:'1st', name:'K.C. Neogy (Chairman)', tenure:'1951 – 1952', period:'1952–57', note:'Recommended 55% share of income tax + 40% of jute export duty to States.'},
+      {no:'2nd', name:'K. Santhanam (Chairman)', tenure:'1956 – 1957', period:'1957–62', note:''},
+      {no:'3rd', name:'A.K. Chanda (Chairman)', tenure:'1960 – 1961', period:'1962–66', note:''},
+      {no:'4th', name:'Dr. P.V. Rajamannar (Chairman)', tenure:'1964 – 1965', period:'1966–69', note:'Tamil Nadu connection — P.V. Rajamannar was also Chairman of the Tamil Nadu Centre-State Relations Commission.'},
+      {no:'5th', name:'Mahavir Tyagi (Chairman)', tenure:'1968 – 1969', period:'1969–74', note:''},
+      {no:'6th', name:'Brahmananada Reddy (Chairman)', tenure:'1972 – 1973', period:'1974–79', note:''},
+      {no:'7th', name:'J.M. Shelat (Chairman)', tenure:'1978 – 1979', period:'1979–84', note:''},
+      {no:'8th', name:'Y.B. Chavan (Chairman)', tenure:'1983 – 1984', period:'1984–89', note:'Former Finance Minister and Home Minister.'},
+      {no:'9th', name:'N.K.P. Salve (Chairman)', tenure:'1987 – 1988', period:'1989–95', note:''},
+      {no:'10th', name:'K.C. Pant (Chairman)', tenure:'1992 – 1993', period:'1995–2000', note:'Recommended 29% share of Central taxes to States.'},
+      {no:'11th', name:'A.M. Khusro (Chairman)', tenure:'1998 – 2000', period:'2000–05', note:'Recommended 29.5% to States.'},
+      {no:'12th', name:'Dr. C. Rangarajan (Chairman)', tenure:'2003 – 2004', period:'2005–10', note:'Recommended 30.5% to States. Focus on fiscal consolidation.'},
+      {no:'13th', name:'Dr. Vijay Kelkar (Chairman)', tenure:'2007 – 2009', period:'2010–15', note:'Recommended 32% share to States. First to recommend Goods and Services Tax reform.'},
+      {no:'14th', name:'Dr. Y.V. Reddy (Chairman)', tenure:'2013 – 2015', period:'2015–20', note:'Recommended HIGHEST EVER 42% share to States. Discontinued several grants. Key: Special Category Status discontinued.'},
+      {no:'15th', name:'N.K. Singh (Chairman)', tenure:'2017 – 2020', period:'2021–26', note:'Recommended 41% share to States (1% less than 14th FC due to J&K becoming UT). Performance-linked grants. Covered COVID-19 impact. Key: State fiscal deficit allowed at 4% GSDP.'},
+      {no:'16th', name:'Dr. Arvind Panagariya (Chairman)', tenure:'Dec 2024 – present', period:'2026–31', note:'Current FC. Former NITI Aayog Vice-Chairman. Key issues: vertical devolution, horizontal distribution, local body grants, populist spending by States.'},
+    ]
+  },
+  pm: {
+    title: 'Prime Ministers of India',
+    icon: '🇮🇳',
+    color: '#4a0080',
+    note: 'Art 74-75 | Head of Government | Leader of majority in Lok Sabha | Appointed by President | No term limit',
+    holders: [
+      {no:'1', name:'Jawaharlal Nehru', tenure:'15 Aug 1947 – 27 May 1964', party:'INC', note:'First and longest-serving PM (16 years 9 months). Died in office. Architect of Indian foreign policy (NAM, Panchsheel).'},
+      {no:'—', name:'Gulzarilal Nanda (Acting)', tenure:'27 May 1964 – 9 Jun 1964', party:'INC', note:'First of two stints as Acting PM.'},
+      {no:'2', name:'Lal Bahadur Shastri', tenure:'9 Jun 1964 – 11 Jan 1966', party:'INC', note:'Died in office at Tashkent (after signing Tashkent Agreement with Pakistan). "Jai Jawan Jai Kisan." 1965 war with Pakistan.'},
+      {no:'—', name:'Gulzarilal Nanda (Acting)', tenure:'11 Jan 1966 – 24 Jan 1966', party:'INC', note:'Second stint as Acting PM.'},
+      {no:'3', name:'Indira Gandhi', tenure:'24 Jan 1966 – 24 Mar 1977', party:'INC', note:'First woman PM. 1971 war (Bangladesh liberation). Emergency (1975-77). Nationalized banks (1969). Declared Emergency — controversial.'},
+      {no:'4', name:'Morarji Desai', tenure:'24 Mar 1977 – 28 Jul 1979', party:'Janata Party', note:'First non-Congress PM. Reversed Emergency-era constitutional changes (44th Amendment).'},
+      {no:'5', name:'Charan Singh', tenure:'28 Jul 1979 – 14 Jan 1980', party:'JD', note:'Never faced Parliament. Resigned before Lok Sabha session.'},
+      {no:'6', name:'Indira Gandhi', tenure:'14 Jan 1980 – 31 Oct 1984', party:'INC', note:'Second term. Operation Blue Star (1984). Assassinated by her own bodyguards (31 Oct 1984).'},
+      {no:'7', name:'Rajiv Gandhi', tenure:'31 Oct 1984 – 2 Dec 1989', party:'INC', note:'Youngest PM (age 40). Largest mandate (404 seats, 1984). Bofors scandal. 73rd & 74th Amendments initiated. Assassinated (1991).'},
+      {no:'8', name:'V.P. Singh', tenure:'2 Dec 1989 – 10 Nov 1990', party:'JD', note:'Implemented Mandal Commission report (27% OBC reservation). Led to Indra Sawhney (Mandal) case 1992.'},
+      {no:'9', name:'Chandra Shekhar', tenure:'10 Nov 1990 – 21 Jun 1991', party:'SP', note:'Minority govt supported by INC. Mortgaged gold to RBI during 1991 BOP crisis.'},
+      {no:'10', name:'P.V. Narasimha Rao', tenure:'21 Jun 1991 – 16 May 1996', party:'INC', note:'Economic liberalisation (1991). Manmohan Singh as FM. First PM from South India to complete full term.'},
+      {no:'11', name:'H.D. Deve Gowda', tenure:'1 Jun 1996 – 21 Apr 1997', party:'JD', note:'United Front coalition. First PM from Karnataka.'},
+      {no:'12', name:'I.K. Gujral', tenure:'21 Apr 1997 – 19 Mar 1998', party:'JD', note:'Gujral Doctrine on foreign policy.'},
+      {no:'13', name:'Atal Bihari Vajpayee', tenure:'19 Mar 1998 – 22 May 2004', party:'BJP (NDA)', note:'First BJP PM to complete full term. Pokhran-II nuclear tests (1998). Kargil War (1999). NDA coalition. Bharat Ratna (2015, posthumous).'},
+      {no:'14', name:'Dr. Manmohan Singh', tenure:'22 May 2004 – 26 May 2014', party:'INC (UPA)', note:'Two terms. First Sikh PM. Economist (1991 reforms). India-US Nuclear Deal (2008). RTI Act 2005, MGNREGA 2005, RTE Act 2009.'},
+      {no:'15', name:'Narendra Modi', tenure:'26 May 2014 – present', party:'BJP (NDA)', note:'Third consecutive term (2024). First PM from Gujarat (Vadnagar). GST (2017), Demonetization (2016), CAA (2019), Art 370 abrogation (2019), COVID-19 response, PM Awas, Swachh Bharat, Digital India.'},
+    ]
+  },
+  cji: {
+    title: 'Chief Justices of India',
+    icon: '⚖️',
+    color: '#2c1a00',
+    note: 'Art 124 | Retire at 65 years | Appointed by President on Collegium recommendation | Senior-most judge convention (broken 1973 & 1977)',
+    holders: [
+      {no:'1', name:'H.J. Kania', tenure:'26 Jan 1950 – 6 Nov 1951', party:'—', note:'First CJI of independent India.'},
+      {no:'2', name:'M. Patanjali Sastri', tenure:'7 Nov 1951 – 3 Jan 1954', party:'—', note:''},
+      {no:'3', name:'Mehr Chand Mahajan', tenure:'4 Jan 1954 – 22 Dec 1954', party:'—', note:''},
+      {no:'4', name:'B.K. Mukherjea', tenure:'23 Dec 1954 – 31 Jan 1956', party:'—', note:''},
+      {no:'5', name:'S.R. Das', tenure:'1 Feb 1956 – 30 Sep 1959', party:'—', note:''},
+      {no:'6', name:'B.P. Sinha', tenure:'1 Oct 1959 – 31 Jan 1964', party:'—', note:''},
+      {no:'7', name:'P.B. Gajendragadkar', tenure:'1 Feb 1964 – 15 Mar 1966', party:'—', note:'Presided over era of labour law development.'},
+      {no:'8', name:'A.K. Sarkar', tenure:'16 Mar 1966 – 29 Jun 1966', party:'—', note:'Short tenure.'},
+      {no:'9', name:'K. Subba Rao', tenure:'30 Jun 1966 – 11 Apr 1967', party:'—', note:'Resigned to contest Presidential election against V.V. Giri (1969).'},
+      {no:'10', name:'K.N. Wanchoo', tenure:'12 Apr 1967 – 24 Feb 1968', party:'—', note:''},
+      {no:'11', name:'M. Hidayatullah', tenure:'25 Feb 1968 – 16 Dec 1970', party:'—', note:'Only CJI to later become VP (1979-84) and Acting President (1969).'},
+      {no:'12', name:'J.C. Shah', tenure:'17 Dec 1970 – 21 Jan 1971', party:'—', note:''},
+      {no:'13', name:'S.M. Sikri', tenure:'22 Jan 1971 – 25 Apr 1973', party:'—', note:'Presided over Kesavananda Bharati (1973) — basic structure case.'},
+      {no:'14', name:'A.N. Ray', tenure:'26 Apr 1973 – 28 Jan 1977', party:'—', note:'SUPERSEDED 3 senior judges — appointment controversy. Emergency era.'},
+      {no:'15', name:'M.H. Beg', tenure:'29 Jan 1977 – 21 Feb 1978', party:'—', note:'ADM Jabalpur (Habeas Corpus case) judgment — controversial Emergency era.'},
+      {no:'16', name:'Y.V. Chandrachud', tenure:'22 Feb 1978 – 11 Jul 1985', party:'—', note:'LONGEST SERVING CJI (7 years 4 months). Presided over Minerva Mills (1980).'},
+      {no:'17', name:'P.N. Bhagwati', tenure:'12 Jul 1985 – 20 Dec 1986', party:'—', note:'Pioneer of PIL (Public Interest Litigation). Introduced epistolary jurisdiction.'},
+      {no:'18', name:'R.S. Pathak', tenure:'21 Dec 1986 – 18 Jun 1989', party:'—', note:''},
+      {no:'19', name:'E.S. Venkataramaiah', tenure:'19 Jun 1989 – 17 Dec 1989', party:'—', note:''},
+      {no:'20', name:'S. Mukherjee', tenure:'18 Dec 1989 – 25 Sep 1990', party:'—', note:''},
+      {no:'21', name:'Ranganath Misra', tenure:'26 Sep 1990 – 24 Nov 1991', party:'—', note:'Later became Rajya Sabha MP and NCM chairman.'},
+      {no:'22', name:'K.N. Singh', tenure:'25 Nov 1991 – 12 Dec 1991', party:'—', note:'SHORTEST tenure as CJI (17 days).'},
+      {no:'23', name:'M.H. Kania', tenure:'13 Dec 1991 – 17 Nov 1992', party:'—', note:''},
+      {no:'24', name:'L.M. Sharma', tenure:'18 Nov 1992 – 11 Feb 1993', party:'—', note:''},
+      {no:'25', name:'M.N. Venkatachaliah', tenure:'12 Feb 1993 – 24 Oct 1994', party:'—', note:'Presided over Second Judges Case (collegium system).'},
+      {no:'26', name:'A.M. Ahmadi', tenure:'25 Oct 1994 – 24 Mar 1997', party:'—', note:''},
+      {no:'27', name:'J.S. Verma', tenure:'25 Mar 1997 – 17 Jan 1998', party:'—', note:'Third Judges Case (1998). Later headed Justice Verma Committee on women\'s safety (2013).'},
+      {no:'28', name:'M.M. Punchhi', tenure:'18 Jan 1998 – 7 Oct 1998', party:'—', note:'Headed Punchhi Commission on Centre-State relations (2010).'},
+      {no:'29', name:'A.S. Anand', tenure:'10 Oct 1998 – 31 Oct 2001', party:'—', note:''},
+      {no:'30', name:'S.P. Bharucha', tenure:'1 Nov 2001 – 5 May 2002', party:'—', note:''},
+      {no:'31', name:'B.N. Kirpal', tenure:'6 May 2002 – 7 Nov 2002', party:'—', note:''},
+      {no:'32', name:'G.B. Pattanaik', tenure:'8 Nov 2002 – 18 Dec 2002', party:'—', note:''},
+      {no:'33', name:'V.N. Khare', tenure:'19 Dec 2002 – 1 May 2004', party:'—', note:''},
+      {no:'34', name:'S. Rajendra Babu', tenure:'2 May 2004 – 31 May 2004', party:'—', note:''},
+      {no:'35', name:'R.C. Lahoti', tenure:'1 Jun 2004 – 31 Oct 2005', party:'—', note:''},
+      {no:'36', name:'Y.K. Sabharwal', tenure:'1 Nov 2005 – 13 Jan 2007', party:'—', note:''},
+      {no:'37', name:'K.G. Balakrishnan', tenure:'14 Jan 2007 – 11 May 2010', party:'—', note:'FIRST DALIT CJI. Later Chairman of NHRC.'},
+      {no:'38', name:'S.H. Kapadia', tenure:'12 May 2010 – 28 Sep 2012', party:'—', note:'Presided over 2G Spectrum case.'},
+      {no:'39', name:'Altamas Kabir', tenure:'29 Sep 2012 – 18 Jul 2013', party:'—', note:''},
+      {no:'40', name:'P. Sathasivam', tenure:'19 Jul 2013 – 26 Apr 2014', party:'—', note:'Later appointed Governor of Kerala.'},
+      {no:'41', name:'R.M. Lodha', tenure:'27 Apr 2014 – 27 Sep 2014', party:'—', note:'Headed BCCI Reforms Committee (Lodha Panel 2016).'},
+      {no:'42', name:'H.L. Dattu', tenure:'28 Sep 2014 – 2 Dec 2015', party:'—', note:'Later Chairman of NHRC.'},
+      {no:'43', name:'T.S. Thakur', tenure:'3 Dec 2015 – 3 Jan 2017', party:'—', note:'Moved to tears in open court about judicial vacancies (2016).'},
+      {no:'44', name:'J.S. Khehar', tenure:'4 Jan 2017 – 27 Aug 2017', party:'—', note:'First Sikh CJI. Presided over Triple Talaq judgment (2017).'},
+      {no:'45', name:'Dipak Misra', tenure:'28 Aug 2017 – 2 Oct 2018', party:'—', note:'Aadhaar judgment, Section 377 decriminalization, Sabarimala. First impeachment motion (RS) — failed.'},
+      {no:'46', name:'Ranjan Gogoi', tenure:'3 Oct 2018 – 17 Nov 2019', party:'—', note:'Presided over Ayodhya verdict (2019). Later became Rajya Sabha MP (nominated). Rafale case.'},
+      {no:'47', name:'S.A. Bobde', tenure:'18 Nov 2019 – 23 Apr 2021', party:'—', note:'COVID-19 pandemic period. Migration crisis.'},
+      {no:'48', name:'N.V. Ramana', tenure:'24 Apr 2021 – 26 Aug 2022', party:'—', note:'Focus on vacancies in judiciary & Press freedom.'},
+      {no:'49', name:'U.U. Lalit', tenure:'27 Aug 2022 – 8 Nov 2022', party:'—', note:'Shortest full-term CJI. First direct appointee from Bar (not from HC).'},
+      {no:'50', name:'D.Y. Chandrachud', tenure:'9 Nov 2022 – 10 Nov 2024', party:'—', note:'Son of 16th CJI Y.V. Chandrachud. Same-sex marriage (2023), Art 370 abrogation upheld (2023), Right to privacy (Puttaswamy 2017 — 9-judge bench), Electoral bonds struck down (2024).'},
+      {no:'51', name:'Sanjiv Khanna', tenure:'11 Nov 2024 – present', party:'—', note:'Current CJI. Presided over Electoral Bonds final judgment. Known for work in electoral law.'},
+    ]
+  },
+  cag: {
+    title: 'Comptrollers & Auditors-General',
+    icon: '📊',
+    color: '#1a3060',
+    note: 'Art 148 | "Guardian of Public Purse" | Appointed by President | Removed like SC Judge | Reports to President/Governor | Salary charged on CFI',
+    holders: [
+      {no:'1', name:'V. Narahari Rao', tenure:'1948 – 1954', party:'—', note:'First CAG of independent India.'},
+      {no:'2', name:'A.K. Chanda', tenure:'1954 – 1960', party:'—', note:'Later became Chairman of 3rd Finance Commission.'},
+      {no:'3', name:'A.K. Roy', tenure:'1960 – 1966', party:'—', note:''},
+      {no:'4', name:'S. Ranganathan', tenure:'1966 – 1972', party:'—', note:''},
+      {no:'5', name:'A. Bakshi', tenure:'1972 – 1978', party:'—', note:''},
+      {no:'6', name:'Gyan Prakash', tenure:'1978 – 1984', party:'—', note:''},
+      {no:'7', name:'T.N. Chaturvedi', tenure:'1984 – 1990', party:'—', note:'Later became Governor of Karnataka.'},
+      {no:'8', name:'C.G. Somiah', tenure:'1990 – 1996', party:'—', note:'Known for strong audit reports on defence procurements.'},
+      {no:'9', name:'V.K. Shunglu', tenure:'1996 – 2002', party:'—', note:''},
+      {no:'10', name:'V.N. Kaul', tenure:'2002 – 2008', party:'—', note:''},
+      {no:'11', name:'Vinod Rai', tenure:'2008 – 2013', party:'—', note:'MOST FAMOUS CAG. 2G Spectrum audit (₹1.76 lakh crore loss). Coalgate report. Changed landscape of government accountability.'},
+      {no:'12', name:'Shashi Kant Sharma', tenure:'2013 – 2017', party:'—', note:''},
+      {no:'13', name:'Rajiv Mehrishi', tenure:'2017 – 2020', party:'—', note:'Former Home Secretary.'},
+      {no:'14', name:'G.C. Murmu', tenure:'2020 – 2024', party:'—', note:'Former Lt. Governor of J&K. Appointed after J&K bifurcation.'},
+      {no:'15', name:'K. Sanjay Murthy', tenure:'2024 – present', party:'—', note:'Current CAG. Former Secretary, Higher Education.'},
+    ]
+  }
+};
+
+// ═══════════════ OFFICES UI ═══════════════
+let currentOffice = 'president';
+
+const OFFICE_LABELS = {
+  president:       {label:'Presidents',    icon:'🏛️'},
+  vicepresident:   {label:'Vice-Presidents', icon:'🔔'},
+  pm:              {label:'Prime Ministers', icon:'🇮🇳'},
+  cec:             {label:'CECs',           icon:'🗳️'},
+  financecommission:{label:'Finance Commissions', icon:'💰'},
+  cji:             {label:'CJIs',           icon:'⚖️'},
+  cag:             {label:'CAGs',           icon:'📊'},
+};
+
+function initOffices() {
+  const tabs = document.getElementById('officeTabs');
+  if(!tabs) return;
+  tabs.innerHTML = Object.entries(OFFICE_LABELS).map(([key, val]) =>
+    `<div class="office-tab${key===currentOffice?' active':''}" onclick="selectOffice('${key}',this)">${val.icon} ${val.label}</div>`
+  ).join('');
+  renderOffice(currentOffice, '');
+}
+
+function selectOffice(key, el) {
+  currentOffice = key;
+  document.querySelectorAll('.office-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  const searchEl = document.getElementById('officeSearch');
+  if(searchEl) searchEl.value = '';
+  renderOffice(key, '');
+}
+
+function filterOffices(q) { renderOffice(currentOffice, q); }
+
+function renderOffice(key, query) {
+  const data = OFFICE_DATA[key];
+  if(!data) return;
+  const noteEl = document.getElementById('officeNote');
+  const listEl = document.getElementById('officeList');
+  if(noteEl) noteEl.innerHTML = `<strong>${data.icon} ${data.title}</strong> — ${data.note}`;
+
+  const q = query.trim().toLowerCase();
+  const filtered = q
+    ? data.holders.filter(h =>
+        h.name.toLowerCase().includes(q) ||
+        h.tenure.toLowerCase().includes(q) ||
+        (h.note && h.note.toLowerCase().includes(q)) ||
+        (h.period && h.period.toLowerCase().includes(q)))
+    : data.holders;
+
+  const color = data.color;
+  if(listEl) listEl.innerHTML = filtered.length ? filtered.map(h => `
+    <div class="office-card">
+      <div class="office-no" style="background:${color}22;color:${color};border:1px solid ${color}44">${h.no}</div>
+      <div class="office-body">
+        <div class="office-name">${h.name}</div>
+        <div class="office-tenure">📅 ${h.tenure}${h.period ? ` | Period: ${h.period}` : ''}</div>
+        ${h.party && h.party !== '—' ? `<div class="office-party">🏳️ ${h.party}</div>` : ''}
+        ${h.note ? `<div class="office-note-text">💡 ${h.note}</div>` : ''}
+      </div>
+    </div>`).join('') :
+    `<div class="empty-state"><div class="empty-icon">🔍</div><div class="empty-text">No results for "${query}"</div></div>`;
+}
+
+
 // Init
 applyReadSettings();
 applyBg();
@@ -2965,5 +3670,25 @@ renderParts();
 renderAOD();
 renderSchedules();
 </script>
+
+<!-- OFFICES VIEW -->
+<div class="screen" id="offices-view">
+  <div class="sub-bar" style="padding-bottom:0">
+    <div class="sub-bar-inner" style="margin-bottom:8px">
+      <div><div class="sub-bar-title">Constitutional Offices</div><div class="sub-bar-count">Presidents · VPs · CECs · Finance Commissions · PMs · CJIs · CAGs</div></div>
+    </div>
+    <div class="office-tabs" id="officeTabs"></div>
+  </div>
+  <div class="office-search"><input id="officeSearch" type="text" placeholder="Search by name or year…" oninput="filterOffices(this.value)"/></div>
+  <div class="office-note" id="officeNote"></div>
+  <div class="office-list" id="officeList"></div>
+  <div class="bottom-nav">
+    <div class="nav-item" onclick="switchTab('home',this)"><span class="nav-icon">📜</span><span class="nav-label">Constitution</span></div>
+    <div class="nav-item" onclick="switchTab('schedules-view',this)"><span class="nav-icon">📅</span><span class="nav-label">Schedules</span></div>
+    <div class="nav-item" onclick="switchTab('offices-view',this)"><span class="nav-icon">🏛️</span><span class="nav-label">Offices</span></div>
+    <div class="nav-item" onclick="switchTab('favorites-view',this)"><span class="nav-icon">⭐</span><span class="nav-label">Saved</span></div>
+    <div class="nav-item" onclick="switchTab('aod-view',this)"><span class="nav-icon">☀️</span><span class="nav-label">Today</span></div>
+  </div>
+</div>
 </body>
 </html>
