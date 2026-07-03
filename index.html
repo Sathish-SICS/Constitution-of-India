@@ -318,15 +318,58 @@ html,body{width:100%;margin:0;font-family:'Inter',sans-serif;background:var(--in
 .detail-content.tex-grain{background-image:radial-gradient(rgba(150,110,50,0.10) 1px,transparent 1px);background-size:5px 5px;}
 .detail-content.tex-paper{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.10'/%3E%3C/svg%3E");}
 
-/* RESPONSIVE — fit phone, tablet, desktop */
+/* ═══════ DEVICE-ADAPTIVE LAYOUT SYSTEM ═══════ */
+/* Tablet (iPad portrait) 700-1023px: wider column + 2-col grids */
 @media (min-width: 700px) {
-  .screen { box-shadow: 0 0 60px rgba(0,0,0,0.5); }
-  /* article reading column slightly wider & comfortable on big screens */
-  .article-body-parch p, .clause-block .clause-text { max-width: 560px; }
+  .screen { max-width: 720px; box-shadow: 0 0 60px rgba(0,0,0,0.5); }
+  .parts-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .sched-list, .amend-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .quick-card { break-inside: avoid; }
 }
-/* On very large screens, give breathing room top/bottom */
-@media (min-width: 1000px) {
+/* Desktop (Mac/PC/iPad landscape) ≥1024px: side nav rail + wide reading + multi-col */
+@media (min-width: 1024px) {
+  .screen { max-width: 900px; }
+  /* Bottom nav becomes a LEFT SIDE RAIL */
+  .bottom-nav {
+    top: 0; bottom: 0; left: 0; right: auto; transform: none;
+    width: 92px; max-width: 92px; height: 100vh;
+    flex-direction: column; justify-content: center; gap: 26px;
+    padding: 0; border-top: none; border-right: 1px solid var(--border-soft);
+  }
+  .nav-item { flex-direction: column; padding: 10px 6px; border-radius: 12px; margin: 0 10px; }
+  .nav-icon { font-size: 24px; }
+  .nav-label { font-size: 10px; }
+  /* Shift content right of the rail and center in remaining space */
+  .screen { margin-left: calc(92px + (100vw - 92px - 900px) / 2); margin-right: auto; }
+  /* Reading text: bigger default, comfortable line length */
+  .clause-block .clause-text { font-size: calc(var(--read-size, 18px) + 1px); max-width: 760px; }
+  .article-body-parch p { max-width: 760px; }
+  .art-main-title-parch { font-size: 30px; }
+  /* Quick view: 2-column masonry */
+  #articlesContent { column-count: 2; column-gap: 12px; }
+  #articlesContent .quick-card { display: inline-block; width: 100%; margin-bottom: 12px; }
+  /* Offices: wider photos */
+  .office-photo { width: 68px; height: 82px; }
+  .font-panel { left: calc(92px + (100vw - 92px) / 2); }
+}
+/* Large desktop (27" monitors) ≥1600px: even wider + 3-col parts */
+@media (min-width: 1600px) {
+  .screen { max-width: 1080px; margin-left: calc(92px + (100vw - 92px - 1080px) / 2); }
+  .parts-list { grid-template-columns: 1fr 1fr 1fr; }
   body { background: radial-gradient(ellipse at 50% 0%, #161d2e 0%, var(--ink) 60%); }
+  .clause-block .clause-text { max-width: 880px; }
+  .article-body-parch p { max-width: 880px; }
+}
+/* Keep bottom-nav at bottom for touch devices even if wide (iPad landscape has coarse pointer) */
+@media (min-width: 1024px) and (pointer: coarse) {
+  .bottom-nav {
+    top: auto; bottom: 0; left: 50%; right: auto; transform: translateX(-50%);
+    width: 100%; max-width: 720px; height: auto; flex-direction: row;
+    padding: 10px 0 28px; border-right: none; border-top: 1px solid var(--border-soft);
+  }
+  .nav-item { flex-direction: column; margin: 0; }
+  .screen { margin-left: auto; margin-right: auto; }
+  .font-panel { left: 50%; }
 }
 /* Ensure detail/schedule parchment screens show parch bg full column height */
 #article-detail.screen, #schedule-detail.screen { background: var(--parch-bg); }
@@ -366,6 +409,33 @@ html,body{width:100%;margin:0;font-family:'Inter',sans-serif;background:var(--in
 .office-bg-pick{display:flex;gap:4px;margin-left:auto;}
 .office-bg-swatch{width:22px;height:22px;border-radius:6px;cursor:pointer;border:2px solid transparent;transition:all 0.15s;}
 .office-bg-swatch.active{border-color:var(--gold);}
+
+/* ── MY NOTES (per-article) ── */
+.note-section{margin:16px 20px;border:2px dashed #b8985a;border-radius:14px;background:rgba(255,255,255,0.35);overflow:hidden;}
+.note-header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:rgba(139,105,20,0.12);cursor:pointer;}
+.note-title{font-family:'Inter',sans-serif;font-size:12px;font-weight:700;color:#6b4400;text-transform:uppercase;letter-spacing:0.8px;}
+.note-status{font-size:11px;color:#8b6914;font-style:italic;}
+.note-textarea{width:100%;min-height:110px;border:none;background:transparent;padding:14px 16px;font-family:var(--read-font,'Lexend',sans-serif);font-size:15px;line-height:1.6;color:var(--parch-text2);resize:vertical;outline:none;}
+.note-textarea::placeholder{color:#b09a6a;font-style:italic;}
+.note-actions{display:flex;gap:8px;padding:0 16px 12px;}
+.note-btn{background:#8b1a00;color:#f4e4c1;border:none;border-radius:8px;padding:7px 16px;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;cursor:pointer;}
+.note-btn.secondary{background:rgba(139,105,20,0.15);color:#6b4400;}
+.has-note-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#e0a020;margin-left:6px;vertical-align:middle;}
+
+/* ── COMPARE VIEW ── */
+.compare-list{padding:0 16px 90px;display:flex;flex-direction:column;gap:10px;}
+.compare-card{background:var(--ink-mid);border:1px solid var(--border-soft);border-radius:14px;padding:16px;cursor:pointer;transition:all 0.15s;display:flex;align-items:center;gap:14px;}
+.compare-card:hover{border-color:var(--gold);}
+.compare-icon{font-size:26px;flex-shrink:0;}
+.compare-name{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:var(--text-primary);}
+.compare-sub{font-size:11px;color:var(--text-muted);margin-top:2px;}
+.compare-table-wrap{padding:16px;overflow-x:auto;}
+.compare-table{width:100%;border-collapse:collapse;font-family:var(--read-font,'Lexend',sans-serif);font-size:13px;background:rgba(255,255,255,0.4);border-radius:10px;overflow:hidden;}
+.compare-table th{background:#8b1a00;color:#f4e4c1;padding:10px 12px;text-align:left;font-weight:700;font-size:12px;}
+.compare-table td{padding:10px 12px;border-bottom:1px solid rgba(139,105,20,0.2);color:var(--parch-text2);vertical-align:top;line-height:1.5;}
+.compare-table tr td:first-child{font-weight:700;color:#6b4400;white-space:nowrap;}
+.compare-table tr:nth-child(even) td{background:rgba(139,105,20,0.05);}
+@media (min-width: 700px){ .compare-list{display:grid;grid-template-columns:1fr 1fr;} }
 </style>
 </head>
 <body>
@@ -437,6 +507,7 @@ html,body{width:100%;margin:0;font-family:'Inter',sans-serif;background:var(--in
         <div class="shortcut-chip" onclick="openAmendments()"><div class="chip-icon neon-red">📝</div><div class="chip-label">Key Amendments</div></div>
         <div class="shortcut-chip" onclick="openPartByShortcut('pXVIII','Emergency Provisions','352–360')"><div class="chip-icon neon-teal">🚨</div><div class="chip-label">Emergency</div></div>
         <div class="shortcut-chip" onclick="switchTab('schedules-view',null)"><div class="chip-icon neon-gold">📅</div><div class="chip-label">12 Schedules</div></div>
+        <div class="shortcut-chip" onclick="showScreen('compare-view')"><div class="chip-icon neon-purple">⚖️</div><div class="chip-label">Compare</div></div>
       </div>
     </div>
     <div class="section-label"><span>Parts of the Constitution</span></div>
@@ -597,6 +668,987 @@ html,body{width:100%;margin:0;font-family:'Inter',sans-serif;background:var(--in
 // ═══════════════ RICH ARTICLE DATA (clause-wise) ═══════════════
 // Structure: clauses[] = [{label, text}], keywords[], mnemonic, cases[], recent[]
 const ART_DATA = {
+  // ─── PART VI BATCH 1: Missing State Executive + listed gaps ───
+  '160': {
+    clauses:[{label:'',text:'DISCHARGE OF THE FUNCTIONS OF THE GOVERNOR IN CERTAIN CONTINGENCIES: The PRESIDENT may make such provision as he thinks fit for the discharge of the functions of the Governor of a State in any contingency not provided for in this Chapter (e.g. Governor\'s sudden death — typically the Chief Justice of the HC or Governor of a neighbouring state is given additional charge).'}],
+    keywords:['President provides for Governor contingencies','Sudden vacancy','CJ of HC or neighbouring Governor given charge','Parallel to Art 70 for President'],
+    mnemonic:'160 = "President fills unexpected Governor gaps" (parallel of Art 70).',
+    cases:[],
+    recent:[]
+  },
+  '162': {
+    clauses:[{label:'',text:'EXTENT OF EXECUTIVE POWER OF STATE: The executive power of a State extends to the matters with respect to which the LEGISLATURE OF THE STATE has power to make laws (i.e. State List + Concurrent List). PROVISO: In Concurrent List matters, the State\'s executive power is SUBJECT TO the executive power expressly conferred on the Union by the Constitution or by Parliament.'}],
+    keywords:['State executive power = State legislative power','State List + Concurrent List','Union prevails on Concurrent executive matters','Mirrors Art 73 for Union'],
+    mnemonic:'162 = "State executive power follows State legislative power" (73 = Union parallel). On Concurrent — Union executive wins.',
+    cases:[{name:'Ram Jawaya Kapur v State of Punjab',year:'1955',held:'Executive power is not confined to matters where legislation exists; the executive can act on any matter within the legislature\'s competence even without a law, subject to constitutional limits.'}],
+    recent:[]
+  },
+  '166': {
+    clauses:[
+      {label:'166(1)',text:'CONDUCT OF BUSINESS OF THE GOVERNMENT OF A STATE: All executive action of a State Government shall be expressed to be taken in the NAME OF THE GOVERNOR.'},
+      {label:'166(2)',text:'Orders/instruments in the Governor\'s name shall be authenticated as specified in rules made by the Governor; validity shall not be questioned on the ground that it is not an order made by the Governor.'},
+      {label:'166(3)',text:'The Governor shall make RULES for the more convenient transaction of the business of the State Government, and for allocation of business among Ministers (State Business Rules).'}
+    ],
+    keywords:['State action in Governor\'s name','Authentication rules','State Business/Allocation Rules','Mirrors Art 77 for Union'],
+    mnemonic:'166 = "State version of Art 77" — all action in GOVERNOR\'s name.',
+    cases:[],
+    recent:[]
+  },
+  '167': {
+    clauses:[{label:'',text:'DUTIES OF CHIEF MINISTER: It shall be the duty of the CM — (a) to COMMUNICATE to the Governor all decisions of the Council of Ministers relating to administration and proposals for legislation; (b) to FURNISH such information relating to administration/legislation as the Governor may call for; (c) if the Governor so requires, to SUBMIT for the consideration of the Council of Ministers any matter on which a decision has been taken by a Minister but which has not been considered by the Council.'}],
+    keywords:['CM duties to Governor','Communicate CoM decisions','Furnish information','Submit individual Minister decisions to CoM','Mirrors Art 78 (PM duties)'],
+    mnemonic:'167 = "CM is the bridge between Governor and State Cabinet" (mirror of Art 78 for PM-President).',
+    cases:[],
+    recent:[]
+  },
+  '207': {
+    clauses:[{label:'',text:'SPECIAL PROVISIONS AS TO FINANCIAL BILLS (STATE): A Bill dealing with Art 199(1) matters (State Money Bill matters) shall not be introduced/moved except on the GOVERNOR\'S RECOMMENDATION, and shall not be introduced in a Legislative Council. A Bill involving expenditure from the Consolidated Fund of the State shall not be passed unless the Governor has recommended its consideration. (Mirrors Art 117 at the Union level.)'}],
+    keywords:['State Financial Bills','Governor recommendation','Not in Legislative Council','Mirrors Art 117'],
+    mnemonic:'207 = "State Financial Bills — Governor recommendation" (State mirror of 117).',
+    cases:[],
+    recent:[]
+  },
+  '225': {
+    clauses:[{label:'',text:'JURISDICTION OF EXISTING HIGH COURTS: Subject to the Constitution and to any law of the appropriate Legislature, the jurisdiction of, and the law administered in, any EXISTING High Court, and the powers of its judges in relation to administration of justice — including rule-making — shall be the SAME as immediately before the commencement of the Constitution (continuity clause preserving pre-1950 HC jurisdiction, including any original jurisdiction of Bombay/Calcutta/Madras HCs).'}],
+    keywords:['Continuity of existing HC jurisdiction','Pre-1950 powers preserved','Bombay/Calcutta/Madras original jurisdiction','Rule-making continuity'],
+    mnemonic:'225 = "Old HCs keep their pre-1950 powers" — continuity clause (why Madras HC has original civil jurisdiction).',
+    cases:[],
+    recent:[]
+  },
+  '236': {
+    clauses:[{label:'',text:'INTERPRETATION (Subordinate Courts chapter): (a) "DISTRICT JUDGE" includes judge of a city civil court, additional district judge, joint district judge, assistant district judge, chief judge of a small cause court, chief presidency magistrate, additional chief presidency magistrate, sessions judge, additional sessions judge and assistant sessions judge; (b) "JUDICIAL SERVICE" means a service consisting exclusively of persons intended to fill the post of district judge and other civil judicial posts inferior to the post of district judge.'}],
+    keywords:['District Judge definition (inclusive)','Sessions Judge included','Judicial service definition','Chapter VI interpretation clause'],
+    mnemonic:'236 = "Defines District Judge (wide) + judicial service" for the subordinate courts chapter.',
+    cases:[],
+    recent:[]
+  },
+  '237': {
+    clauses:[{label:'',text:'APPLICATION OF THE PROVISIONS OF THIS CHAPTER TO CERTAIN CLASS OR CLASSES OF MAGISTRATES: The GOVERNOR may by public notification direct that the provisions of this Chapter (on subordinate courts) shall apply to any class of magistrates in the State, subject to such exceptions and modifications as may be specified.'}],
+    keywords:['Governor extends chapter to magistrates','Public notification','Exceptions and modifications possible'],
+    mnemonic:'237 = "Governor can extend subordinate-courts rules to magistrates" — closing article of Part VI.',
+    cases:[],
+    recent:[]
+  },
+  // ─── PART VI BATCH 2: STATE LEGISLATURE (172–199, 203–212) ───
+  '172': {
+    clauses:[
+      {label:'172(1)',text:'DURATION OF STATE LEGISLATURES: Every LEGISLATIVE ASSEMBLY (Vidhan Sabha), unless sooner dissolved, continues for FIVE YEARS from its first sitting; expiry operates as dissolution. During a National Emergency, Parliament may extend the term by ONE YEAR at a time (not beyond 6 months after Emergency ends).'},
+      {label:'172(2)',text:'The LEGISLATIVE COUNCIL (Vidhan Parishad) shall NOT be subject to dissolution — a PERMANENT body; 1/3 of members retire every SECOND YEAR (6-year member term).'}
+    ],
+    keywords:['Vidhan Sabha 5 years','Emergency extension 1 year at a time','Vidhan Parishad permanent','1/3 retire every 2 years','Mirrors Art 83'],
+    mnemonic:'172 = "State mirror of Art 83" — Assembly 5 yrs; Council permanent.',
+    cases:[],
+    recent:[]
+  },
+  '173': {
+    clauses:[{label:'',text:'QUALIFICATION FOR MEMBERSHIP OF THE STATE LEGISLATURE: A person must — (a) be a CITIZEN of India; (b) be not less than 25 YEARS for the Legislative ASSEMBLY and not less than 30 YEARS for the Legislative COUNCIL; (c) possess such other qualifications as Parliament prescribes (Representation of the People Act 1951 — must be an elector in the State).'}],
+    keywords:['MLA: 25 years','MLC: 30 years','Citizen of India','RPA 1951 elector requirement','Mirrors Art 84'],
+    mnemonic:'173 = "25 for Assembly, 30 for Council" — same ages as Lok Sabha/Rajya Sabha.',
+    cases:[],
+    recent:[]
+  },
+  '174': {
+    clauses:[{label:'',text:'SESSIONS, PROROGATION AND DISSOLUTION (STATE): The GOVERNOR summons the House(s); gap between two sessions must NOT exceed SIX MONTHS. The Governor may prorogue the House(s) and DISSOLVE the Legislative Assembly. (Nabam Rebia 2016: Governor cannot summon/dissolve at his own discretion against CM\'s advice when govt has majority.)'}],
+    keywords:['Governor summons/prorogues/dissolves','6-month max gap','Nabam Rebia limits discretion','Mirrors Art 85'],
+    mnemonic:'174 = "State mirror of Art 85" — 6-month session gap rule; Governor bound by CoM advice (Nabam Rebia).',
+    cases:[{name:'Nabam Rebia v Deputy Speaker',year:'2016',held:'Governor cannot summon or advance an Assembly session at his own discretion; must act on CM/CoM advice unless government majority is in doubt.'}],
+    recent:[]
+  },
+  '175': {
+    clauses:[{label:'',text:'RIGHT OF GOVERNOR TO ADDRESS AND SEND MESSAGES TO THE HOUSE(S): The Governor may address the Legislative Assembly (or both Houses together) and may send messages to the House(s), which shall consider the message with all convenient despatch. (Mirrors Art 86 for the President.)'}],
+    keywords:['Governor addresses Legislature','Can send messages','House must consider promptly','Mirrors Art 86'],
+    mnemonic:'175 = "Governor\'s address/messages" (State mirror of Art 86).',
+    cases:[],
+    recent:[]
+  },
+  '176': {
+    clauses:[{label:'',text:'SPECIAL ADDRESS BY THE GOVERNOR: At the commencement of the FIRST SESSION after each general election to the Assembly and at the FIRST SESSION of EACH YEAR, the Governor shall address the Assembly (or both Houses assembled together) and inform the Legislature of the causes of its summons. (Mirrors Art 87 — the Governor\'s Address, followed by the Motion of Thanks.)'}],
+    keywords:['Governor\'s Address','First session after election / each year','Motion of Thanks follows','Mirrors Art 87'],
+    mnemonic:'176 = "Governor\'s Address ceremony" (State mirror of 87). Kerala/TN Governor-address controversies arise here.',
+    cases:[],
+    recent:[{title:'Governor address controversies',desc:'In 2023-24, Governors of Kerala, Tamil Nadu and other opposition-ruled states skipped or truncated portions of the customary address prepared by the State Government — raising constitutional questions since the Address reflects government policy, not the Governor\'s personal views.'}]
+  },
+  '177': {
+    clauses:[{label:'',text:'RIGHTS OF MINISTERS AND ADVOCATE-GENERAL AS RESPECTS THE HOUSES: Every Minister and the ADVOCATE-GENERAL of the State have the right to SPEAK in and take part in the proceedings of the Assembly, the Council (if any), and any committee of the Legislature of which they are named a member — but are NOT entitled to VOTE unless they are members.'}],
+    keywords:['Ministers/AG speak in both Houses','No vote unless member','Mirrors Art 88'],
+    mnemonic:'177 = "State mirror of Art 88" — Ministers/AG speak anywhere, vote only where members.',
+    cases:[],
+    recent:[]
+  },
+  '178': {
+    clauses:[{label:'',text:'THE SPEAKER AND DEPUTY SPEAKER OF THE LEGISLATIVE ASSEMBLY: Every Legislative Assembly shall, as soon as may be, choose two members to be SPEAKER and DEPUTY SPEAKER, and choose replacements when either office falls vacant. (Their vacation/resignation/removal — Art 179 — mirrors Arts 93-94: removal by majority of ALL members with 14 days notice; Speaker continues after dissolution until the new Assembly meets.)'}],
+    keywords:['Assembly elects Speaker/Deputy Speaker','Removal: majority of all members','Speaker survives dissolution','Mirrors Arts 93-96'],
+    mnemonic:'178 = "State Speaker" — same rules as LS Speaker (survives dissolution; removal by absolute majority).',
+    cases:[],
+    recent:[]
+  },
+  '180': {
+    clauses:[{label:'',text:'POWER OF THE DEPUTY SPEAKER OR OTHER PERSON TO PERFORM THE DUTIES OF THE OFFICE OF, OR TO ACT AS, SPEAKER: When the office of Speaker is vacant, the Deputy Speaker performs the duties; if that too is vacant, such member as the Governor appoints. During absence from a sitting, the Deputy Speaker (or person determined by Assembly rules) presides.'}],
+    keywords:['Deputy Speaker substitutes','Governor appoints if both vacant','Mirrors Art 95'],
+    mnemonic:'180 = "Backup chain for State Speaker" (mirror of 95).',
+    cases:[],
+    recent:[]
+  },
+  '181': {
+    clauses:[{label:'',text:'THE SPEAKER OR THE DEPUTY SPEAKER NOT TO PRESIDE WHILE A RESOLUTION FOR HIS REMOVAL FROM OFFICE IS UNDER CONSIDERATION: Mirrors Art 96 — natural justice; he may speak/take part and vote as an ordinary member (except a casting vote in the usual course).'}],
+    keywords:['Cannot preside over own removal','May speak and vote as member','Mirrors Art 96'],
+    mnemonic:'181 = "State mirror of 96" — no judge in his own cause.',
+    cases:[],
+    recent:[]
+  },
+  '182': {
+    clauses:[{label:'',text:'THE CHAIRMAN AND DEPUTY CHAIRMAN OF THE LEGISLATIVE COUNCIL: The Legislative Council of a State (where it exists) chooses two of its members to be CHAIRMAN and DEPUTY CHAIRMAN. (Unlike Rajya Sabha — whose Chairman is the Vice-President ex-officio — the State Council elects its OWN Chairman from among members. Arts 183-185 mirror the RS provisions on vacation/removal/substitute/own-removal rules.)'}],
+    keywords:['Council elects own Chairman','Different from RS (VP ex-officio)','Arts 183-185 mirror RS provisions'],
+    mnemonic:'182 = "Vidhan Parishad elects its OWN Chairman" (KEY difference from Rajya Sabha where VP is automatic).',
+    cases:[],
+    recent:[]
+  },
+  '187': {
+    clauses:[{label:'',text:'SECRETARIAT OF STATE LEGISLATURE: Each House of the State Legislature has a SEPARATE secretarial staff; the State Legislature may by law regulate recruitment and conditions of service. (Mirrors Art 98 — legislative independence from the executive.)'}],
+    keywords:['Separate secretariat','State law regulates','Mirrors Art 98'],
+    mnemonic:'187 = "State Legislature\'s own staff" (mirror of 98).',
+    cases:[],
+    recent:[]
+  },
+  '188': {
+    clauses:[{label:'',text:'OATH OR AFFIRMATION BY MEMBERS: Every MLA/MLC, before taking his seat, makes and subscribes an oath/affirmation (3rd Schedule form) before the GOVERNOR or a person appointed by him. (Mirrors Art 99.)'}],
+    keywords:['MLA/MLC oath','3rd Schedule form','Before Governor or nominee','Mirrors Art 99'],
+    mnemonic:'188 = "State members\' oath" (mirror of 99).',
+    cases:[],
+    recent:[]
+  },
+  '189': {
+    clauses:[{label:'',text:'VOTING, QUORUM (STATE): Questions are determined by a majority of members present and voting (Speaker/Chairman votes only to break a tie — casting vote). QUORUM = 10 MEMBERS or 1/10th of the total membership, WHICHEVER IS GREATER. (Slightly different from Art 100 which is simply 1/10th.)'}],
+    keywords:['Quorum = 10 or 1/10th whichever greater','Casting vote','Mirrors Art 100 with variation'],
+    mnemonic:'189 = "State quorum: 10 members OR 1/10th — whichever is GREATER" (note the small difference from Art 100).',
+    cases:[],
+    recent:[]
+  },
+  '190': {
+    clauses:[{label:'',text:'VACATION OF SEATS (STATE): No person can be a member of BOTH Houses of a State Legislature, or of legislatures of TWO OR MORE States (seat vacated per rules). A seat also falls vacant on disqualification (Art 191), resignation, or ABSENCE for 60 DAYS without permission. (Mirrors Art 101.)'}],
+    keywords:['No dual membership','Two states = seat vacated','60 days absence rule','Mirrors Art 101'],
+    mnemonic:'190 = "State mirror of 101" — one seat only; 60-day absence rule.',
+    cases:[],
+    recent:[]
+  },
+  '191': {
+    clauses:[{label:'',text:'DISQUALIFICATIONS FOR MEMBERSHIP (STATE): Same five grounds as Art 102 — (a) office of profit under Union/State govt (except offices exempted by State law); (b) unsound mind; (c) undischarged insolvent; (d) not a citizen / voluntarily acquired foreign citizenship; (e) disqualified under any parliamentary law (RPA 1951). Plus disqualification under the TENTH SCHEDULE (defection).'}],
+    keywords:['5 grounds + defection','Office of profit','RPA 1951','Mirrors Art 102','10th Schedule'],
+    mnemonic:'191 = "State mirror of 102" — same 5 disqualifications + defection.',
+    cases:[],
+    recent:[]
+  },
+  '192': {
+    clauses:[{label:'',text:'DECISION ON QUESTIONS AS TO DISQUALIFICATIONS OF MEMBERS (STATE): Questions of disqualification under Art 191(1) are referred to the GOVERNOR, whose decision is final — but the Governor SHALL OBTAIN and ACT ACCORDING TO the OPINION of the ELECTION COMMISSION. (Defection cases under the 10th Schedule are decided by the Speaker/Chairman — separate mechanism, mirrors Art 103.)'}],
+    keywords:['Governor decides on EC opinion (binding)','Defection = Speaker decides (separate)','Mirrors Art 103'],
+    mnemonic:'192 = "Governor decides disqualification, MUST follow EC" (State mirror of 103).',
+    cases:[],
+    recent:[]
+  },
+  '193': {
+    clauses:[{label:'',text:'PENALTY FOR SITTING AND VOTING BEFORE MAKING OATH OR WHEN NOT QUALIFIED OR WHEN DISQUALIFIED (STATE): ₹500 per day penalty, recoverable as a debt due to the State. (Mirrors Art 104.)'}],
+    keywords:['₹500/day penalty','Debt due to State','Mirrors Art 104'],
+    mnemonic:'193 = "State ₹500/day fine" (mirror of 104).',
+    cases:[],
+    recent:[]
+  },
+  '194': {
+    clauses:[{label:'',text:'POWERS, PRIVILEGES, ETC., OF THE HOUSES OF LEGISLATURES AND OF THE MEMBERS AND COMMITTEES THEREOF: Freedom of SPEECH in the State Legislature; no member liable in any court for anything said or any vote given; immunity for authorised publications. Other privileges as defined by the Legislature by law (until then, those of the House of Commons as at commencement — the same framework as Art 105 for Parliament).'}],
+    keywords:['State legislative privileges','Freedom of speech in House','No court liability','Mirrors Art 105','Sita Soren 2024 applies (bribery not protected)'],
+    mnemonic:'194 = "State mirror of 105". Sita Soren (2024): bribery for votes NOT protected — applies to MLAs too.',
+    cases:[{name:'Sita Soren v Union of India',year:'2024',held:'7-judge bench: an MLA (or MP) taking a bribe for a vote/speech is NOT protected by legislative privilege under Art 194/105 — overruled P.V. Narasimha Rao (1998).'}],
+    recent:[]
+  },
+  '195': {
+    clauses:[{label:'',text:'SALARIES AND ALLOWANCES OF MEMBERS: MLAs/MLCs receive salaries and allowances as determined by the State Legislature by law. (Mirrors Art 106.)'}],
+    keywords:['MLA salaries by State law','Mirrors Art 106'],
+    mnemonic:'195 = "MLA salary — State law" (mirror of 106).',
+    cases:[],
+    recent:[]
+  },
+  '196': {
+    clauses:[{label:'',text:'PROVISIONS AS TO INTRODUCTION AND PASSING OF BILLS (STATE): A Bill may originate in EITHER House (in bicameral states), except Money/Financial Bills (Assembly only). A Bill does NOT lapse on PROROGATION. A Bill pending in the COUNCIL which has not been passed by the Assembly does NOT lapse on dissolution of the Assembly; a Bill pending in (or passed by) the ASSEMBLY lapses on its dissolution. (Mirrors Art 107.)'}],
+    keywords:['Bills originate in either House (except Money)','Prorogation ≠ lapse','Assembly dissolution = lapse','Mirrors Art 107'],
+    mnemonic:'196 = "State mirror of 107" — prorogation vs dissolution lapse rules.',
+    cases:[],
+    recent:[]
+  },
+  '197': {
+    clauses:[
+      {label:'197(1)',text:'RESTRICTION ON POWERS OF LEGISLATIVE COUNCIL AS TO BILLS OTHER THAN MONEY BILLS: If the Council rejects a Bill passed by the Assembly, or 3 MONTHS pass without the Council passing it, or the Council passes it with amendments the Assembly does not agree to — the Assembly may PASS IT AGAIN. If the Council again rejects/delays beyond ONE MONTH/amends unacceptably, the Bill is DEEMED PASSED by both Houses in the form passed the second time by the Assembly.'},
+      {label:'Key point',text:'The Council can DELAY an ordinary Bill for a MAXIMUM of about 4 MONTHS (3 + 1) — it has NO power to permanently block. There is NO JOINT SITTING at the State level (unlike Art 108 for Parliament).'}
+    ],
+    keywords:['Council can delay max ~4 months (3+1)','No joint sitting in States','Assembly supremacy','Council = advisory/delaying body','Mirrors 108-109 with differences'],
+    mnemonic:'197 = "Vidhan Parishad = speed-bump, not wall" — max ~4-month delay; NO joint sitting at State level.',
+    cases:[],
+    recent:[]
+  },
+  '198': {
+    clauses:[{label:'',text:'SPECIAL PROCEDURE IN RESPECT OF MONEY BILLS (STATE): A Money Bill shall NOT be introduced in a Legislative Council. After passage in the Assembly, it is sent to the Council for RECOMMENDATIONS — the Council must return it within 14 DAYS; the Assembly may accept or reject the recommendations; if not returned in 14 days, DEEMED PASSED. (Mirrors Art 109.)'}],
+    keywords:['State Money Bill','Assembly only','Council 14 days recommendations','Deemed passed','Mirrors Art 109'],
+    mnemonic:'198 = "State Money Bill — 14-day Council window" (mirror of 109).',
+    cases:[],
+    recent:[]
+  },
+  '199': {
+    clauses:[{label:'',text:'DEFINITION OF "MONEY BILLS" (STATE): Same categories as Art 110 but at the State level — State taxation, borrowing by the State, Consolidated Fund/Contingency Fund of the State, appropriation, charged expenditure, receipt/custody of State money. The decision of the SPEAKER of the Legislative Assembly that a Bill is a Money Bill is FINAL.'}],
+    keywords:['State Money Bill definition','Speaker certificate final','Mirrors Art 110'],
+    mnemonic:'199 = "State mirror of 110" — Assembly Speaker\'s certificate is final.',
+    cases:[],
+    recent:[]
+  },
+  '203': {
+    clauses:[{label:'',text:'PROCEDURE IN LEGISLATURE WITH RESPECT TO ESTIMATES (STATE): CHARGED expenditure on the Consolidated Fund of the State — discussed but NOT voted. Other expenditure — submitted as DEMANDS FOR GRANTS to the Assembly, which may assent, refuse, or REDUCE (never increase). Demands require the GOVERNOR\'S recommendation. (Mirrors Art 113.)'}],
+    keywords:['State Demands for Grants','Charged = no vote','Assembly can reduce only','Governor recommendation','Mirrors Art 113'],
+    mnemonic:'203 = "State budget voting" (mirror of 113).',
+    cases:[],
+    recent:[]
+  },
+  '204': {
+    clauses:[{label:'',text:'APPROPRIATION BILLS (STATE): After Demands are passed, an Appropriation Bill authorises withdrawal from the Consolidated Fund of the State for voted grants + charged expenditure. No amendment varying any amount/destination is permissible. No money can be withdrawn from the Consolidated Fund of the State except under appropriation made by such law. (Mirrors Art 114.)'}],
+    keywords:['State Appropriation Bill','No amendment on amounts','Only route to withdraw from State CF','Mirrors Art 114'],
+    mnemonic:'204 = "State Appropriation Bill" (mirror of 114).',
+    cases:[],
+    recent:[]
+  },
+  '205': {
+    clauses:[{label:'',text:'SUPPLEMENTARY, ADDITIONAL OR EXCESS GRANTS (STATE): Same three categories as the Union — supplementary (insufficient), additional (new need), excess (overspent, ex-post approval on CAG report via PAC) — following the same Demands + Appropriation procedure. (Mirrors Art 115.)'}],
+    keywords:['State supplementary/additional/excess grants','Mirrors Art 115'],
+    mnemonic:'205 = "State top-up grants" (mirror of 115).',
+    cases:[],
+    recent:[]
+  },
+  '206': {
+    clauses:[{label:'',text:'VOTES ON ACCOUNT, VOTES OF CREDIT AND EXCEPTIONAL GRANTS (STATE): The Assembly can make an advance grant for part of the year (VOTE ON ACCOUNT), a grant for unexpected indeterminate demands (VOTE OF CREDIT), and an EXCEPTIONAL GRANT for a purpose outside the current year\'s statement. (Mirrors Art 116.)'}],
+    keywords:['State Vote on Account','Vote of Credit','Exceptional Grant','Mirrors Art 116'],
+    mnemonic:'206 = "State interim/emergency grants" (mirror of 116).',
+    cases:[],
+    recent:[]
+  },
+  '208': {
+    clauses:[{label:'',text:'RULES OF PROCEDURE (STATE): Each House of the State Legislature may make rules regulating its procedure and conduct of business, subject to the Constitution. The Governor, after consulting the Speaker/Chairman, may make rules for communication between the two Houses. (Mirrors Art 118.)'}],
+    keywords:['State House rules','Governor rules for inter-House communication','Mirrors Art 118'],
+    mnemonic:'208 = "State rulebook" (mirror of 118).',
+    cases:[],
+    recent:[]
+  },
+  '209': {
+    clauses:[{label:'',text:'REGULATION BY LAW OF PROCEDURE IN THE LEGISLATURE OF THE STATE IN RELATION TO FINANCIAL BUSINESS: The State Legislature may by law regulate financial procedure, overriding inconsistent House rules. (Mirrors Art 119.)'}],
+    keywords:['State financial procedure law','Overrides House rules','Mirrors Art 119'],
+    mnemonic:'209 = "State financial-procedure law wins" (mirror of 119).',
+    cases:[],
+    recent:[]
+  },
+  '210': {
+    clauses:[{label:'',text:'LANGUAGE TO BE USED IN THE LEGISLATURE: Business shall be transacted in the OFFICIAL LANGUAGE(S) OF THE STATE, or in HINDI, or in ENGLISH — with the presiding officer able to permit a member to address in his MOTHER TONGUE. [After 15 years from commencement, the words "or in English" were to drop away unless the Legislature provided otherwise — most states extended English by law.]'}],
+    keywords:['State official language / Hindi / English','Mother tongue with permission','15-year English clause','Mirrors Art 120'],
+    mnemonic:'210 = "State legislature language" (mirror of 120) — TN uses Tamil + English.',
+    cases:[],
+    recent:[]
+  },
+  '211': {
+    clauses:[{label:'',text:'RESTRICTION ON DISCUSSION IN THE LEGISLATURE: No discussion shall take place in a State Legislature with respect to the CONDUCT of any JUDGE of the Supreme Court or of a High Court in the discharge of his duties. (Note: State Legislatures have NO power to even move a removal address — that is exclusively Parliament\'s — so the bar here is ABSOLUTE, stricter than Art 121.)'}],
+    keywords:['Absolute bar on discussing judges','No exception (unlike Art 121)','States cannot remove judges','Judicial independence'],
+    mnemonic:'211 = "State Houses can NEVER discuss judges\' conduct" — absolute (Parliament has the impeachment exception under 121; States have none).',
+    cases:[],
+    recent:[]
+  },
+  '212': {
+    clauses:[{label:'',text:'COURTS NOT TO INQUIRE INTO PROCEEDINGS OF THE LEGISLATURE: The validity of any proceedings in a State Legislature shall NOT be called in question on the ground of any alleged IRREGULARITY OF PROCEDURE; officers/members empowered to regulate procedure are not subject to court jurisdiction in exercise of those powers. (Substantive illegality remains reviewable — same principle as Art 122 / Raja Ram Pal.)'}],
+    keywords:['No judicial review of procedural irregularity','Substantive illegality reviewable','Mirrors Art 122'],
+    mnemonic:'212 = "State mirror of 122" — procedure immune, substance reviewable.',
+    cases:[],
+    recent:[]
+  },
+  // ─── PART VI BATCH 3: HIGH COURTS remaining (218, 221-224, 228-232, 234) ───
+  '218': {
+    clauses:[{label:'',text:'APPLICATION OF CERTAIN PROVISIONS RELATING TO SUPREME COURT TO HIGH COURTS: The provisions of Art 124(4) and (5) — REMOVAL of judges by Parliament (impeachment for proved misbehaviour or incapacity, special majority in both Houses) — shall apply to HIGH COURT judges as they apply to SC judges. (So an HC judge is removed by the SAME process as an SC judge — by Parliament, NOT by the State Legislature.)'}],
+    keywords:['HC judge removal = same as SC judge','Parliament impeachment only','State Legislature has NO role','Judges (Inquiry) Act 1968'],
+    mnemonic:'218 = "HC judges removed EXACTLY like SC judges" — Parliament, special majority. States have zero role.',
+    cases:[],
+    recent:[{title:'Removal attempts',desc:'No judge has ever been successfully impeached. Justice V. Ramaswami (1993 — motion failed in LS), Justice Soumitra Sen (2011 — resigned before LS vote) are the closest cases.'}]
+  },
+  '221': {
+    clauses:[{label:'',text:'SALARIES ETC. OF JUDGES: HC judges are paid salaries as determined by Parliament by law (2nd Schedule default); allowances/leave/pension also by Parliament law — none can be varied to a judge\'s DISADVANTAGE after appointment (except under Financial Emergency, Art 360).'}],
+    keywords:['HC judge salaries by Parliament','Cannot reduce after appointment','Financial Emergency exception','Charged on Consolidated Fund of the State (salaries); pensions on CFI'],
+    mnemonic:'221 = "HC judge pay protected". Note: SALARIES charged on State CF, but PENSIONS on Union CFI.',
+    cases:[],
+    recent:[]
+  },
+  '222': {
+    clauses:[{label:'',text:'TRANSFER OF A JUDGE FROM ONE HIGH COURT TO ANOTHER: The PRESIDENT, after consultation with the CHIEF JUSTICE OF INDIA, may transfer a judge from one HC to any other HC. On transfer, the judge is entitled to a compensatory allowance as determined by Parliament. (Third Judges Case: CJI must consult a plurality of judges — collegium of CJI + 4 senior-most — before recommending transfer; transfers cannot be punitive.)'}],
+    keywords:['HC judge transfer by President','CJI consultation (collegium)','Compensatory allowance','Cannot be punitive','Third Judges Case norms'],
+    mnemonic:'222 = "HC judge transfer — President + CJI/collegium". Controversial when seen as punitive.',
+    cases:[{name:'Union of India v Sankalchand Sheth',year:'1977',held:'Transfer of HC judges is permissible in public interest but consultation with CJI must be full and effective; consent of the judge not constitutionally required.'},{name:'Third Judges Case',year:'1998',held:'Transfers require consultation with the collegium (CJI + 4 senior-most SC judges) plus the CJs of both HCs concerned.'}],
+    recent:[{title:'Transfer controversies',desc:'Several judge transfers (e.g. Justice Tahilramani from Madras HC 2019, various 2023-24 collegium transfers) sparked debate about transparency in the collegium\'s transfer decisions.'}]
+  },
+  '223': {
+    clauses:[{label:'',text:'APPOINTMENT OF ACTING CHIEF JUSTICE: When the office of Chief Justice of a High Court is vacant, or the CJ is unable to perform duties (absence or otherwise), the duties are performed by such OTHER JUDGE of that Court as the PRESIDENT may appoint. (HC parallel of Art 126.)'}],
+    keywords:['Acting CJ of HC','President appoints','Mirrors Art 126'],
+    mnemonic:'223 = "Acting HC Chief Justice — President appoints" (mirror of 126).',
+    cases:[],
+    recent:[]
+  },
+  '224': {
+    clauses:[
+      {label:'224(1)',text:'APPOINTMENT OF ADDITIONAL AND ACTING JUDGES: If there is a temporary increase in HC business or arrears, the President may appoint duly qualified persons as ADDITIONAL JUDGES for a period not exceeding TWO YEARS.'},
+      {label:'224(2)',text:'When a permanent judge (other than the CJ) is absent or acts as CJ, the President may appoint a duly qualified person as an ACTING JUDGE until the permanent judge resumes.'},
+      {label:'224A',text:'APPOINTMENT OF RETIRED JUDGES AT SITTINGS OF HIGH COURTS: The CJ of an HC may, with the PREVIOUS CONSENT of the PRESIDENT, request a RETIRED HC judge to sit and act as a judge of that HC (his consent also needed) — the HC parallel of Art 128.'}
+    ],
+    keywords:['Additional judges (2-year max, arrears)','Acting judges (temporary absence)','224A retired judges recalled','Mirrors 127/128 pattern'],
+    mnemonic:'224 = "Additional (arrears, ≤2 yrs) + Acting (absence) judges. 224A = recall retired HC judges."',
+    cases:[],
+    recent:[{title:'224A revived',desc:'In 2021 the SC (in Lok Prahari v UOI) laid down guidelines to activate the dormant Art 224A for appointing ad-hoc retired judges to clear massive HC pendency — rarely used since.'}]
+  },
+  '228': {
+    clauses:[{label:'',text:'TRANSFER OF CERTAIN CASES TO HIGH COURT: If the HC is satisfied that a case pending in a SUBORDINATE court involves a SUBSTANTIAL QUESTION OF LAW as to the INTERPRETATION OF THE CONSTITUTION, the determination of which is necessary for the disposal of the case, it SHALL WITHDRAW the case and may — (a) dispose of the case itself; or (b) determine the constitutional question and return the case to the subordinate court with its judgment on that question.'}],
+    keywords:['HC withdraws constitutional cases from lower courts','Substantial constitutional question','Decide fully or answer question and return','Only HC/SC interpret Constitution'],
+    mnemonic:'228 = "Constitutional questions belong to HC" — pulled up from subordinate courts (they cannot decide constitutional interpretation).',
+    cases:[],
+    recent:[]
+  },
+  '229': {
+    clauses:[{label:'',text:'OFFICERS AND SERVANTS AND THE EXPENSES OF HIGH COURTS: Appointments of officers/servants of an HC are made by the CHIEF JUSTICE of that Court (or his nominee judge/officer); service conditions prescribed by rules made by the CJ (Governor\'s approval needed for salaries/allowances/pensions matters). Administrative expenses of the HC — including all salaries/allowances — are CHARGED on the CONSOLIDATED FUND OF THE STATE.'}],
+    keywords:['HC CJ appoints own staff','Governor approval for salary rules','HC expenses charged on State CF','Administrative independence','Mirrors Art 146'],
+    mnemonic:'229 = "HC runs its own house" (mirror of 146 for SC) — expenses charged on STATE fund.',
+    cases:[],
+    recent:[]
+  },
+  '230': {
+    clauses:[{label:'',text:'EXTENSION OF JURISDICTION OF HIGH COURTS TO UNION TERRITORIES: Parliament may by law EXTEND the jurisdiction of an HC to, or EXCLUDE the jurisdiction of an HC from, any UNION TERRITORY. (E.g. Madras HC covers Puducherry; Kerala HC covers Lakshadweep; Calcutta HC covers Andaman & Nicobar; Punjab & Haryana HC covers Chandigarh.)'}],
+    keywords:['HC jurisdiction over UTs','Parliament extends/excludes','Madras HC → Puducherry','Kerala HC → Lakshadweep'],
+    mnemonic:'230 = "Parliament maps HCs onto UTs" (Madras→Puducherry, Kerala→Lakshadweep, Calcutta→A&N).',
+    cases:[],
+    recent:[]
+  },
+  '231': {
+    clauses:[{label:'',text:'ESTABLISHMENT OF A COMMON HIGH COURT FOR TWO OR MORE STATES: Parliament may by law establish a COMMON HIGH COURT for two or more States, or for two or more States and a Union Territory. (Examples: Punjab & Haryana HC at Chandigarh — Punjab + Haryana + Chandigarh UT; Gauhati HC — Assam, Nagaland, Mizoram, Arunachal Pradesh; Bombay HC — Maharashtra + Goa + DNH&DD.)'}],
+    keywords:['Common HC for multiple states','Parliament by law','Punjab & Haryana HC','Gauhati HC (4 states)','Bombay HC (2 states + UT)'],
+    mnemonic:'231 = "One HC, many states" — P&H HC, Gauhati HC (4 NE states), Bombay HC.',
+    cases:[],
+    recent:[]
+  },
+  '233': {
+    clauses:[{label:'',text:'APPOINTMENT OF DISTRICT JUDGES: Appointments, postings and promotions of DISTRICT JUDGES in a State are made by the GOVERNOR in consultation with the HIGH COURT. Eligibility for direct recruitment from the Bar: an advocate/pleader of NOT LESS THAN 7 YEARS standing, recommended by the HC. (A person already in Union/State service is appointed through the judicial service route, not direct recruitment.)'}],
+    keywords:['Governor appoints District Judges','HC consultation mandatory','7 years Bar practice for direct recruitment','HC recommendation needed'],
+    mnemonic:'233 = "District Judge: Governor appoints on HC advice; direct recruits need 7 years at the Bar".',
+    cases:[{name:'All India Judges Association v Union of India',year:'2002',held:'Directed service conditions/pay improvements for subordinate judiciary; recommended All India Judicial Service consideration and set judicial officer-population norms.'}],
+    recent:[]
+  },
+  '234': {
+    clauses:[{label:'',text:'RECRUITMENT OF PERSONS OTHER THAN DISTRICT JUDGES TO THE JUDICIAL SERVICE: Appointments to the judicial service of a State (below District Judge — civil judges/munsiffs/magistrates) shall be made by the GOVERNOR in accordance with rules made after consultation with the STATE PUBLIC SERVICE COMMISSION and the HIGH COURT.'}],
+    keywords:['Lower judiciary recruitment','Governor + SPSC + HC consultation','Civil judges/munsiffs','State judicial service exams'],
+    mnemonic:'234 = "Junior judges: Governor appoints after consulting SPSC AND HC" (three-way process).',
+    cases:[],
+    recent:[]
+  },
+
+  // ─── PART V BATCH 3: Remaining articles not in current PARTS list ───
+  '68': {
+    clauses:[{label:'',text:'TIME OF HOLDING ELECTION TO FILL VACANCY IN THE OFFICE OF VICE-PRESIDENT: An election to fill a vacancy caused by EXPIRY of VP\'s term shall be completed BEFORE the expiry. An election to fill a CASUAL vacancy (death, resignation, removal) shall be held AS SOON AS POSSIBLE after the vacancy occurs; the person elected serves a FULL fresh 5-year term.'}],
+    keywords:['VP vacancy election timing','Mirrors Art 62 for President','Casual vacancy = ASAP','Fresh full term'],
+    mnemonic:'68 = "VP vacancy rule" (mirrors Art 62 for President, but no strict 6-month deadline specified for VP).',
+    cases:[],
+    recent:[]
+  },
+  '69': {
+    clauses:[{label:'',text:'OATH OR AFFIRMATION BY THE VICE-PRESIDENT: Every VP shall, before entering office, make and subscribe an oath/affirmation before the PRESIDENT (or some person appointed by him) — to bear true faith and allegiance to the Constitution and faithfully discharge the duty upon which he is about to enter.'}],
+    keywords:['VP oath before President','Faith and allegiance to Constitution','Compare: President\'s oath before CJI (Art 60)'],
+    mnemonic:'69 = "VP oath before PRESIDENT" (not CJI — that\'s for the President himself, Art 60).',
+    cases:[],
+    recent:[]
+  },
+  '70': {
+    clauses:[{label:'',text:'DISCHARGE OF PRESIDENT\'S FUNCTIONS IN OTHER CONTINGENCIES: Parliament may by law make provision for the discharge of the functions of the President in any contingency NOT provided for in this Chapter (e.g. if BOTH the President\'s and Vice-President\'s offices are simultaneously vacant).'}],
+    keywords:['Parliament fills gaps','Both President & VP offices vacant simultaneously','Residual contingency provision'],
+    mnemonic:'70 = "What if BOTH President AND VP are unavailable?" — Parliament makes a law for that gap.',
+    cases:[],
+    recent:[{title:'Presidential and Vice-Presidential Elections Act 1952',desc:'Parliament enacted this law partly under Art 70 powers, providing for situations of double vacancy — in practice, the CJI typically steps in temporarily as seen in 1969.'}]
+  },
+  '71': {
+    clauses:[
+      {label:'71(1)',text:'MATTERS RELATING TO, OR CONNECTED WITH, THE ELECTION OF A PRESIDENT OR VICE-PRESIDENT: All doubts and disputes arising out of or in connection with the election of a President or VP shall be inquired into and decided by the SUPREME COURT, whose decision is FINAL.'},
+      {label:'71(3)',text:'Parliament may by law regulate matters relating to such election petitions.'},
+      {label:'71(4)',text:'The election of a person as President or VP shall NOT be called in question on the ground of any VACANCY in the electoral college that elected him.'}
+    ],
+    keywords:['SC decides Presidential/VP election disputes','SC decision final','Vacancy in electoral college does not invalidate election','Presidential and VP Elections Act 1952'],
+    mnemonic:'71 = "SC is FINAL authority on President/VP election disputes" — vacancy in electoral college doesn\'t matter.',
+    cases:[{name:'Charan Lal Sahu v Giani Zail Singh',year:'1984',held:'SC has exclusive jurisdiction over Presidential election disputes under Art 71; rejected the challenge to Zail Singh\'s election.'}],
+    recent:[]
+  },
+  '82': {
+    clauses:[{label:'',text:'READJUSTMENT AFTER EACH CENSUS: Upon completion of each census, the allocation of Lok Sabha seats to States and the division of States into territorial constituencies shall be READJUSTED by the DELIMITATION COMMISSION, as Parliament may by law determine. (84th Amendment 2001 and 87th Amendment 2003 froze this readjustment based on 1971 census population until the first census after 2026.)'}],
+    keywords:['Delimitation after census','84th & 87th Amendments froze till post-2026','Based on 1971 census currently','Seat allocation readjustment'],
+    mnemonic:'82 = "Delimitation after census" — currently FROZEN since 1971 census (84th/87th Amendments) till post-2026 census.',
+    cases:[],
+    recent:[{title:'Delimitation looming',desc:'Next delimitation expected after the first census conducted post-2026 — likely to significantly shift seat numbers toward southern/smaller-population states losing relative share, a politically sensitive topic. The 106th Amendment\'s women\'s reservation is also tied to this delimitation.'}]
+  },
+  '83': {
+    clauses:[
+      {label:'83(1)',text:'DURATION OF HOUSES OF PARLIAMENT: The RAJYA SABHA shall NOT be subject to dissolution — it is a PERMANENT body — but as nearly as possible ONE-THIRD of its members retire every SECOND YEAR.'},
+      {label:'83(2)',text:'The LOK SABHA, unless sooner dissolved, continues for FIVE YEARS from the date of its first sitting; expiry of 5 years operates as dissolution. DURING A PROCLAMATION OF EMERGENCY, this period may be EXTENDED by Parliament by law for a period not exceeding ONE YEAR at a time (not extending beyond 6 months after the Emergency ceases). [The 42nd Amendment (1976) extended LS term to 6 years; the 44th Amendment (1978) restored it to 5 years.]'}
+    ],
+    keywords:['Rajya Sabha permanent (never dissolved)','1/3 retire every 2 years','Lok Sabha 5-year term','Extension during Emergency (max 1 year at a time)','42nd Amend made it 6 years; 44th restored 5 years'],
+    mnemonic:'83 = "RS permanent (1/3 every 2 yrs); LS = 5 years (6 yrs under 42nd Amend, restored to 5 by 44th)".',
+    cases:[],
+    recent:[]
+  },
+  '84': {
+    clauses:[{label:'',text:'QUALIFICATION FOR MEMBERSHIP OF PARLIAMENT: A person shall not be qualified to be chosen to fill a seat in Parliament unless he — (a) is a CITIZEN OF INDIA; (b) is, for Rajya Sabha, NOT LESS THAN 30 YEARS, and for Lok Sabha, NOT LESS THAN 25 YEARS of age; (c) possesses such other qualifications as Parliament may by law prescribe.'}],
+    keywords:['Citizen of India','Rajya Sabha: 30 years minimum','Lok Sabha: 25 years minimum','Parliament can prescribe more qualifications'],
+    mnemonic:'84 = "30 for Rajya Sabha (Upper, older), 25 for Lok Sabha (Lower, younger)".',
+    cases:[],
+    recent:[]
+  },
+  '86': {
+    clauses:[
+      {label:'86(1)',text:'RIGHT OF PRESIDENT TO ADDRESS AND SEND MESSAGES TO HOUSES: The President may address either House or both Houses assembled together, and may require attendance of members for that purpose.'},
+      {label:'86(2)',text:'The President addresses BOTH HOUSES at the commencement of the FIRST SESSION after each general election, AND at the commencement of the FIRST SESSION of each year (the "President\'s Address" — sets out government policy for the year).'}
+    ],
+    keywords:['President addresses Parliament','First session after election','First session of each year','Motion of Thanks debated after'],
+    mnemonic:'86 = "President\'s Address" — like the State of the Union; happens at start of new LS and start of each year.',
+    cases:[],
+    recent:[]
+  },
+  '87': {
+    clauses:[{label:'',text:'SPECIAL ADDRESS BY THE PRESIDENT: At the commencement of the FIRST SESSION after each general election to the Lok Sabha, and at the commencement of the FIRST SESSION of each year, the President shall address BOTH Houses assembled together and inform Parliament of the causes of its summons. (This is the formal, detailed version triggering Art 86(2) — sometimes treated as the operative provision for the President\'s Address ceremony.)'}],
+    keywords:['Special address ceremony','Causes of summons informed','First session after election / each year','Linked closely with Art 86(2)'],
+    mnemonic:'87 = "Formal ceremony version of the President\'s Address" — works with 86(2).',
+    cases:[],
+    recent:[]
+  },
+  '88': {
+    clauses:[{label:'',text:'RIGHTS OF MINISTERS AND ATTORNEY-GENERAL AS RESPECTS HOUSES: Every Minister and the Attorney-General have the RIGHT to SPEAK in, and otherwise take part in the proceedings of, either House, any joint sitting, and any Parliamentary Committee of which they are a member — but they are NOT entitled to VOTE unless they are also a member of that House.'}],
+    keywords:['Ministers can speak in both Houses','AG can speak in Parliament','No vote unless also a member','Right to participate in committees'],
+    mnemonic:'88 = "Ministers/AG can SPEAK anywhere in Parliament but VOTE only where they are actually MEMBERS".',
+    cases:[],
+    recent:[]
+  },
+  '89': {
+    clauses:[
+      {label:'89(1)',text:'THE CHAIRMAN AND DEPUTY CHAIRMAN OF THE COUNCIL OF STATES: The VICE-PRESIDENT of India shall be EX-OFFICIO CHAIRMAN of the Rajya Sabha.'},
+      {label:'89(2)',text:'The Rajya Sabha shall, as soon as may be, choose a member of the House to be DEPUTY CHAIRMAN. The Deputy Chairman vacates office if he ceases to be a member, may resign by writing to the Chairman, or may be removed by a resolution passed by a majority of all then members.'}
+    ],
+    keywords:['VP = ex-officio Chairman of RS','Deputy Chairman elected by RS members','Removal by majority of all members'],
+    mnemonic:'89 = "RS Chairman = VP (automatic); Deputy Chairman = elected by RS itself".',
+    cases:[],
+    recent:[]
+  },
+  '90': {
+    clauses:[{label:'',text:'VACATION AND RESIGNATION OF, AND REMOVAL FROM, THE OFFICE OF DEPUTY CHAIRMAN: The Deputy Chairman of Rajya Sabha vacates office if he ceases to be a member of the Council; may resign by writing to the Chairman; may be removed by a resolution of the Council passed by a MAJORITY of all the then members of the Council (14 days advance notice required).'}],
+    keywords:['Deputy Chairman vacation/resignation/removal','Majority of all members','14 days notice','Resigns to Chairman (VP)'],
+    mnemonic:'90 = "Deputy Chairman removal — majority of ALL members, 14-day notice" (similar process to Speaker removal).',
+    cases:[],
+    recent:[]
+  },
+  '91': {
+    clauses:[{label:'',text:'POWER OF THE DEPUTY CHAIRMAN OR OTHER PERSON TO PERFORM THE DUTIES OF THE OFFICE OF, OR TO ACT AS, CHAIRMAN: While the office of Chairman is vacant, or the Vice-President is acting as/discharging functions of President, the duties of Chairman shall be performed by the DEPUTY CHAIRMAN, or if that office is also vacant, by such member of Rajya Sabha as the President may appoint.'}],
+    keywords:['Deputy Chairman substitutes for Chairman','When VP acts as President','Fallback: President appoints any RS member'],
+    mnemonic:'91 = "Backup chain for RS Chairman" — Deputy Chairman, then a President-appointed member.',
+    cases:[],
+    recent:[]
+  },
+  '92': {
+    clauses:[{label:'',text:'THE CHAIRMAN OR THE DEPUTY CHAIRMAN NOT TO PRESIDE WHILE A RESOLUTION FOR HIS REMOVAL FROM OFFICE IS UNDER CONSIDERATION: The Chairman/Deputy Chairman shall NOT preside at a sitting of Rajya Sabha while a resolution for his removal is being considered, though he may be present and speak/take part (but cannot vote in the first instance — only has a casting vote in a tie).'}],
+    keywords:['Cannot preside over own removal debate','Can still speak','Casting vote only','Principle of natural justice (no judge in own cause)'],
+    mnemonic:'92 = "Cannot judge your own removal" — natural justice principle for RS Chairman/Deputy Chairman.',
+    cases:[],
+    recent:[]
+  },
+  '93': {
+    clauses:[{label:'',text:'THE SPEAKER AND DEPUTY SPEAKER OF THE HOUSE OF THE PEOPLE: The Lok Sabha shall, as soon as may be, choose two members to be SPEAKER and DEPUTY SPEAKER. When the office of either falls vacant, the House chooses another member.'}],
+    keywords:['Speaker elected by Lok Sabha itself','Different from RS Chairman (VP, ex-officio)','Deputy Speaker also elected','Both from among LS members'],
+    mnemonic:'93 = "LS chooses its OWN Speaker/Deputy Speaker" (unlike RS, where Chairman = VP automatically).',
+    cases:[],
+    recent:[]
+  },
+  '94': {
+    clauses:[{label:'',text:'VACATION AND RESIGNATION OF, AND REMOVAL FROM, THE OFFICES OF SPEAKER AND DEPUTY SPEAKER: The Speaker/Deputy Speaker vacates office if he ceases to be a member of Lok Sabha; may resign (Speaker resigns to Deputy Speaker, and vice versa); may be removed by a resolution passed by a MAJORITY of all then members of Lok Sabha (14 days notice). The Speaker shall NOT vacate office upon DISSOLUTION of the Lok Sabha — he continues till a newly elected House meets.'}],
+    keywords:['Speaker continues despite LS dissolution','Removal: majority of all members + 14 days notice','Resignation procedure','Speaker survives dissolution (important exam point)'],
+    mnemonic:'94 = "Speaker SURVIVES dissolution" — continues till new LS first meets. Removal needs majority of ALL members.',
+    cases:[],
+    recent:[]
+  },
+  '95': {
+    clauses:[{label:'',text:'POWER OF THE DEPUTY SPEAKER OR OTHER PERSON TO PERFORM THE DUTIES OF THE OFFICE OF, OR TO ACT AS, SPEAKER: While the office of Speaker is vacant, the DEPUTY SPEAKER performs his duties. Similarly, during the absence of the Speaker from any sitting, the Deputy Speaker (or if also absent, such member as may be determined by House rules) presides.'}],
+    keywords:['Deputy Speaker substitutes for Speaker','Vacancy or absence','House rules determine further fallback'],
+    mnemonic:'95 = "Deputy Speaker steps in" when Speaker is vacant/absent (parallel to Art 91 for RS).',
+    cases:[],
+    recent:[]
+  },
+  '96': {
+    clauses:[{label:'',text:'THE SPEAKER OR THE DEPUTY SPEAKER NOT TO PRESIDE WHILE A RESOLUTION FOR HIS REMOVAL FROM OFFICE IS UNDER CONSIDERATION: Same principle as Art 92 for Rajya Sabha — the Speaker/Deputy Speaker shall not preside while his own removal resolution is being debated, though he may speak and otherwise take part, and has a right to vote in the FIRST INSTANCE (though not on an equal voting tie usually exercised as Speaker — only casting vote applies normally; on his OWN removal, he has the same voting rights as any other member).'}],
+    keywords:['Cannot preside over own removal','Can speak and vote as ordinary member on this resolution','Mirrors Art 92 for RS Chairman'],
+    mnemonic:'96 = "Speaker cannot judge his own removal" (mirrors 92). Natural justice.',
+    cases:[],
+    recent:[]
+  },
+  '97': {
+    clauses:[{label:'',text:'SALARIES AND ALLOWANCES OF THE SPEAKER AND DEPUTY SPEAKER AND THE CHAIRMAN AND DEPUTY CHAIRMAN: Salaries/allowances of the Speaker, Deputy Speaker, Chairman and Deputy Chairman shall be such as Parliament may by law fix, and until so fixed, as specified in the SECOND SCHEDULE — CHARGED on the Consolidated Fund of India (non-votable).'}],
+    keywords:['Speaker/Chairman salaries','Charged on CFI (non-votable)','2nd Schedule default','Parliament can fix by law'],
+    mnemonic:'97 = "Speaker/Chairman pay" — charged, like other top constitutional offices.',
+    cases:[],
+    recent:[]
+  },
+  '98': {
+    clauses:[{label:'',text:'SECRETARIAT OF PARLIAMENT: Each House of Parliament has a SEPARATE secretarial staff (Lok Sabha Secretariat & Rajya Sabha Secretariat); Parliament may by law regulate the recruitment and conditions of service of persons appointed to these secretarial staffs. (Ensures Parliament\'s administrative INDEPENDENCE from the executive.)'}],
+    keywords:['Separate secretariats for LS and RS','Parliament regulates recruitment','Independence from executive'],
+    mnemonic:'98 = "Parliament has its OWN staff" (independent of the executive\'s civil service).',
+    cases:[],
+    recent:[]
+  },
+  '99': {
+    clauses:[{label:'',text:'OATH OR AFFIRMATION BY MEMBERS: Every member of either House, before taking his seat, must make and subscribe an OATH or AFFIRMATION in the form set out in the THIRD SCHEDULE, before the PRESIDENT or some person appointed by him for that purpose.'}],
+    keywords:['MP oath before taking seat','3rd Schedule form','Before President or his nominee','Mandatory before participating'],
+    mnemonic:'99 = "MPs swear in using 3rd Schedule form before President/nominee".',
+    cases:[],
+    recent:[]
+  },
+  '101': {
+    clauses:[
+      {label:'101(1)',text:'VACATION OF SEATS: No person shall be a member of BOTH Houses of Parliament — if elected to both, his seat in one House (as per rules) falls vacant.'},
+      {label:'101(2)',text:'No person shall be a member of BOTH Parliament and a State Legislature — if so elected, his seat in Parliament becomes vacant unless he resigns from the State Legislature within the prescribed period.'},
+      {label:'101(3)',text:'A member\'s seat falls vacant if he becomes subject to any DISQUALIFICATION under Art 102, or RESIGNS in writing to the Chairman/Speaker, or is ABSENT from all meetings of the House for a period of 60 DAYS without permission.'}
+    ],
+    keywords:['No dual membership (both Houses)','No dual membership (Parliament + State Legislature)','Disqualification under Art 102','60 days absence without permission = vacant seat'],
+    mnemonic:'101 = "One person, one House. 60 days absence = automatic vacancy."',
+    cases:[],
+    recent:[]
+  },
+  '102': {
+    clauses:[
+      {label:'102(1)',text:'DISQUALIFICATIONS FOR MEMBERSHIP: A person is disqualified for being chosen as, and for being, a member of either House if he — (a) holds an OFFICE OF PROFIT under the Government (Union/State), other than an office exempted by Parliament by law; (b) is of UNSOUND MIND, so declared by a competent court; (c) is an UNDISCHARGED INSOLVENT; (d) is NOT A CITIZEN of India, or has voluntarily acquired citizenship of a foreign State; (e) is disqualified by/under any law made by Parliament.'},
+      {label:'102(2)',text:'A person is disqualified if disqualified under the TENTH SCHEDULE (Anti-Defection Law).'}
+    ],
+    keywords:['Office of profit disqualification','Unsound mind','Undischarged insolvent','Not citizen / foreign citizenship','10th Schedule defection disqualification'],
+    mnemonic:'102 = "5 disqualifications: Office-of-profit, Unsound mind, Insolvent, Non-citizen, Defection (10th Schedule)".',
+    cases:[{name:'Jaya Bachchan v Union of India',year:'2006',held:'Holding an "office of profit" (UP Film Development Council Chairperson) disqualified her as Rajya Sabha MP — even without drawing salary, the POTENTIAL to receive pecuniary gain matters.'}],
+    recent:[]
+  },
+  '103': {
+    clauses:[{label:'',text:'DECISION ON QUESTIONS AS TO DISQUALIFICATIONS OF MEMBERS: If any question arises whether a member of either House has become subject to disqualification under Art 102, the question is referred to the PRESIDENT, whose decision is final — BUT before deciding, the President SHALL OBTAIN the OPINION of the ELECTION COMMISSION and act ACCORDING TO such opinion. (Note: Disputes under the 10th Schedule [defection] are decided by the SPEAKER/CHAIRMAN, NOT the President — that is a separate mechanism.)'}],
+    keywords:['President decides Art 102 disqualification','Must follow EC opinion (binding)','10th Schedule defection = Speaker/Chairman decides (different)','Key distinction often tested'],
+    mnemonic:'103 = "President decides ART 102 disqualification, MUST follow EC advice". (Different from 10th Schedule defection, decided by Speaker/Chairman under Art 191/192 parallel provision.)',
+    cases:[],
+    recent:[]
+  },
+  '104': {
+    clauses:[{label:'',text:'PENALTY FOR SITTING AND VOTING BEFORE MAKING OATH UNDER ARTICLE 99 OR WHEN NOT QUALIFIED OR WHEN DISQUALIFIED: If a person sits or votes as a member of either House WITHOUT taking the oath under Art 99, or KNOWING he is not qualified/is disqualified, or knowing a law of Parliament prohibits it — he is liable to a PENALTY of Rs 500 for EACH DAY he so sits/votes, recoverable as a debt due to the Union.'}],
+    keywords:['Penalty for sitting without oath','₹500 per day penalty','Recoverable as debt to Union','Sitting while disqualified'],
+    mnemonic:'104 = "₹500/day fine" for sitting/voting illegally (no oath, or disqualified, or not qualified).',
+    cases:[],
+    recent:[]
+  },
+  '106': {
+    clauses:[{label:'',text:'SALARIES AND ALLOWANCES OF MEMBERS: Members of either House of Parliament shall be entitled to receive such salaries and allowances as Parliament may from time to time by law determine [Salaries, Allowances and Pension of Members of Parliament Act, 1954, periodically amended].'}],
+    keywords:['MP salary determined by Parliament law','1954 Act and amendments','Distinct from Ministers\' salaries (Art 75/164)'],
+    mnemonic:'106 = "MP salary — set by Parliament itself via the 1954 Act".',
+    cases:[],
+    recent:[]
+  },
+  '107': {
+    clauses:[
+      {label:'107(1)',text:'PROVISIONS AS TO INTRODUCTION AND PASSING OF BILLS: Subject to Art 109 (Money Bills) and Art 117 (Financial Bills), a Bill may originate in EITHER House.'},
+      {label:'107(2)',text:'A Bill is NOT deemed passed unless agreed to by BOTH Houses (with or without amendments).'},
+      {label:'107(3)',text:'A Bill PENDING in Parliament does NOT LAPSE by reason of the PROROGATION of the Houses.'},
+      {label:'107(4)',text:'A Bill pending in RAJYA SABHA which has NOT been passed by LOK SABHA does NOT lapse on DISSOLUTION of Lok Sabha. BUT a Bill pending in (or passed by) Lok Sabha LAPSES on its dissolution.'}
+    ],
+    keywords:['Bill can originate in either House (except Money/Financial Bills)','Prorogation does NOT lapse Bills','Dissolution of LS DOES lapse Bills pending there','RS Bills not yet sent to LS survive dissolution'],
+    mnemonic:'107 = "Prorogation ≠ lapse. Dissolution OF LOK SABHA = lapse (for LS-origin bills)." Key distinction tested often.',
+    cases:[],
+    recent:[]
+  },
+  '113': {
+    clauses:[{label:'',text:'PROCEDURE IN PARLIAMENT WITH RESPECT TO ESTIMATES: Estimates of expenditure CHARGED on the Consolidated Fund of India shall NOT be submitted to the VOTE of Parliament (though they may be DISCUSSED). Other estimates (votable expenditure) shall be submitted in the form of DEMANDS FOR GRANTS to Lok Sabha, which has the power to ASSENT to, REFUSE to assent to, or REDUCE the amount in any Demand (NOT increase it).'}],
+    keywords:['Charged expenditure: discuss but not vote','Voted expenditure: Demands for Grants','Lok Sabha can reduce, not increase','Only Lok Sabha votes on Demands (RS has no role)'],
+    mnemonic:'113 = "Charged = discuss only; Voted = Demands for Grants (LS can only REDUCE, never increase)".',
+    cases:[],
+    recent:[]
+  },
+  '114': {
+    clauses:[{label:'',text:'APPROPRIATION BILLS: After Demands for Grants are passed by Lok Sabha, a BILL is introduced to provide for APPROPRIATION out of the Consolidated Fund of India of all moneys required to meet (a) grants made by Lok Sabha, and (b) expenditure charged on the CFI. NO AMENDMENT shall be proposed in either House that would VARY the amount or alter the destination of any grant, or vary the amount of charged expenditure. (Appropriation Bill is a MONEY BILL.)'}],
+    keywords:['Appropriation Bill','Combines voted grants + charged expenditure','No amendment allowed to vary amounts','Treated as Money Bill'],
+    mnemonic:'114 = "Appropriation Bill — legalises withdrawal from CFI". No amendments allowed on amounts.',
+    cases:[],
+    recent:[]
+  },
+  '115': {
+    clauses:[{label:'',text:'SUPPLEMENTARY, ADDITIONAL OR EXCESS GRANTS: If the amount authorised for a financial year is found insufficient, or a need arises for additional expenditure not in the original budget, or money has been spent in EXCESS of the granted amount — the President causes a statement of SUPPLEMENTARY/ADDITIONAL/EXCESS GRANTS to be laid before Parliament, which is dealt with through the SAME procedure as the regular budget (Demands for Grants + Appropriation Bill).'}],
+    keywords:['Supplementary grant (insufficient funds)','Additional grant (new need)','Excess grant (overspending — needs ex-post approval)','Same procedure as regular budget'],
+    mnemonic:'115 = "When the Budget isn\'t enough" — Supplementary/Additional/Excess grants, same procedure.',
+    cases:[],
+    recent:[]
+  },
+  '116': {
+    clauses:[{label:'',text:'VOTES ON ACCOUNT, VOTES OF CREDIT AND EXCEPTIONAL GRANTS: (a) VOTE ON ACCOUNT — Lok Sabha may grant in advance a sum to meet expenditure for PART of a financial year, pending completion of the full budget procedure (used when elections delay the full budget). (b) VOTE OF CREDIT — for meeting an unexpected demand of indeterminate amount/indefinite character (e.g. war). (c) EXCEPTIONAL GRANT — for a purpose not in the current year\'s annual financial statement.'}],
+    keywords:['Vote on Account (interim budget)','Vote of Credit (indeterminate/emergency need)','Exceptional Grant (unforeseen purpose)','Used in election years (interim budget)'],
+    mnemonic:'116 = "3 special grants: Vote-on-Account (interim), Vote-of-Credit (emergency/war), Exceptional Grant (new purpose)".',
+    cases:[],
+    recent:[{title:'Interim Budget 2024',desc:'A Vote on Account / Interim Budget was presented in February 2024 ahead of the General Elections, with the full Budget presented after the new government took office (July 2024).'}]
+  },
+  '117': {
+    clauses:[
+      {label:'117(1)',text:'SPECIAL PROVISIONS AS TO FINANCIAL BILLS: A Bill containing provisions dealing with any matter in Art 110(1) (Money Bill matters) — but ALSO other matters — is called a "FINANCIAL BILL" (Category A); it shall NOT be introduced in Rajya Sabha and requires PRESIDENT\'S RECOMMENDATION for introduction (like Money Bills), BUT unlike Money Bills, RAJYA SABHA CAN AMEND or REJECT it (not just recommend).'},
+      {label:'117(3)',text:'A Bill which, if enacted, would involve EXPENDITURE from the Consolidated Fund of India (but doesn\'t deal with Art 110 matters) — called Financial Bill (Category B) — may be introduced in EITHER House, but shall NOT be passed unless the PRESIDENT has RECOMMENDED consideration of the Bill.'}
+    ],
+    keywords:['Financial Bill Category A (Art 110 matters + others)','Financial Bill Category B (just involves expenditure)','RS CAN amend/reject Category A (unlike Money Bills)','President\'s recommendation needed for passing (not introduction) Category B'],
+    mnemonic:'117 = "Financial Bills — TWO types. Category A = Money Bill matters+more (RS can amend). Category B = just involves expenditure (RS full powers, only needs Pres. recommendation to PASS)."',
+    cases:[],
+    recent:[]
+  },
+  '118': {
+    clauses:[{label:'',text:'RULES OF PROCEDURE: Each House of Parliament may make RULES for regulating its own procedure and conduct of business, subject to the provisions of the Constitution. The President, after consultation with the Speaker and Chairman, may make rules for regulating procedure with respect to communications between the two Houses, or with respect to procedure for joint sittings/communications.'}],
+    keywords:['Each House makes own Rules of Procedure','President makes rules for inter-House communication','Subject to Constitution'],
+    mnemonic:'118 = "Each House writes its own rulebook" (subject to the Constitution itself).',
+    cases:[],
+    recent:[]
+  },
+  '119': {
+    clauses:[{label:'',text:'REGULATION BY LAW OF PROCEDURE IN PARLIAMENT IN RELATION TO FINANCIAL BUSINESS: Parliament may by law regulate the procedure and conduct of business in each House with respect to financial matters, or any matter connected with finance, NOTWITHSTANDING anything in the Rules of Procedure (Art 118) or in the Rules of Procedure governing Bills (i.e. financial procedure law overrides the regular House rules where inconsistent).'}],
+    keywords:['Parliament can legislate financial procedure','Overrides regular House rules','Notwithstanding Art 118'],
+    mnemonic:'119 = "Financial procedure LAW trumps regular House Rules" when there\'s a conflict.',
+    cases:[],
+    recent:[]
+  },
+  '120': {
+    clauses:[{label:'',text:'LANGUAGE TO BE USED IN PARLIAMENT: Business in Parliament shall be transacted in HINDI or in ENGLISH — provided the Speaker/Chairman (or person presiding) may permit a member to address the House in his MOTHER TONGUE if he cannot adequately express himself in Hindi or English. [Parallel provision to Art 210 for State Legislatures.]'}],
+    keywords:['Hindi or English in Parliament','Mother tongue permitted with permission','Speaker/Chairman discretion','Parallels Art 210 for States'],
+    mnemonic:'120 = "Hindi/English officially, but mother tongue allowed with permission" — practical accommodation.',
+    cases:[],
+    recent:[]
+  },
+  '121': {
+    clauses:[{label:'',text:'RESTRICTION ON DISCUSSION IN PARLIAMENT: No discussion shall take place in Parliament with respect to the CONDUCT of any JUDGE of the Supreme Court or a High Court in the discharge of his duties, EXCEPT upon a motion for presenting an ADDRESS to the President praying for the judge\'s REMOVAL (i.e. the IMPEACHMENT motion itself — Art 124(4)/218). This protects judicial independence from routine parliamentary criticism.'}],
+    keywords:['No discussion on judge\'s conduct','Exception: impeachment motion only','Protects judicial independence','Parallels Art 211 for State Legislatures (re: HC judges)'],
+    mnemonic:'121 = "Don\'t discuss a judge\'s conduct UNLESS it\'s a formal impeachment motion" — shields judiciary from routine political attack.',
+    cases:[],
+    recent:[]
+  },
+  '122': {
+    clauses:[{label:'',text:'COURTS NOT TO INQUIRE INTO PROCEEDINGS OF PARLIAMENT: The VALIDITY of any proceedings in Parliament shall NOT be called in question on the ground of any alleged IRREGULARITY OF PROCEDURE. No officer/member of Parliament empowered to regulate procedure or conduct business shall be subject to the jurisdiction of any court in respect of exercise of those powers. (Parallels Art 212 for State Legislatures. This is distinct from judicial review of the SUBSTANCE of a law — only PROCEDURAL irregularities are immune.)'}],
+    keywords:['No judicial review of procedural irregularity','Officers regulating procedure are immune','Parallels Art 212 (States)','Substantive validity still reviewable'],
+    mnemonic:'122 = "Courts ignore PROCEDURAL glitches in Parliament" — but can still review substantive constitutionality.',
+    cases:[{name:'Raja Ram Pal v Speaker, Lok Sabha (Cash for Query)',year:'2007',held:'Expulsion of MPs in "cash for query" scam — SC held Art 122 bars review of mere procedural irregularity, but does NOT bar review for SUBSTANTIVE illegality or violation of constitutional provisions/FRs.'}],
+    recent:[]
+  },
+  '135': {
+    clauses:[{label:'',text:'JURISDICTION AND POWERS OF THE FEDERAL COURT UNDER EXISTING LAW TO BE EXERCISABLE BY THE SUPREME COURT: Until Parliament otherwise provides, the SC shall also have jurisdiction and powers with respect to any matter to which the provisions of Art 133 or Art 134 do not apply, if jurisdiction and powers in relation to that matter were exercisable by the FEDERAL COURT immediately before the Constitution\'s commencement (i.e. a transitional/continuity provision from the pre-1950 Federal Court of India to the new Supreme Court).'}],
+    keywords:['Transitional provision','Federal Court (pre-1950) powers transferred to SC','Continuity of jurisdiction'],
+    mnemonic:'135 = "Old Federal Court\'s leftover powers transferred to the new Supreme Court" — a historical continuity clause.',
+    cases:[],
+    recent:[]
+  },
+  '138': {
+    clauses:[{label:'',text:'ENLARGEMENT OF THE JURISDICTION OF THE SUPREME COURT: Parliament may by law confer on the SC further jurisdiction/powers with respect to any matter in the UNION LIST. Parliament may also confer further jurisdiction/powers on the SC for the better discharge of its functions if the Government of India and the Government of any State AGREE by special arrangement.'}],
+    keywords:['Parliament can expand SC jurisdiction','Union List matters','Special agreement Centre-State also possible','Demonstrates flexibility of SC powers'],
+    mnemonic:'138 = "Parliament (or special Centre-State agreement) can GROW the SC\'s jurisdiction beyond the Constitution\'s base list".',
+    cases:[],
+    recent:[]
+  },
+  '139': {
+    clauses:[{label:'',text:'CONFERMENT ON THE SUPREME COURT OF POWERS TO ISSUE CERTAIN WRITS: Parliament may by law confer on the SC power to issue directions, orders or writs (including the 5 prerogative writs — habeas corpus, mandamus, prohibition, quo warranto, certiorari) for PURPOSES OTHER THAN those mentioned in Art 32(2) (which is limited to enforcement of Fundamental Rights). [Distinct from Art 32, which is itself an FR; this is an ADDITIONAL statutory writ power Parliament COULD confer but largely has NOT exercised, since Art 136 (SLP) already serves a similar broad function.]'}],
+    keywords:['Parliament COULD give SC writ power beyond FR enforcement','Distinct from Art 32 (FR-specific)','Largely unused — Art 136 SLP serves similar purpose'],
+    mnemonic:'139 = "Parliament COULD expand SC\'s writ power beyond just FRs" — rarely invoked because Art 136 (SLP) already covers most needs.',
+    cases:[],
+    recent:[]
+  },
+  '139A': {
+    clauses:[{label:'',text:'TRANSFER OF CERTAIN CASES: Where cases involving the SAME or SUBSTANTIALLY THE SAME questions of law are pending before the SC and one or more High Courts, or before two or more High Courts, the SC may, on its own motion or on application by the Attorney-General or a party, WITHDRAW the case(s) pending before the HC(s) and DISPOSE OF all the cases itself; OR the SC may TRANSFER any case from one HC to another. (Added by 42nd Amendment, 1976 — promotes uniformity and avoids conflicting judgments.)'}],
+    keywords:['Transfer of cases','Same legal question pending in multiple courts','42nd Amendment 1976','Avoids conflicting HC judgments','SC can withdraw or transfer'],
+    mnemonic:'139A = "A for Avoid conflicting judgments" — SC can pull together or shift cases involving the same legal question. 42nd Amendment.',
+    cases:[],
+    recent:[]
+  },
+  '140': {
+    clauses:[{label:'',text:'ANCILLARY POWERS OF SUPREME COURT: Parliament may by law make provision for conferring upon the SC such SUPPLEMENTAL POWERS not inconsistent with any of the provisions of this Constitution as may appear necessary or desirable for the purpose of enabling the SC more EFFECTIVELY to exercise the jurisdiction conferred upon it by or under this Constitution.'}],
+    keywords:['Ancillary/supplemental powers','Parliament can grant by law','Must enable SC to function more effectively','Not inconsistent with Constitution'],
+    mnemonic:'140 = "Give the SC extra TOOLS to do its job better" — supplemental, not contradictory, powers.',
+    cases:[],
+    recent:[]
+  },
+  '143': {
+    clauses:[
+      {label:'143(1)',text:'POWER OF PRESIDENT TO CONSULT SUPREME COURT: If it appears to the President that a question of LAW or FACT of public importance has arisen, or is likely to arise, he MAY refer the question to the SC for its OPINION; the SC MAY, after hearing as it thinks fit, report its opinion to the President.'},
+      {label:'143(2)',text:'The President MAY refer a dispute arising out of any treaty, agreement, etc. made BEFORE the Constitution\'s commencement (which is excluded from Art 131\'s original jurisdiction) to the SC for opinion, and the SC SHALL (mandatory, not discretionary as in 143(1)) report its opinion.'}
+    ],
+    keywords:['Advisory jurisdiction','143(1) discretionary for SC to answer','143(2) mandatory SC opinion (pre-Constitution treaties)','Not binding on President (advisory only)'],
+    mnemonic:'143 = "Advisory opinion". 143(1) = SC MAY answer; 143(2) = SC MUST answer (pre-1950 treaty disputes).',
+    cases:[{name:'In re Berubari Union',year:'1960',held:'Advisory opinion under 143(1) — cession of territory requires constitutional amendment.'},{name:'In re Special Courts Bill',year:'1979',held:'SC gave advisory opinion on the constitutionality of a proposed Bill before its enactment.'},{name:'In re Art 370 Reference (2025 context)',year:'2025',held:'Presidential references continue to be used for major constitutional questions, including gubernatorial assent timelines.'}],
+    recent:[]
+  },
+  '144': {
+    clauses:[{label:'',text:'CIVIL AND JUDICIAL AUTHORITIES TO ACT IN AID OF THE SUPREME COURT: All authorities, civil and judicial, throughout the territory of India, shall ACT IN AID of the Supreme Court. (Ensures SC orders are enforced by the entire administrative/judicial machinery of the country.)'}],
+    keywords:['All authorities must aid SC','Civil and judicial authorities','Ensures enforcement of SC orders nationwide'],
+    mnemonic:'144 = "Everyone helps the SC" — civil/judicial machinery bound to assist enforcement.',
+    cases:[],
+    recent:[]
+  },
+  '145': {
+    clauses:[{label:'',text:'RULES OF COURT, ETC.: The Supreme Court may, with the approval of the PRESIDENT, make RULES for regulating generally the practice and procedure of the Court — including rules on persons practising before the Court, procedure for hearing appeals, conditions for exercising powers under Art 137 (review), the minimum number of judges to sit for certain cases (e.g. a question of substantial constitutional law interpretation REQUIRES a minimum of 5 judges — a CONSTITUTION BENCH).'}],
+    keywords:['SC makes its own procedural rules','President\'s approval needed','Constitution Bench = minimum 5 judges for constitutional questions','Supreme Court Rules 2013 (current)'],
+    mnemonic:'145 = "SC\'s own rulebook" — KEY: constitutional questions need minimum 5 judges (Constitution Bench).',
+    cases:[],
+    recent:[]
+  },
+  '146': {
+    clauses:[{label:'',text:'OFFICERS AND SERVANTS AND THE EXPENSES OF THE SUPREME COURT: Appointments of officers/servants of the SC are made by the CHIEF JUSTICE OF INDIA (or a judge/officer of the Court he directs); conditions of service are prescribed by RULES made by the CJI (or a person he directs), subject to PRESIDENT\'S approval (where related to salaries/allowances/leave/pension). Administrative expenses of the SC (including salaries/pensions of officers/servants) are CHARGED on the Consolidated Fund of India.'}],
+    keywords:['CJI appoints SC staff','President\'s approval for service conditions','SC administrative expenses charged on CFI','SC administrative independence'],
+    mnemonic:'146 = "CJI runs the SC\'s own house" (staff, admin) — expenses charged, ensuring institutional independence.',
+    cases:[],
+    recent:[]
+  },
+  '147': {
+    clauses:[{label:'',text:'INTERPRETATION: In Articles 124-147 (the Union Judiciary chapter), references to any LAW IN FORCE or to ACTS or LAWS of a Legislature (or other competent authority) shall be construed as including a reference to an ORDINANCE made by the President or Governor, and to any ORDER, BYE-LAW, RULE, REGULATION made under such Act/Ordinance. Also clarifies references to laws of a "Federal Legislature" or "Indian Legislature" pre-Constitution.'}],
+    keywords:['Interpretation clause for judiciary chapter','Ordinances included in "law"','Closing/definitional article of Chapter IV Part V'],
+    mnemonic:'147 = "Wraps up the judiciary chapter\'s definitions" — Ordinances count as law too.',
+    cases:[],
+    recent:[]
+  },
+
+  // ─── PART V BATCH 1: PRESIDENT/VP MISSING ARTICLES ───
+  '57': {
+    clauses:[{label:'',text:'ELIGIBILITY FOR RE-ELECTION: A person who holds, or who has held, office as President shall, subject to other provisions of the Constitution, be ELIGIBLE for RE-ELECTION to that office. (No limit on number of terms — unlike the US 2-term limit.)'}],
+    keywords:['No term limit for President','Eligible for re-election','Unlike USA (2-term limit)','Rajendra Prasad served 2 terms'],
+    mnemonic:'57 = "No limit — President can run again and again" (Dr Rajendra Prasad did, serving 2 terms).',
+    cases:[],
+    recent:[]
+  },
+  '59': {
+    clauses:[
+      {label:'59(1)',text:'CONDITIONS OF PRESIDENT\'S OFFICE: The President shall NOT be a member of either House of Parliament or of a State Legislature. If a sitting MP/MLA is elected President, his seat is deemed vacated from the date he enters office.'},
+      {label:'59(2)',text:'The President shall NOT hold any other OFFICE OF PROFIT.'},
+      {label:'59(3)',text:'The President is entitled, without payment of rent, to the use of his official residences (Rashtrapati Bhavan) and such emoluments, allowances and privileges as Parliament may by law determine.'},
+      {label:'59(4)',text:'The President\'s emoluments and allowances shall NOT be DIMINISHED during his term of office.'}
+    ],
+    keywords:['No legislature membership','No office of profit','Rashtrapati Bhavan rent-free','Emoluments cannot be reduced during term'],
+    mnemonic:'59 = "President conditions: no legislature, no profit, free Rashtrapati Bhavan, salary cannot be cut".',
+    cases:[],
+    recent:[]
+  },
+  '60': {
+    clauses:[{label:'',text:'OATH OR AFFIRMATION BY THE PRESIDENT: Every President shall, before entering office, make and subscribe an oath/affirmation in the presence of the CHIEF JUSTICE OF INDIA (or in his absence, the senior-most Judge of the Supreme Court available). The oath: to preserve, protect and defend the Constitution and the law, and to devote himself to the service and well-being of the people of India.'}],
+    keywords:['Oath by CJI','Preserve protect defend Constitution','Service of people of India','Before entering office'],
+    mnemonic:'60 = "President\'s oath before CJI" (compare: Governor\'s oath before CJ of HC — Art 159).',
+    cases:[],
+    recent:[]
+  },
+  '62': {
+    clauses:[
+      {label:'62(1)',text:'TIME OF HOLDING ELECTION TO FILL VACANCY: An election to fill a vacancy caused by the expiration of the President\'s term shall be completed BEFORE the expiration of the term.'},
+      {label:'62(2)',text:'An election to fill a vacancy caused by death, resignation, removal, or otherwise shall be held AS SOON AS POSSIBLE after, and in no case later than SIX MONTHS from, the date of the vacancy. The person so elected holds office for a FULL fresh term of 5 years (not just the remainder).'}
+    ],
+    keywords:['Election before term expiry','6-month rule for casual vacancy','Fresh full 5-year term (not remainder)','Different from Vice-President filling in'],
+    mnemonic:'62 = "Vacancy filled within 6 months — fresh FULL 5-year term, not just the leftover".',
+    cases:[],
+    recent:[]
+  },
+  '64': {
+    clauses:[{label:'',text:'THE VICE-PRESIDENT TO BE EX-OFFICIO CHAIRMAN OF THE COUNCIL OF STATES: The Vice-President shall be EX-OFFICIO CHAIRMAN of the Rajya Sabha, and shall not hold any other office of profit. (Distinguishes from Lok Sabha Speaker, who is elected by the House itself.)'}],
+    keywords:['VP = ex-officio RS Chairman','Not elected by RS (automatic by virtue of being VP)','No other office of profit','Different from LS Speaker (elected)'],
+    mnemonic:'64 = "VP automatically chairs Rajya Sabha" — ex-officio, not elected by the House.',
+    cases:[],
+    recent:[]
+  },
+  '65': {
+    clauses:[
+      {label:'65(1)',text:'THE VICE-PRESIDENT TO ACT AS PRESIDENT OR TO DISCHARGE HIS FUNCTIONS: During a vacancy in the office of President (due to death, resignation, removal or otherwise), the VICE-PRESIDENT shall ACT AS PRESIDENT until a new President is elected.'},
+      {label:'65(2)',text:'When the President is unable to discharge his functions owing to absence, illness or any other cause, the Vice-President shall DISCHARGE HIS FUNCTIONS until the President resumes his duties.'},
+      {label:'65(3)',text:'The Vice-President, while so acting/discharging functions, has all the powers, immunities and emoluments of the President, and shall NOT perform the duties of the office of Chairman of Rajya Sabha during that period.'}
+    ],
+    keywords:['VP acts as President during vacancy','VP discharges functions during temporary absence','Cannot be RS Chairman simultaneously','Full Presidential powers while acting'],
+    mnemonic:'65 = "VP steps in for President" — either ACTS (full vacancy) or DISCHARGES (temporary absence).',
+    cases:[{name:'V.V. Giri example',year:'1969',held:'V.V. Giri acted as President after Dr Zakir Husain\'s death (1969) before resigning to contest the Presidential election himself.'}],
+    recent:[]
+  },
+  '67': {
+    clauses:[
+      {label:'67(a)',text:'TERM OF OFFICE OF VICE-PRESIDENT: The Vice-President holds office for a term of FIVE YEARS from the date he enters office.'},
+      {label:'67(b)',text:'The Vice-President may resign by writing to the PRESIDENT (not Rajya Sabha Chairman as one might assume).'},
+      {label:'67(c)',text:'REMOVAL: The Vice-President may be removed by a resolution of the RAJYA SABHA passed by a MAJORITY of all the then members, and AGREED TO by the LOK SABHA (simple majority). 14 days notice required. (No impeachment procedure like President — simpler removal process.)'}
+    ],
+    keywords:['5-year term','Resigns to President','Removal: RS majority + LS agreement (simple majority)','14 days notice','Simpler than President\'s impeachment'],
+    mnemonic:'67 = "VP: 5 years, resigns to PRESIDENT, removed by RS resolution + LS agreement (simple majority, NOT impeachment)".',
+    cases:[],
+    recent:[]
+  },
+  // ─── PART V BATCH 2: EXECUTIVE — Attorney General & misc ───
+  '77': {
+    clauses:[
+      {label:'77(1)',text:'CONDUCT OF BUSINESS OF THE GOVERNMENT OF INDIA: All executive action of the Government of India shall be expressed to be taken in the NAME OF THE PRESIDENT.'},
+      {label:'77(2)',text:'Orders/instruments made and executed in the President\'s name shall be AUTHENTICATED in such manner as specified in rules made by the President, and the validity of such order shall NOT be questioned on the ground that it is not an order made by the President.'},
+      {label:'77(3)',text:'The President shall make RULES for the more convenient transaction of Government business, and for the ALLOCATION of business among Ministers (the "Allocation of Business Rules" / "Transaction of Business Rules").'}
+    ],
+    keywords:['Executive action in President\'s name','Authentication rules','Allocation of Business Rules','Transaction of Business Rules','Government of India (Allocation of Business) Rules 1961'],
+    mnemonic:'77 = "All Govt action = in PRESIDENT\'s name" — even though PM/Cabinet actually decide.',
+    cases:[{name:'R. Chitralekha v State of Mysore',year:'1964',held:'Orders properly authenticated under Art 77(2) cannot be questioned merely because they don\'t bear the President\'s personal signature.'}],
+    recent:[]
+  },
+  '109': {
+    clauses:[
+      {label:'109(1)',text:'SPECIAL PROCEDURE IN RESPECT OF MONEY BILLS: A Money Bill shall NOT be introduced in the RAJYA SABHA. After passage in Lok Sabha, it is transmitted to Rajya Sabha for its RECOMMENDATIONS.'},
+      {label:'109(2)',text:'Rajya Sabha must return the Bill (with or without recommendations) to Lok Sabha within 14 DAYS. Lok Sabha may accept or reject ALL or ANY recommendations.'},
+      {label:'109(5)',text:'If Rajya Sabha does not return the Bill within 14 days, it is DEEMED to have been passed by both Houses in the form passed by Lok Sabha.'}
+    ],
+    keywords:['Money Bill only in Lok Sabha','14-day Rajya Sabha window','Deemed passed if no return in 14 days','LS can reject RS recommendations'],
+    mnemonic:'109 = "Money Bill procedure — 14 days for RS, then deemed passed". Mirrors 110\'s definition.',
+    cases:[],
+    recent:[]
+  },
+  '111': {
+    clauses:[{label:'',text:'ASSENT TO BILLS: When a Bill is passed by both Houses, it is presented to the PRESIDENT, who shall declare either that he ASSENTS or WITHHOLDS assent. The President MAY (except for Money Bills) return the Bill for RECONSIDERATION with a message. If the Houses pass it again (with or without amendments), the President SHALL NOT WITHHOLD ASSENT (mandatory assent on re-passage). [Note: This is the "Suo Moto" / pocket veto debate — President can sit indefinitely without a time limit specified in the Constitution.]'}],
+    keywords:['President assent to Union Bills','Can return once for reconsideration (not Money Bills)','Must assent if re-passed','No constitutional time limit (pocket veto debate)'],
+    mnemonic:'111 = "President: Assent / Withhold / Return-once. MUST assent if Parliament re-passes."',
+    cases:[{name:'Re: Presidential Reference on Bill assent timelines (2025)',year:'2025',held:'SC examined whether timelines can be read into Art 200/201/111 for Governor/President assent — debate on judicially imposed deadlines.'}],
+    recent:[]
+  },
+  '125': {
+    clauses:[{label:'',text:'SALARIES OF SUPREME COURT JUDGES: Judges of the SC shall be paid such salaries as Parliament may by law determine, and until provision is made, such salaries as specified in the SECOND SCHEDULE. Judges are also entitled to privileges, leave of absence, and pension as Parliament determines — these CANNOT be varied to their disadvantage after appointment (EXCEPT during a Financial Emergency under Art 360).'}],
+    keywords:['SC Judge salaries','Determined by Parliament','2nd Schedule (default)','Cannot reduce after appointment','Financial Emergency exception'],
+    mnemonic:'125 = "SC Judge salary — fixed by Parliament, 2nd Schedule, protected from reduction".',
+    cases:[],
+    recent:[]
+  },
+  '126': {
+    clauses:[{label:'',text:'APPOINTMENT OF ACTING CHIEF JUSTICE: When the office of CJI is vacant, or the CJI is unable to perform duties due to absence or otherwise, the duties of office are performed by such OTHER JUDGE of the Court as the PRESIDENT may appoint (typically the senior-most judge).'}],
+    keywords:['Acting CJI','President appoints','Usually senior-most judge','Temporary vacancy/absence'],
+    mnemonic:'126 = "Acting CJI appointed by President" when CJI office vacant/CJI absent.',
+    cases:[],
+    recent:[]
+  },
+  '127': {
+    clauses:[{label:'',text:'APPOINTMENT OF AD HOC JUDGES: If there is a lack of QUORUM of permanent SC judges to hold/continue a sitting, the CJI may, with PREVIOUS CONSENT of the PRESIDENT, request a HIGH COURT JUDGE (qualified to be an SC judge) to sit as an ad hoc judge of the SC for as long as necessary.'}],
+    keywords:['Ad hoc SC judges','Lack of quorum','CJI requests with President\'s consent','HC judge sits temporarily'],
+    mnemonic:'127 = "Ad hoc judge — borrow an HC judge when SC lacks quorum".',
+    cases:[],
+    recent:[]
+  },
+  '128': {
+    clauses:[{label:'',text:'ATTENDANCE OF RETIRED JUDGES AT SITTINGS OF THE SUPREME COURT: The CJI may, with the PREVIOUS CONSENT of the PRESIDENT, request any person who has held office as a Judge of the SC (or of the Federal Court, or who is qualified to be an SC judge) to sit and act as a Judge of the SC. Such a person enjoys all jurisdiction, powers and privileges of an SC Judge but is NOT otherwise deemed a Judge of the SC, and cannot be compelled to so sit/act unless he consents.'}],
+    keywords:['Retired SC judges can be recalled','CJI + President\'s consent','Consent of retired judge needed','Temporary recall, not full reappointment'],
+    mnemonic:'128 = "Recall a RETIRED SC judge temporarily" — needs his consent too.',
+    cases:[],
+    recent:[]
+  },
+  '130': {
+    clauses:[{label:'',text:'SEAT OF SUPREME COURT: The Supreme Court shall sit in DELHI or in such other place(s) as the CHIEF JUSTICE OF INDIA may, with the approval of the PRESIDENT, appoint from time to time. (There have been demands for SC Circuit Benches in South India — not yet implemented.)'}],
+    keywords:['SC seat = Delhi','CJI + President can appoint other places','No permanent regional benches yet','Circuit bench demand'],
+    mnemonic:'130 = "SC sits in Delhi" — CJI+President can change/add locations (not done so far for permanent benches).',
+    cases:[],
+    recent:[{title:'Circuit Bench demand',desc:'Demands for SC Circuit Benches in South India (Chennai/Hyderabad) and other regions persist (raised in Parliament periodically) but have not been implemented due to SC\'s own resistance citing institutional integrity concerns.'}]
+  },
+  '132': {
+    clauses:[{label:'',text:'APPELLATE JURISDICTION OF SUPREME COURT IN CERTAIN CASES (Constitutional matters): An appeal lies to the SC from any judgment/decree/final order of an HC (in civil, criminal or other proceedings) if the HC CERTIFIES that the case involves a SUBSTANTIAL QUESTION OF LAW as to the INTERPRETATION OF THE CONSTITUTION.'}],
+    keywords:['Constitutional appeal from HC','HC certificate required','Substantial question of Constitution interpretation','One of 3 appellate routes (civil/criminal/constitutional)'],
+    mnemonic:'132 = "Constitutional question appeal" — needs HC certificate of substantial constitutional question.',
+    cases:[],
+    recent:[]
+  },
+  '133': {
+    clauses:[{label:'',text:'APPELLATE JURISDICTION OF SUPREME COURT IN CIVIL MATTERS: An appeal lies to the SC from any judgment/decree/final order of an HC in a CIVIL proceeding, if the HC certifies that the case involves a SUBSTANTIAL QUESTION OF LAW of GENERAL IMPORTANCE which, in the HC\'s opinion, needs to be decided by the SC. (Amended by 30th Amendment, 1972 — removed the earlier valuation-based criterion of Rs 20,000.)'}],
+    keywords:['Civil appeal from HC','Substantial question of general importance','30th Amendment 1972 removed valuation test','HC certificate needed'],
+    mnemonic:'133 = "Civil appeal" — 30th Amendment (1972) removed the old money-value test; now based on substantial question of law.',
+    cases:[],
+    recent:[]
+  },
+  '134': {
+    clauses:[
+      {label:'134(1)',text:'APPELLATE JURISDICTION OF SUPREME COURT IN CRIMINAL MATTERS: An appeal lies to the SC from any judgment/order of an HC in a CRIMINAL proceeding if the HC — (a) has reversed an order of ACQUITTAL and sentenced the accused to DEATH; (b) has withdrawn a case from a subordinate court and itself convicted and sentenced the accused to death; (c) certifies that the case is FIT for appeal to the SC.'},
+      {label:'134(2)',text:'Parliament may by law confer further powers on the SC to entertain criminal appeals (used to enact the Supreme Court (Enlargement of Criminal Appellate Jurisdiction) Act, 1970).'}
+    ],
+    keywords:['Criminal appeal from HC','Acquittal reversed to death sentence','HC withdraws case + death sentence','HC certificate (fit case)','1970 Enlargement Act'],
+    mnemonic:'134 = "Criminal appeal — mainly DEATH SENTENCE cases" (reversal of acquittal or HC\'s own conviction).',
+    cases:[],
+    recent:[]
+  },
+  '137': {
+    clauses:[{label:'',text:'REVIEW OF JUDGMENTS OR ORDERS BY THE SUPREME COURT: Subject to provisions of any law made by Parliament or rules made under Art 145, the SC has POWER TO REVIEW any judgment or order pronounced/made by it. (A review petition is generally heard by the SAME bench that delivered the original judgment, "in chamber" without oral arguments unless the Court directs otherwise.)'}],
+    keywords:['SC can review its own judgments','Same bench typically','In-chamber hearing (usually)','Distinct from curative petition (later remedy)'],
+    mnemonic:'137 = "SC reviews itself" — review petition, usually same bench, in-chamber. (Curative petition = even later remedy, post-review.)',
+    cases:[{name:'Rupa Ashok Hurra v Ashok Hurra',year:'2002',held:'Created the CURATIVE PETITION — a remedy even after review petition is dismissed, to prevent gross miscarriage of justice; heard by 3 senior-most judges + bench judges (if available) in chamber.'}],
+    recent:[]
+  },
+  '149': {
+    clauses:[{label:'',text:'DUTIES AND POWERS OF THE COMPTROLLER AND AUDITOR-GENERAL: The CAG shall perform such duties and exercise such powers in relation to the accounts of the Union, States, and other authorities/bodies as may be PRESCRIBED by or under any law made by Parliament — until then, as prescribed by the President (PRESIDENTIAL RULES, after consultation with CAG). [Statutory basis: CAG (Duties, Powers and Conditions of Service) Act, 1971.]'}],
+    keywords:['CAG duties prescribed by Parliament law','CAG (DPC) Act 1971','Audits Union, States, and other bodies','President consults CAG for interim rules'],
+    mnemonic:'149 = "CAG\'s job description" — defined by the CAG (Duties, Powers, Conditions of Service) Act 1971.',
+    cases:[],
+    recent:[]
+  },
+  '150': {
+    clauses:[{label:'',text:'FORM OF ACCOUNTS OF THE UNION AND OF THE STATES: The accounts of the Union and States shall be kept in such FORM as the PRESIDENT may, ON THE ADVICE of the CAG, prescribe. (Ensures uniformity and CAG\'s expert input into accounting standards across India.)'}],
+    keywords:['Accounting form','President prescribes','On CAG\'s advice','Uniform accounting standards'],
+    mnemonic:'150 = "Accounts FORM — President decides ON CAG\'S ADVICE" (CAG\'s expertise shapes the format).',
+    cases:[],
+    recent:[]
+  },
+  '151': {
+    clauses:[
+      {label:'151(1)',text:'AUDIT REPORTS: Reports of the CAG relating to the accounts of the UNION shall be submitted to the PRESIDENT, who shall cause them to be laid before EACH HOUSE OF PARLIAMENT.'},
+      {label:'151(2)',text:'Reports relating to the accounts of a STATE shall be submitted to the GOVERNOR, who shall cause them to be laid before the STATE LEGISLATURE.'}
+    ],
+    keywords:['CAG reports to President (Union)','CAG reports to Governor (State)','Laid before Parliament/State Legislature','Examined by Public Accounts Committee (PAC)'],
+    mnemonic:'151 = "CAG report → President/Governor → Parliament/Legislature → PAC examines (Public Accounts Committee)".',
+    cases:[],
+    recent:[]
+  },
+
+  // ─── PART XVII: OFFICIAL LANGUAGE — Missing Articles (344, 345–350) ───
+  '344': {
+    clauses:[
+      {label:'344(1)',text:'COMMISSION ON OFFICIAL LANGUAGE: The President shall, at the expiration of 5 years from the commencement of the Constitution and thereafter at the expiration of 10 years, by order constitute a Commission — a Chairman and members representing the 8th Schedule languages plus Hindi — to make recommendations on the progressive use of Hindi for Union official purposes, restrictions on use of English, language of Supreme Court and High Courts, language of Union/State Acts, and other language matters.'},
+      {label:'344(4)',text:'COMMITTEE OF PARLIAMENT: The President shall constitute a Committee of 30 members — 20 from Lok Sabha + 10 from Rajya Sabha — to examine the Commission\'s report and present its own recommendations to the President.'}
+    ],
+    keywords:['Official Language Commission','Every 5 then 10 years','Chairman + 8th Schedule language reps','Committee of Parliament 30 members (20 LS + 10 RS)','Progressive use of Hindi'],
+    mnemonic:'344 = "Commission on OL — 5 years, then 10 years". Committee = 30 MPs (20+10).',
+    cases:[],
+    recent:[{title:'Official Language Committees',desc:'Several OL Commissions have been set up. The Committee of Parliament on Official Language submits periodic reports. 9th Report (2011) recommended wider use of Hindi. 11th Report (2022) submitted to President — recommended making Hindi the medium of instruction in IITs and Central Universities. Non-Hindi states (Tamil Nadu, West Bengal etc.) opposed.'}]
+  },
+  '345': {
+    clauses:[{label:'',text:'OFFICIAL LANGUAGE(S) OF A STATE: Subject to the provisions of Arts 346 and 347, the Legislature of a State may by law adopt any one or more of the languages in use in the State OR Hindi as the official language of that State. Until such provision is made, English continues as the official language of the State.'}],
+    keywords:['State official language','State Legislature decides','Any 8th Schedule language or Hindi','English continues till State law made','Tamil Nadu = Tamil + English'],
+    mnemonic:'345 = "State picks its own OL" — from 8th Schedule languages or Hindi. Tamil Nadu = Tamil + English (by TN Official Languages Act).',
+    cases:[],
+    recent:[{title:'Tamil Nadu',desc:'Tamil Nadu Official Language Act 1956 (amended 2006) prescribes Tamil as the official language. English is also used for official purposes. TN has consistently opposed Hindi imposition.'}]
+  },
+  '346': {
+    clauses:[{label:'',text:'OFFICIAL LANGUAGE FOR COMMUNICATION BETWEEN STATES AND BETWEEN STATES AND THE UNION: The authorised language for inter-State communication and for communication between a State and the Union shall be HINDI (in Devanagari script). EXCEPTION: If two States agree to communicate in English, they may do so. If one of the States has not adopted Hindi, communication with the Union must be in English unless both agree otherwise.'}],
+    keywords:['Inter-State communication','Hindi is default','English if one State has not adopted Hindi','Mutual agreement for English','Union-State communication'],
+    mnemonic:'346 = "Hindi for Centre-State/State-State talks. English if non-Hindi State involved."',
+    cases:[],
+    recent:[]
+  },
+  '347': {
+    clauses:[{label:'',text:'SPECIAL PROVISION RELATING TO LANGUAGE SPOKEN BY A SECTION OF POPULATION: If a substantial proportion of the population of a State desires that the language spoken by them should be recognised for any or all official purposes in that State, the PRESIDENT may, if satisfied therewith, direct that such language shall also be officially recognised in that State.'}],
+    keywords:['Linguistic minority recognition','Substantial proportion needed','President directs recognition','State recognition of minority language'],
+    mnemonic:'347 = "President can recognise a minority language in a State" if substantial population demands.',
+    cases:[],
+    recent:[{title:'Examples',desc:'Urdu has been recognised under Art 347 in several States including UP, Bihar, and Jammu. Konkani was recognised in Goa before becoming an 8th Schedule language.'}]
+  },
+  '348': {
+    clauses:[
+      {label:'348(1)',text:'LANGUAGE TO BE USED IN SUPREME COURT AND HIGH COURTS: All proceedings in the SC, all proceedings before HCs, all Bills/Acts/Ordinances/Orders of Parliament and State Legislatures, all orders/rules/regulations/by-laws issued by governments — shall be in the ENGLISH LANGUAGE until Parliament by law otherwise provides.'},
+      {label:'348(2)',text:'EXCEPTION FOR HCs: The Governor of a State may, with PREVIOUS CONSENT OF THE PRESIDENT, authorise the use of Hindi (or any other official language of the State) in proceedings in the HC of that State. But judgments, decrees and orders of the HC shall STILL be in ENGLISH.'}
+    ],
+    keywords:['English in SC and HC proceedings','Bills and Acts in English','Governor + Presidential consent for Hindi in HC','HC judgments still in English','Parliament can change SC language'],
+    mnemonic:'348 = "English in courts + laws". HC can use Hindi WITH Presidential consent (Bihar, UP, MP, Rajasthan have done so). But JUDGMENTS must remain in English.',
+    cases:[],
+    recent:[{title:'HC Hindi use',desc:'4 States (Bihar 1972, Uttar Pradesh 1972, Madhya Pradesh 1973, Rajasthan 1975) got Presidential consent to use Hindi in HC proceedings under Art 348(2). Judgments still must be in English. Tamil Nadu HC and most other HCs remain fully English.'}]
+  },
+  '349': {
+    clauses:[{label:'',text:'SPECIAL PROCEDURE FOR ENACTMENT OF CERTAIN LAWS RELATING TO LANGUAGE: During the 15-year period from the Constitution\'s commencement, no Bill or Amendment providing for the use of any language other than English for the purposes of Art 348 (SC/HC proceedings, Bills) shall be introduced in either House of Parliament without the PREVIOUS SANCTION OF THE PRESIDENT — and the President shall not give his sanction unless he has taken into consideration the recommendations of the Commission constituted under Art 344(1).'}],
+    keywords:['Special procedure for language laws','15-year restriction (1950-1965)','Presidential sanction needed','Art 344 Commission consultation','Courts and Bills language change'],
+    mnemonic:'349 = "15-year lock (1950-65): cannot change court language without Presidential sanction + Art 344 Commission input".',
+    cases:[],
+    recent:[]
+  },
+  '350': {
+    clauses:[{label:'',text:'LANGUAGE TO BE USED IN REPRESENTATIONS FOR REDRESS OF GRIEVANCES: Every person shall be entitled to submit a representation for the redress of any grievance to any officer or authority of the Union or a State in ANY OF THE LANGUAGES USED IN THE UNION or in the State, as the case may be. (This is a RIGHT — no citizen can be denied the right to submit a grievance in their own language.)'}],
+    keywords:['Right to submit grievances in own language','Any language used in Union or State','Cannot be denied on language ground','Grievance redressal right'],
+    mnemonic:'350 = "Grievance in your own language — RIGHT of every citizen".',
+    cases:[],
+    recent:[]
+  },
+
   // ───────── PART XX: AMENDMENT OF THE CONSTITUTION (368) ─────────
   '368': {
     clauses:[
@@ -1381,13 +2433,6 @@ const ART_DATA = {
     keywords:['Superintendence over all courts','All courts in territory','Cannot superintend SC','Administrative + judicial supervision'],
     mnemonic:'227 = "HC is the boss of all lower courts in its territory".',
     cases:[{name:'Waryam Singh v Amarnath',year:'1954',held:'Art 227 gives HC wide supervisory jurisdiction — includes power to interfere when lower court acts without jurisdiction or commits grave error.'}],
-    recent:[]
-  },
-  '233': {
-    clauses:[{label:'',text:'APPOINTMENT OF DISTRICT JUDGES: District Judges in a State are appointed, posted and promoted by the Governor in consultation with the HC exercising jurisdiction over the State.'}],
-    keywords:['District Judge appointment','Governor + HC consultation','Subordinate judiciary','Most senior trial court judge'],
-    mnemonic:'233 = "District Judge — Governor appoints on HC advice".',
-    cases:[],
     recent:[]
   },
   '235': {
@@ -2654,10 +3699,69 @@ const PARTS = [
   ]},
   {id:'pIVA',num:'IV-A',name:'Fundamental Duties',articles:[{n:'51A',t:'Fundamental Duties of every citizen'}]},
   {id:'pV',num:'V',name:'The Union',articles:[
-    {n:'52',t:'The President of India'},{n:'53',t:'Executive power of the Union'},{n:'54',t:'Election of President'},{n:'55',t:'Manner of election of President'},{n:'56',t:'Term of office of President'},{n:'57',t:'Eligibility for re-election'},{n:'58',t:'Qualifications for election as President'},{n:'59',t:'Conditions of President\'s office'},{n:'60',t:'Oath or affirmation by the President'},{n:'61',t:'Procedure for impeachment of the President'},{n:'62',t:'Time of holding election to fill vacancy'},{n:'63',t:'The Vice-President of India'},{n:'64',t:'The Vice-President to be ex officio Chairman of Rajya Sabha'},{n:'65',t:'The Vice-President to act as President'},{n:'66',t:'Election of Vice-President'},{n:'67',t:'Term of office of Vice-President'},{n:'72',t:'Power of President to grant pardons'},{n:'74',t:'Council of Ministers to aid and advise President'},{n:'75',t:'Other provisions as to Ministers'},{n:'76',t:'Attorney-General for India'},{n:'77',t:'Conduct of business of Government of India'},{n:'78',t:'Duties of Prime Minister'},{n:'79',t:'Constitution of Parliament'},{n:'80',t:'Composition of Rajya Sabha'},{n:'81',t:'Composition of Lok Sabha'},{n:'85',t:'Sessions of Parliament, prorogation and dissolution'},{n:'100',t:'Voting in Houses, power of Houses to act notwithstanding vacancies'},{n:'105',t:'Powers, privileges of Houses of Parliament'},{n:'108',t:'Joint sitting of both Houses'},{n:'109',t:'Special procedure in respect of Money Bills'},{n:'110',t:'Definition of Money Bills'},{n:'111',t:'Assent to Bills'},{n:'112',t:'Annual financial statement'},{n:'123',t:'Power of President to promulgate Ordinances'},{n:'124',t:'Establishment and constitution of Supreme Court'},{n:'125',t:'Salaries of Judges'},{n:'126',t:'Appointment of acting Chief Justice'},{n:'127',t:'Appointment of ad hoc Judges'},{n:'128',t:'Attendance of retired Judges at sittings of Supreme Court'},{n:'129',t:'Supreme Court to be a court of record'},{n:'130',t:'Seat of Supreme Court'},{n:'131',t:'Original jurisdiction of Supreme Court'},{n:'132',t:'Appellate jurisdiction of Supreme Court in constitutional cases'},{n:'133',t:'Appellate jurisdiction in civil matters'},{n:'134',t:'Appellate jurisdiction in criminal matters'},{n:'136',t:'Special leave to appeal by Supreme Court'},{n:'137',t:'Review of judgments by Supreme Court'},{n:'141',t:'Law declared by Supreme Court to be binding'},{n:'142',t:'Enforcement of decrees of Supreme Court'},{n:'143',t:'Power of President to consult Supreme Court'},{n:'148',t:'Comptroller and Auditor-General of India'},{n:'149',t:'Duties and powers of CAG'},{n:'150',t:'Form of accounts of the Union and States'},{n:'151',t:'Audit reports'}
+    {n:'52',t:'The President of India'},{n:'53',t:'Executive power of the Union'},{n:'54',t:'Election of President'},
+    {n:'55',t:'Manner of election of President'},{n:'56',t:'Term of office of President'},{n:'57',t:'Eligibility for re-election'},
+    {n:'58',t:'Qualifications for election as President'},{n:'59',t:'Conditions of President\'s office'},{n:'60',t:'Oath or affirmation by the President'},
+    {n:'61',t:'Procedure for impeachment of the President'},{n:'62',t:'Time of holding election to fill vacancy'},{n:'63',t:'The Vice-President of India'},
+    {n:'64',t:'Vice-President to be ex officio Chairman of Rajya Sabha'},{n:'65',t:'The Vice-President to act as President'},{n:'66',t:'Election of Vice-President'},
+    {n:'67',t:'Term of office of Vice-President'},{n:'68',t:'Time of holding election to fill vacancy in office of Vice-President'},{n:'69',t:'Oath or affirmation by the Vice-President'},
+    {n:'70',t:'Discharge of President\'s functions in other contingencies'},{n:'71',t:'Matters relating to election of President or Vice-President'},{n:'72',t:'Power of President to grant pardons'},
+    {n:'74',t:'Council of Ministers to aid and advise President'},{n:'75',t:'Other provisions as to Ministers'},{n:'76',t:'Attorney-General for India'},
+    {n:'77',t:'Conduct of business of Government of India'},{n:'78',t:'Duties of Prime Minister'},{n:'79',t:'Constitution of Parliament'},
+    {n:'80',t:'Composition of Rajya Sabha'},{n:'81',t:'Composition of Lok Sabha'},{n:'82',t:'Readjustment after each census'},
+    {n:'83',t:'Duration of Houses of Parliament'},{n:'84',t:'Qualification for membership of Parliament'},{n:'85',t:'Sessions of Parliament, prorogation and dissolution'},
+    {n:'86',t:'Right of President to address and send messages to Houses'},{n:'87',t:'Special address by the President'},{n:'88',t:'Rights of Ministers and Attorney-General as respects Houses'},
+    {n:'89',t:'The Chairman and Deputy Chairman of Rajya Sabha'},{n:'90',t:'Vacation, resignation and removal of Deputy Chairman'},{n:'91',t:'Power of Deputy Chairman to act as Chairman'},
+    {n:'92',t:'Chairman/Deputy Chairman not to preside during own removal resolution'},{n:'93',t:'The Speaker and Deputy Speaker of Lok Sabha'},{n:'94',t:'Vacation, resignation and removal of Speaker/Deputy Speaker'},
+    {n:'95',t:'Power of Deputy Speaker to act as Speaker'},{n:'96',t:'Speaker/Deputy Speaker not to preside during own removal resolution'},{n:'97',t:'Salaries of Speaker, Deputy Speaker, Chairman, Deputy Chairman'},
+    {n:'98',t:'Secretariat of Parliament'},{n:'99',t:'Oath or affirmation by members'},{n:'100',t:'Voting, quorum, casting vote'},
+    {n:'101',t:'Vacation of seats'},{n:'102',t:'Disqualifications for membership'},{n:'103',t:'Decision on questions of disqualification of members'},
+    {n:'104',t:'Penalty for sitting and voting before oath or when disqualified'},{n:'105',t:'Powers, privileges of Houses of Parliament'},{n:'106',t:'Salaries and allowances of members'},
+    {n:'107',t:'Provisions as to introduction and passing of Bills'},{n:'108',t:'Joint sitting of both Houses'},{n:'109',t:'Special procedure in respect of Money Bills'},
+    {n:'110',t:'Definition of Money Bills'},{n:'111',t:'Assent to Bills'},{n:'112',t:'Annual financial statement'},
+    {n:'113',t:'Procedure with respect to estimates'},{n:'114',t:'Appropriation Bills'},{n:'115',t:'Supplementary, additional or excess grants'},
+    {n:'116',t:'Votes on account, votes of credit and exceptional grants'},{n:'117',t:'Special provisions as to Financial Bills'},{n:'118',t:'Rules of procedure'},
+    {n:'119',t:'Regulation by law of procedure relating to financial business'},{n:'120',t:'Language to be used in Parliament'},{n:'121',t:'Restriction on discussion in Parliament re: judges'},
+    {n:'122',t:'Courts not to inquire into proceedings of Parliament'},{n:'123',t:'Power of President to promulgate Ordinances'},{n:'124',t:'Establishment and constitution of Supreme Court'},
+    {n:'125',t:'Salaries of Judges'},{n:'126',t:'Appointment of acting Chief Justice'},{n:'127',t:'Appointment of ad hoc Judges'},
+    {n:'128',t:'Attendance of retired Judges at sittings of Supreme Court'},{n:'129',t:'Supreme Court to be a court of record'},{n:'130',t:'Seat of Supreme Court'},
+    {n:'131',t:'Original jurisdiction of Supreme Court'},{n:'132',t:'Appellate jurisdiction in constitutional cases'},{n:'133',t:'Appellate jurisdiction in civil matters'},
+    {n:'134',t:'Appellate jurisdiction in criminal matters'},{n:'135',t:'Jurisdiction of Federal Court exercisable by Supreme Court'},{n:'136',t:'Special leave to appeal by Supreme Court'},
+    {n:'137',t:'Review of judgments by Supreme Court'},{n:'138',t:'Enlargement of jurisdiction of Supreme Court'},{n:'139',t:'Conferment of power to issue certain writs'},
+    {n:'139A',t:'Transfer of certain cases'},{n:'140',t:'Ancillary powers of Supreme Court'},{n:'141',t:'Law declared by Supreme Court binding on all courts'},
+    {n:'142',t:'Enforcement of decrees of Supreme Court'},{n:'143',t:'Power of President to consult Supreme Court'},{n:'144',t:'Civil and judicial authorities to act in aid of Supreme Court'},
+    {n:'145',t:'Rules of Court'},{n:'146',t:'Officers, servants and expenses of Supreme Court'},{n:'147',t:'Interpretation (Chapter IV)'},
+    {n:'148',t:'Comptroller and Auditor-General of India'},{n:'149',t:'Duties and powers of CAG'},{n:'150',t:'Form of accounts of Union and States'},
+    {n:'151',t:'Audit reports'}
   ]},
   {id:'pVI',num:'VI',name:'The States',articles:[
-    {n:'152',t:'Definition'},{n:'153',t:'Governors of States'},{n:'154',t:'Executive power of State'},{n:'155',t:'Appointment of Governor'},{n:'156',t:'Term of office of Governor'},{n:'157',t:'Qualifications for appointment as Governor'},{n:'158',t:'Conditions of Governor\'s office'},{n:'159',t:'Oath or affirmation by the Governor'},{n:'161',t:'Power of Governor to grant pardons'},{n:'163',t:'Council of Ministers to aid and advise Governor'},{n:'164',t:'Other provisions as to Ministers'},{n:'165',t:'Advocate-General for the State'},{n:'168',t:'Constitution of Legislatures in States'},{n:'169',t:'Abolition or creation of Legislative Councils'},{n:'170',t:'Composition of Legislative Assemblies'},{n:'171',t:'Composition of Legislative Councils'},{n:'200',t:'Assent to Bills'},{n:'201',t:'Bills reserved for consideration of President'},{n:'202',t:'Annual financial statement of States'},{n:'207',t:'Special provisions as to financial Bills'},{n:'213',t:'Power of Governor to promulgate Ordinances'},{n:'214',t:'High Courts for States'},{n:'215',t:'High Courts to be courts of record'},{n:'216',t:'Constitution of High Courts'},{n:'217',t:'Appointment of Judges of High Courts'},{n:'219',t:'Oath or affirmation by Judges of High Courts'},{n:'220',t:'Restriction on practice in courts after being a permanent Judge'},{n:'225',t:'Jurisdiction of existing High Courts'},{n:'226',t:'Power of High Courts to issue writs'},{n:'227',t:'Power of superintendence over all courts'},{n:'233',t:'Appointment of district judges'},{n:'235',t:'Control over subordinate courts'},{n:'236',t:'Interpretation'},{n:'237',t:'Application of provisions of this Chapter to certain class or classes of magistrates'}
+    {n:'152',t:'Definition'},{n:'153',t:'Governors of States'},{n:'154',t:'Executive power of State'},
+    {n:'155',t:'Appointment of Governor'},{n:'156',t:'Term of office of Governor'},{n:'157',t:'Qualifications for appointment as Governor'},
+    {n:'158',t:'Conditions of Governor\'s office'},{n:'159',t:'Oath or affirmation by the Governor'},{n:'160',t:'Discharge of Governor\'s functions in certain contingencies'},
+    {n:'161',t:'Power of Governor to grant pardons'},{n:'162',t:'Extent of executive power of State'},{n:'163',t:'Council of Ministers to aid and advise Governor'},
+    {n:'164',t:'Other provisions as to Ministers'},{n:'165',t:'Advocate-General for the State'},{n:'166',t:'Conduct of business of the Government of a State'},
+    {n:'167',t:'Duties of Chief Minister'},{n:'168',t:'Constitution of Legislatures in States'},{n:'169',t:'Abolition or creation of Legislative Councils'},
+    {n:'170',t:'Composition of the Legislative Assemblies'},{n:'171',t:'Composition of the Legislative Councils'},{n:'172',t:'Duration of State Legislatures'},
+    {n:'173',t:'Qualification for membership of the State Legislature'},{n:'174',t:'Sessions of the State Legislature, prorogation and dissolution'},{n:'175',t:'Right of Governor to address and send messages'},
+    {n:'176',t:'Special address by the Governor'},{n:'177',t:'Rights of Ministers and Advocate-General as respects the Houses'},{n:'178',t:'The Speaker and Deputy Speaker of the Legislative Assembly'},
+    {n:'180',t:'Power of the Deputy Speaker to act as Speaker'},{n:'181',t:'Speaker/Deputy Speaker not to preside during own removal'},{n:'182',t:'The Chairman and Deputy Chairman of the Legislative Council'},
+    {n:'187',t:'Secretariat of State Legislature'},{n:'188',t:'Oath or affirmation by members'},{n:'189',t:'Voting, quorum'},
+    {n:'190',t:'Vacation of seats'},{n:'191',t:'Disqualifications for membership'},{n:'192',t:'Decision on questions as to disqualifications'},
+    {n:'193',t:'Penalty for sitting and voting before oath or when disqualified'},{n:'194',t:'Powers, privileges of the Houses of State Legislatures'},{n:'195',t:'Salaries and allowances of members'},
+    {n:'196',t:'Provisions as to introduction and passing of Bills'},{n:'197',t:'Restriction on powers of Legislative Council'},{n:'198',t:'Special procedure in respect of Money Bills'},
+    {n:'199',t:'Definition of Money Bills'},{n:'200',t:'Assent to Bills'},{n:'201',t:'Bills reserved for consideration of President'},
+    {n:'202',t:'Annual financial statement'},{n:'203',t:'Procedure with respect to estimates'},{n:'204',t:'Appropriation Bills'},
+    {n:'205',t:'Supplementary, additional or excess grants'},{n:'206',t:'Votes on account, votes of credit and exceptional grants'},{n:'207',t:'Special provisions as to Financial Bills'},
+    {n:'208',t:'Rules of procedure'},{n:'209',t:'Regulation by law of financial business procedure'},{n:'210',t:'Language to be used in the Legislature'},
+    {n:'211',t:'Restriction on discussion in the Legislature re: judges'},{n:'212',t:'Courts not to inquire into proceedings of the Legislature'},{n:'213',t:'Power of Governor to promulgate Ordinances'},
+    {n:'214',t:'High Courts for States'},{n:'215',t:'High Courts to be courts of record'},{n:'216',t:'Constitution of High Courts'},
+    {n:'217',t:'Appointment and conditions of a Judge of a High Court'},{n:'218',t:'Application of SC removal provisions to High Courts'},{n:'219',t:'Oath or affirmation by Judges of High Courts'},
+    {n:'220',t:'Restriction on practice after being a permanent Judge'},{n:'221',t:'Salaries etc. of Judges'},{n:'222',t:'Transfer of a Judge from one High Court to another'},
+    {n:'223',t:'Appointment of acting Chief Justice'},{n:'224',t:'Appointment of additional and acting Judges (incl. 224A retired judges)'},{n:'225',t:'Jurisdiction of existing High Courts'},
+    {n:'226',t:'Power of High Courts to issue certain writs'},{n:'227',t:'Power of superintendence over all courts by the High Court'},{n:'228',t:'Transfer of certain cases to High Court'},
+    {n:'229',t:'Officers and servants and the expenses of High Courts'},{n:'230',t:'Extension of jurisdiction of High Courts to Union territories'},{n:'231',t:'Establishment of a common High Court for two or more States'},
+    {n:'233',t:'Appointment of district judges'},{n:'234',t:'Recruitment of persons other than district judges to the judicial service'},{n:'235',t:'Control over subordinate courts'},
+    {n:'236',t:'Interpretation'},{n:'237',t:'Application of the provisions of this Chapter to certain classes of magistrates'}
   ]},
   {id:'pVIII',num:'VIII',name:'The Union Territories',articles:[
     {n:'239',t:'Administration of Union territories'},{n:'239A',t:'Creation of local Legislatures for certain Union territories'},{n:'239AA',t:'Special provisions with respect to Delhi'},{n:'239AB',t:'Provision in case of failure of constitutional machinery'},{n:'239B',t:'Power of administrator to promulgate Ordinances'},{n:'240',t:'Power of President to make regulations for certain Union territories'},{n:'241',t:'High Courts for Union territories'},{n:'242',t:'[Repealed]'}
@@ -2903,8 +4007,8 @@ const IMPORTANT = {
   pIII: ['12','13','14','15','16','17','18','19','20','21','21A','22','23','24','25','29','30','32'],
   pIV:  ['37','38','39','39A','40','41','44','45','46','48A','50','51'],
   pIVA: ['51A'],
-  pV:   ['52','53','54','58','60','61','72','74','75','76','78','79','80','81','85','105','108','110','111','112','123','124','129','131','136','141','142','148'],
-  pVI:  ['153','155','156','161','163','164','168','200','213','214','216','217','226','227'],
+  pV:   ['52','53','54','55','56','57','58','59','60','61','62','63','64','65','66','67','68','69','70','71','72','74','75','76','77','78','79','80','81','82','83','84','85','86','87','88','89','90','91','92','93','94','95','96','97','98','99','100','101','102','103','104','105','106','107','108','109','110','111','112','113','114','115','116','117','118','119','120','121','122','123','124','125','126','127','128','129','130','131','132','133','134','135','136','137','138','139','139A','140','141','142','143','144','145','146','147','148','149','150','151'],
+  pVI:  ['152','153','154','155','156','157','158','159','160','161','162','163','164','165','166','167','168','169','170','171','172','173','174','175','176','177','178','180','181','182','187','188','189','190','191','192','193','194','195','196','197','198','199','200','201','202','203','204','205','206','207','208','209','210','211','212','213','214','215','216','217','218','219','220','221','222','223','224','225','226','227','228','229','230','231','233','234','235','236','237'],
   pVIII:['239','239A','239AA','239AB','239B','240','241'],
   pIX:  ['243','243A','243B','243C','243D','243E','243F','243G','243H','243I','243J','243K','243M','243O'],
   pIXA: ['243P','243Q','243R','243S','243T','243U','243V','243W','243X','243Y','243ZA','243ZD','243ZE','243ZG'],
@@ -2914,7 +4018,7 @@ const IMPORTANT = {
   pXIV: ['308','309','310','311','312','315','316','317','318','319','320','321','322','323','323A'],
   pXV:  ['324','325','326','327','328','329','329A'],
   pXVI: ['330','332','334','335','338','338A','338B','341','342','342A'],
-  pXVII:['343','344','345','346','348','350A','350B','351'],
+  pXVII:['343','344','345','346','347','348','349','350','350A','350B','351'],
   pXVIII:['352','353','355','356','358','359','360'],
   pXIX: ['361','366'],
   pXX:  ['368'],
@@ -3134,6 +4238,7 @@ function renderRichArticle(artObj, rich) {
       </div>
       <div class="clauses-area">${clausesHtml}</div>
       ${kwHtml}${mnHtml}${casesHtml}${recentHtml}
+      ${buildNoteSection(artObj.n)}
       <div class="swipe-hint">← swipe to turn pages →</div>
     </div>`;
 }
@@ -3754,8 +4859,165 @@ function setOfficeBg(bg, el) {
   cards.forEach(c => { c.style.borderColor = b.border; });
 }
 
+
+// ═══════════════ MY NOTES (per-article, localStorage) ═══════════════
+function getNotes(){ try { return JSON.parse(localStorage.getItem('samvidhan_notes')||'{}'); } catch(e){ return {}; } }
+function getNote(artN){ return getNotes()[artN] || ''; }
+function saveNote(artN){
+  const ta = document.getElementById('noteTA_'+artN);
+  if(!ta) return;
+  const notes = getNotes();
+  if(ta.value.trim()) notes[artN] = ta.value; else delete notes[artN];
+  localStorage.setItem('samvidhan_notes', JSON.stringify(notes));
+  const st = document.getElementById('noteStatus_'+artN);
+  if(st){ st.textContent = 'Saved ✓'; setTimeout(()=>{ st.textContent=''; }, 2000); }
+}
+function clearNote(artN){
+  const ta = document.getElementById('noteTA_'+artN);
+  if(ta) ta.value = '';
+  saveNote(artN);
+}
+function buildNoteSection(artN){
+  const existing = getNote(artN).replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  return `<div class="note-section">
+    <div class="note-header"><span class="note-title">📝 My Notes — Art ${artN}</span><span class="note-status" id="noteStatus_${artN}"></span></div>
+    <textarea class="note-textarea" id="noteTA_${artN}" placeholder="Write your corrections, extra points, or Laxmikanth references here… (saved on this device)" oninput="clearTimeout(window._noteT);window._noteT=setTimeout(()=>saveNote('${artN}'),800)">${existing}</textarea>
+    <div class="note-actions">
+      <button class="note-btn" onclick="saveNote('${artN}')">Save</button>
+      <button class="note-btn secondary" onclick="clearNote('${artN}')">Clear</button>
+    </div>
+  </div>`;
+}
+
+// ═══════════════ COMPARATIVE STUDY TABLES ═══════════════
+const COMPARE_DATA = [
+  {id:'pres-gov', title:'President vs Governor', icon:'🏛️', rows:[
+    ['Aspect','President (Union)','Governor (State)'],
+    ['Article','52-62','153-162'],
+    ['Election/Appointment','Elected by Electoral College (elected MPs + MLAs)','Appointed by President'],
+    ['Term','5 years; removal only by impeachment (Art 61)','5 years BUT at pleasure of President (can be removed anytime)'],
+    ['Oath by','Chief Justice of India (Art 60)','Chief Justice of the High Court (Art 159)'],
+    ['Pardon power','Art 72 — includes DEATH sentences + court martial','Art 161 — CANNOT pardon death or court-martial'],
+    ['Ordinance','Art 123 — on Cabinet advice','Art 213 — some need prior Presidential instruction'],
+    ['Discretion','Almost none (bound by CoM advice, Art 74)','Has real discretion (Art 163) — e.g. hung assembly, reserving bills'],
+    ['Age/Qualification','35 yrs + Lok Sabha eligible','35 yrs (no legislature eligibility needed)'],
+  ]},
+  {id:'32-226', title:'Article 32 vs Article 226', icon:'⚖️', rows:[
+    ['Aspect','Art 32 (Supreme Court)','Art 226 (High Court)'],
+    ['Nature','Itself a FUNDAMENTAL RIGHT (Part III)','Constitutional power (not a FR)'],
+    ['Scope','ONLY for enforcement of Fundamental Rights','FRs AND any other legal right (WIDER)'],
+    ['Territorial reach','Whole of India','Within HC territorial jurisdiction'],
+    ['Can be refused?','Cannot refuse if FR violated (Ambedkar: "heart & soul")','Discretionary — may refuse if alternate remedy exists'],
+    ['Suspension','Suspended during Emergency (except enforcement of 20, 21)','Same suspension rules'],
+    ['Writs','All 5 writs','All 5 writs'],
+  ]},
+  {id:'money-fin', title:'Money Bill vs Financial Bill', icon:'💰', rows:[
+    ['Aspect','Money Bill (110)','Financial Bill Cat-A (117(1))','Financial Bill Cat-B (117(3))'],
+    ['Contains','ONLY Art 110 matters','Art 110 matters + OTHER matters','Just involves expenditure from CFI'],
+    ['Introduced in','Lok Sabha only','Lok Sabha only','Either House'],
+    ['President recommendation','For introduction','For introduction','For CONSIDERATION (passing stage)'],
+    ['Rajya Sabha power','Only recommend (14 days)','CAN amend/reject (normal bill after intro)','Full normal powers'],
+    ['Joint sitting','NO','YES possible','YES possible'],
+    ['Speaker certificate','YES — final','No','No'],
+  ]},
+  {id:'ls-rs', title:'Lok Sabha vs Rajya Sabha', icon:'🏢', rows:[
+    ['Aspect','Lok Sabha','Rajya Sabha'],
+    ['Article','81','80'],
+    ['Max strength','550 (530 states + 20 UTs)','250 (238 + 12 nominated)'],
+    ['Election','Direct (territorial constituencies)','Indirect — elected MLAs via STV'],
+    ['Term','5 years (dissolvable)','Permanent; 1/3 retire every 2 years; member term 6 yrs'],
+    ['Min age','25 years','30 years'],
+    ['Presiding officer','Speaker (elected by House)','Vice-President (ex-officio Chairman)'],
+    ['Money Bills','Originates + final say','14-day recommendations only'],
+    ['Special powers','No-confidence motion; Money Bills','Art 249 (State List resolution); Art 312 (new AIS)'],
+  ]},
+  {id:'emergencies', title:'352 vs 356 vs 360 (Three Emergencies)', icon:'🚨', rows:[
+    ['Aspect','National (352)','President Rule (356)','Financial (360)'],
+    ['Ground','War / external aggression / armed rebellion','Failure of constitutional machinery in State','Threat to financial stability/credit'],
+    ['Parliamentary approval','1 MONTH — special majority','2 MONTHS — simple majority','2 MONTHS — simple majority'],
+    ['Duration','6 months, renewable indefinitely','6 months; MAX 3 YEARS (conditions after 1 yr)','Indefinite once approved (no max)'],
+    ['Effect on FRs','Art 19 auto-suspended (war/aggression only); others by order (never 20, 21)','No direct effect on FRs','No direct effect'],
+    ['Times used','3 (1962, 1971, 1975)','130+ times','NEVER'],
+    ['Judicial review','Yes (Minerva Mills)','Yes (S.R. Bommai)','Presumably yes'],
+  ]},
+  {id:'sched56', title:'5th Schedule vs 6th Schedule', icon:'⛰️', rows:[
+    ['Aspect','5th Schedule','6th Schedule'],
+    ['Applies to','Scheduled Areas in 10 states','Tribal areas in Assam, Meghalaya, Tripura, Mizoram'],
+    ['Governance','Governor + Tribes Advisory Council','Autonomous District Councils (elected)'],
+    ['Autonomy level','Lower — Governor-centric','Higher — elected ADCs make laws'],
+    ['Law-making','Governor can modify state/central laws','ADCs legislate on land, forest, customs etc.'],
+    ['Article','244(1)','244(2) + 275'],
+    ['Key case/act','Samatha (1997); PESA Act 1996','10 ADCs; Bodoland etc.'],
+  ]},
+  {id:'impeach', title:'Removal Procedures Compared', icon:'🔨', rows:[
+    ['Office','Removed by','Ground','Majority needed'],
+    ['President (61)','Parliament — both Houses','Violation of Constitution','2/3 of TOTAL membership of each House'],
+    ['Vice-President (67)','RS resolution + LS agreement','No ground specified','RS: majority of all members; LS: simple'],
+    ['SC/HC Judge (124(4)/218)','Parliament address to President','Proved misbehaviour / incapacity','Special majority both Houses'],
+    ['CEC (324(5))','Like SC Judge','Same as SC Judge','Same as SC Judge'],
+    ['CAG (148)','Like SC Judge','Same as SC Judge','Same as SC Judge'],
+    ['UPSC Chairman (317)','President after SC inquiry','Misbehaviour (SC inquires)','No parliamentary vote needed'],
+    ['Governor (156)','President (at pleasure)','No ground needed (B.P. Singhal: not arbitrary)','None'],
+    ['Speaker (94)','Lok Sabha resolution','No ground specified','Majority of ALL members (14-day notice)'],
+  ]},
+  {id:'quorum', title:'Parliament vs State Legislature (fine differences)', icon:'🔍', rows:[
+    ['Aspect','Parliament','State Legislature'],
+    ['Quorum','1/10th of House (Art 100)','10 members OR 1/10th, whichever GREATER (Art 189)'],
+    ['Upper House chair','Vice-President (ex-officio)','Council elects OWN Chairman (Art 182)'],
+    ['Joint sitting','YES — Art 108 (Speaker presides)','NO joint sitting at State level'],
+    ['Upper House delay power','RS can block ordinary bill → joint sitting resolves','Council delays max ~4 months (197) — cannot block'],
+    ['Judge conduct discussion','Barred EXCEPT impeachment motion (121)','Barred ABSOLUTELY — no exception (211)'],
+    ['Money Bill certifier','LS Speaker (110)','Assembly Speaker (199)'],
+  ]},
+  {id:'funds', title:'Consolidated vs Contingency vs Public Account', icon:'🏦', rows:[
+    ['Aspect','Consolidated Fund (266(1))','Contingency Fund (267)','Public Account (266(2))'],
+    ['Contains','All revenues, loans, receipts','₹30,000 cr corpus (2021)','PF, small savings, judicial deposits'],
+    ['Withdrawal','Only by parliamentary appropriation','Executive (President/Governor) advances, later regularised','Executive action — no vote needed'],
+    ['Purpose','All government expenditure','Unforeseen/urgent expenditure','Money held in trust'],
+    ['Vote needed','YES (except charged expenditure)','Ex-post facto approval','NO'],
+  ]},
+  {id:'dpsp-fr', title:'Fundamental Rights vs DPSP vs Fundamental Duties', icon:'📋', rows:[
+    ['Aspect','Fundamental Rights','DPSP','Fundamental Duties'],
+    ['Part / Articles','Part III (12-35)','Part IV (36-51)','Part IV-A (51A)'],
+    ['Enforceability','Justiciable — Art 32/226','Non-justiciable (Art 37)','Non-justiciable'],
+    ['Source','US Constitution','Irish Constitution','USSR Constitution'],
+    ['Nature','Negative (restrict State) mostly','Positive (direct State)','Duties of citizens'],
+    ['Origin','Original Constitution','Original Constitution','42nd Amendment 1976 (Swaran Singh Committee)'],
+    ['Amendment link','Kesavananda (basic structure)','Minerva Mills (balance = basic structure)','86th Amend 2002 added 11th duty'],
+  ]},
+];
+
+function renderCompareList(){
+  const el = document.getElementById('compareList');
+  if(!el) return;
+  el.innerHTML = COMPARE_DATA.map((c,i)=>`
+    <div class="compare-card" onclick="openCompare(${i})">
+      <div class="compare-icon">${c.icon}</div>
+      <div><div class="compare-name">${c.title}</div><div class="compare-sub">${c.rows.length-1} points compared</div></div>
+    </div>`).join('');
+}
+function openCompare(i){
+  const c = COMPARE_DATA[i];
+  document.getElementById('compareDetailTitle').textContent = c.title;
+  const header = c.rows[0];
+  const body = c.rows.slice(1);
+  document.getElementById('compareDetailContent').innerHTML = `
+    <div class="article-header-parch">
+      <div class="art-part-tag-parch">${c.icon} Comparative Study</div>
+      <div class="art-main-title-parch">${c.title}</div>
+    </div>
+    <div class="compare-table-wrap">
+      <table class="compare-table">
+        <thead><tr>${header.map(h=>`<th>${h}</th>`).join('')}</tr></thead>
+        <tbody>${body.map(row=>`<tr>${row.map(cell=>`<td>${cell}</td>`).join('')}</tr>`).join('')}</tbody>
+      </table>
+    </div>`;
+  showScreen('compare-detail');
+}
+
 // Init
 applyReadSettings();
+renderCompareList();
 applyBg();
 renderParts();
 renderAOD();
@@ -3794,6 +5056,28 @@ renderSchedules();
     <div class="nav-item" onclick="switchTab('favorites-view',this)"><span class="nav-icon">⭐</span><span class="nav-label">Saved</span></div>
     <div class="nav-item" onclick="switchTab('aod-view',this)"><span class="nav-icon">☀️</span><span class="nav-label">Today</span></div>
   </div>
+</div>
+
+<!-- COMPARE VIEW (list) -->
+<div class="screen" id="compare-view">
+  <div class="sub-bar">
+    <div class="sub-bar-inner">
+      <div class="back-btn" onclick="showScreen('home')">←</div>
+      <div><div class="sub-bar-title">⚖️ Compare & Contrast</div><div class="sub-bar-count">Side-by-side tables of commonly confused topics</div></div>
+    </div>
+  </div>
+  <div class="compare-list" id="compareList"></div>
+</div>
+<!-- COMPARE DETAIL (table on parchment) -->
+<div class="screen" id="compare-detail">
+  <div class="detail-bar">
+    <div class="detail-bar-inner">
+      <div class="back-btn-parch" onclick="showScreen('compare-view')">←</div>
+      <div class="detail-bar-title" id="compareDetailTitle">Comparison</div>
+      <div style="width:38px"></div>
+    </div>
+  </div>
+  <div class="detail-content" id="compareDetailContent" style="background:var(--parch-bg);min-height:100vh"></div>
 </div>
 </body>
 </html>
