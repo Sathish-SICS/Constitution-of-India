@@ -487,8 +487,8 @@ body.device-desktop .screen,body.device-large .screen{
 body.device-desktop .parts-list,body.device-large .parts-list{
   display:grid!important;grid-template-columns:1fr 1fr;gap:12px!important;
 }
-body.device-desktop #articlesContent{display:grid!important;grid-template-columns:1fr 1fr!important;gap:12px!important;column-count:unset!important;}
-body.device-desktop #articlesContent .quick-card{display:flex!important;width:auto!important;}
+body.device-desktop #articlesContent{display:grid!important;grid-template-columns:1fr 1fr!important;gap:12px!important;column-count:unset!important;align-items:start!important;grid-auto-rows:min-content!important;}
+body.device-desktop #articlesContent .quick-card{display:block!important;width:auto!important;height:fit-content!important;}
 body.device-desktop .art-main-title-parch{font-size:32px!important;}
 body.device-desktop .clause-block .clause-text{font-size:17px!important;}
 body.device-desktop body{background:radial-gradient(ellipse at 30% 0%,#1a2340 0%,#0d1117 60%)!important;}
@@ -516,6 +516,28 @@ body.fs-mode .detail-content{flex:1;overflow-y:auto;}
 /* Keyboard nav hint */
 .kbd-hint{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.7);color:#fff;font-size:11px;padding:6px 14px;border-radius:20px;pointer-events:none;opacity:0;transition:opacity 0.3s;z-index:999;}
 .kbd-hint.show{opacity:1;}
+
+/* ── FLOATING PREV/NEXT ARROWS (article navigation) ── */
+.art-nav-arrow{position:fixed;top:50%;transform:translateY(-50%);z-index:150;width:46px;height:46px;border-radius:50%;background:rgba(139,26,0,0.85);color:#f4e4c1;border:2px solid rgba(244,228,193,0.3);font-size:20px;display:none;align-items:center;justify-content:center;cursor:pointer;transition:all 0.15s;box-shadow:0 4px 16px rgba(0,0,0,0.3);user-select:none;}
+.art-nav-arrow:hover{background:#8b1a00;transform:translateY(-50%) scale(1.1);}
+.art-nav-arrow.prev{left:12px;}
+.art-nav-arrow.next{right:12px;}
+/* Show only when article detail active */
+#article-detail.active ~ .art-nav-arrow, body:has(#article-detail.active) .art-nav-arrow{display:flex;}
+/* Desktop: position relative to reading column */
+@media(min-width:1024px) and (pointer:fine){
+  .art-nav-arrow.prev{left:calc(80px + max(0px,(100vw - 80px - 860px)/2) - 60px);}
+  .art-nav-arrow.next{right:calc(max(0px,(100vw - 80px - 860px)/2) - 60px);}
+}
+@media(min-width:1600px) and (pointer:fine){
+  .art-nav-arrow.prev{left:calc(80px + max(0px,(100vw - 80px - 1100px)/2) - 60px);}
+  .art-nav-arrow.next{right:calc(max(0px,(100vw - 80px - 1100px)/2) - 60px);}
+}
+/* Mobile: smaller, bottom placement to avoid thumb overlap */
+@media(max-width:699px){
+  .art-nav-arrow{width:40px;height:40px;font-size:17px;top:auto;bottom:110px;transform:none;}
+  .art-nav-arrow:hover{transform:scale(1.1);}
+}
 </style>
 </head>
 <body>
@@ -5223,13 +5245,7 @@ function renderSplitArticle(){
   }
 }
 
-// Store current article and flat list for split view & keyboard use
-const _origBuildFlatList = buildFlatList;
-function buildFlatList(artObj){
-  _origBuildFlatList(artObj);
-  window._currentArtN = artObj.n;
-  
-}
+// (flat list stored directly inside the main buildFlatList function)
 
 // Also add split view button to article header (desktop only)
 function addSplitBtn(){
@@ -5248,8 +5264,25 @@ function addSplitBtn(){
   favBtn.parentNode.insertBefore(btn, favBtn);
 }
 
+
+// ═══════════════ FLOATING NAV ARROWS visibility ═══════════════
+function updateNavArrows(){
+  const onArticle = document.getElementById('article-detail').classList.contains('active');
+  const prev = document.getElementById('artNavPrev');
+  const next = document.getElementById('artNavNext');
+  if(prev) prev.style.display = onArticle ? 'flex' : 'none';
+  if(next) next.style.display = onArticle ? 'flex' : 'none';
+}
+// Hook into showScreen
+const _origShowScreen = showScreen;
+showScreen = function(id){
+  _origShowScreen(id);
+  updateNavArrows();
+};
+
 // Init
 applyReadSettings();
+updateNavArrows();
 renderCompareList();
 applyBg();
 renderParts();
@@ -5333,5 +5366,9 @@ renderSchedules();
   <div id="splitContent"></div>
 </div>
 <div class="kbd-hint" id="kbdHint"></div>
+
+<!-- FLOATING ARTICLE NAV ARROWS -->
+<div class="art-nav-arrow prev" id="artNavPrev" onclick="navigateArticle(-1)" title="Previous Article (←)">‹</div>
+<div class="art-nav-arrow next" id="artNavNext" onclick="navigateArticle(1)" title="Next Article (→)">›</div>
 </body>
 </html>
