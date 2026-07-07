@@ -82,7 +82,7 @@ html,body{width:100%;margin:0;font-family:'Inter',sans-serif;background:var(--in
 .chip-icon.neon-red{background:linear-gradient(135deg,#cc0000,#ff3333);box-shadow:0 0 16px rgba(204,0,0,0.4);}
 .chip-icon.neon-teal{background:linear-gradient(135deg,#007777,#00cccc);box-shadow:0 0 16px rgba(0,204,204,0.4);}
 .chip-icon.neon-gold{background:linear-gradient(135deg,#8b6914,#c9a84c);box-shadow:0 0 16px rgba(201,168,76,0.4);}
-.chip-label{font-size:10px;font-weight:500;color:var(--text-secondary);text-align:center;line-height:1.3;max-width:60px;}
+.chip-label{font-family:'Lexend',sans-serif;font-size:10px;font-weight:600;color:var(--text-secondary);text-align:center;line-height:1.3;max-width:64px;}
 
 /* SECTION LABEL */
 .section-label{padding:0 16px;margin:20px 0 12px;display:flex;align-items:center;gap:10px;}
@@ -318,58 +318,84 @@ html,body{width:100%;margin:0;font-family:'Inter',sans-serif;background:var(--in
 .detail-content.tex-grain{background-image:radial-gradient(rgba(150,110,50,0.10) 1px,transparent 1px);background-size:5px 5px;}
 .detail-content.tex-paper{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.10'/%3E%3C/svg%3E");}
 
-/* ═══════ DEVICE-ADAPTIVE LAYOUT SYSTEM ═══════ */
-/* Tablet (iPad portrait) 700-1023px: wider column + 2-col grids */
-@media (min-width: 700px) {
-  .screen { max-width: 720px; box-shadow: 0 0 60px rgba(0,0,0,0.5); }
-  .parts-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-  .sched-list, .amend-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-  .quick-card { break-inside: avoid; }
+/* ═══════ DEVICE-ADAPTIVE LAYOUT — COMPLETE REWRITE ═══════ */
+
+/* ── TABLET (iPad portrait) 700–1023px ── */
+@media (min-width:700px){
+  .screen{max-width:720px!important;box-shadow:0 0 60px rgba(0,0,0,.5);}
+  .parts-list{display:grid!important;grid-template-columns:1fr 1fr;gap:10px;}
+  .sched-list,.amend-list{display:grid!important;grid-template-columns:1fr 1fr;gap:10px;}
 }
-/* Desktop (Mac/PC/iPad landscape) ≥1024px: side nav rail + wide reading + multi-col */
-@media (min-width: 1024px) {
-  .screen { max-width: 900px; }
-  /* Bottom nav becomes a LEFT SIDE RAIL */
-  .bottom-nav {
-    top: 0; bottom: 0; left: 0; right: auto; transform: none;
-    width: 92px; max-width: 92px; height: 100vh;
-    flex-direction: column; justify-content: center; gap: 26px;
-    padding: 0; border-top: none; border-right: 1px solid var(--border-soft);
+
+/* ── DESKTOP / MAC / PC (pointer:fine = mouse/trackpad) ── */
+@media (min-width:1024px) and (pointer:fine){
+  /* Body fills window with subtle gradient */
+  body{background:radial-gradient(ellipse at 30% 0%,#1a2340 0%,#0d1117 60%)!important;}
+
+  /* LEFT SIDE NAVIGATION RAIL */
+  .bottom-nav{
+    position:fixed!important;
+    top:0!important;bottom:0!important;left:0!important;right:auto!important;
+    transform:none!important;
+    width:80px!important;max-width:80px!important;height:100vh!important;
+    flex-direction:column!important;justify-content:center!important;
+    align-items:center!important;gap:4px!important;
+    padding:20px 0!important;
+    border-top:none!important;border-right:1px solid rgba(255,255,255,.08)!important;
+    background:rgba(10,14,20,.97)!important;
   }
-  .nav-item { flex-direction: column; padding: 10px 6px; border-radius: 12px; margin: 0 10px; }
-  .nav-icon { font-size: 24px; }
-  .nav-label { font-size: 10px; }
-  /* Shift content right of the rail and center in remaining space */
-  .screen { margin-left: calc(92px + (100vw - 92px - 900px) / 2); margin-right: auto; }
-  /* Reading text: bigger default, comfortable line length */
-  .clause-block .clause-text { font-size: calc(var(--read-size, 18px) + 1px); max-width: 760px; }
-  .article-body-parch p { max-width: 760px; }
-  .art-main-title-parch { font-size: 30px; }
-  /* Quick view: 2-column masonry */
-  #articlesContent { column-count: 2; column-gap: 12px; }
-  #articlesContent .quick-card { display: inline-block; width: 100%; margin-bottom: 12px; }
-  /* Offices: wider photos */
-  .office-photo { width: 68px; height: 82px; }
-  .font-panel { left: calc(92px + (100vw - 92px) / 2); }
-}
-/* Large desktop (27" monitors) ≥1600px: even wider + 3-col parts */
-@media (min-width: 1600px) {
-  .screen { max-width: 1080px; margin-left: calc(92px + (100vw - 92px - 1080px) / 2); }
-  .parts-list { grid-template-columns: 1fr 1fr 1fr; }
-  body { background: radial-gradient(ellipse at 50% 0%, #161d2e 0%, var(--ink) 60%); }
-  .clause-block .clause-text { max-width: 880px; }
-  .article-body-parch p { max-width: 880px; }
-}
-/* Keep bottom-nav at bottom for touch devices even if wide (iPad landscape has coarse pointer) */
-@media (min-width: 1024px) and (pointer: coarse) {
-  .bottom-nav {
-    top: auto; bottom: 0; left: 50%; right: auto; transform: translateX(-50%);
-    width: 100%; max-width: 720px; height: auto; flex-direction: row;
-    padding: 10px 0 28px; border-right: none; border-top: 1px solid var(--border-soft);
+  .nav-item{
+    flex-direction:column!important;width:68px!important;
+    padding:12px 4px!important;border-radius:14px!important;
+    margin:2px 0!important;gap:4px!important;
   }
-  .nav-item { flex-direction: column; margin: 0; }
-  .screen { margin-left: auto; margin-right: auto; }
-  .font-panel { left: 50%; }
+  .nav-icon{font-size:22px!important;}
+  .nav-label{font-size:9px!important;letter-spacing:.3px!important;}
+
+  /* CONTENT COLUMN — positioned right of the rail */
+  .screen{
+    max-width:860px!important;
+    margin-left:calc(80px + max(0px,(100vw - 80px - 860px)/2))!important;
+    margin-right:auto!important;
+  }
+
+  /* PARTS LIST — 2 column cards */
+  .parts-list{display:grid!important;grid-template-columns:1fr 1fr;gap:12px!important;}
+
+  /* QUICK VIEW — 2 columns masonry */
+  #articlesContent{column-count:2!important;column-gap:14px!important;}
+  #articlesContent .quick-card{display:inline-block!important;width:100%!important;margin-bottom:14px!important;}
+
+  /* ARTICLE READING — bigger text, wider */
+  .clause-block .clause-text{max-width:none!important;font-size:17px!important;}
+  .article-body-parch p{max-width:none!important;}
+  .art-main-title-parch{font-size:32px!important;}
+  .ai-section{margin:18px 24px!important;}
+
+  /* FONT PANEL — anchored to content area */
+  .font-panel{left:80px!important;transform:translateX(max(0px,(100vw - 80px - 860px)/2))!important;}
+
+  /* SCHEDULES / OFFICES wider */
+  .office-photo{width:72px!important;height:88px!important;}
+  .sched-list,.amend-list{display:grid!important;grid-template-columns:1fr 1fr;gap:10px!important;}
+
+  /* COMPARE — wider table */
+  .compare-table{font-size:14px!important;}
+
+  /* SEARCH overlay repositioned */
+  .search-results-overlay{
+    left:80px!important;transform:none!important;
+    width:calc(100vw - 80px)!important;max-width:860px!important;
+    margin-left:max(0px,(100vw - 80px - 860px)/2)!important;
+  }
+}
+
+/* ── 27-INCH / LARGE DESKTOP ≥1600px ── */
+@media (min-width:1600px) and (pointer:fine){
+  .screen{max-width:1100px!important;margin-left:calc(80px + max(0px,(100vw - 80px - 1100px)/2))!important;}
+  .parts-list{grid-template-columns:1fr 1fr 1fr!important;}
+  .compare-list{grid-template-columns:1fr 1fr!important;}
+  .font-panel{transform:translateX(max(0px,(100vw - 80px - 1100px)/2))!important;}
 }
 /* Ensure detail/schedule parchment screens show parch bg full column height */
 #article-detail.screen, #schedule-detail.screen { background: var(--parch-bg); }
@@ -436,6 +462,60 @@ html,body{width:100%;margin:0;font-family:'Inter',sans-serif;background:var(--in
 .compare-table tr td:first-child{font-weight:700;color:#6b4400;white-space:nowrap;}
 .compare-table tr:nth-child(even) td{background:rgba(139,105,20,0.05);}
 @media (min-width: 700px){ .compare-list{display:grid;grid-template-columns:1fr 1fr;} }
+
+/* ── BODY-CLASS FALLBACKS (set by JS, in case media queries fail) ── */
+body.device-desktop .bottom-nav,
+body.device-large .bottom-nav{
+  position:fixed!important;top:0!important;bottom:0!important;left:0!important;right:auto!important;
+  transform:none!important;width:80px!important;max-width:80px!important;height:100vh!important;
+  flex-direction:column!important;justify-content:center!important;align-items:center!important;
+  gap:4px!important;padding:20px 0!important;border-top:none!important;
+  border-right:1px solid rgba(255,255,255,.08)!important;background:rgba(10,14,20,.97)!important;
+}
+body.device-desktop .nav-item,
+body.device-large .nav-item{
+  flex-direction:column!important;width:68px!important;padding:12px 4px!important;
+  border-radius:14px!important;margin:2px 0!important;gap:4px!important;
+}
+body.device-desktop .nav-icon,body.device-large .nav-icon{font-size:22px!important;}
+body.device-desktop .nav-label,body.device-large .nav-label{font-size:9px!important;}
+body.device-desktop .screen,body.device-large .screen{
+  max-width:860px!important;
+  margin-left:calc(80px + max(0px,(100vw - 80px - 860px)/2))!important;
+  margin-right:auto!important;
+}
+body.device-desktop .parts-list,body.device-large .parts-list{
+  display:grid!important;grid-template-columns:1fr 1fr;gap:12px!important;
+}
+body.device-desktop #articlesContent{display:grid!important;grid-template-columns:1fr 1fr!important;gap:12px!important;column-count:unset!important;}
+body.device-desktop #articlesContent .quick-card{display:flex!important;width:auto!important;}
+body.device-desktop .art-main-title-parch{font-size:32px!important;}
+body.device-desktop .clause-block .clause-text{font-size:17px!important;}
+body.device-desktop body{background:radial-gradient(ellipse at 30% 0%,#1a2340 0%,#0d1117 60%)!important;}
+body.device-large .screen{
+  max-width:1100px!important;
+  margin-left:calc(80px + max(0px,(100vw - 80px - 1100px)/2))!important;
+}
+body.device-large .parts-list{grid-template-columns:1fr 1fr 1fr!important;}
+
+/* ── SPLIT VIEW & FULLSCREEN ── */
+.split-bar{display:none;position:fixed;top:0;right:0;bottom:0;z-index:90;width:50%;background:var(--parch-bg);border-left:2px solid var(--parch-border);overflow-y:auto;padding-bottom:40px;}
+.split-bar.open{display:block;}
+.split-controls{display:flex;gap:6px;align-items:center;padding:8px 12px;background:rgba(180,140,80,0.15);border-bottom:1px solid var(--parch-border);}
+.split-ctrl-btn{background:rgba(139,105,20,0.2);border:1px solid var(--parch-border);border-radius:8px;padding:4px 12px;font-size:11px;font-weight:700;color:#6b4400;cursor:pointer;}
+.split-ctrl-btn.active{background:#8b1a00;color:#f4e4c1;border-color:#8b1a00;}
+/* Fullscreen reading mode */
+body.fs-mode #article-detail{position:fixed!important;inset:0!important;z-index:500!important;display:flex!important;max-width:none!important;margin:0!important;}
+body.fs-mode #article-detail .bottom-nav{display:none!important;}
+body.fs-mode .detail-content{flex:1;overflow-y:auto;}
+/* Desktop: show split-view button */
+@media(min-width:1024px){
+  .split-btn-wrap{display:block;}
+  body.device-desktop #article-detail .detail-content.split-open{width:50%;}
+}
+/* Keyboard nav hint */
+.kbd-hint{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.7);color:#fff;font-size:11px;padding:6px 14px;border-radius:20px;pointer-events:none;opacity:0;transition:opacity 0.3s;z-index:999;}
+.kbd-hint.show{opacity:1;}
 </style>
 </head>
 <body>
@@ -555,6 +635,7 @@ html,body{width:100%;margin:0;font-family:'Inter',sans-serif;background:var(--in
       <div class="back-btn-parch" id="artBackBtn">←</div>
       <div class="detail-bar-title" id="detailBarTitle">Article</div>
       <div class="icon-btn-parch" id="fontBtn" onclick="toggleFontPanel()" style="font-family:Georgia,serif;font-weight:700">Aa</div>
+      <div class="icon-btn-parch" id="fsBtn" onclick="toggleFullscreen()" title="Fullscreen (F)">⛶</div>
       <div class="icon-btn-parch" id="favBtn" onclick="toggleFav()">☆</div>
     </div>
   </div>
@@ -3966,8 +4047,12 @@ let favorites = JSON.parse(localStorage.getItem('samvidhan_favs') || '[]');
 // ═══════════════ NAVIGATION ═══════════════
 function showScreen(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
+  const el = document.getElementById(id);
+  if(!el){ console.warn('Screen not found:',id); return; }
+  el.classList.add('active');
   window.scrollTo(0,0);
+  if(id==='compare-view') renderCompareList();
+  if(id==='offices-view') initOffices();
 }
 function goHome() { showScreen('home'); renderParts(); }
 function goBack(target) { showScreen(target); }
@@ -3978,6 +4063,7 @@ function switchTab(targetId, el) {
   if(targetId==='favorites-view') renderFavorites();
   if(targetId==='aod-view') renderAOD();
   if(targetId==='offices-view') initOffices();
+  if(targetId==='compare-view') renderCompareList();
   if(targetId==='home') renderParts();
   if(targetId==='schedules-view') renderSchedules();
 }
@@ -4167,6 +4253,7 @@ async function openArticle(artObj, from) {
   currentArticleId = `${artObj.n}_${artObj.part}`;
   currentArticleData = artObj;
   buildFlatList(artObj);
+  setTimeout(addSplitBtn, 100);
 
   document.getElementById('artBackBtn').onclick = () => goBack(backTarget);
   document.getElementById('detailBarTitle').textContent = artObj.n === 'Preamble' ? 'Preamble' : `Article ${artObj.n}`;
@@ -4249,6 +4336,7 @@ let flatArticleList = [];
 let flatIndex = -1;
 
 function buildFlatList(artObj) {
+  window._currentArtN = artObj.n;
   // Build a flat list of all articles across all parts
   if(!flatArticleList.length) {
     PARTS.forEach(p => {
@@ -4257,6 +4345,7 @@ function buildFlatList(artObj) {
       });
     });
   }
+  window._flatList = flatArticleList.map(a=>a.n);
   flatIndex = flatArticleList.findIndex(a => a.n === artObj.n && a.part === artObj.part);
 }
 
@@ -4989,11 +5078,16 @@ const COMPARE_DATA = [
 
 function renderCompareList(){
   const el = document.getElementById('compareList');
-  if(!el) return;
+  if(!el){ setTimeout(renderCompareList, 200); return; }
+  if(el.children.length > 0) return; // already rendered
   el.innerHTML = COMPARE_DATA.map((c,i)=>`
-    <div class="compare-card" onclick="openCompare(${i})">
-      <div class="compare-icon">${c.icon}</div>
-      <div><div class="compare-name">${c.title}</div><div class="compare-sub">${c.rows.length-1} points compared</div></div>
+    <div class="compare-card" onclick="openCompare(${i})" style="cursor:pointer;background:var(--ink-mid);border:1px solid var(--border-soft);border-radius:14px;padding:18px;display:flex;align-items:center;gap:16px;transition:border-color 0.15s;" onmouseenter="this.style.borderColor='var(--gold)'" onmouseleave="this.style.borderColor='var(--border-soft)'">
+      <div style="font-size:32px;flex-shrink:0">${c.icon}</div>
+      <div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:700;color:var(--text-primary);margin-bottom:3px">${c.title}</div>
+        <div style="font-size:11px;color:var(--text-muted)">${c.rows.length-1} key exam points compared</div>
+      </div>
+      <div style="margin-left:auto;color:var(--gold);font-size:18px">›</div>
     </div>`).join('');
 }
 function openCompare(i){
@@ -5013,6 +5107,145 @@ function openCompare(i){
       </table>
     </div>`;
   showScreen('compare-detail');
+}
+
+
+// ═══════════════ DEVICE CLASS DETECTION ═══════════════
+function detectDevice(){
+  const w = window.innerWidth;
+  const isTouch = window.matchMedia('(pointer:coarse)').matches;
+  const isFine = window.matchMedia('(pointer:fine)').matches;
+  document.body.classList.remove('device-phone','device-tablet','device-desktop','device-large');
+  if(w >= 1600 && isFine){ document.body.classList.add('device-large','device-desktop'); }
+  else if(w >= 1024 && isFine){ document.body.classList.add('device-desktop'); }
+  else if(w >= 700){ document.body.classList.add('device-tablet'); }
+  else { document.body.classList.add('device-phone'); }
+}
+window.addEventListener('resize', detectDevice);
+detectDevice();
+
+
+// ═══════════════ KEYBOARD NAVIGATION ═══════════════
+document.addEventListener('keydown', function(e){
+  const onArticle = document.getElementById('article-detail').classList.contains('active');
+  if(!onArticle) return;
+
+  if(e.key==='ArrowRight' || e.key==='ArrowDown'){
+    e.preventDefault(); navigateArticle(1); showKbdHint('→ Next Article');
+  } else if(e.key==='ArrowLeft' || e.key==='ArrowUp'){
+    e.preventDefault(); navigateArticle(-1); showKbdHint('← Previous Article');
+  } else if(e.key==='f' || e.key==='F'){
+    toggleFullscreen();
+  } else if(e.key==='Escape'){
+    if(document.body.classList.contains('fs-mode')) toggleFullscreen();
+    else if(document.getElementById('splitPanel').classList.contains('open')) closeSplit();
+  } else if(e.key==='s' || e.key==='S'){
+    openSplitView();
+  }
+});
+
+function showKbdHint(msg){
+  const el = document.getElementById('kbdHint');
+  if(!el) return;
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(window._kbdT);
+  window._kbdT = setTimeout(()=>el.classList.remove('show'), 1200);
+}
+
+// ═══════════════ FULLSCREEN ═══════════════
+function toggleFullscreen(){
+  const body = document.body;
+  if(!body.classList.contains('fs-mode')){
+    body.classList.add('fs-mode');
+    document.getElementById('fsBtn').textContent = '⊠';
+    document.getElementById('fsBtn').title = 'Exit Fullscreen (F or Esc)';
+    // Try browser native fullscreen too
+    if(document.documentElement.requestFullscreen) document.documentElement.requestFullscreen().catch(()=>{});
+  } else {
+    body.classList.remove('fs-mode');
+    document.getElementById('fsBtn').textContent = '⛶';
+    document.getElementById('fsBtn').title = 'Fullscreen (F)';
+    if(document.exitFullscreen && document.fullscreenElement) document.exitFullscreen().catch(()=>{});
+  }
+}
+
+// ═══════════════ SPLIT VIEW ═══════════════
+let splitArtIdx = -1;
+
+function openSplitView(){
+  // Only on desktop
+  const isDesktop = window.matchMedia('(pointer:fine)').matches && window.innerWidth >= 900;
+  if(!isDesktop){ showKbdHint('Split view: desktop only'); return; }
+  const panel = document.getElementById('splitPanel');
+  panel.classList.add('open');
+  document.getElementById('detailContent').style.marginRight = '50%';
+  // Show next article in split
+  splitArtIdx = (window._flatList||[]).indexOf(window._currentArtN) + 1;
+  renderSplitArticle();
+}
+
+function closeSplit(){
+  document.getElementById('splitPanel').classList.remove('open');
+  document.getElementById('detailContent').style.marginRight = '';
+  splitArtIdx = -1;
+}
+
+function splitNavigate(dir){
+  splitArtIdx = Math.max(0, Math.min((window._flatList||[]).length-1, splitArtIdx + dir));
+  renderSplitArticle();
+}
+
+function renderSplitArticle(){
+  const flat = window._flatList || [];
+  if(splitArtIdx < 0 || splitArtIdx >= flat.length) return;
+  const n = flat[splitArtIdx];
+  const sc = document.getElementById('splitContent');
+  if(!sc) return;
+  const rich = ART_DATA[n];
+  if(rich){
+    // Build minimal artObj for rendering
+    const flatItem = flatArticleList.find(a=>a.n===n) || {n,t:'Article '+n,part:''};
+    sc.innerHTML = '<div style="padding:0 0 60px">';
+    // Render clauses inline
+    const clauseHtml = rich.clauses.map((c,i)=>`<div class="clause-block"><span class="clause-label">${c.label||''}</span><div class="clause-text">${c.text}</div></div>`).join('');
+    const kwHtml = rich.keywords ? `<div class="ai-section sec-keywords" style="margin:12px 16px"><div class="ai-section-header">🔑 KEY WORDS</div><div class="ai-section-body"><div class="kw-tags">${rich.keywords.map(k=>`<span class="kw-tag">${k}</span>`).join('')}</div></div></div>` : '';
+    const mnHtml = rich.mnemonic ? `<div class="ai-section sec-mnemonic" style="margin:12px 16px"><div class="ai-section-header">🧠 MEMORY HOOK</div><div class="ai-section-body"><p>${rich.mnemonic}</p></div></div>` : '';
+    sc.innerHTML = `<div class="article-header-parch" style="position:sticky;top:0;z-index:10">
+      <div class="art-part-tag-parch">${flatItem.part}</div>
+      <div class="art-number-parch">ARTICLE ${n}</div>
+      <div class="art-main-title-parch">${flatItem.t}</div>
+    </div>
+    <div class="article-body-parch">${clauseHtml}</div>
+    ${kwHtml}${mnHtml}`;
+  } else {
+    sc.innerHTML = `<div style="padding:20px;text-align:center;color:#8b6914;font-family:Lexend,sans-serif">Article ${n} — tap in main view to load</div>`;
+  }
+}
+
+// Store current article and flat list for split view & keyboard use
+const _origBuildFlatList = buildFlatList;
+function buildFlatList(artObj){
+  _origBuildFlatList(artObj);
+  window._currentArtN = artObj.n;
+  
+}
+
+// Also add split view button to article header (desktop only)
+function addSplitBtn(){
+  const isDesktop = window.matchMedia('(pointer:fine)').matches && window.innerWidth >= 1024;
+  if(!isDesktop) return;
+  if(document.getElementById('splitOpenBtn')) return;
+  const favBtn = document.getElementById('favBtn');
+  if(!favBtn) return;
+  const btn = document.createElement('div');
+  btn.id = 'splitOpenBtn';
+  btn.className = 'icon-btn-parch';
+  btn.title = 'Split View (S)';
+  btn.textContent = '⊟';
+  btn.style.cssText = 'font-size:18px';
+  btn.onclick = openSplitView;
+  favBtn.parentNode.insertBefore(btn, favBtn);
 }
 
 // Init
@@ -5060,13 +5293,22 @@ renderSchedules();
 
 <!-- COMPARE VIEW (list) -->
 <div class="screen" id="compare-view">
-  <div class="sub-bar">
-    <div class="sub-bar-inner">
-      <div class="back-btn" onclick="showScreen('home')">←</div>
-      <div><div class="sub-bar-title">⚖️ Compare & Contrast</div><div class="sub-bar-count">Side-by-side tables of commonly confused topics</div></div>
+  <div class="top-bar" style="padding:52px 16px 12px;display:flex;align-items:center;gap:14px;border-bottom:1px solid var(--border-soft);">
+    <div class="icon-btn" onclick="showScreen('home')" style="font-size:20px;color:var(--text-secondary)">←</div>
+    <div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--text-primary)">⚖️ Compare & Contrast</div>
+      <div style="font-size:12px;color:var(--text-muted);margin-top:2px">10 side-by-side tables for exam clarity</div>
     </div>
   </div>
-  <div class="compare-list" id="compareList"></div>
+  <div class="compare-list" id="compareList" style="padding:16px 16px 100px;display:grid;gap:10px;"></div>
+  <div class="bottom-nav">
+    <div class="nav-item active" onclick="switchTab('home',this)"><span class="nav-icon">📜</span><span class="nav-label">Constitution</span></div>
+    <div class="nav-item" onclick="switchTab('schedules-view',this)"><span class="nav-icon">📅</span><span class="nav-label">Schedules</span></div>
+    <div class="nav-item" onclick="switchTab('offices-view',this)"><span class="nav-icon">🏛️</span><span class="nav-label">Offices</span></div>
+    <div class="nav-item" onclick="switchTab('favorites-view',this)"><span class="nav-icon">⭐</span><span class="nav-label">Saved</span></div>
+    <div class="nav-item" onclick="switchTab('aod-view',this)"><span class="nav-icon">☀️</span><span class="nav-label">Today</span></div>
+  </div>
+</div>
 </div>
 <!-- COMPARE DETAIL (table on parchment) -->
 <div class="screen" id="compare-detail">
@@ -5077,7 +5319,19 @@ renderSchedules();
       <div style="width:38px"></div>
     </div>
   </div>
-  <div class="detail-content" id="compareDetailContent" style="background:var(--parch-bg);min-height:100vh"></div>
+  <div id="compareDetailContent" style="background:var(--parch-bg);min-height:100vh;padding-bottom:90px"></div>
 </div>
+
+<!-- SPLIT VIEW PANEL -->
+<div class="split-bar" id="splitPanel">
+  <div class="split-controls">
+    <span style="font-size:11px;font-weight:700;color:#6b4400">SPLIT VIEW</span>
+    <button class="split-ctrl-btn" onclick="splitNavigate(-1)">← Prev</button>
+    <button class="split-ctrl-btn" onclick="splitNavigate(1)">Next →</button>
+    <button class="split-ctrl-btn" onclick="closeSplit()" style="margin-left:auto">✕</button>
+  </div>
+  <div id="splitContent"></div>
+</div>
+<div class="kbd-hint" id="kbdHint"></div>
 </body>
 </html>
