@@ -498,21 +498,10 @@ body.device-large .screen{
 }
 body.device-large .parts-list{grid-template-columns:1fr 1fr 1fr!important;}
 
-/* ── SPLIT VIEW & FULLSCREEN ── */
-.split-bar{display:none;position:fixed;top:0;right:0;bottom:0;z-index:90;width:50%;background:var(--parch-bg);border-left:2px solid var(--parch-border);overflow-y:auto;padding-bottom:40px;}
-.split-bar.open{display:block;}
-.split-controls{display:flex;gap:6px;align-items:center;padding:8px 12px;background:rgba(180,140,80,0.15);border-bottom:1px solid var(--parch-border);}
-.split-ctrl-btn{background:rgba(139,105,20,0.2);border:1px solid var(--parch-border);border-radius:8px;padding:4px 12px;font-size:11px;font-weight:700;color:#6b4400;cursor:pointer;}
-.split-ctrl-btn.active{background:#8b1a00;color:#f4e4c1;border-color:#8b1a00;}
-/* Fullscreen reading mode */
+/* ── FULLSCREEN ── */
 body.fs-mode #article-detail{position:fixed!important;inset:0!important;z-index:500!important;display:flex!important;max-width:none!important;margin:0!important;}
 body.fs-mode #article-detail .bottom-nav{display:none!important;}
 body.fs-mode .detail-content{flex:1;overflow-y:auto;}
-/* Desktop: show split-view button */
-@media(min-width:1024px){
-  .split-btn-wrap{display:block;}
-  body.device-desktop #article-detail .detail-content.split-open{width:50%;}
-}
 /* Keyboard nav hint */
 .kbd-hint{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.7);color:#fff;font-size:11px;padding:6px 14px;border-radius:20px;pointer-events:none;opacity:0;transition:opacity 0.3s;z-index:999;}
 .kbd-hint.show{opacity:1;}
@@ -538,6 +527,32 @@ body.fs-mode .detail-content{flex:1;overflow-y:auto;}
   .art-nav-arrow{width:40px;height:40px;font-size:17px;top:auto;bottom:110px;transform:none;}
   .art-nav-arrow:hover{transform:scale(1.1);}
 }
+
+/* ── VIEW MODES (desktop reader) ── */
+.vm-btns{display:none;gap:4px;margin-right:4px;}
+body.device-desktop .vm-btns,body.device-large .vm-btns{display:flex;}
+.vm-btn{width:34px;height:34px;border-radius:9px;background:rgba(60,40,10,0.18);border:1px solid rgba(107,68,0,0.35);color:#5a3c00;font-size:13px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-family:'Inter',sans-serif;font-weight:700;transition:all .15s;}
+.vm-btn.active{background:#8b1a00;color:#f4e4c1;border-color:#8b1a00;}
+/* Mode 2 — two pages side by side (Word style) */
+.two-page-grid{display:grid;grid-template-columns:1fr 1fr;align-items:start;min-height:100vh;}
+.page-pane{border-right:2px solid var(--parch-border);min-height:100vh;padding-bottom:60px;}
+.page-pane:last-child{border-right:none;}
+.page-pane .article-header-parch{position:static!important;}
+.page-pane .clause-block .clause-text{font-size:15px!important;}
+.page-pane .art-main-title-parch{font-size:22px!important;}
+.page-pane .ai-section{margin:12px 16px!important;}
+/* Mode 3 — master list left + article right */
+.master-grid{display:grid;grid-template-columns:320px 1fr;align-items:start;min-height:100vh;}
+.master-list{border-right:2px solid var(--parch-border);background:rgba(0,0,0,0.05);position:sticky;top:0;max-height:100vh;overflow-y:auto;}
+.master-part-label{padding:10px 14px 6px;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#8b6914;position:sticky;top:0;background:var(--parch-bg2);z-index:5;}
+.master-item{padding:10px 14px;border-bottom:1px solid rgba(139,105,20,0.15);cursor:pointer;transition:background .12s;}
+.master-item:hover{background:rgba(139,105,20,0.12);}
+.master-item.active{background:#8b1a00;}
+.master-item.active .mi-title,.master-item.active .mi-num{color:#f4e4c1;}
+.mi-num{font-family:'Cormorant Garamond',serif;font-size:12px;font-weight:700;color:#8b6914;}
+.mi-title{font-family:var(--read-font,'Lexend',sans-serif);font-size:13px;color:var(--parch-text2);line-height:1.35;}
+.master-content{min-height:100vh;padding-bottom:60px;}
+.master-content .article-header-parch{position:static!important;}
 </style>
 </head>
 <body>
@@ -656,6 +671,11 @@ body.fs-mode .detail-content{flex:1;overflow-y:auto;}
     <div class="detail-bar-inner">
       <div class="back-btn-parch" id="artBackBtn">←</div>
       <div class="detail-bar-title" id="detailBarTitle">Article</div>
+      <div class="vm-btns" id="vmBtns">
+        <div class="vm-btn" id="vmBtn1" onclick="setViewMode(1)" title="Single page">▭</div>
+        <div class="vm-btn" id="vmBtn2" onclick="setViewMode(2)" title="Two pages (Word style)">▯▯</div>
+        <div class="vm-btn" id="vmBtn3" onclick="setViewMode(3)" title="List + Page">☰</div>
+      </div>
       <div class="icon-btn-parch" id="fontBtn" onclick="toggleFontPanel()" style="font-family:Georgia,serif;font-weight:700">Aa</div>
       <div class="icon-btn-parch" id="fsBtn" onclick="toggleFullscreen()" title="Fullscreen (F)">⛶</div>
       <div class="icon-btn-parch" id="favBtn" onclick="toggleFav()">☆</div>
@@ -4275,7 +4295,6 @@ async function openArticle(artObj, from) {
   currentArticleId = `${artObj.n}_${artObj.part}`;
   currentArticleData = artObj;
   buildFlatList(artObj);
-  setTimeout(addSplitBtn, 100);
 
   document.getElementById('artBackBtn').onclick = () => goBack(backTarget);
   document.getElementById('detailBarTitle').textContent = artObj.n === 'Preamble' ? 'Preamble' : `Article ${artObj.n}`;
@@ -4350,6 +4369,8 @@ function renderRichArticle(artObj, rich) {
       ${buildNoteSection(artObj.n)}
       <div class="swipe-hint">← swipe to turn pages →</div>
     </div>`;
+  window._lastSingleHtml = document.getElementById('detailContent').innerHTML;
+  if(typeof isDesktopReader === 'function' && isDesktopReader() && viewMode > 1) setTimeout(applyViewMode, 30);
 }
 
 
@@ -5160,9 +5181,8 @@ document.addEventListener('keydown', function(e){
     toggleFullscreen();
   } else if(e.key==='Escape'){
     if(document.body.classList.contains('fs-mode')) toggleFullscreen();
-    else if(document.getElementById('splitPanel').classList.contains('open')) closeSplit();
   } else if(e.key==='s' || e.key==='S'){
-    openSplitView();
+    setViewMode(viewMode % 3 + 1); showKbdHint('View mode: ' + ['','1 Page','2 Pages','List + Page'][viewMode]);
   }
 });
 
@@ -5192,77 +5212,6 @@ function toggleFullscreen(){
   }
 }
 
-// ═══════════════ SPLIT VIEW ═══════════════
-let splitArtIdx = -1;
-
-function openSplitView(){
-  // Only on desktop
-  const isDesktop = window.matchMedia('(pointer:fine)').matches && window.innerWidth >= 900;
-  if(!isDesktop){ showKbdHint('Split view: desktop only'); return; }
-  const panel = document.getElementById('splitPanel');
-  panel.classList.add('open');
-  document.getElementById('detailContent').style.marginRight = '50%';
-  // Show next article in split
-  splitArtIdx = (window._flatList||[]).indexOf(window._currentArtN) + 1;
-  renderSplitArticle();
-}
-
-function closeSplit(){
-  document.getElementById('splitPanel').classList.remove('open');
-  document.getElementById('detailContent').style.marginRight = '';
-  splitArtIdx = -1;
-}
-
-function splitNavigate(dir){
-  splitArtIdx = Math.max(0, Math.min((window._flatList||[]).length-1, splitArtIdx + dir));
-  renderSplitArticle();
-}
-
-function renderSplitArticle(){
-  const flat = window._flatList || [];
-  if(splitArtIdx < 0 || splitArtIdx >= flat.length) return;
-  const n = flat[splitArtIdx];
-  const sc = document.getElementById('splitContent');
-  if(!sc) return;
-  const rich = ART_DATA[n];
-  if(rich){
-    // Build minimal artObj for rendering
-    const flatItem = flatArticleList.find(a=>a.n===n) || {n,t:'Article '+n,part:''};
-    sc.innerHTML = '<div style="padding:0 0 60px">';
-    // Render clauses inline
-    const clauseHtml = rich.clauses.map((c,i)=>`<div class="clause-block"><span class="clause-label">${c.label||''}</span><div class="clause-text">${c.text}</div></div>`).join('');
-    const kwHtml = rich.keywords ? `<div class="ai-section sec-keywords" style="margin:12px 16px"><div class="ai-section-header">🔑 KEY WORDS</div><div class="ai-section-body"><div class="kw-tags">${rich.keywords.map(k=>`<span class="kw-tag">${k}</span>`).join('')}</div></div></div>` : '';
-    const mnHtml = rich.mnemonic ? `<div class="ai-section sec-mnemonic" style="margin:12px 16px"><div class="ai-section-header">🧠 MEMORY HOOK</div><div class="ai-section-body"><p>${rich.mnemonic}</p></div></div>` : '';
-    sc.innerHTML = `<div class="article-header-parch" style="position:sticky;top:0;z-index:10">
-      <div class="art-part-tag-parch">${flatItem.part}</div>
-      <div class="art-number-parch">ARTICLE ${n}</div>
-      <div class="art-main-title-parch">${flatItem.t}</div>
-    </div>
-    <div class="article-body-parch">${clauseHtml}</div>
-    ${kwHtml}${mnHtml}`;
-  } else {
-    sc.innerHTML = `<div style="padding:20px;text-align:center;color:#8b6914;font-family:Lexend,sans-serif">Article ${n} — tap in main view to load</div>`;
-  }
-}
-
-// (flat list stored directly inside the main buildFlatList function)
-
-// Also add split view button to article header (desktop only)
-function addSplitBtn(){
-  const isDesktop = window.matchMedia('(pointer:fine)').matches && window.innerWidth >= 1024;
-  if(!isDesktop) return;
-  if(document.getElementById('splitOpenBtn')) return;
-  const favBtn = document.getElementById('favBtn');
-  if(!favBtn) return;
-  const btn = document.createElement('div');
-  btn.id = 'splitOpenBtn';
-  btn.className = 'icon-btn-parch';
-  btn.title = 'Split View (S)';
-  btn.textContent = '⊟';
-  btn.style.cssText = 'font-size:18px';
-  btn.onclick = openSplitView;
-  favBtn.parentNode.insertBefore(btn, favBtn);
-}
 
 
 // ═══════════════ FLOATING NAV ARROWS visibility ═══════════════
@@ -5280,8 +5229,115 @@ showScreen = function(id){
   updateNavArrows();
 };
 
+
+// ═══════════════ VIEW MODES: 1=single, 2=two-page, 3=list+page ═══════════════
+let viewMode = parseInt(localStorage.getItem('samvidhan_viewmode') || '1');
+
+function isDesktopReader(){
+  return window.matchMedia('(pointer:fine)').matches && window.innerWidth >= 1024;
+}
+
+function updateVmBtns(){
+  [1,2,3].forEach(m => {
+    const b = document.getElementById('vmBtn'+m);
+    if(b) b.classList.toggle('active', m === viewMode);
+  });
+}
+
+function setViewMode(m){
+  viewMode = m;
+  localStorage.setItem('samvidhan_viewmode', String(m));
+  updateVmBtns();
+  applyViewMode();
+}
+
+// Build a complete self-contained page for one article (used by modes 2 & 3)
+function buildArticlePageHtml(n, withNotes){
+  const meta = flatArticleList.find(a => a.n === n) || {n:n, t:'Article '+n, part:''};
+  const rich = ART_DATA[n];
+  if(!rich){
+    return `<div class="article-header-parch">
+      <div class="art-part-tag-parch">📜 ${meta.part}</div>
+      <div class="art-number-parch">ARTICLE ${n}</div>
+      <div class="art-main-title-parch">${meta.t}</div>
+    </div>
+    <div style="padding:30px 20px;text-align:center;color:#8b6914;font-family:'Lexend',sans-serif;font-size:14px">
+      This article is not yet hardcoded.<br>Open it in single-page view to load via AI.
+    </div>`;
+  }
+  const clausesHtml = rich.clauses.map((c,i) => {
+    const label = c.label ? `<span class="clause-label">${c.label}</span>` : '';
+    return `<div class="clause-block${i===0&&!c.label?' first-clause':''}">${label}<div class="clause-text">${c.text}</div></div>`;
+  }).join('');
+  const kwHtml = (rich.keywords && rich.keywords.length) ? `<div class="ai-section sec-key"><div class="ai-section-header">🔑 Key Words</div><div class="ai-section-body"><div class="kw-wrap">${rich.keywords.map(k=>`<span class="kw-chip">${k}</span>`).join('')}</div></div></div>` : '';
+  const mnHtml = rich.mnemonic ? `<div class="ai-section sec-mnemonic"><div class="ai-section-header">🧠 Memory Hook</div><div class="ai-section-body"><p style="font-weight:600">${rich.mnemonic}</p></div></div>` : '';
+  const casesHtml = (rich.cases && rich.cases.length) ? `<div class="ai-section sec-cases"><div class="ai-section-header">⚖️ Landmark Cases</div><div class="ai-section-body">${rich.cases.map(c=>`<div class="case-item"><span class="case-name">${c.name}</span>${c.year&&c.year!=='—'?`<span class="case-year">(${c.year})</span>`:''}<div class="case-held">${c.held}</div></div>`).join('')}</div></div>` : '';
+  const recentHtml = (rich.recent && rich.recent.length) ? `<div class="ai-section sec-dev"><div class="ai-section-header">🆕 Recent Developments</div><div class="ai-section-body">${rich.recent.map(r=>`<div class="dev-item"><strong>${r.title}</strong><br>${r.desc}</div>`).join('')}</div></div>` : '';
+  const notesHtml = withNotes ? buildNoteSection(n) : '';
+  return `<div class="article-header-parch">
+    <div class="art-part-tag-parch">📜 ${meta.part}</div>
+    <div class="art-number-parch">ARTICLE ${n}</div>
+    <div class="art-main-title-parch">${meta.t}</div>
+  </div>
+  <div class="article-body-parch">${clausesHtml}</div>
+  ${kwHtml}${mnHtml}${casesHtml}${recentHtml}${notesHtml}`;
+}
+
+// Apply the current view mode to the detail content
+function applyViewMode(){
+  const dc = document.getElementById('detailContent');
+  if(!dc) return;
+  const onArticle = document.getElementById('article-detail').classList.contains('active');
+  if(!onArticle) return;
+
+  // Fallback to single page on phone/tablet
+  if(!isDesktopReader() || viewMode === 1){
+    if(window._lastSingleHtml) dc.innerHTML = window._lastSingleHtml;
+    return;
+  }
+
+  const flat = flatArticleList;
+  const cur = flatIndex >= 0 ? flatIndex : 0;
+
+  if(viewMode === 2){
+    // TWO PAGES — current + next, like Word
+    const leftN  = flat[cur] ? flat[cur].n : null;
+    const rightN = flat[cur+1] ? flat[cur+1].n : null;
+    dc.innerHTML = `<div class="two-page-grid">
+      <div class="page-pane">${leftN ? buildArticlePageHtml(leftN, true) : ''}</div>
+      <div class="page-pane">${rightN ? buildArticlePageHtml(rightN, false) : '<div style="padding:40px;text-align:center;color:#8b6914">— End of articles —</div>'}</div>
+    </div>`;
+  } else if(viewMode === 3){
+    // LIST + PAGE — master-detail
+    const curPart = flat[cur] ? flat[cur].part : '';
+    const partArts = flat.filter(a => a.part === curPart);
+    const listHtml = `<div class="master-part-label">${curPart}</div>` + partArts.map(a =>
+      `<div class="master-item${a.n===flat[cur].n?' active':''}" onclick="masterOpen('${a.n}')">
+        <div class="mi-num">ART ${a.n}</div>
+        <div class="mi-title">${a.t}</div>
+      </div>`).join('');
+    dc.innerHTML = `<div class="master-grid">
+      <div class="master-list" id="masterList">${listHtml}</div>
+      <div class="master-content">${buildArticlePageHtml(flat[cur].n, true)}</div>
+    </div>`;
+    // Scroll active item into view
+    setTimeout(()=>{
+      const act = document.querySelector('.master-item.active');
+      if(act) act.scrollIntoView({block:'center'});
+    }, 50);
+  }
+}
+
+// Open an article from the master list — reuse full openArticle for consistency
+function masterOpen(n){
+  const meta = flatArticleList.find(a => a.n === n);
+  if(!meta) return;
+  openArticle({n: meta.n, t: meta.t, part: meta.part}, 'articles-view');
+}
+
 // Init
 applyReadSettings();
+updateVmBtns();
 updateNavArrows();
 renderCompareList();
 applyBg();
@@ -5355,16 +5411,6 @@ renderSchedules();
   <div id="compareDetailContent" style="background:var(--parch-bg);min-height:100vh;padding-bottom:90px"></div>
 </div>
 
-<!-- SPLIT VIEW PANEL -->
-<div class="split-bar" id="splitPanel">
-  <div class="split-controls">
-    <span style="font-size:11px;font-weight:700;color:#6b4400">SPLIT VIEW</span>
-    <button class="split-ctrl-btn" onclick="splitNavigate(-1)">← Prev</button>
-    <button class="split-ctrl-btn" onclick="splitNavigate(1)">Next →</button>
-    <button class="split-ctrl-btn" onclick="closeSplit()" style="margin-left:auto">✕</button>
-  </div>
-  <div id="splitContent"></div>
-</div>
 <div class="kbd-hint" id="kbdHint"></div>
 
 <!-- FLOATING ARTICLE NAV ARROWS -->
