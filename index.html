@@ -354,9 +354,12 @@ html,body{width:100%;margin:0;font-family:'Inter',sans-serif;background:var(--in
 
   /* CONTENT COLUMN — positioned right of the rail */
   .screen{
-    max-width:860px!important;
-    margin-left:calc(80px + max(0px,(100vw - 80px - 860px)/2))!important;
-    margin-right:auto!important;
+    max-width:none!important;
+    width:calc(100vw - 80px)!important;
+    margin-left:80px!important;
+    margin-right:0!important;
+    padding:0 2.5vw!important;
+    box-sizing:border-box!important;
   }
 
   /* PARTS LIST — 2 column cards */
@@ -367,20 +370,20 @@ html,body{width:100%;margin:0;font-family:'Inter',sans-serif;background:var(--in
   #articlesContent .quick-card{display:inline-block!important;width:100%!important;margin-bottom:14px!important;}
 
   /* ARTICLE READING — bigger text, wider */
-  .clause-block .clause-text{max-width:none!important;font-size:17px!important;}
+  .clause-block .clause-text{max-width:none!important;font-size:var(--read-size,17px)!important;}
   .article-body-parch p{max-width:none!important;}
   .art-main-title-parch{font-size:32px!important;}
   .ai-section{margin:18px 24px!important;}
 
   /* FONT PANEL — anchored to content area */
-  .font-panel{left:80px!important;transform:translateX(max(0px,(100vw - 80px - 860px)/2))!important;}
+  .font-panel{left:calc(80px + (100vw - 80px)/2)!important;transform:translateX(-50%)!important;}
 
   /* SCHEDULES / OFFICES wider */
   .office-photo{width:72px!important;height:88px!important;}
-  .sched-list,.amend-list{display:grid!important;grid-template-columns:1fr 1fr;gap:10px!important;}
+  .sched-list,.amend-list{display:grid!important;grid-template-columns:repeat(auto-fill,minmax(380px,1fr))!important;gap:10px!important;}
 
   /* COMPARE — wider table */
-  .compare-table{font-size:14px!important;}
+
 
   /* SEARCH overlay repositioned */
   .search-results-overlay{
@@ -392,10 +395,10 @@ html,body{width:100%;margin:0;font-family:'Inter',sans-serif;background:var(--in
 
 /* ── 27-INCH / LARGE DESKTOP ≥1600px ── */
 @media (min-width:1600px) and (pointer:fine){
-  .screen{max-width:1100px!important;margin-left:calc(80px + max(0px,(100vw - 80px - 1100px)/2))!important;}
+
   .parts-list{grid-template-columns:1fr 1fr 1fr!important;}
   .compare-list{grid-template-columns:1fr 1fr!important;}
-  .font-panel{transform:translateX(max(0px,(100vw - 80px - 1100px)/2))!important;}
+
 }
 /* Ensure detail/schedule parchment screens show parch bg full column height */
 #article-detail.screen, #schedule-detail.screen { background: var(--parch-bg); }
@@ -456,8 +459,8 @@ html,body{width:100%;margin:0;font-family:'Inter',sans-serif;background:var(--in
 .compare-name{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:var(--text-primary);}
 .compare-sub{font-size:11px;color:var(--text-muted);margin-top:2px;}
 .compare-table-wrap{padding:16px;overflow-x:auto;}
-.compare-table{width:100%;border-collapse:collapse;font-family:var(--read-font,'Lexend',sans-serif);font-size:13px;background:rgba(255,255,255,0.4);border-radius:10px;overflow:hidden;}
-.compare-table th{background:#8b1a00;color:#f4e4c1;padding:10px 12px;text-align:left;font-weight:700;font-size:12px;}
+.compare-table{width:100%;border-collapse:collapse;font-family:var(--read-font,'Lexend',sans-serif);font-size:calc(var(--read-size,16px) - 1px);background:rgba(255,255,255,0.4);border-radius:10px;overflow:hidden;}
+.compare-table th{background:#8b1a00;color:#f4e4c1;padding:12px 14px;text-align:left;font-weight:700;font-size:calc(var(--read-size,16px) - 2px);}
 .compare-table td{padding:10px 12px;border-bottom:1px solid rgba(139,105,20,0.2);color:var(--parch-text2);vertical-align:top;line-height:1.5;}
 .compare-table tr td:first-child{font-weight:700;color:#6b4400;white-space:nowrap;}
 .compare-table tr:nth-child(even) td{background:rgba(139,105,20,0.05);}
@@ -480,23 +483,23 @@ body.device-large .nav-item{
 body.device-desktop .nav-icon,body.device-large .nav-icon{font-size:22px!important;}
 body.device-desktop .nav-label,body.device-large .nav-label{font-size:9px!important;}
 body.device-desktop .screen,body.device-large .screen{
-  max-width:860px!important;
-  margin-left:calc(80px + max(0px,(100vw - 80px - 860px)/2))!important;
-  margin-right:auto!important;
+  max-width:none!important;
+  width:calc(100vw - 80px)!important;
+  margin-left:80px!important;
+  margin-right:0!important;
+  padding:0 2.5vw!important;
+  box-sizing:border-box!important;
 }
 body.device-desktop .parts-list,body.device-large .parts-list{
-  display:grid!important;grid-template-columns:1fr 1fr;gap:12px!important;
+  display:grid!important;grid-template-columns:repeat(auto-fill,minmax(360px,1fr))!important;gap:12px!important;
 }
-body.device-desktop #articlesContent{display:grid!important;grid-template-columns:1fr 1fr!important;gap:12px!important;column-count:unset!important;align-items:start!important;grid-auto-rows:min-content!important;}
+body.device-desktop #articlesContent{display:grid!important;grid-template-columns:repeat(auto-fill,minmax(430px,1fr))!important;gap:12px!important;column-count:unset!important;align-items:start!important;grid-auto-rows:min-content!important;}
 body.device-desktop #articlesContent .quick-card{display:block!important;width:auto!important;height:fit-content!important;}
 body.device-desktop .art-main-title-parch{font-size:32px!important;}
-body.device-desktop .clause-block .clause-text{font-size:17px!important;}
+body.device-desktop .clause-block .clause-text{font-size:var(--read-size,17px)!important;}
 body.device-desktop body{background:radial-gradient(ellipse at 30% 0%,#1a2340 0%,#0d1117 60%)!important;}
-body.device-large .screen{
-  max-width:1100px!important;
-  margin-left:calc(80px + max(0px,(100vw - 80px - 1100px)/2))!important;
-}
-body.device-large .parts-list{grid-template-columns:1fr 1fr 1fr!important;}
+
+
 
 /* ── FULLSCREEN ── */
 body.fs-mode #article-detail{position:fixed!important;inset:0!important;z-index:500!important;display:flex!important;max-width:none!important;margin:0!important;}
@@ -538,8 +541,8 @@ body.device-desktop .vm-btns,body.device-large .vm-btns{display:flex;}
 .page-pane{border-right:2px solid var(--parch-border);min-height:100vh;padding-bottom:60px;}
 .page-pane:last-child{border-right:none;}
 .page-pane .article-header-parch{position:static!important;}
-.page-pane .clause-block .clause-text{font-size:15px!important;}
-.page-pane .art-main-title-parch{font-size:22px!important;}
+.page-pane .clause-block .clause-text{font-size:calc(var(--read-size,16px) - 1px)!important;}
+.page-pane .art-main-title-parch{font-size:calc(var(--read-size,16px) + 8px)!important;}
 .page-pane .ai-section{margin:12px 16px!important;}
 /* Mode 3 — master list left + article right */
 .master-grid{display:grid;grid-template-columns:320px 1fr;align-items:start;min-height:100vh;}
@@ -553,6 +556,14 @@ body.device-desktop .vm-btns,body.device-large .vm-btns{display:flex;}
 .mi-title{font-family:var(--read-font,'Lexend',sans-serif);font-size:13px;color:var(--parch-text2);line-height:1.35;}
 .master-content{min-height:100vh;padding-bottom:60px;}
 .master-content .article-header-parch{position:static!important;}
+
+/* ── GLOBAL Aa BUTTON (all screens) ── */
+.global-aa{position:fixed;bottom:104px;right:18px;z-index:940;width:48px;height:48px;border-radius:50%;background:#8b1a00;color:#f4e4c1;border:2px solid rgba(244,228,193,.4);font-family:Georgia,serif;font-weight:700;font-size:17px;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 18px rgba(0,0,0,.35);}
+.global-aa:hover{transform:scale(1.08);}
+@media(min-width:1024px) and (pointer:fine){.global-aa{bottom:26px;right:26px;width:54px;height:54px;font-size:19px;}}
+
+/* ── KEYBOARD FOCUS HIGHLIGHT ── */
+.kb-focus{outline:3px solid var(--gold,#e0a020)!important;outline-offset:2px;border-radius:14px;}
 </style>
 </head>
 <body>
@@ -709,6 +720,15 @@ body.device-desktop .vm-btns,body.device-large .vm-btns{display:flex;}
         <button class="fp-opt" onclick="setReadSize(-1)">A−</button>
         <button class="fp-opt fp-size-display" id="sizeDisplay">18px</button>
         <button class="fp-opt" onclick="setReadSize(1)">A+</button>
+      </div>
+    </div>
+    <div class="fp-section">
+      <div class="fp-label">🖥️ Display Zoom — for projector / classroom</div>
+      <div class="fp-row">
+        <button class="fp-opt" onclick="setUiZoom(100,this)">100%</button>
+        <button class="fp-opt" onclick="setUiZoom(125,this)">125%</button>
+        <button class="fp-opt" onclick="setUiZoom(150,this)">150%</button>
+        <button class="fp-opt" onclick="setUiZoom(175,this)">175%</button>
       </div>
     </div>
     <div class="fp-section">
@@ -4100,7 +4120,7 @@ function goHome() { showScreen('home'); renderParts(); }
 function goBack(target) { showScreen(target); }
 function switchTab(targetId, el) {
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  if(el) el.classList.add('active');
+  if(el) if(el) el.classList.add('active'); else { document.querySelectorAll(`.nav-item[onclick*="${targetId}"]`).forEach(n=>n.classList.add('active')); }
   showScreen(targetId);
   if(targetId==='favorites-view') renderFavorites();
   if(targetId==='aod-view') renderAOD();
@@ -5168,21 +5188,93 @@ window.addEventListener('resize', detectDevice);
 detectDevice();
 
 
-// ═══════════════ KEYBOARD NAVIGATION ═══════════════
-document.addEventListener('keydown', function(e){
-  const onArticle = document.getElementById('article-detail').classList.contains('active');
-  if(!onArticle) return;
+// ═══════════════ GLOBAL KEYBOARD CONTROL ═══════════════
+const KB_ITEM_SELECTOR = '.part-card,.article-row,.quick-card,.sched-card,.schedule-card,.compare-card,.office-card,.fav-card,.master-item,.amend-card';
+let kbIndex = -1;
 
-  if(e.key==='ArrowRight' || e.key==='ArrowDown'){
-    e.preventDefault(); navigateArticle(1); showKbdHint('→ Next Article');
-  } else if(e.key==='ArrowLeft' || e.key==='ArrowUp'){
-    e.preventDefault(); navigateArticle(-1); showKbdHint('← Previous Article');
-  } else if(e.key==='f' || e.key==='F'){
-    toggleFullscreen();
-  } else if(e.key==='Escape'){
-    if(document.body.classList.contains('fs-mode')) toggleFullscreen();
-  } else if(e.key==='s' || e.key==='S'){
-    setViewMode(viewMode % 3 + 1); showKbdHint('View mode: ' + ['','1 Page','2 Pages','List + Page'][viewMode]);
+function kbItems(){
+  const active = document.querySelector('.screen.active');
+  return active ? Array.from(active.querySelectorAll(KB_ITEM_SELECTOR)) : [];
+}
+function kbClear(){
+  document.querySelectorAll('.kb-focus').forEach(el=>el.classList.remove('kb-focus'));
+}
+function kbMove(delta){
+  const items = kbItems();
+  if(!items.length) return;
+  kbIndex = Math.max(0, Math.min(items.length-1, (kbIndex<0?(delta>0?-1:items.length):kbIndex) + delta));
+  kbClear();
+  const el = items[kbIndex];
+  el.classList.add('kb-focus');
+  el.scrollIntoView({block:'center', behavior:'smooth'});
+}
+function kbOpen(){
+  const items = kbItems();
+  if(kbIndex>=0 && items[kbIndex]) items[kbIndex].click();
+}
+function goBackSmart(){
+  const id = (document.querySelector('.screen.active')||{}).id;
+  const backMap = {
+    'article-detail':'articles-view',
+    'articles-view':'home',
+    'schedule-detail':'schedules-view',
+    'compare-detail':'compare-view',
+    'compare-view':'home',
+    'aod-view':'home','favorites-view':'home','offices-view':'home','schedules-view':'home'
+  };
+  if(id && backMap[id]){ showScreen(backMap[id]); kbIndex=-1; kbClear(); showKbdHint('← Back'); }
+}
+function toggleShortcutHelp(){
+  let p = document.getElementById('kbHelp');
+  if(p){ p.remove(); return; }
+  p = document.createElement('div');
+  p.id = 'kbHelp';
+  p.style.cssText = 'position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.75);display:flex;align-items:center;justify-content:center;';
+  p.innerHTML = `<div style="background:var(--parch-bg,#f4e4c1);border-radius:18px;padding:28px 34px;max-width:520px;font-family:Lexend,sans-serif;color:#2c1a00;line-height:2">
+    <div style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;margin-bottom:10px">⌨️ Keyboard Shortcuts</div>
+    <b>↑ ↓ ← →</b> — move in lists / prev-next article<br>
+    <b>Enter</b> — open highlighted item<br>
+    <b>Backspace / Esc</b> — go back<br>
+    <b>1–5</b> — switch tabs (Constitution · Schedules · Offices · Saved · Today)<br>
+    <b>F</b> — fullscreen &nbsp; <b>S</b> — cycle view modes (desktop)<br>
+    <b>N</b> — jump to My Notes &nbsp; <b>?</b> — this help
+    <div style="margin-top:14px;text-align:right"><button onclick="toggleShortcutHelp()" style="background:#8b1a00;color:#f4e4c1;border:none;border-radius:8px;padding:8px 20px;font-weight:700;cursor:pointer">Close</button></div>
+  </div>`;
+  p.onclick = (ev)=>{ if(ev.target===p) toggleShortcutHelp(); };
+  document.body.appendChild(p);
+}
+
+document.addEventListener('keydown', function(e){
+  const t = e.target;
+  if(t && (t.tagName==='INPUT' || t.tagName==='TEXTAREA' || t.isContentEditable)) return;
+  const artActive = document.getElementById('article-detail').classList.contains('active');
+
+  // Tab switching with number keys
+  if(['1','2','3','4','5'].includes(e.key) && !e.ctrlKey && !e.metaKey && !e.altKey){
+    const map = {'1':'home','2':'schedules-view','3':'offices-view','4':'favorites-view','5':'aod-view'};
+    switchTab(map[e.key], null);
+    kbIndex=-1; kbClear();
+    showKbdHint(['','📜 Constitution','📅 Schedules','🏛️ Offices','⭐ Saved','☀️ Today'][parseInt(e.key)]);
+    return;
+  }
+  if(e.key==='Backspace'){ e.preventDefault(); goBackSmart(); return; }
+  if(e.key==='Escape'){
+    if(document.getElementById('kbHelp')){ toggleShortcutHelp(); return; }
+    if(document.body.classList.contains('fs-mode')){ toggleFullscreen(); return; }
+    goBackSmart(); return;
+  }
+  if(e.key==='?'){ toggleShortcutHelp(); return; }
+
+  if(artActive){
+    if(e.key==='ArrowRight' || e.key==='ArrowDown'){ e.preventDefault(); navigateArticle(1); showKbdHint('→ Next Article'); return; }
+    if(e.key==='ArrowLeft'  || e.key==='ArrowUp'){ e.preventDefault(); navigateArticle(-1); showKbdHint('← Previous Article'); return; }
+    if(e.key==='f' || e.key==='F'){ toggleFullscreen(); return; }
+    if(e.key==='s' || e.key==='S'){ setViewMode(viewMode % 3 + 1); showKbdHint('View mode: ' + ['','1 Page','2 Pages','List + Page'][viewMode]); return; }
+    if(e.key==='n' || e.key==='N'){ const ta = document.querySelector('.note-textarea'); if(ta){ ta.focus(); showKbdHint('📝 Notes'); } return; }
+  } else {
+    if(e.key==='ArrowDown' || e.key==='ArrowRight'){ e.preventDefault(); kbMove(1); return; }
+    if(e.key==='ArrowUp'   || e.key==='ArrowLeft'){ e.preventDefault(); kbMove(-1); return; }
+    if(e.key==='Enter'){ e.preventDefault(); kbOpen(); return; }
   }
 });
 
@@ -5335,8 +5427,27 @@ function masterOpen(n){
   openArticle({n: meta.n, t: meta.t, part: meta.part}, 'articles-view');
 }
 
+
+// ═══════════════ UI ZOOM (projector / classroom mode) ═══════════════
+function setUiZoom(z, el){
+  readSettings.uiZoom = z;
+  applyUiZoom();
+  localStorage.setItem('samvidhan_read', JSON.stringify(readSettings));
+}
+function applyUiZoom(){
+  const z = readSettings.uiZoom || 100;
+  document.body.style.zoom = z + '%';
+  document.querySelectorAll('.fp-section').forEach(sec=>{
+    const lbl = sec.querySelector('.fp-label');
+    if(lbl && lbl.textContent.includes('Display Zoom')){
+      sec.querySelectorAll('.fp-opt').forEach(o=>o.classList.toggle('active', o.textContent === z + '%'));
+    }
+  });
+}
+
 // Init
 applyReadSettings();
+applyUiZoom();
 updateVmBtns();
 updateNavArrows();
 renderCompareList();
@@ -5416,5 +5527,7 @@ renderSchedules();
 <!-- FLOATING ARTICLE NAV ARROWS -->
 <div class="art-nav-arrow prev" id="artNavPrev" onclick="navigateArticle(-1)" title="Previous Article (←)">‹</div>
 <div class="art-nav-arrow next" id="artNavNext" onclick="navigateArticle(1)" title="Next Article (→)">›</div>
+
+<div class="global-aa" onclick="toggleFontPanel()" title="Reading & Display settings (Aa)">Aa</div>
 </body>
 </html>
